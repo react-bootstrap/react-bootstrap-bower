@@ -14,8 +14,9 @@ define(
       mixins: [BootstrapMixin],
 
       propTypes: {
-        bsStyle: React.PropTypes.oneOf(['tabs','pills']).isRequired,
-        bsVariation: React.PropTypes.oneOf(['stacked','justified']),
+        bsStyle: React.PropTypes.oneOf(['tabs','pills']),
+        stacked: React.PropTypes.bool,
+        justified: React.PropTypes.bool,
         onSelect: React.PropTypes.func
       },
 
@@ -28,6 +29,9 @@ define(
       render: function () {
         var classes = this.getBsClassSet();
 
+        classes['nav-stacked'] = this.props.stacked;
+        classes['nav-justified'] = this.props.justified;
+
         return this.transferPropsTo(
           React.DOM.nav(null, 
             React.DOM.ul( {className:classSet(classes)}, 
@@ -37,11 +41,31 @@ define(
         );
       },
 
+      getChildActiveProp: function (child) {
+        if (child.props.active) {
+          return true;
+        }
+        if (this.props.activeKey != null) {
+          if (child.props.key === this.props.activeKey) {
+            return true;
+          }
+        }
+        if (this.props.activeHref != null) {
+          if (child.props.href === this.props.activeHref) {
+            return true;
+          }
+        }
+
+        return child.props.active;
+      },
+
       renderNavItem: function (child) {
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
+            active: this.getChildActiveProp(child),
+            activeKey: this.props.activeKey,
+            activeHref: this.props.activeHref,
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key

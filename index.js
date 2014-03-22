@@ -5,18 +5,19 @@ define(function (require) {
 
     return {
         Accordion: require('./Accordion'),
+        Affix: require('./Affix'),
+        AffixMixin: require('./AffixMixin'),
         Alert: require('./Alert'),
         BootstrapMixin: require('./BootstrapMixin'),
         Button: require('./Button'),
-        DangerMixin: require('./DangerMixin'),
-        DefaultMixin: require('./DefaultMixin'),
+        ButtonGroup: require('./ButtonGroup'),
+        ButtonToolbar: require('./ButtonToolbar'),
         DropdownButton: require('./DropdownButton'),
+        DropdownMenu: require('./DropdownMenu'),
+        DropdownStateMixin: require('./DropdownStateMixin'),
         FadeMixin: require('./FadeMixin'),
-        InfoMixin: require('./InfoMixin'),
-        InlineMixin: require('./InlineMixin'),
         Input: require('./Input'),
-        LargeMixin: require('./LargeMixin'),
-        MediumMixin: require('./MediumMixin'),
+        Interpolate: require('./Interpolate'),
         MenuItem: require('./MenuItem'),
         Modal: require('./Modal'),
         Nav: require('./Nav'),
@@ -25,14 +26,10 @@ define(function (require) {
         OverlayTriggerMixin: require('./OverlayTriggerMixin'),
         Panel: require('./Panel'),
         PanelGroup: require('./PanelGroup'),
-        PrimaryMixin: require('./PrimaryMixin'),
         ProgressBar: require('./ProgressBar'),
-        SmallMixin: require('./SmallMixin'),
         SplitButton: require('./SplitButton'),
-        SuccessMixin: require('./SuccessMixin'),
+        SubNav: require('./SubNav'),
         TabbedArea: require('./TabbedArea'),
-        TabPane: require('./TabPane'),
-        WarningMixin: require('./WarningMixin'),
-        XSmallMixin: require('./XSmallMixin')
+        TabPane: require('./TabPane')
     };
 });
