@@ -9,7 +9,6 @@
 }(this, function (React) {
 
 
-
 /**
  * almond 0.1.2 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -2039,7 +2038,8 @@ define(
               href:this.props.href,
               bsStyle:this.props.bsStyle,
               className:className,
-              onClick:this.handleOpenClick}, 
+              onClick:this.handleOpenClick,
+              id:this.props.id}, 
               this.props.title,' ',
               React.DOM.span( {className:"caret"} )
             ),
@@ -3337,26 +3337,24 @@ define('ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar) {
   return ProgressBar.default;
 });
 define(
-  'transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./utils","./Button","./ButtonGroup","./DropdownMenu","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
+  'transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./Button","./ButtonGroup","./DropdownMenu","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     
     /** @jsx React.DOM */
-    /* global document */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
     var DropdownStateMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
-    var Button = __dependency6__["default"];
-    var ButtonGroup = __dependency7__["default"];
-    var DropdownMenu = __dependency8__["default"];
+    var Button = __dependency5__["default"];
+    var ButtonGroup = __dependency6__["default"];
+    var DropdownMenu = __dependency7__["default"];
 
     var SplitButton = React.createClass({displayName: 'SplitButton',
       mixins: [BootstrapMixin, DropdownStateMixin],
 
       propTypes: {
-        pullRight:         React.PropTypes.bool,
+        pullRight:     React.PropTypes.bool,
         title:         React.PropTypes.renderable,
         href:          React.PropTypes.string,
         dropdownTitle: React.PropTypes.renderable,
@@ -3379,7 +3377,8 @@ define(
         return (
           ButtonGroup(
             {bsSize:this.props.bsSize,
-            className:classSet(groupClasses)}, 
+            className:classSet(groupClasses),
+            id:this.props.id}, 
             Button(
               {ref:"button",
               href:this.props.href,
@@ -3725,7 +3724,8 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
         TabbedArea: require('./TabbedArea'),
         TabPane: require('./TabPane')
     };
-});    //Register in the values from the outer closure for common dependencies
+});
+    //Register in the values from the outer closure for common dependencies
     //as local almond modules
     define('react', function () {
         return React;

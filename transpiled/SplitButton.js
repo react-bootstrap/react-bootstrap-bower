@@ -1,24 +1,22 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./utils","./Button","./ButtonGroup","./DropdownMenu","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./Button","./ButtonGroup","./DropdownMenu","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
-    /* global document */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
     var DropdownStateMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
-    var Button = __dependency6__["default"];
-    var ButtonGroup = __dependency7__["default"];
-    var DropdownMenu = __dependency8__["default"];
+    var Button = __dependency5__["default"];
+    var ButtonGroup = __dependency6__["default"];
+    var DropdownMenu = __dependency7__["default"];
 
     var SplitButton = React.createClass({displayName: 'SplitButton',
       mixins: [BootstrapMixin, DropdownStateMixin],
 
       propTypes: {
-        pullRight:         React.PropTypes.bool,
+        pullRight:     React.PropTypes.bool,
         title:         React.PropTypes.renderable,
         href:          React.PropTypes.string,
         dropdownTitle: React.PropTypes.renderable,
@@ -41,7 +39,8 @@ define(
         return (
           ButtonGroup(
             {bsSize:this.props.bsSize,
-            className:classSet(groupClasses)}, 
+            className:classSet(groupClasses),
+            id:this.props.id}, 
             Button(
               {ref:"button",
               href:this.props.href,
