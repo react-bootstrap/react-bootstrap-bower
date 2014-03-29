@@ -3573,34 +3573,56 @@ define(
     var Nav = __dependency4__["default"];
     var NavItem = __dependency5__["default"];
 
+    function hasTab (child) {
+      return !!child.props.tab;
+    }
+
     var TabbedArea = React.createClass({displayName: 'TabbedArea',
       mixins: [BootstrapMixin],
 
       propTypes: {
+        animation: React.PropTypes.bool,
         onSelect: React.PropTypes.func
       },
 
-      getInitialState: function () {
-        var initialActiveKey = this.props.initialActiveKey;
+      getDefaultProps: function () {
+        return {
+          animation: true
+        };
+      },
 
-        if (initialActiveKey == null) {
+      getInitialState: function () {
+        var defaultActiveKey = this.props.defaultActiveKey;
+
+        if (defaultActiveKey == null) {
           var children = this.props.children;
-          initialActiveKey =
+          defaultActiveKey =
             Array.isArray(children) ? children[0].props.key : children.props.key;
         }
 
         return {
-          activeKey: initialActiveKey
+          activeKey: defaultActiveKey,
+          previousActiveKey: null
         };
+      },
+
+      componentWillReceiveProps: function (nextProps) {
+        if (nextProps.activeKey != null && nextProps.activeKey !== this.props.activeKey) {
+          this.setState({
+            previousActiveKey: this.props.activeKey
+          });
+        }
+      },
+
+      handlePaneAnimateOutEnd: function () {
+        this.setState({
+          previousActiveKey: null
+        });
       },
 
       render: function () {
         var activeKey =
           this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
-        function hasTab (child) {
-          return !!child.props.tab;
-        }
 
         return this.transferPropsTo(
           React.DOM.div(null, 
@@ -3614,15 +3636,23 @@ define(
         );
       },
 
+      getActiveKey: function () {
+        return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+      },
+
       renderPane: function (child) {
-        var activeKey =
-          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+        var activeKey = this.getActiveKey();
+
         return utils.cloneWithProps(
             child,
             {
-              active: (child.props.key === activeKey),
+              active: (child.props.key === activeKey &&
+                (this.state.previousActiveKey == null || !this.props.animation)),
               ref: child.props.ref,
-              key: child.props.key
+              key: child.props.key,
+              animation: this.props.animation,
+              onAnimateOutEnd: (this.state.previousActiveKey != null &&
+                child.props.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
             }
           );
       },
@@ -3648,11 +3678,12 @@ define(
           this._isChanging = true;
           this.props.onSelect(key);
           this._isChanging = false;
+        } else if (key !== this.getActiveKey()) {
+          this.setState({
+            activeKey: key,
+            previousActiveKey: this.getActiveKey()
+          });
         }
-
-        this.setState({
-          activeKey: key
-        });
       }
     });
 
@@ -3662,19 +3693,81 @@ define('TabbedArea',['./transpiled/TabbedArea'], function (TabbedArea) {
   return TabbedArea.default;
 });
 define(
-  'transpiled/TabPane',["./react-es6","./react-es6/lib/cx","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  'transpiled/TabPane',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
+    var ReactTransitionEvents = __dependency3__["default"];
 
     var TabPane = React.createClass({displayName: 'TabPane',
+      getDefaultProps: function () {
+        return {
+          animation: true
+        };
+      },
+
+      getInitialState: function () {
+        return {
+          animateIn: false,
+          animateOut: false
+        };
+      },
+
+      componentWillReceiveProps: function (nextProps) {
+        if (this.props.animation) {
+          if (!this.state.animateIn && nextProps.active && !this.props.active) {
+            this.setState({
+              animateIn: true
+            });
+          } else if (!this.state.animateOut && !nextProps.active && this.props.active) {
+            this.setState({
+              animateOut: true
+            });
+          }
+        }
+      },
+
+      componentDidUpdate: function () {
+        if (this.state.animateIn) {
+          setTimeout(this.startAnimateIn, 0);
+        }
+        if (this.state.animateOut) {
+          ReactTransitionEvents.addEndEventListener(
+            this.getDOMNode(),
+            this.stopAnimateOut
+          );
+        }
+      },
+
+      startAnimateIn: function () {
+        if (this.isMounted()) {
+          this.setState({
+            animateIn: false
+          });
+        }
+      },
+
+      stopAnimateOut: function () {
+        if (this.isMounted()) {
+          this.setState({
+            animateOut: false
+          });
+
+          if (typeof this.props.onAnimateOutEnd === 'function') {
+            this.props.onAnimateOutEnd();
+          }
+        }
+      },
+
       render: function () {
         var classes = {
           'tab-pane': true,
-          'active': this.props.active
+          'fade': true,
+          'active': this.props.active || this.state.animateOut,
+          'in': this.props.active && !this.state.animateIn
         };
 
         return this.transferPropsTo(
