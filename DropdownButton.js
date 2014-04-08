@@ -1,3 +1,3 @@
 define(['./transpiled/DropdownButton'], function (DropdownButton) {
-  return DropdownButton.default;
+  return DropdownButton['default'];
 })

@@ -1,3 +1,3 @@
 define(['./transpiled/TabbedArea'], function (TabbedArea) {
-  return TabbedArea.default;
+  return TabbedArea['default'];
 })

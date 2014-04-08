@@ -1,3 +1,3 @@
 define(['./transpiled/PanelGroup'], function (PanelGroup) {
-  return PanelGroup.default;
+  return PanelGroup['default'];
 })

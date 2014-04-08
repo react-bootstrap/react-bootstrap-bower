@@ -1,3 +1,3 @@
 define(['./transpiled/Nav'], function (Nav) {
-  return Nav.default;
+  return Nav['default'];
 })

@@ -1,3 +1,3 @@
 define(['./transpiled/DropdownStateMixin'], function (DropdownStateMixin) {
-  return DropdownStateMixin.default;
+  return DropdownStateMixin['default'];
 })

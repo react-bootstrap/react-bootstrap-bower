@@ -1,3 +1,3 @@
 define(['./transpiled/Interpolate'], function (Interpolate) {
-  return Interpolate.default;
+  return Interpolate['default'];
 })

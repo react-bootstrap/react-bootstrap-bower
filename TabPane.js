@@ -1,3 +1,3 @@
 define(['./transpiled/TabPane'], function (TabPane) {
-  return TabPane.default;
+  return TabPane['default'];
 })

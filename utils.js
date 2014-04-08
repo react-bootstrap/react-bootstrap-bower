@@ -1,3 +1,3 @@
 define(['./transpiled/utils'], function (utils) {
-  return utils.default;
+  return utils['default'];
 })

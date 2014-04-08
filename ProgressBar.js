@@ -1,3 +1,3 @@
 define(['./transpiled/ProgressBar'], function (ProgressBar) {
-  return ProgressBar.default;
+  return ProgressBar['default'];
 })

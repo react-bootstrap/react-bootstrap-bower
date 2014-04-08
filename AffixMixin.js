@@ -1,3 +1,3 @@
 define(['./transpiled/AffixMixin'], function (AffixMixin) {
-  return AffixMixin.default;
+  return AffixMixin['default'];
 })

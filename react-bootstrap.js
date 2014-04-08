@@ -1443,7 +1443,7 @@ define(
     __exports__["default"] = Accordion;
   });
 define('Accordion',['./transpiled/Accordion'], function (Accordion) {
-  return Accordion.default;
+  return Accordion['default'];
 });
 define(
   'transpiled/domUtils',["exports"],
@@ -1671,10 +1671,10 @@ define(
     __exports__["default"] = Affix;
   });
 define('Affix',['./transpiled/Affix'], function (Affix) {
-  return Affix.default;
+  return Affix['default'];
 });
 define('AffixMixin',['./transpiled/AffixMixin'], function (AffixMixin) {
-  return AffixMixin.default;
+  return AffixMixin['default'];
 });
 define(
   'transpiled/Alert',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
@@ -1742,10 +1742,10 @@ define(
     __exports__["default"] = Alert;
   });
 define('Alert',['./transpiled/Alert'], function (Alert) {
-  return Alert.default;
+  return Alert['default'];
 });
 define('BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
-  return BootstrapMixin.default;
+  return BootstrapMixin['default'];
 });
 define(
   'transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
@@ -1810,7 +1810,7 @@ define(
     __exports__["default"] = Button;
   });
 define('Button',['./transpiled/Button'], function (Button) {
-  return Button.default;
+  return Button['default'];
 });
 define(
   'transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
@@ -1854,7 +1854,7 @@ define(
     __exports__["default"] = ButtonGroup;
   });
 define('ButtonGroup',['./transpiled/ButtonGroup'], function (ButtonGroup) {
-  return ButtonGroup.default;
+  return ButtonGroup['default'];
 });
 define(
   'transpiled/ButtonToolbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
@@ -1892,7 +1892,7 @@ define(
     __exports__["default"] = ButtonGroup;
   });
 define('ButtonToolbar',['./transpiled/ButtonToolbar'], function (ButtonToolbar) {
-  return ButtonToolbar.default;
+  return ButtonToolbar['default'];
 });
 define(
   'transpiled/DropdownStateMixin',["./react-es6","exports"],
@@ -2071,13 +2071,13 @@ define(
     __exports__["default"] = DropdownButton;
   });
 define('DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
-  return DropdownButton.default;
+  return DropdownButton['default'];
 });
 define('DropdownMenu',['./transpiled/DropdownMenu'], function (DropdownMenu) {
-  return DropdownMenu.default;
+  return DropdownMenu['default'];
 });
 define('DropdownStateMixin',['./transpiled/DropdownStateMixin'], function (DropdownStateMixin) {
-  return DropdownStateMixin.default;
+  return DropdownStateMixin['default'];
 });
 define(
   'transpiled/FadeMixin',["./react-es6","exports"],
@@ -2138,7 +2138,7 @@ define(
     };
   });
 define('FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
-  return FadeMixin.default;
+  return FadeMixin['default'];
 });
 define(
   'transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
@@ -2247,7 +2247,7 @@ define(
     __exports__["default"] = Input;
   });
 define('Input',['./transpiled/Input'], function (Input) {
-  return Input.default;
+  return Input['default'];
 });
 define(
   'transpiled/Interpolate',["./react-es6","./react-es6/lib/invariant","./utils","exports"],
@@ -2337,7 +2337,7 @@ define(
     __exports__["default"] = Interpolate;
   });
 define('Interpolate',['./transpiled/Interpolate'], function (Interpolate) {
-  return Interpolate.default;
+  return Interpolate['default'];
 });
 define(
   'transpiled/MenuItem',["./react-es6","./react-es6/lib/cx","exports"],
@@ -2402,7 +2402,7 @@ define(
     __exports__["default"] = MenuItem;
   });
 define('MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
-  return MenuItem.default;
+  return MenuItem['default'];
 });
 define(
   'transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./FadeMixin","exports"],
@@ -2520,7 +2520,7 @@ define(
     __exports__["default"] = Modal;
   });
 define('Modal',['./transpiled/Modal'], function (Modal) {
-  return Modal.default;
+  return Modal['default'];
 });
 define(
   'transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
@@ -2601,7 +2601,7 @@ define(
     __exports__["default"] = Nav;
   });
 define('Nav',['./transpiled/Nav'], function (Nav) {
-  return Nav.default;
+  return Nav['default'];
 });
 define(
   'transpiled/NavItem',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
@@ -2663,7 +2663,7 @@ define(
     __exports__["default"] = NavItem;
   });
 define('NavItem',['./transpiled/NavItem'], function (NavItem) {
-  return NavItem.default;
+  return NavItem['default'];
 });
 define(
   'transpiled/OverlayTriggerMixin',["./react-es6","exports"],
@@ -2812,10 +2812,10 @@ define(
     __exports__["default"] = OverlayTrigger;
   });
 define('OverlayTrigger',['./transpiled/OverlayTrigger'], function (OverlayTrigger) {
-  return OverlayTrigger.default;
+  return OverlayTrigger['default'];
 });
 define('OverlayTriggerMixin',['./transpiled/OverlayTriggerMixin'], function (OverlayTriggerMixin) {
-  return OverlayTriggerMixin.default;
+  return OverlayTriggerMixin['default'];
 });
 define(
   'transpiled/react-es6/lib/ExecutionEnvironment',["exports"],
@@ -3198,10 +3198,10 @@ define(
     __exports__["default"] = Panel;
   });
 define('Panel',['./transpiled/Panel'], function (Panel) {
-  return Panel.default;
+  return Panel['default'];
 });
 define('PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
-  return PanelGroup.default;
+  return PanelGroup['default'];
 });
 define(
   'transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","exports"],
@@ -3334,7 +3334,7 @@ define(
     __exports__["default"] = ProgressBar;
   });
 define('ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar) {
-  return ProgressBar.default;
+  return ProgressBar['default'];
 });
 define(
   'transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./Button","./ButtonGroup","./DropdownMenu","exports"],
@@ -3425,7 +3425,7 @@ define(
     __exports__["default"] = SplitButton;
   });
 define('SplitButton',['./transpiled/SplitButton'], function (SplitButton) {
-  return SplitButton.default;
+  return SplitButton['default'];
 });
 define(
   'transpiled/SubNav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
@@ -3559,7 +3559,7 @@ define(
     __exports__["default"] = SubNav;
   });
 define('SubNav',['./transpiled/SubNav'], function (SubNav) {
-  return SubNav.default;
+  return SubNav['default'];
 });
 define(
   'transpiled/TabbedArea',["./react-es6","./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
@@ -3624,11 +3624,15 @@ define(
         var activeKey =
           this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
-        return this.transferPropsTo(
-          React.DOM.div(null, 
-            Nav( {bsStyle:"tabs", activeKey:activeKey, onSelect:this.handleSelect, ref:"tabs"}, 
+        var nav = this.transferPropsTo(
+          Nav( {bsStyle:"tabs", activeKey:activeKey, onSelect:this.handleSelect, ref:"tabs"}, 
               utils.modifyChildren(utils.filterChildren(this.props.children, hasTab), this.renderTab)
-            ),
+          )
+        );
+
+        return (
+          React.DOM.div(null, 
+            nav,
             React.DOM.div( {id:this.props.id, className:"tab-content", ref:"panes"}, 
               utils.modifyChildren(this.props.children, this.renderPane)
             )
@@ -3690,7 +3694,7 @@ define(
     __exports__["default"] = TabbedArea;
   });
 define('TabbedArea',['./transpiled/TabbedArea'], function (TabbedArea) {
-  return TabbedArea.default;
+  return TabbedArea['default'];
 });
 define(
   'transpiled/TabPane',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","exports"],
@@ -3781,7 +3785,7 @@ define(
     __exports__["default"] = TabPane;
   });
 define('TabPane',['./transpiled/TabPane'], function (TabPane) {
-  return TabPane.default;
+  return TabPane['default'];
 });
 /*global define */
 

@@ -1,3 +1,3 @@
 define(['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
-  return BootstrapMixin.default;
+  return BootstrapMixin['default'];
 })
