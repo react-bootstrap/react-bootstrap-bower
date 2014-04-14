@@ -1,104 +1,224 @@
 define(
-  ["./react-es6","./react-es6/lib/cloneWithProps","./OverlayTriggerMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./react-es6","./react-es6/lib/cloneWithProps","./react-es6/lib/merge","./OverlayMixin","./domUtils","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var cloneWithProps = __dependency2__["default"];
-    var OverlayTriggerMixin = __dependency3__["default"];
+    var merge = __dependency3__["default"];
+    var OverlayMixin = __dependency4__["default"];
+    var domUtils = __dependency5__["default"];
+    var utils = __dependency6__["default"];
+
+    /**
+     * Check if value one is inside or equal to the of value
+     *
+     * @param {string} one
+     * @param {string|array} of
+     * @returns {boolean}
+     */
+    function isOneOf(one, of) {
+      if (Array.isArray(of)) {
+        return of.indexOf(one) >= 0;
+      }
+      return one === of;
+    }
 
     var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
-        mixins: [OverlayTriggerMixin],
+      mixins: [OverlayMixin],
 
-        getDefaultProps: function () {
-            return {
-                trigger: 'click'
-            };
-        },
+      propTypes: {
+        trigger: React.PropTypes.oneOfType([
+          React.PropTypes.oneOf(['manual', 'click', 'hover', 'focus']),
+          React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
+        ]),
+        placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
+        delay: React.PropTypes.number,
+        delayShow: React.PropTypes.number,
+        delayHide: React.PropTypes.number,
+        defaultOverlayShown: React.PropTypes.bool,
+        overlay: React.PropTypes.renderable.isRequired
+      },
 
-        getInitialState: function() {
-            return {
-                isOverlayShown: (this.props.defaultOverlayShown == null) ?
-                    false : this.props.defaultOverlayShown
-            };
-        },
+      getDefaultProps: function () {
+        return {
+          placement: 'right',
+          trigger: ['hover', 'focus']
+        };
+      },
 
-        show: function () {
-            this.setState({
-                isOverlayShown: true
-            });
-        },
+      getInitialState: function () {
+        return {
+          isOverlayShown: this.props.defaultOverlayShown == null ?
+            false : this.props.defaultOverlayShown,
+          overlayLeft: null,
+          overlayTop: null
+        };
+      },
 
-        hide: function () {
-            this.setState({
-                isOverlayShown: false
-            });
-        },
+      show: function () {
+        this.setState({
+          isOverlayShown: true
+        }, function() {
+          this.updateOverlayPosition();
+        });
+      },
 
-        toggle: function () {
-            this.setState({
-                isOverlayShown: !this.state.isOverlayShown
-            });
-        },
+      hide: function () {
+        this.setState({
+          isOverlayShown: false
+        });
+      },
 
-        _trigger: function () {
-            var propName = 'delay' + (this.state.isOverlayShown ? 'Hide' : 'Show'),
-                delay = this.props[propName] || this.props.delay;
+      toggle: function () {
+        this.state.isOverlayShown ?
+          this.hide() : this.show();
+      },
 
-            clearTimeout(this._triggerTimeout);
-            if (delay) {
-                this._triggerTimeout = setTimeout(this.toggle, parseInt(delay, 10));
-            } else {
-                this.toggle();
-            }
-        },
-
-        renderOverlay: function() {
-            var props;
-
-            if (!this.state.isOverlayShown || !this.props.overlay) {
-                return React.DOM.span(null );
-            }
-
-            props = {
-                onRequestHide: this._trigger
-            };
-
-            if (this.props.animation != null) {
-                props.animation = this.props.animation;
-            }
-
-            return cloneWithProps(
-                this.props.overlay,
-                props
-            );
-        },
-
-        render: function() {
-            return (this.props.children) ?
-                this.renderTrigger() : React.DOM.span(null );
-        },
-
-        renderTrigger: function () {
-            var props = {},
-                trigger = this.props.trigger,
-                propName;
-
-            if (trigger !== 'manual') {
-                if (trigger === 'hover') {
-                    trigger = 'mouseOver';
-                }
-                propName = 'on' + trigger.substr(0, 1).toUpperCase() +
-                    trigger.substr(1);
-                props[propName] = this._trigger;
-            }
-
-            return React.DOM.span(
-                props,
-                this.props.children
-            );
+      renderOverlay: function () {
+        if (!this.state.isOverlayShown) {
+          return React.DOM.span(null );
         }
+
+        return cloneWithProps(
+          this.props.overlay,
+          {
+            onRequestHide: this.hide,
+            placement: this.props.placement,
+            positionLeft: this.state.overlayLeft,
+            positionTop: this.state.overlayTop
+          }
+        );
+      },
+
+      render: function () {
+        var props = {};
+
+        if (isOneOf('click', this.props.trigger)) {
+          props.onClick = utils.createChainedFunction(this.toggle, this.props.onClick);
+        }
+
+        if (isOneOf('hover', this.props.trigger)) {
+          props.onMouseOver = utils.createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
+          props.onMouseOut = utils.createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+        }
+
+        if (isOneOf('focus', this.props.trigger)) {
+          props.onFocus = utils.createChainedFunction(this.handleDelayedShow, this.props.onFocus);
+          props.onBlur = utils.createChainedFunction(this.handleDelayedHide, this.props.onBlur);
+        }
+
+        return cloneWithProps(
+          React.Children.only(this.props.children),
+          props
+        );
+      },
+
+      componentWillUnmount: function() {
+        clearTimeout(this._hoverDelay);
+      },
+
+      handleDelayedShow: function () {
+        if (this._hoverDelay != null) {
+          clearTimeout(this._hoverDelay);
+          this._hoverDelay = null;
+          return;
+        }
+
+        var delay = this.props.delayShow != null ?
+          this.props.delayShow : this.props.delay;
+
+        if (!delay) {
+          this.show();
+          return;
+        }
+
+        this._hoverDelay = setTimeout(function() {
+          this._hoverDelay = null;
+          this.show();
+        }.bind(this), delay);
+      },
+
+      handleDelayedHide: function () {
+        if (this._hoverDelay != null) {
+          clearTimeout(this._hoverDelay);
+          this._hoverDelay = null;
+          return;
+        }
+
+        var delay = this.props.delayHide != null ?
+          this.props.delayHide : this.props.delay;
+
+        if (!delay) {
+          this.hide();
+          return;
+        }
+
+        this._hoverDelay = setTimeout(function() {
+          this._hoverDelay = null;
+          this.hide();
+        }.bind(this), delay);
+      },
+
+      updateOverlayPosition: function () {
+        if (!this.isMounted()) {
+          return;
+        }
+
+        var pos = this.calcOverlayPosition();
+
+        this.setState({
+          overlayLeft: pos.left,
+          overlayTop: pos.top
+        });
+      },
+
+      calcOverlayPosition: function () {
+        var childOffset = this.getPosition();
+
+        var overlayNode = this.getOverlayDOMNode();
+        var overlayHeight = overlayNode.offsetHeight;
+        var overlayWidth = overlayNode.offsetWidth;
+
+        switch (this.props.placement) {
+          case 'right':
+            return {
+              top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
+              left: childOffset.left + childOffset.width
+            };
+          case 'left':
+            return {
+              top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
+              left: childOffset.left - overlayWidth
+            };
+          case 'top':
+            return {
+              top: childOffset.top - overlayHeight,
+              left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
+            };
+          case 'bottom':
+            return {
+              top: childOffset.top + childOffset.height,
+              left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
+            };
+          default:
+            throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
+        }
+      },
+
+      getPosition: function () {
+        var node = this.getDOMNode();
+        var container = this.getContainerDOMNode();
+
+        var offset = container.tagName == 'BODY' ?
+          domUtils.getOffset(node) : domUtils.getPosition(node, container);
+
+        return merge(offset, {
+          height: node.offsetHeight,
+          width: node.offsetWidth
+        });
+      }
     });
 
     __exports__["default"] = OverlayTrigger;

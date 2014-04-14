@@ -23,8 +23,8 @@ define(
         };
       },
 
-      getPosition: function (elem) {
-        var offsetParent, offset,
+      getPosition: function (elem, offsetParent) {
+        var offset,
             parentOffset = {top: 0, left: 0};
 
         // Fixed elements are offset from window (parentOffset = {top:0, left: 0}, because it is its only offset parent
@@ -33,8 +33,10 @@ define(
           offset = elem.getBoundingClientRect();
 
         } else {
-          // Get *real* offsetParent
-          offsetParent = this.offsetParent(elem);
+          if (!offsetParent) {
+            // Get *real* offsetParent
+            offsetParent = this.offsetParent(elem);
+          }
 
           // Get correct offsets
           offset = this.getOffset(elem);

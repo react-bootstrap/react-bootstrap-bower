@@ -402,39 +402,243 @@ define(
   function(__exports__) {
     
     __exports__["default"] = {
-        CLASSES: {
-            'column': 'col',
-            'button': 'btn',
-            'button-group': 'btn-group',
-            'button-toolbar': 'btn-toolbar',
-            'label': 'label',
-            'alert': 'alert',
-            'input-group': 'input-group',
-            'form': 'form',
-            'panel': 'panel',
-            'panel-group': 'panel-group',
-            'progress-bar': 'progress-bar',
-            'nav': 'nav',
-            'modal': 'modal'
-        },
-        STYLES: {
-            'default': 'default',
-            'primary': 'primary',
-            'success': 'success',
-            'info': 'info',
-            'warning': 'warning',
-            'danger': 'danger',
-            'link': 'link',
-            'inline': 'inline',
-            'tabs': 'tabs',
-            'pills': 'pills'
-        },
-        SIZES: {
-            'large': 'lg',
-            'medium': 'md',
-            'small': 'sm',
-            'xsmall': 'xs'
-        }
+      CLASSES: {
+        'column': 'col',
+        'button': 'btn',
+        'button-group': 'btn-group',
+        'button-toolbar': 'btn-toolbar',
+        'label': 'label',
+        'alert': 'alert',
+        'input-group': 'input-group',
+        'form': 'form',
+        'panel': 'panel',
+        'panel-group': 'panel-group',
+        'progress-bar': 'progress-bar',
+        'nav': 'nav',
+        'modal': 'modal',
+        'glyphicon': 'glyphicon',
+        'well': 'well'
+      },
+      STYLES: {
+        'default': 'default',
+        'primary': 'primary',
+        'success': 'success',
+        'info': 'info',
+        'warning': 'warning',
+        'danger': 'danger',
+        'link': 'link',
+        'inline': 'inline',
+        'tabs': 'tabs',
+        'pills': 'pills'
+      },
+      SIZES: {
+        'large': 'lg',
+        'medium': 'md',
+        'small': 'sm',
+        'xsmall': 'xs'
+      },
+      GLYPHS: {
+        'asterisk': 'asterisk',
+        'plus': 'plus',
+        'euro': 'euro',
+        'minus': 'minus',
+        'cloud': 'cloud',
+        'envelope': 'envelope',
+        'pencil': 'pencil',
+        'glass': 'glass',
+        'music': 'music',
+        'search': 'search',
+        'heart': 'heart',
+        'star': 'star',
+        'star-empty': 'star-empty',
+        'user': 'user',
+        'film': 'film',
+        'th-large': 'th-large',
+        'th': 'th',
+        'th-list': 'th-list',
+        'ok': 'ok',
+        'remove': 'remove',
+        'zoom-in': 'zoom-in',
+        'zoom-out': 'zoom-out',
+        'off': 'off',
+        'signal': 'signal',
+        'cog': 'cog',
+        'trash': 'trash',
+        'home': 'home',
+        'file': 'file',
+        'time': 'time',
+        'road': 'road',
+        'download-alt': 'download-alt',
+        'download': 'download',
+        'upload': 'upload',
+        'inbox': 'inbox',
+        'play-circle': 'play-circle',
+        'repeat': 'repeat',
+        'refresh': 'refresh',
+        'list-alt': 'list-alt',
+        'lock': 'lock',
+        'flag': 'flag',
+        'headphones': 'headphones',
+        'volume-off': 'volume-off',
+        'volume-down': 'volume-down',
+        'volume-up': 'volume-up',
+        'qrcode': 'qrcode',
+        'barcode': 'barcode',
+        'tag': 'tag',
+        'tags': 'tags',
+        'book': 'book',
+        'bookmark': 'bookmark',
+        'print': 'print',
+        'camera': 'camera',
+        'font': 'font',
+        'bold': 'bold',
+        'italic': 'italic',
+        'text-height': 'text-height',
+        'text-width': 'text-width',
+        'align-left': 'align-left',
+        'align-center': 'align-center',
+        'align-right': 'align-right',
+        'align-justify': 'align-justify',
+        'list': 'list',
+        'indent-left': 'indent-left',
+        'indent-right': 'indent-right',
+        'facetime-video': 'facetime-video',
+        'picture': 'picture',
+        'map-marker': 'map-marker',
+        'adjust': 'adjust',
+        'tint': 'tint',
+        'edit': 'edit',
+        'share': 'share',
+        'check': 'check',
+        'move': 'move',
+        'step-backward': 'step-backward',
+        'fast-backward': 'fast-backward',
+        'backward': 'backward',
+        'play': 'play',
+        'pause': 'pause',
+        'stop': 'stop',
+        'forward': 'forward',
+        'fast-forward': 'fast-forward',
+        'step-forward': 'step-forward',
+        'eject': 'eject',
+        'chevron-left': 'chevron-left',
+        'chevron-right': 'chevron-right',
+        'plus-sign': 'plus-sign',
+        'minus-sign': 'minus-sign',
+        'remove-sign': 'remove-sign',
+        'ok-sign': 'ok-sign',
+        'question-sign': 'question-sign',
+        'info-sign': 'info-sign',
+        'screenshot': 'screenshot',
+        'remove-circle': 'remove-circle',
+        'ok-circle': 'ok-circle',
+        'ban-circle': 'ban-circle',
+        'arrow-left': 'arrow-left',
+        'arrow-right': 'arrow-right',
+        'arrow-up': 'arrow-up',
+        'arrow-down': 'arrow-down',
+        'share-alt': 'share-alt',
+        'resize-full': 'resize-full',
+        'resize-small': 'resize-small',
+        'exclamation-sign': 'exclamation-sign',
+        'gift': 'gift',
+        'leaf': 'leaf',
+        'fire': 'fire',
+        'eye-open': 'eye-open',
+        'eye-close': 'eye-close',
+        'warning-sign': 'warning-sign',
+        'plane': 'plane',
+        'calendar': 'calendar',
+        'random': 'random',
+        'comment': 'comment',
+        'magnet': 'magnet',
+        'chevron-up': 'chevron-up',
+        'chevron-down': 'chevron-down',
+        'retweet': 'retweet',
+        'shopping-cart': 'shopping-cart',
+        'folder-close': 'folder-close',
+        'folder-open': 'folder-open',
+        'resize-vertical': 'resize-vertical',
+        'resize-horizontal': 'resize-horizontal',
+        'hdd': 'hdd',
+        'bullhorn': 'bullhorn',
+        'bell': 'bell',
+        'certificate': 'certificate',
+        'thumbs-up': 'thumbs-up',
+        'thumbs-down': 'thumbs-down',
+        'hand-right': 'hand-right',
+        'hand-left': 'hand-left',
+        'hand-up': 'hand-up',
+        'hand-down': 'hand-down',
+        'circle-arrow-right': 'circle-arrow-right',
+        'circle-arrow-left': 'circle-arrow-left',
+        'circle-arrow-up': 'circle-arrow-up',
+        'circle-arrow-down': 'circle-arrow-down',
+        'globe': 'globe',
+        'wrench': 'wrench',
+        'tasks': 'tasks',
+        'filter': 'filter',
+        'briefcase': 'briefcase',
+        'fullscreen': 'fullscreen',
+        'dashboard': 'dashboard',
+        'paperclip': 'paperclip',
+        'heart-empty': 'heart-empty',
+        'link': 'link',
+        'phone': 'phone',
+        'pushpin': 'pushpin',
+        'usd': 'usd',
+        'gbp': 'gbp',
+        'sort': 'sort',
+        'sort-by-alphabet': 'sort-by-alphabet',
+        'sort-by-alphabet-alt': 'sort-by-alphabet-alt',
+        'sort-by-order': 'sort-by-order',
+        'sort-by-order-alt': 'sort-by-order-alt',
+        'sort-by-attributes': 'sort-by-attributes',
+        'sort-by-attributes-alt': 'sort-by-attributes-alt',
+        'unchecked': 'unchecked',
+        'expand': 'expand',
+        'collapse-down': 'collapse-down',
+        'collapse-up': 'collapse-up',
+        'log-in': 'log-in',
+        'flash': 'flash',
+        'log-out': 'log-out',
+        'new-window': 'new-window',
+        'record': 'record',
+        'save': 'save',
+        'open': 'open',
+        'saved': 'saved',
+        'import': 'import',
+        'export': 'export',
+        'send': 'send',
+        'floppy-disk': 'floppy-disk',
+        'floppy-saved': 'floppy-saved',
+        'floppy-remove': 'floppy-remove',
+        'floppy-save': 'floppy-save',
+        'floppy-open': 'floppy-open',
+        'credit-card': 'credit-card',
+        'transfer': 'transfer',
+        'cutlery': 'cutlery',
+        'header': 'header',
+        'compressed': 'compressed',
+        'earphone': 'earphone',
+        'phone-alt': 'phone-alt',
+        'tower': 'tower',
+        'stats': 'stats',
+        'sd-video': 'sd-video',
+        'hd-video': 'hd-video',
+        'subtitles': 'subtitles',
+        'sound-stereo': 'sound-stereo',
+        'sound-dolby': 'sound-dolby',
+        'sound-5-1': 'sound-5-1',
+        'sound-6-1': 'sound-6-1',
+        'sound-7-1': 'sound-7-1',
+        'copyright-mark': 'copyright-mark',
+        'registration-mark': 'registration-mark',
+        'cloud-download': 'cloud-download',
+        'cloud-upload': 'cloud-upload',
+        'tree-conifer': 'tree-conifer',
+        'tree-deciduous': 'tree-deciduous'
+      }
     };
   });
 define(
@@ -448,7 +652,8 @@ define(
       propTypes: {
         bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
         bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
+        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES)),
+        bsGlyph: React.PropTypes.oneOf(Object.keys(constants.GLYPHS))
       },
 
       getBsClassSet: function () {
@@ -463,6 +668,11 @@ define(
           var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
           if (bsSize) {
             classes[prefix + bsSize] = true;
+          }
+
+          var bsGlyph = this.props.bsGlyph && constants.GLYPHS[this.props.bsGlyph];
+          if (bsGlyph) {
+            classes[prefix + bsGlyph] = true;
           }
 
           var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
@@ -1470,8 +1680,8 @@ define(
         };
       },
 
-      getPosition: function (elem) {
-        var offsetParent, offset,
+      getPosition: function (elem, offsetParent) {
+        var offset,
             parentOffset = {top: 0, left: 0};
 
         // Fixed elements are offset from window (parentOffset = {top:0, left: 0}, because it is its only offset parent
@@ -1480,8 +1690,10 @@ define(
           offset = elem.getBoundingClientRect();
 
         } else {
-          // Get *real* offsetParent
-          offsetParent = this.offsetParent(elem);
+          if (!offsetParent) {
+            // Get *real* offsetParent
+            offsetParent = this.offsetParent(elem);
+          }
 
           // Get correct offsets
           offset = this.getOffset(elem);
@@ -1748,6 +1960,31 @@ define('BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixi
   return BootstrapMixin['default'];
 });
 define(
+  'transpiled/Badge',["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+
+    var Badge = React.createClass({displayName: 'Badge',
+
+      render: function () {
+        return this.transferPropsTo(
+          React.DOM.span( {className:"badge"}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Badge;
+  });
+define('Badge',['./transpiled/Badge'], function (Badge) {
+  return Badge['default'];
+});
+define(
   'transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
@@ -1893,6 +2130,561 @@ define(
   });
 define('ButtonToolbar',['./transpiled/ButtonToolbar'], function (ButtonToolbar) {
   return ButtonToolbar['default'];
+});
+define(
+  'transpiled/Carousel',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+    var Carousel = React.createClass({displayName: 'Carousel',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        slide: React.PropTypes.bool,
+        indicators: React.PropTypes.bool,
+        controls: React.PropTypes.bool,
+        pauseOnHover: React.PropTypes.bool,
+        wrap: React.PropTypes.bool,
+        onSelect: React.PropTypes.func,
+        activeIndex: React.PropTypes.number,
+        direction: React.PropTypes.oneOf(['prev', 'next'])
+      },
+
+      getDefaultProps: function () {
+        return {
+          slide: true,
+          interval: 5000,
+          pauseOnHover: true,
+          wrap: true,
+          indicators: true,
+          controls: true
+        };
+      },
+
+      getInitialState: function () {
+        var defaultActiveIndex = this.props.defaultActiveIndex;
+
+        if (defaultActiveIndex == null) {
+          defaultActiveIndex = 0;
+        }
+
+        return {
+          activeIndex: defaultActiveIndex,
+          previousActiveIndex: null,
+          direction: null
+        };
+      },
+
+      getDirection: function (prevIndex, index) {
+        if (prevIndex === index) {
+          return null;
+        }
+
+        return prevIndex > index ?
+          'prev' : 'next';
+      },
+
+      getNumberOfItems: function () {
+        if (!this.props.children) {
+          return 0;
+        }
+
+        if (!Array.isArray(this.props.children)) {
+          return 1;
+        }
+
+        return this.props.children.length;
+      },
+
+      componentWillReceiveProps: function (nextProps) {
+        var activeIndex = this.getActiveIndex();
+
+        if (nextProps.activeIndex != null && nextProps.activeIndex !== activeIndex) {
+          this.setState({
+            previousActiveIndex: activeIndex,
+            direction: nextProps.direction != null ?
+              nextProps.direction : this.getDirection(activeIndex, nextProps.activeIndex)
+          });
+        }
+      },
+
+      componentDidMount: function () {
+        this.waitForNext();
+      },
+
+      next: function (e) {
+        var index = this.getActiveIndex() + 1;
+
+        if (index > this.getNumberOfItems() - 1) {
+          if (!this.props.wrap) {
+            return;
+          }
+          index = 0;
+        }
+
+        this.handleSelect(index, 'next');
+
+        if (e) {
+          e.preventDefault();
+        }
+      },
+
+      prev: function (e) {
+        var index = this.getActiveIndex() - 1;
+
+        if (index < 0) {
+          if (!this.props.wrap) {
+            return;
+          }
+          index = this.getNumberOfItems() - 1;
+        }
+
+        this.handleSelect(index, 'prev');
+
+        if (e) {
+          e.preventDefault();
+        }
+      },
+
+      pause: function () {
+        this.isPaused = true;
+        clearTimeout(this.timeout);
+      },
+
+      play: function () {
+        this.isPaused = false;
+        this.waitForNext();
+      },
+
+      waitForNext: function () {
+        if (!this.isPaused && this.props.slide && this.props.interval &&
+            this.props.activeIndex == null) {
+          this.timeout = setTimeout(this.next, this.props.interval);
+        }
+      },
+
+      handleMouseOver: function () {
+        if (this.props.pauseOnHover) {
+          this.pause();
+        }
+      },
+
+      handleMouseOut: function () {
+        if (this.isPaused) {
+          this.play();
+        }
+      },
+
+      render: function () {
+        var classes = {
+          carousel: true,
+          slide: this.props.slide
+        };
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {className:classSet(classes),
+            onMouseOver:this.handleMouseOver,
+            onMouseOut:this.handleMouseOut}, 
+            this.props.indicators ? this.renderIndicators() : null,
+            React.DOM.div( {className:"carousel-inner", ref:"inner"}, 
+              utils.modifyChildren(this.props.children, this.renderItem)
+            ),
+            this.props.controls ? this.renderControls() : null
+          )
+        );
+      },
+
+      renderPrev: function () {
+        var href = '#';
+
+        if (this.props.id) {
+          href += this.props.id;
+        }
+
+        return (
+          React.DOM.a( {className:"left carousel-control", href:href, key:0}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-left", onClick:this.prev})
+          )
+        );
+      },
+
+      renderNext: function () {
+        var href = '#';
+
+        if (this.props.id) {
+          href += this.props.id;
+        }
+
+        return (
+          React.DOM.a( {className:"right carousel-control", href:href, key:1}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-right", onClick:this.next})
+          )
+        );
+      },
+
+      renderControls: function () {
+        var activeIndex = this.getActiveIndex();
+
+        return [
+          (this.props.wrap || activeIndex !== 0) ? this.renderPrev() : null,
+          (this.props.wrap || activeIndex !== this.getNumberOfItems() - 1) ?
+            this.renderNext() : null
+        ];
+      },
+
+      renderIndicator: function (child, i) {
+        var className = (i === this.getActiveIndex()) ?
+          'active' : null;
+
+        return [
+          React.DOM.li(
+            {key:i,
+            className:className,
+            onClick:this.handleSelect.bind(this, i, null)} ),
+          ' '
+        ];
+      },
+
+      renderIndicators: function () {
+        return (
+          React.DOM.ol( {className:"carousel-indicators"}, 
+            utils.modifyChildren(this.props.children, this.renderIndicator)
+          )
+        );
+      },
+
+      getActiveIndex: function () {
+        return this.props.activeIndex != null ? this.props.activeIndex : this.state.activeIndex;
+      },
+
+      handleItemAnimateOutEnd: function () {
+        this.sliding = false;
+
+        this.setState({
+          previousActiveIndex: null,
+          direction: null
+        });
+
+        this.waitForNext();
+      },
+
+      renderItem: function (child, i) {
+        var activeIndex = this.getActiveIndex(),
+            isActive = (i === activeIndex),
+            isPreviousActive = this.state.previousActiveIndex != null &&
+                this.state.previousActiveIndex === i && this.props.slide;
+
+        return utils.cloneWithProps(
+            child,
+            {
+              active: isActive,
+              ref: child.props.ref,
+              key: child.props.key != null ?
+                child.props.key : i,
+              index: i,
+              animateOut: isPreviousActive,
+              animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
+              direction: this.state.direction,
+              onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd: null
+            }
+          );
+      },
+
+      shouldComponentUpdate: function() {
+        // Defer any updates to this component during the `onSelect` handler.
+        return !this._isChanging;
+      },
+
+      handleSelect: function (index, direction) {
+        var previousActiveIndex;
+
+        if (this.sliding) {
+          return;
+        }
+
+        this.sliding = true;
+
+        if (this.props.onSelect) {
+          this._isChanging = true;
+          this.props.onSelect(index, direction);
+          this._isChanging = false;
+        }
+
+        if (this.props.activeIndex == null && index !== this.getActiveIndex()) {
+          previousActiveIndex = this.getActiveIndex();
+          this.setState({
+            activeIndex: index,
+            previousActiveIndex: previousActiveIndex,
+            direction: direction || this.getDirection(previousActiveIndex, index)
+          });
+
+          if (!this.props.slide) {
+            this.waitForNext();
+          }
+        }
+      }
+    });
+
+    __exports__["default"] = Carousel;
+  });
+define('Carousel',['./transpiled/Carousel'], function (Carousel) {
+  return Carousel['default'];
+});
+define(
+  'transpiled/react-es6/lib/ExecutionEnvironment',["exports"],
+  function(__exports__) {
+    
+    /**
+     * Copyright 2013-2014 Facebook, Inc.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     * http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     *
+     * @providesModule ExecutionEnvironment
+     */
+
+    /*jslint evil: true */
+
+    
+
+    var canUseDOM = typeof window !== 'undefined';
+
+    /**
+     * Simple, lightweight module assisting with the detection and context of
+     * Worker. Helps avoid circular dependencies and allows code to reason about
+     * whether or not they are in a Worker, even if they never include the main
+     * `ReactWorker` dependency.
+     */
+    var ExecutionEnvironment = {
+
+      canUseDOM: canUseDOM,
+
+      canUseWorkers: typeof Worker !== 'undefined',
+
+      canUseEventListeners:
+        canUseDOM && (window.addEventListener || window.attachEvent),
+
+      isInWorker: !canUseDOM // For now, this is true - might change in the future.
+
+    };
+
+    __exports__["default"] = ExecutionEnvironment;
+  });
+define(
+  'transpiled/react-es6/lib/ReactTransitionEvents',["./ExecutionEnvironment","exports"],
+  function(__dependency1__, __exports__) {
+    
+    /**
+     * Copyright 2013-2014 Facebook, Inc.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     * http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     *
+     * @providesModule ReactTransitionEvents
+     */
+
+    
+
+    var ExecutionEnvironment = __dependency1__["default"];
+
+    var EVENT_NAME_MAP = {
+      transitionend: {
+        'transition': 'transitionend',
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'mozTransitionEnd',
+        'OTransition': 'oTransitionEnd',
+        'msTransition': 'MSTransitionEnd'
+      },
+
+      animationend: {
+        'animation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd',
+        'MozAnimation': 'mozAnimationEnd',
+        'OAnimation': 'oAnimationEnd',
+        'msAnimation': 'MSAnimationEnd'
+      }
+    };
+
+    var endEvents = [];
+
+    function detectEvents() {
+      var testEl = document.createElement('div');
+      var style = testEl.style;
+      for (var baseEventName in EVENT_NAME_MAP) {
+        var baseEvents = EVENT_NAME_MAP[baseEventName];
+        for (var styleName in baseEvents) {
+          if (styleName in style) {
+            endEvents.push(baseEvents[styleName]);
+            break;
+          }
+        }
+      }
+    }
+
+    if (ExecutionEnvironment.canUseDOM) {
+      detectEvents();
+    }
+
+    // We use the raw {add|remove}EventListener() call because EventListener
+    // does not know how to remove event listeners and we really should
+    // clean up. Also, these events are not triggered in older browsers
+    // so we should be A-OK here.
+
+    function addEventListener(node, eventName, eventListener) {
+      node.addEventListener(eventName, eventListener, false);
+    }
+
+    function removeEventListener(node, eventName, eventListener) {
+      node.removeEventListener(eventName, eventListener, false);
+    }
+
+    var ReactTransitionEvents = {
+      addEndEventListener: function(node, eventListener) {
+        if (endEvents.length === 0) {
+          // If CSS transitions are not supported, trigger an "end animation"
+          // event immediately.
+          window.setTimeout(eventListener, 0);
+          return;
+        }
+        endEvents.forEach(function(endEvent) {
+          addEventListener(node, endEvent, eventListener);
+        });
+      },
+
+      removeEndEventListener: function(node, eventListener) {
+        if (endEvents.length === 0) {
+          return;
+        }
+        endEvents.forEach(function(endEvent) {
+          removeEventListener(node, endEvent, eventListener);
+        });
+      }
+    };
+
+    __exports__["default"] = ReactTransitionEvents;
+  });
+define(
+  'transpiled/CarouselItem',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var ReactTransitionEvents = __dependency3__["default"];
+
+    var CarouselItem = React.createClass({displayName: 'CarouselItem',
+      propTypes: {
+        direction: React.PropTypes.oneOf(['prev', 'next']),
+        onAnimateOutEnd: React.PropTypes.func,
+        active: React.PropTypes.bool,
+        caption: React.PropTypes.renderable
+      },
+
+      getInitialState: function () {
+        return {
+          direction: null
+        };
+      },
+
+      getDefaultProps: function () {
+        return {
+          animation: true
+        };
+      },
+
+      handleAnimateOutEnd: function () {
+        if (typeof this.props.onAnimateOutEnd === 'function') {
+          this.props.onAnimateOutEnd(this.props.index);
+        }
+      },
+
+      componentWillReceiveProps: function (nextProps) {
+        if (this.props.active !== nextProps.active) {
+          this.setState({
+            direction: null
+          });
+        }
+      },
+
+      componentDidUpdate: function (prevProps) {
+        if (!this.props.active && prevProps.active) {
+          ReactTransitionEvents.addEndEventListener(
+            this.getDOMNode(),
+            this.handleAnimateOutEnd
+          );
+        }
+
+        if (this.props.active !== prevProps.active) {
+          setTimeout(this.startAnimation, 20);
+        }
+      },
+
+      startAnimation: function () {
+        this.setState({
+          direction: this.props.direction === 'prev' ?
+            'right' : 'left'
+        });
+      },
+
+      render: function () {
+        var classes = {
+          item: true,
+          active: (this.props.active && !this.props.animateIn) || this.props.animateOut,
+          next: this.props.active && this.props.animateIn && this.props.direction === 'next',
+          prev: this.props.active && this.props.animateIn && this.props.direction === 'prev'
+        };
+
+        if (this.state.direction && (this.props.animateIn || this.props.animateOut)) {
+          classes[this.state.direction] = true;
+        }
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(classes)}, 
+            this.props.children,
+            this.props.caption ? this.renderCaption() : null
+          )
+        );
+      },
+
+      renderCaption: function () {
+        return (
+          React.DOM.div( {className:"carousel-caption"}, 
+            this.props.caption
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = CarouselItem;
+  });
+define('CarouselItem',['./transpiled/CarouselItem'], function (CarouselItem) {
+  return CarouselItem['default'];
 });
 define(
   'transpiled/DropdownStateMixin',["./react-es6","exports"],
@@ -2141,6 +2933,41 @@ define('FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
   return FadeMixin['default'];
 });
 define(
+  'transpiled/Glyphicon',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Glyphicon = React.createClass({displayName: 'Glyphicon',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'glyphicon'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        return this.transferPropsTo(
+          React.DOM.span( {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Glyphicon;
+  });
+define('Glyphicon',['./transpiled/Glyphicon'], function (Glyphicon) {
+  return Glyphicon['default'];
+});
+define(
   'transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
@@ -2340,6 +3167,67 @@ define('Interpolate',['./transpiled/Interpolate'], function (Interpolate) {
   return Interpolate['default'];
 });
 define(
+  'transpiled/Jumbotron',["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+
+    var Jumbotron = React.createClass({displayName: 'Jumbotron',
+
+      render: function () {
+        return this.transferPropsTo(
+          React.DOM.div( {className:"jumbotron"}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Jumbotron;
+  });
+define('Jumbotron',['./transpiled/Jumbotron'], function (Jumbotron) {
+  return Jumbotron['default'];
+});
+define(
+  'transpiled/Label',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Label = React.createClass({displayName: 'Label',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'label',
+          bsStyle: 'default'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        return this.transferPropsTo(
+          React.DOM.span( {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Label;
+  });
+define('Label',['./transpiled/Label'], function (Label) {
+  return Label['default'];
+});
+define(
   'transpiled/MenuItem',["./react-es6","./react-es6/lib/cx","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
@@ -2424,6 +3312,13 @@ define(
     var Modal = React.createClass({displayName: 'Modal',
       mixins: [BootstrapMixin, FadeMixin],
 
+      propTypes: {
+        title: React.PropTypes.renderable,
+        backdrop: React.PropTypes.oneOf(['static', true, false]),
+        keyboard: React.PropTypes.bool,
+        onRequestHide: React.PropTypes.func.isRequired
+      },
+
       getDefaultProps: function () {
         return {
           bsClass: 'modal',
@@ -2433,29 +3328,8 @@ define(
         };
       },
 
-      componentDidMount: function () {
-        document.addEventListener('keyup', this.handleKeyUp);
-      },
-
-      componentWillUnmount: function () {
-        document.removeEventListener('keyup', this.handleKeyUp);
-      },
-
-      killClick: function (e) {
-        e.stopPropagation();
-      },
-
-      handleBackdropClick: function () {
-        this.props.onRequestHide();
-      },
-
-      handleKeyUp: function (e) {
-        if (this.props.keyboard && e.keyCode === 27) {
-          this.props.onRequestHide();
-        }
-      },
-
       render: function () {
+        var modalStyle = {display: 'block'};
         var classes = this.getBsClassSet();
 
         classes['fade'] = this.props.animation;
@@ -2463,16 +3337,14 @@ define(
 
         var modal = this.transferPropsTo(
           React.DOM.div(
-            {bsClass:"modal",
-            tabIndex:"-1",
+            {tabIndex:"-1",
             role:"dialog",
-            style:{display: 'block'},
+            style:modalStyle,
             className:classSet(classes),
-            onClick:this.handleBackdropClick,
-            ref:"modal"}
-          , 
+            onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
+            ref:"modal"}, 
             React.DOM.div( {className:"modal-dialog"}, 
-              React.DOM.div( {className:"modal-content", onClick:this.killClick}, 
+              React.DOM.div( {className:"modal-content"}, 
                 this.props.title ? this.renderHeader() : null,
                 this.props.children
               )
@@ -2514,6 +3386,28 @@ define(
           React.isValidComponent(this.props.title) ?
             this.props.title : React.DOM.h4( {className:"modal-title"}, this.props.title)
         );
+      },
+
+      componentDidMount: function () {
+        document.addEventListener('keyup', this.handleDocumentKeyUp);
+      },
+
+      componentWillUnmount: function () {
+        document.removeEventListener('keyup', this.handleDocumentKeyUp);
+      },
+
+      handleBackdropClick: function (e) {
+        if (e.target !== e.currentTarget) {
+          return;
+        }
+
+        this.props.onRequestHide();
+      },
+
+      handleDocumentKeyUp: function (e) {
+        if (this.props.keyboard && e.keyCode === 27) {
+          this.props.onRequestHide();
+        }
       }
     });
 
@@ -2666,15 +3560,26 @@ define('NavItem',['./transpiled/NavItem'], function (NavItem) {
   return NavItem['default'];
 });
 define(
-  'transpiled/OverlayTriggerMixin',["./react-es6","exports"],
+  'transpiled/OverlayMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
     var React = __dependency1__["default"];
 
     __exports__["default"] = {
+      propTypes: {
+        container: React.PropTypes.object.isRequired
+      },
+
+      getDefaultProps: function () {
+        return {
+          container: document.body
+        };
+      },
+
       componentWillUnmount: function () {
         this._unrenderOverlay();
-        document.body.removeChild(this._overlayTarget);
+        this.getContainerDOMNode()
+          .removeChild(this._overlayTarget);
         this._overlayTarget = null;
       },
 
@@ -2688,7 +3593,8 @@ define(
 
       _mountOverlayTarget: function () {
         this._overlayTarget = document.createElement('div');
-        document.body.appendChild(this._overlayTarget);
+        this.getContainerDOMNode()
+          .appendChild(this._overlayTarget);
       },
 
       _renderOverlay: function () {
@@ -2703,110 +3609,314 @@ define(
       _unrenderOverlay: function () {
         React.unmountComponentAtNode(this._overlayTarget);
         this._overlayInstance = null;
+      },
+
+      getOverlayDOMNode: function() {
+        if (!this.isMounted()) {
+          throw new Error('getOverlayDOMNode(): A component must be mounted to have a DOM node.');
+        }
+
+        return this._overlayInstance.getDOMNode();
+      },
+
+      getContainerDOMNode: function() {
+        return React.isValidComponent(this.props.container) ?
+          this.props.container.getDOMNode() : this.props.container;
       }
     };
   });
 define(
-  'transpiled/OverlayTrigger',["./react-es6","./react-es6/lib/cloneWithProps","./OverlayTriggerMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  'transpiled/ModalTrigger',["./react-es6","./react-es6/lib/cloneWithProps","./OverlayMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var cloneWithProps = __dependency2__["default"];
-    var OverlayTriggerMixin = __dependency3__["default"];
+    var OverlayMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+    var ModalTrigger = React.createClass({displayName: 'ModalTrigger',
+      mixins: [OverlayMixin],
+
+      propTypes: {
+        modal: React.PropTypes.renderable.isRequired
+      },
+
+      getInitialState: function () {
+        return {
+          isOverlayShown: false
+        };
+      },
+
+      show: function () {
+        this.setState({
+          isOverlayShown: true
+        });
+      },
+
+      hide: function () {
+        this.setState({
+          isOverlayShown: false
+        });
+      },
+
+      toggle: function () {
+        this.setState({
+          isOverlayShown: !this.state.isOverlayShown
+        });
+      },
+
+      renderOverlay: function () {
+        if (!this.state.isOverlayShown) {
+          return React.DOM.span(null );
+        }
+
+        return cloneWithProps(
+          this.props.modal,
+          {
+            onRequestHide: this.hide
+          }
+        );
+      },
+
+      render: function () {
+        var child = React.Children.only(this.props.children);
+        return cloneWithProps(
+          child,
+          {
+            onClick: utils.createChainedFunction(child.props.onClick, this.toggle)
+          }
+        );
+      }
+    });
+
+    __exports__["default"] = ModalTrigger;
+  });
+define('ModalTrigger',['./transpiled/ModalTrigger'], function (ModalTrigger) {
+  return ModalTrigger['default'];
+});
+define(
+  'transpiled/OverlayTrigger',["./react-es6","./react-es6/lib/cloneWithProps","./react-es6/lib/merge","./OverlayMixin","./domUtils","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var cloneWithProps = __dependency2__["default"];
+    var merge = __dependency3__["default"];
+    var OverlayMixin = __dependency4__["default"];
+    var domUtils = __dependency5__["default"];
+    var utils = __dependency6__["default"];
+
+    /**
+     * Check if value one is inside or equal to the of value
+     *
+     * @param {string} one
+     * @param {string|array} of
+     * @returns {boolean}
+     */
+    function isOneOf(one, of) {
+      if (Array.isArray(of)) {
+        return of.indexOf(one) >= 0;
+      }
+      return one === of;
+    }
 
     var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
-        mixins: [OverlayTriggerMixin],
+      mixins: [OverlayMixin],
 
-        getDefaultProps: function () {
-            return {
-                trigger: 'click'
-            };
-        },
+      propTypes: {
+        trigger: React.PropTypes.oneOfType([
+          React.PropTypes.oneOf(['manual', 'click', 'hover', 'focus']),
+          React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
+        ]),
+        placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
+        delay: React.PropTypes.number,
+        delayShow: React.PropTypes.number,
+        delayHide: React.PropTypes.number,
+        defaultOverlayShown: React.PropTypes.bool,
+        overlay: React.PropTypes.renderable.isRequired
+      },
 
-        getInitialState: function() {
-            return {
-                isOverlayShown: (this.props.defaultOverlayShown == null) ?
-                    false : this.props.defaultOverlayShown
-            };
-        },
+      getDefaultProps: function () {
+        return {
+          placement: 'right',
+          trigger: ['hover', 'focus']
+        };
+      },
 
-        show: function () {
-            this.setState({
-                isOverlayShown: true
-            });
-        },
+      getInitialState: function () {
+        return {
+          isOverlayShown: this.props.defaultOverlayShown == null ?
+            false : this.props.defaultOverlayShown,
+          overlayLeft: null,
+          overlayTop: null
+        };
+      },
 
-        hide: function () {
-            this.setState({
-                isOverlayShown: false
-            });
-        },
+      show: function () {
+        this.setState({
+          isOverlayShown: true
+        }, function() {
+          this.updateOverlayPosition();
+        });
+      },
 
-        toggle: function () {
-            this.setState({
-                isOverlayShown: !this.state.isOverlayShown
-            });
-        },
+      hide: function () {
+        this.setState({
+          isOverlayShown: false
+        });
+      },
 
-        _trigger: function () {
-            var propName = 'delay' + (this.state.isOverlayShown ? 'Hide' : 'Show'),
-                delay = this.props[propName] || this.props.delay;
+      toggle: function () {
+        this.state.isOverlayShown ?
+          this.hide() : this.show();
+      },
 
-            clearTimeout(this._triggerTimeout);
-            if (delay) {
-                this._triggerTimeout = setTimeout(this.toggle, parseInt(delay, 10));
-            } else {
-                this.toggle();
-            }
-        },
-
-        renderOverlay: function() {
-            var props;
-
-            if (!this.state.isOverlayShown || !this.props.overlay) {
-                return React.DOM.span(null );
-            }
-
-            props = {
-                onRequestHide: this._trigger
-            };
-
-            if (this.props.animation != null) {
-                props.animation = this.props.animation;
-            }
-
-            return cloneWithProps(
-                this.props.overlay,
-                props
-            );
-        },
-
-        render: function() {
-            return (this.props.children) ?
-                this.renderTrigger() : React.DOM.span(null );
-        },
-
-        renderTrigger: function () {
-            var props = {},
-                trigger = this.props.trigger,
-                propName;
-
-            if (trigger !== 'manual') {
-                if (trigger === 'hover') {
-                    trigger = 'mouseOver';
-                }
-                propName = 'on' + trigger.substr(0, 1).toUpperCase() +
-                    trigger.substr(1);
-                props[propName] = this._trigger;
-            }
-
-            return React.DOM.span(
-                props,
-                this.props.children
-            );
+      renderOverlay: function () {
+        if (!this.state.isOverlayShown) {
+          return React.DOM.span(null );
         }
+
+        return cloneWithProps(
+          this.props.overlay,
+          {
+            onRequestHide: this.hide,
+            placement: this.props.placement,
+            positionLeft: this.state.overlayLeft,
+            positionTop: this.state.overlayTop
+          }
+        );
+      },
+
+      render: function () {
+        var props = {};
+
+        if (isOneOf('click', this.props.trigger)) {
+          props.onClick = utils.createChainedFunction(this.toggle, this.props.onClick);
+        }
+
+        if (isOneOf('hover', this.props.trigger)) {
+          props.onMouseOver = utils.createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
+          props.onMouseOut = utils.createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+        }
+
+        if (isOneOf('focus', this.props.trigger)) {
+          props.onFocus = utils.createChainedFunction(this.handleDelayedShow, this.props.onFocus);
+          props.onBlur = utils.createChainedFunction(this.handleDelayedHide, this.props.onBlur);
+        }
+
+        return cloneWithProps(
+          React.Children.only(this.props.children),
+          props
+        );
+      },
+
+      componentWillUnmount: function() {
+        clearTimeout(this._hoverDelay);
+      },
+
+      handleDelayedShow: function () {
+        if (this._hoverDelay != null) {
+          clearTimeout(this._hoverDelay);
+          this._hoverDelay = null;
+          return;
+        }
+
+        var delay = this.props.delayShow != null ?
+          this.props.delayShow : this.props.delay;
+
+        if (!delay) {
+          this.show();
+          return;
+        }
+
+        this._hoverDelay = setTimeout(function() {
+          this._hoverDelay = null;
+          this.show();
+        }.bind(this), delay);
+      },
+
+      handleDelayedHide: function () {
+        if (this._hoverDelay != null) {
+          clearTimeout(this._hoverDelay);
+          this._hoverDelay = null;
+          return;
+        }
+
+        var delay = this.props.delayHide != null ?
+          this.props.delayHide : this.props.delay;
+
+        if (!delay) {
+          this.hide();
+          return;
+        }
+
+        this._hoverDelay = setTimeout(function() {
+          this._hoverDelay = null;
+          this.hide();
+        }.bind(this), delay);
+      },
+
+      updateOverlayPosition: function () {
+        if (!this.isMounted()) {
+          return;
+        }
+
+        var pos = this.calcOverlayPosition();
+
+        this.setState({
+          overlayLeft: pos.left,
+          overlayTop: pos.top
+        });
+      },
+
+      calcOverlayPosition: function () {
+        var childOffset = this.getPosition();
+
+        var overlayNode = this.getOverlayDOMNode();
+        var overlayHeight = overlayNode.offsetHeight;
+        var overlayWidth = overlayNode.offsetWidth;
+
+        switch (this.props.placement) {
+          case 'right':
+            return {
+              top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
+              left: childOffset.left + childOffset.width
+            };
+          case 'left':
+            return {
+              top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
+              left: childOffset.left - overlayWidth
+            };
+          case 'top':
+            return {
+              top: childOffset.top - overlayHeight,
+              left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
+            };
+          case 'bottom':
+            return {
+              top: childOffset.top + childOffset.height,
+              left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
+            };
+          default:
+            throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
+        }
+      },
+
+      getPosition: function () {
+        var node = this.getDOMNode();
+        var container = this.getContainerDOMNode();
+
+        var offset = container.tagName == 'BODY' ?
+          domUtils.getOffset(node) : domUtils.getPosition(node, container);
+
+        return merge(offset, {
+          height: node.offsetHeight,
+          width: node.offsetWidth
+        });
+      }
     });
 
     __exports__["default"] = OverlayTrigger;
@@ -2814,160 +3924,34 @@ define(
 define('OverlayTrigger',['./transpiled/OverlayTrigger'], function (OverlayTrigger) {
   return OverlayTrigger['default'];
 });
-define('OverlayTriggerMixin',['./transpiled/OverlayTriggerMixin'], function (OverlayTriggerMixin) {
-  return OverlayTriggerMixin['default'];
+define('OverlayMixin',['./transpiled/OverlayMixin'], function (OverlayMixin) {
+  return OverlayMixin['default'];
 });
 define(
-  'transpiled/react-es6/lib/ExecutionEnvironment',["exports"],
-  function(__exports__) {
+  'transpiled/PageHeader',["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     
-    /**
-     * Copyright 2013-2014 Facebook, Inc.
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     * http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     *
-     * @providesModule ExecutionEnvironment
-     */
+    /** @jsx React.DOM */
 
-    /*jslint evil: true */
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
 
-    
+    var PageHeader = React.createClass({displayName: 'PageHeader',
 
-    var canUseDOM = typeof window !== 'undefined';
+      render: function () {
+        return this.transferPropsTo(
+          React.DOM.div( {className:"page-header"}, 
+            React.DOM.h1(null, this.props.children)
+          )
+        );
+      }
+    });
 
-    /**
-     * Simple, lightweight module assisting with the detection and context of
-     * Worker. Helps avoid circular dependencies and allows code to reason about
-     * whether or not they are in a Worker, even if they never include the main
-     * `ReactWorker` dependency.
-     */
-    var ExecutionEnvironment = {
-
-      canUseDOM: canUseDOM,
-
-      canUseWorkers: typeof Worker !== 'undefined',
-
-      canUseEventListeners:
-        canUseDOM && (window.addEventListener || window.attachEvent),
-
-      isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
-    };
-
-    __exports__["default"] = ExecutionEnvironment;
+    __exports__["default"] = PageHeader;
   });
-define(
-  'transpiled/react-es6/lib/ReactTransitionEvents',["./ExecutionEnvironment","exports"],
-  function(__dependency1__, __exports__) {
-    
-    /**
-     * Copyright 2013-2014 Facebook, Inc.
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     * http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     *
-     * @providesModule ReactTransitionEvents
-     */
-
-    
-
-    var ExecutionEnvironment = __dependency1__["default"];
-
-    var EVENT_NAME_MAP = {
-      transitionend: {
-        'transition': 'transitionend',
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'mozTransitionEnd',
-        'OTransition': 'oTransitionEnd',
-        'msTransition': 'MSTransitionEnd'
-      },
-
-      animationend: {
-        'animation': 'animationend',
-        'WebkitAnimation': 'webkitAnimationEnd',
-        'MozAnimation': 'mozAnimationEnd',
-        'OAnimation': 'oAnimationEnd',
-        'msAnimation': 'MSAnimationEnd'
-      }
-    };
-
-    var endEvents = [];
-
-    function detectEvents() {
-      var testEl = document.createElement('div');
-      var style = testEl.style;
-      for (var baseEventName in EVENT_NAME_MAP) {
-        var baseEvents = EVENT_NAME_MAP[baseEventName];
-        for (var styleName in baseEvents) {
-          if (styleName in style) {
-            endEvents.push(baseEvents[styleName]);
-            break;
-          }
-        }
-      }
-    }
-
-    if (ExecutionEnvironment.canUseDOM) {
-      detectEvents();
-    }
-
-    // We use the raw {add|remove}EventListener() call because EventListener
-    // does not know how to remove event listeners and we really should
-    // clean up. Also, these events are not triggered in older browsers
-    // so we should be A-OK here.
-
-    function addEventListener(node, eventName, eventListener) {
-      node.addEventListener(eventName, eventListener, false);
-    }
-
-    function removeEventListener(node, eventName, eventListener) {
-      node.removeEventListener(eventName, eventListener, false);
-    }
-
-    var ReactTransitionEvents = {
-      addEndEventListener: function(node, eventListener) {
-        if (endEvents.length === 0) {
-          // If CSS transitions are not supported, trigger an "end animation"
-          // event immediately.
-          window.setTimeout(eventListener, 0);
-          return;
-        }
-        endEvents.forEach(function(endEvent) {
-          addEventListener(node, endEvent, eventListener);
-        });
-      },
-
-      removeEndEventListener: function(node, eventListener) {
-        if (endEvents.length === 0) {
-          return;
-        }
-        endEvents.forEach(function(endEvent) {
-          removeEventListener(node, endEvent, eventListener);
-        });
-      }
-    };
-
-    __exports__["default"] = ReactTransitionEvents;
-  });
+define('PageHeader',['./transpiled/PageHeader'], function (PageHeader) {
+  return PageHeader['default'];
+});
 define(
   'transpiled/Panel',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
@@ -3202,6 +4186,74 @@ define('Panel',['./transpiled/Panel'], function (Panel) {
 });
 define('PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
   return PanelGroup['default'];
+});
+define(
+  'transpiled/Popover',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+
+    var Popover = React.createClass({displayName: 'Popover',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
+        positionLeft: React.PropTypes.number,
+        positionTop: React.PropTypes.number,
+        arrowOffsetLeft: React.PropTypes.number,
+        arrowOffsetTop: React.PropTypes.number,
+        title: React.PropTypes.renderable
+      },
+
+      getDefaultProps: function () {
+        return {
+          placement: 'right'
+        };
+      },
+
+      render: function () {
+        var classes = {};
+        classes['popover'] = true;
+        classes[this.props.placement] = true;
+        classes['in'] = this.props.positionLeft != null || this.props.positionTop != null;
+
+        var style = {};
+        style['left'] = this.props.positionLeft;
+        style['top'] = this.props.positionTop;
+        style['display'] = 'block';
+
+        var arrowStyle = {};
+        arrowStyle['left'] = this.props.arrowOffsetLeft;
+        arrowStyle['top'] = this.props.arrowOffsetTop;
+
+        return (
+          React.DOM.div( {className:classSet(classes), style:style}, 
+            React.DOM.div( {className:"arrow", style:arrowStyle} ),
+            this.props.title ? this.renderTitle() : null,
+            React.DOM.div( {className:"popover-content"}, 
+                this.props.children
+            )
+          )
+        );
+      },
+
+      renderTitle: function() {
+        return (
+          React.DOM.h3( {className:"popover-title"}, this.props.title)
+        );
+      }
+    });
+
+    __exports__["default"] = Popover;
+  });
+define('Popover',['./transpiled/Popover'], function (Popover) {
+  return Popover['default'];
 });
 define(
   'transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","exports"],
@@ -3787,40 +4839,145 @@ define(
 define('TabPane',['./transpiled/TabPane'], function (TabPane) {
   return TabPane['default'];
 });
+define(
+  'transpiled/Tooltip',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+
+    var Tooltip = React.createClass({displayName: 'Tooltip',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        placement: React.PropTypes.oneOf(['top','right', 'bottom', 'left']),
+        positionLeft: React.PropTypes.number,
+        positionTop: React.PropTypes.number,
+        arrowOffsetLeft: React.PropTypes.number,
+        arrowOffsetTop: React.PropTypes.number
+      },
+
+      getDefaultProps: function () {
+        return {
+          placement: 'right'
+        };
+      },
+
+      render: function () {
+        var classes = {};
+        classes['tooltip'] = true;
+        classes[this.props.placement] = true;
+        classes['in'] = this.props.positionLeft != null || this.props.positionTop != null;
+
+        var style = {};
+        style['left'] = this.props.positionLeft;
+        style['top'] = this.props.positionTop;
+
+        var arrowStyle = {};
+        arrowStyle['left'] = this.props.arrowOffsetLeft;
+        arrowStyle['top'] = this.props.arrowOffsetTop;
+
+        return (
+            React.DOM.div( {className:classSet(classes), style:style}, 
+              React.DOM.div( {className:"tooltip-arrow", style:arrowStyle} ),
+              React.DOM.div( {className:"tooltip-inner"}, 
+                this.props.children
+              )
+            )
+          );
+      }
+    });
+
+    __exports__["default"] = Tooltip;
+  });
+define('Tooltip',['./transpiled/Tooltip'], function (Tooltip) {
+  return Tooltip['default'];
+});
+define(
+  'transpiled/Well',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Well = React.createClass({displayName: 'Well',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'well'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Well;
+  });
+define('Well',['./transpiled/Well'], function (Well) {
+  return Well['default'];
+});
 /*global define */
 
-define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Button','./ButtonGroup','./ButtonToolbar','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Input','./Interpolate','./MenuItem','./Modal','./Nav','./NavItem','./OverlayTrigger','./OverlayTriggerMixin','./Panel','./PanelGroup','./ProgressBar','./SplitButton','./SubNav','./TabbedArea','./TabPane'],function (require) {
-    
+define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Input','./Interpolate','./Jumbotron','./Label','./MenuItem','./Modal','./Nav','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./Popover','./ProgressBar','./SplitButton','./SubNav','./TabbedArea','./TabPane','./Tooltip','./Well'],function (require) {
+  
 
-    return {
-        Accordion: require('./Accordion'),
-        Affix: require('./Affix'),
-        AffixMixin: require('./AffixMixin'),
-        Alert: require('./Alert'),
-        BootstrapMixin: require('./BootstrapMixin'),
-        Button: require('./Button'),
-        ButtonGroup: require('./ButtonGroup'),
-        ButtonToolbar: require('./ButtonToolbar'),
-        DropdownButton: require('./DropdownButton'),
-        DropdownMenu: require('./DropdownMenu'),
-        DropdownStateMixin: require('./DropdownStateMixin'),
-        FadeMixin: require('./FadeMixin'),
-        Input: require('./Input'),
-        Interpolate: require('./Interpolate'),
-        MenuItem: require('./MenuItem'),
-        Modal: require('./Modal'),
-        Nav: require('./Nav'),
-        NavItem: require('./NavItem'),
-        OverlayTrigger: require('./OverlayTrigger'),
-        OverlayTriggerMixin: require('./OverlayTriggerMixin'),
-        Panel: require('./Panel'),
-        PanelGroup: require('./PanelGroup'),
-        ProgressBar: require('./ProgressBar'),
-        SplitButton: require('./SplitButton'),
-        SubNav: require('./SubNav'),
-        TabbedArea: require('./TabbedArea'),
-        TabPane: require('./TabPane')
-    };
+  return {
+    Accordion: require('./Accordion'),
+    Affix: require('./Affix'),
+    AffixMixin: require('./AffixMixin'),
+    Alert: require('./Alert'),
+    BootstrapMixin: require('./BootstrapMixin'),
+    Badge: require('./Badge'),
+    Button: require('./Button'),
+    ButtonGroup: require('./ButtonGroup'),
+    ButtonToolbar: require('./ButtonToolbar'),
+    Carousel: require('./Carousel'),
+    CarouselItem: require('./CarouselItem'),
+    DropdownButton: require('./DropdownButton'),
+    DropdownMenu: require('./DropdownMenu'),
+    DropdownStateMixin: require('./DropdownStateMixin'),
+    FadeMixin: require('./FadeMixin'),
+    Glyphicon: require('./Glyphicon'),
+    Input: require('./Input'),
+    Interpolate: require('./Interpolate'),
+    Jumbotron: require('./Jumbotron'),
+    Label: require('./Label'),
+    MenuItem: require('./MenuItem'),
+    Modal: require('./Modal'),
+    Nav: require('./Nav'),
+    NavItem: require('./NavItem'),
+    ModalTrigger: require('./ModalTrigger'),
+    OverlayTrigger: require('./OverlayTrigger'),
+    OverlayMixin: require('./OverlayMixin'),
+    PageHeader: require('./PageHeader'),
+    Panel: require('./Panel'),
+    PanelGroup: require('./PanelGroup'),
+    Popover: require('./Popover'),
+    ProgressBar: require('./ProgressBar'),
+    SplitButton: require('./SplitButton'),
+    SubNav: require('./SubNav'),
+    TabbedArea: require('./TabbedArea'),
+    TabPane: require('./TabPane'),
+    Tooltip: require('./Tooltip'),
+    Well: require('./Well')
+  };
 });
     //Register in the values from the outer closure for common dependencies
     //as local almond modules
