@@ -22,6 +22,8 @@ define(
         title: React.PropTypes.renderable,
         backdrop: React.PropTypes.oneOf(['static', true, false]),
         keyboard: React.PropTypes.bool,
+        closeButton: React.PropTypes.bool,
+        animation: React.PropTypes.bool,
         onRequestHide: React.PropTypes.func.isRequired
       },
 
@@ -30,7 +32,8 @@ define(
           bsClass: 'modal',
           backdrop: true,
           keyboard: true,
-          animation: true
+          animation: true,
+          closeButton: true
         };
       },
 
@@ -43,11 +46,11 @@ define(
 
         var modal = this.transferPropsTo(
           React.DOM.div(
-            {tabIndex:"-1",
+            {title:null,
+            tabIndex:"-1",
             role:"dialog",
             style:modalStyle,
             className:classSet(classes),
-            onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
             ref:"modal"}, 
             React.DOM.div( {className:"modal-dialog"}, 
               React.DOM.div( {className:"modal-content"}, 
@@ -70,18 +73,28 @@ define(
 
         classes['in'] = !this.props.animation || !document.querySelectorAll;
 
+        var onClick = this.props.backdrop === true ?
+          this.handleBackdropClick : null;
+
         return (
           React.DOM.div(null, 
-            React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
+            React.DOM.div( {className:classSet(classes), ref:"backdrop", onClick:onClick} ),
             modal
           )
         );
       },
 
       renderHeader: function () {
+        var closeButton;
+        if (this.props.closeButton) {
+          closeButton = (
+              React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×")
+            );
+        }
+
         return (
           React.DOM.div( {className:"modal-header"}, 
-            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×"),
+            closeButton,
             this.renderTitle()
           )
         );

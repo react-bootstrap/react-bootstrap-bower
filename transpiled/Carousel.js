@@ -176,8 +176,8 @@ define(
         }
 
         return (
-          React.DOM.a( {className:"left carousel-control", href:href, key:0}, 
-            React.DOM.span( {className:"glyphicon glyphicon-chevron-left", onClick:this.prev})
+          React.DOM.a( {className:"left carousel-control", href:href, key:0, onClick:this.prev}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-left"})
           )
         );
       },
@@ -190,8 +190,8 @@ define(
         }
 
         return (
-          React.DOM.a( {className:"right carousel-control", href:href, key:1}, 
-            React.DOM.span( {className:"glyphicon glyphicon-chevron-right", onClick:this.next})
+          React.DOM.a( {className:"right carousel-control", href:href, key:1, onClick:this.next}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-right"})
           )
         );
       },

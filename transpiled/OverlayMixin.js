@@ -11,7 +11,7 @@ define(
 
       getDefaultProps: function () {
         return {
-          container: document.body
+          container: typeof document !== 'undefined' ? document.body : null
         };
       },
 

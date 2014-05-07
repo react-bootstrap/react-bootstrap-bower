@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "main": [
     "react-bootstrap.min.js",
     "index.js"

@@ -119,7 +119,7 @@ define(
           child,
           {
             active: this.getChildActiveProp(child),
-            onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+            onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
           }

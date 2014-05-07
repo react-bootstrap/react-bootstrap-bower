@@ -132,7 +132,7 @@ define(
         var classes = this.getBsClassSet();
         classes['panel'] = true;
 
-        return this.transferPropsTo(
+        return (
           React.DOM.div( {className:classSet(classes), id:this.props.isCollapsable ? null : this.props.id}, 
             this.renderHeading(),
             this.props.isCollapsable ? this.renderCollapsableBody() : this.renderBody(),

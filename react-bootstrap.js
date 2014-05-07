@@ -403,20 +403,22 @@ define(
     
     __exports__["default"] = {
       CLASSES: {
-        'column': 'col',
+        'alert': 'alert',
         'button': 'btn',
         'button-group': 'btn-group',
         'button-toolbar': 'btn-toolbar',
-        'label': 'label',
-        'alert': 'alert',
+        'column': 'col',
         'input-group': 'input-group',
         'form': 'form',
+        'glyphicon': 'glyphicon',
+        'label': 'label',
         'panel': 'panel',
         'panel-group': 'panel-group',
         'progress-bar': 'progress-bar',
         'nav': 'nav',
+        'navbar': 'navbar',
         'modal': 'modal',
-        'glyphicon': 'glyphicon',
+        'row': 'row',
         'well': 'well'
       },
       STYLES: {
@@ -437,208 +439,208 @@ define(
         'small': 'sm',
         'xsmall': 'xs'
       },
-      GLYPHS: {
-        'asterisk': 'asterisk',
-        'plus': 'plus',
-        'euro': 'euro',
-        'minus': 'minus',
-        'cloud': 'cloud',
-        'envelope': 'envelope',
-        'pencil': 'pencil',
-        'glass': 'glass',
-        'music': 'music',
-        'search': 'search',
-        'heart': 'heart',
-        'star': 'star',
-        'star-empty': 'star-empty',
-        'user': 'user',
-        'film': 'film',
-        'th-large': 'th-large',
-        'th': 'th',
-        'th-list': 'th-list',
-        'ok': 'ok',
-        'remove': 'remove',
-        'zoom-in': 'zoom-in',
-        'zoom-out': 'zoom-out',
-        'off': 'off',
-        'signal': 'signal',
-        'cog': 'cog',
-        'trash': 'trash',
-        'home': 'home',
-        'file': 'file',
-        'time': 'time',
-        'road': 'road',
-        'download-alt': 'download-alt',
-        'download': 'download',
-        'upload': 'upload',
-        'inbox': 'inbox',
-        'play-circle': 'play-circle',
-        'repeat': 'repeat',
-        'refresh': 'refresh',
-        'list-alt': 'list-alt',
-        'lock': 'lock',
-        'flag': 'flag',
-        'headphones': 'headphones',
-        'volume-off': 'volume-off',
-        'volume-down': 'volume-down',
-        'volume-up': 'volume-up',
-        'qrcode': 'qrcode',
-        'barcode': 'barcode',
-        'tag': 'tag',
-        'tags': 'tags',
-        'book': 'book',
-        'bookmark': 'bookmark',
-        'print': 'print',
-        'camera': 'camera',
-        'font': 'font',
-        'bold': 'bold',
-        'italic': 'italic',
-        'text-height': 'text-height',
-        'text-width': 'text-width',
-        'align-left': 'align-left',
-        'align-center': 'align-center',
-        'align-right': 'align-right',
-        'align-justify': 'align-justify',
-        'list': 'list',
-        'indent-left': 'indent-left',
-        'indent-right': 'indent-right',
-        'facetime-video': 'facetime-video',
-        'picture': 'picture',
-        'map-marker': 'map-marker',
-        'adjust': 'adjust',
-        'tint': 'tint',
-        'edit': 'edit',
-        'share': 'share',
-        'check': 'check',
-        'move': 'move',
-        'step-backward': 'step-backward',
-        'fast-backward': 'fast-backward',
-        'backward': 'backward',
-        'play': 'play',
-        'pause': 'pause',
-        'stop': 'stop',
-        'forward': 'forward',
-        'fast-forward': 'fast-forward',
-        'step-forward': 'step-forward',
-        'eject': 'eject',
-        'chevron-left': 'chevron-left',
-        'chevron-right': 'chevron-right',
-        'plus-sign': 'plus-sign',
-        'minus-sign': 'minus-sign',
-        'remove-sign': 'remove-sign',
-        'ok-sign': 'ok-sign',
-        'question-sign': 'question-sign',
-        'info-sign': 'info-sign',
-        'screenshot': 'screenshot',
-        'remove-circle': 'remove-circle',
-        'ok-circle': 'ok-circle',
-        'ban-circle': 'ban-circle',
-        'arrow-left': 'arrow-left',
-        'arrow-right': 'arrow-right',
-        'arrow-up': 'arrow-up',
-        'arrow-down': 'arrow-down',
-        'share-alt': 'share-alt',
-        'resize-full': 'resize-full',
-        'resize-small': 'resize-small',
-        'exclamation-sign': 'exclamation-sign',
-        'gift': 'gift',
-        'leaf': 'leaf',
-        'fire': 'fire',
-        'eye-open': 'eye-open',
-        'eye-close': 'eye-close',
-        'warning-sign': 'warning-sign',
-        'plane': 'plane',
-        'calendar': 'calendar',
-        'random': 'random',
-        'comment': 'comment',
-        'magnet': 'magnet',
-        'chevron-up': 'chevron-up',
-        'chevron-down': 'chevron-down',
-        'retweet': 'retweet',
-        'shopping-cart': 'shopping-cart',
-        'folder-close': 'folder-close',
-        'folder-open': 'folder-open',
-        'resize-vertical': 'resize-vertical',
-        'resize-horizontal': 'resize-horizontal',
-        'hdd': 'hdd',
-        'bullhorn': 'bullhorn',
-        'bell': 'bell',
-        'certificate': 'certificate',
-        'thumbs-up': 'thumbs-up',
-        'thumbs-down': 'thumbs-down',
-        'hand-right': 'hand-right',
-        'hand-left': 'hand-left',
-        'hand-up': 'hand-up',
-        'hand-down': 'hand-down',
-        'circle-arrow-right': 'circle-arrow-right',
-        'circle-arrow-left': 'circle-arrow-left',
-        'circle-arrow-up': 'circle-arrow-up',
-        'circle-arrow-down': 'circle-arrow-down',
-        'globe': 'globe',
-        'wrench': 'wrench',
-        'tasks': 'tasks',
-        'filter': 'filter',
-        'briefcase': 'briefcase',
-        'fullscreen': 'fullscreen',
-        'dashboard': 'dashboard',
-        'paperclip': 'paperclip',
-        'heart-empty': 'heart-empty',
-        'link': 'link',
-        'phone': 'phone',
-        'pushpin': 'pushpin',
-        'usd': 'usd',
-        'gbp': 'gbp',
-        'sort': 'sort',
-        'sort-by-alphabet': 'sort-by-alphabet',
-        'sort-by-alphabet-alt': 'sort-by-alphabet-alt',
-        'sort-by-order': 'sort-by-order',
-        'sort-by-order-alt': 'sort-by-order-alt',
-        'sort-by-attributes': 'sort-by-attributes',
-        'sort-by-attributes-alt': 'sort-by-attributes-alt',
-        'unchecked': 'unchecked',
-        'expand': 'expand',
-        'collapse-down': 'collapse-down',
-        'collapse-up': 'collapse-up',
-        'log-in': 'log-in',
-        'flash': 'flash',
-        'log-out': 'log-out',
-        'new-window': 'new-window',
-        'record': 'record',
-        'save': 'save',
-        'open': 'open',
-        'saved': 'saved',
-        'import': 'import',
-        'export': 'export',
-        'send': 'send',
-        'floppy-disk': 'floppy-disk',
-        'floppy-saved': 'floppy-saved',
-        'floppy-remove': 'floppy-remove',
-        'floppy-save': 'floppy-save',
-        'floppy-open': 'floppy-open',
-        'credit-card': 'credit-card',
-        'transfer': 'transfer',
-        'cutlery': 'cutlery',
-        'header': 'header',
-        'compressed': 'compressed',
-        'earphone': 'earphone',
-        'phone-alt': 'phone-alt',
-        'tower': 'tower',
-        'stats': 'stats',
-        'sd-video': 'sd-video',
-        'hd-video': 'hd-video',
-        'subtitles': 'subtitles',
-        'sound-stereo': 'sound-stereo',
-        'sound-dolby': 'sound-dolby',
-        'sound-5-1': 'sound-5-1',
-        'sound-6-1': 'sound-6-1',
-        'sound-7-1': 'sound-7-1',
-        'copyright-mark': 'copyright-mark',
-        'registration-mark': 'registration-mark',
-        'cloud-download': 'cloud-download',
-        'cloud-upload': 'cloud-upload',
-        'tree-conifer': 'tree-conifer',
-        'tree-deciduous': 'tree-deciduous'
-      }
+      GLYPHS: [
+        'asterisk',
+        'plus',
+        'euro',
+        'minus',
+        'cloud',
+        'envelope',
+        'pencil',
+        'glass',
+        'music',
+        'search',
+        'heart',
+        'star',
+        'star-empty',
+        'user',
+        'film',
+        'th-large',
+        'th',
+        'th-list',
+        'ok',
+        'remove',
+        'zoom-in',
+        'zoom-out',
+        'off',
+        'signal',
+        'cog',
+        'trash',
+        'home',
+        'file',
+        'time',
+        'road',
+        'download-alt',
+        'download',
+        'upload',
+        'inbox',
+        'play-circle',
+        'repeat',
+        'refresh',
+        'list-alt',
+        'lock',
+        'flag',
+        'headphones',
+        'volume-off',
+        'volume-down',
+        'volume-up',
+        'qrcode',
+        'barcode',
+        'tag',
+        'tags',
+        'book',
+        'bookmark',
+        'print',
+        'camera',
+        'font',
+        'bold',
+        'italic',
+        'text-height',
+        'text-width',
+        'align-left',
+        'align-center',
+        'align-right',
+        'align-justify',
+        'list',
+        'indent-left',
+        'indent-right',
+        'facetime-video',
+        'picture',
+        'map-marker',
+        'adjust',
+        'tint',
+        'edit',
+        'share',
+        'check',
+        'move',
+        'step-backward',
+        'fast-backward',
+        'backward',
+        'play',
+        'pause',
+        'stop',
+        'forward',
+        'fast-forward',
+        'step-forward',
+        'eject',
+        'chevron-left',
+        'chevron-right',
+        'plus-sign',
+        'minus-sign',
+        'remove-sign',
+        'ok-sign',
+        'question-sign',
+        'info-sign',
+        'screenshot',
+        'remove-circle',
+        'ok-circle',
+        'ban-circle',
+        'arrow-left',
+        'arrow-right',
+        'arrow-up',
+        'arrow-down',
+        'share-alt',
+        'resize-full',
+        'resize-small',
+        'exclamation-sign',
+        'gift',
+        'leaf',
+        'fire',
+        'eye-open',
+        'eye-close',
+        'warning-sign',
+        'plane',
+        'calendar',
+        'random',
+        'comment',
+        'magnet',
+        'chevron-up',
+        'chevron-down',
+        'retweet',
+        'shopping-cart',
+        'folder-close',
+        'folder-open',
+        'resize-vertical',
+        'resize-horizontal',
+        'hdd',
+        'bullhorn',
+        'bell',
+        'certificate',
+        'thumbs-up',
+        'thumbs-down',
+        'hand-right',
+        'hand-left',
+        'hand-up',
+        'hand-down',
+        'circle-arrow-right',
+        'circle-arrow-left',
+        'circle-arrow-up',
+        'circle-arrow-down',
+        'globe',
+        'wrench',
+        'tasks',
+        'filter',
+        'briefcase',
+        'fullscreen',
+        'dashboard',
+        'paperclip',
+        'heart-empty',
+        'link',
+        'phone',
+        'pushpin',
+        'usd',
+        'gbp',
+        'sort',
+        'sort-by-alphabet',
+        'sort-by-alphabet-alt',
+        'sort-by-order',
+        'sort-by-order-alt',
+        'sort-by-attributes',
+        'sort-by-attributes-alt',
+        'unchecked',
+        'expand',
+        'collapse-down',
+        'collapse-up',
+        'log-in',
+        'flash',
+        'log-out',
+        'new-window',
+        'record',
+        'save',
+        'open',
+        'saved',
+        'import',
+        'export',
+        'send',
+        'floppy-disk',
+        'floppy-saved',
+        'floppy-remove',
+        'floppy-save',
+        'floppy-open',
+        'credit-card',
+        'transfer',
+        'cutlery',
+        'header',
+        'compressed',
+        'earphone',
+        'phone-alt',
+        'tower',
+        'stats',
+        'sd-video',
+        'hd-video',
+        'subtitles',
+        'sound-stereo',
+        'sound-dolby',
+        'sound-5-1',
+        'sound-6-1',
+        'sound-7-1',
+        'copyright-mark',
+        'registration-mark',
+        'cloud-download',
+        'cloud-upload',
+        'tree-conifer',
+        'tree-deciduous'
+      ]
     };
   });
 define(
@@ -652,8 +654,7 @@ define(
       propTypes: {
         bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
         bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES)),
-        bsGlyph: React.PropTypes.oneOf(Object.keys(constants.GLYPHS))
+        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
       },
 
       getBsClassSet: function () {
@@ -668,11 +669,6 @@ define(
           var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
           if (bsSize) {
             classes[prefix + bsSize] = true;
-          }
-
-          var bsGlyph = this.props.bsGlyph && constants.GLYPHS[this.props.bsGlyph];
-          if (bsGlyph) {
-            classes[prefix + bsGlyph] = true;
           }
 
           var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
@@ -1960,19 +1956,18 @@ define('BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixi
   return BootstrapMixin['default'];
 });
 define(
-  'transpiled/Badge',["./react-es6","./react-es6/lib/cx","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  'transpiled/Badge',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
 
     var Badge = React.createClass({displayName: 'Badge',
 
       render: function () {
         return this.transferPropsTo(
-          React.DOM.span( {className:"badge"}, 
+          React.DOM.span( {className:this.props.children ? 'badge': null}, 
             this.props.children
           )
         );
@@ -2309,8 +2304,8 @@ define(
         }
 
         return (
-          React.DOM.a( {className:"left carousel-control", href:href, key:0}, 
-            React.DOM.span( {className:"glyphicon glyphicon-chevron-left", onClick:this.prev})
+          React.DOM.a( {className:"left carousel-control", href:href, key:0, onClick:this.prev}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-left"})
           )
         );
       },
@@ -2323,8 +2318,8 @@ define(
         }
 
         return (
-          React.DOM.a( {className:"right carousel-control", href:href, key:1}, 
-            React.DOM.span( {className:"glyphicon glyphicon-chevron-right", onClick:this.next})
+          React.DOM.a( {className:"right carousel-control", href:href, key:1, onClick:this.next}, 
+            React.DOM.span( {className:"glyphicon glyphicon-chevron-right"})
           )
         );
       },
@@ -2687,6 +2682,102 @@ define('CarouselItem',['./transpiled/CarouselItem'], function (CarouselItem) {
   return CarouselItem['default'];
 });
 define(
+  'transpiled/PropTypes',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    __exports__["default"] = {
+      componentClass: function (props, propName, componentName) {
+        return React.isValidClass(props[propName]);
+      }
+    };
+  });
+define(
+  'transpiled/Col',["./react-es6","./react-es6/lib/cx","./PropTypes","./constants","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var PropTypes = __dependency3__["default"];
+    var constants = __dependency4__["default"];
+
+
+    var Col = React.createClass({displayName: 'Col',
+      propTypes: {
+        xs: React.PropTypes.number,
+        sm: React.PropTypes.number,
+        md: React.PropTypes.number,
+        lg: React.PropTypes.number,
+        xsOffset: React.PropTypes.number,
+        smOffset: React.PropTypes.number,
+        mdOffset: React.PropTypes.number,
+        lgOffset: React.PropTypes.number,
+        xsPush: React.PropTypes.number,
+        smPush: React.PropTypes.number,
+        mdPush: React.PropTypes.number,
+        lgPush: React.PropTypes.number,
+        xsPull: React.PropTypes.number,
+        smPull: React.PropTypes.number,
+        mdPull: React.PropTypes.number,
+        lgPull: React.PropTypes.number,
+        componentClass: PropTypes.componentClass
+      },
+
+      getDefaultProps: function () {
+        return {
+          componentClass: React.DOM.div
+        };
+      },
+
+      render: function () {
+        var componentClass = this.props.componentClass;
+        var classes = {};
+
+        Object.keys(constants.SIZES).forEach(function (key) {
+          var size = constants.SIZES[key];
+          var prop = size;
+          var classPart = size + '-';
+
+          if (this.props[prop]) {
+            classes['col-' + classPart + this.props[prop]] = true;
+          }
+
+          prop = size + 'Offset';
+          classPart = size + '-offset-';
+          if (this.props[prop]) {
+            classes['col-' + classPart + this.props[prop]] = true;
+          }
+
+          prop = size + 'Push';
+          classPart = size + '-push-';
+          if (this.props[prop]) {
+            classes['col-' + classPart + this.props[prop]] = true;
+          }
+
+          prop = size + 'Pull';
+          classPart = size + '-pull-';
+          if (this.props[prop]) {
+            classes['col-' + classPart + this.props[prop]] = true;
+          }
+        }, this);
+
+        return this.transferPropsTo(
+          componentClass( {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Col;
+  });
+define('Col',['./transpiled/Col'], function (Col) {
+  return Col['default'];
+});
+define(
   'transpiled/DropdownStateMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
@@ -2933,17 +3024,22 @@ define('FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
   return FadeMixin['default'];
 });
 define(
-  'transpiled/Glyphicon',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  'transpiled/Glyphicon',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./constants","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
+    var constants = __dependency4__["default"];
 
     var Glyphicon = React.createClass({displayName: 'Glyphicon',
       mixins: [BootstrapMixin],
+
+      propTypes: {
+        glyph: React.PropTypes.oneOf(constants.GLYPHS).isRequired
+      },
 
       getDefaultProps: function () {
         return {
@@ -2953,6 +3049,8 @@ define(
 
       render: function () {
         var classes = this.getBsClassSet();
+
+        classes['glyphicon-' + this.props.glyph] = true;
 
         return this.transferPropsTo(
           React.DOM.span( {className:classSet(classes)}, 
@@ -2966,6 +3064,44 @@ define(
   });
 define('Glyphicon',['./transpiled/Glyphicon'], function (Glyphicon) {
   return Glyphicon['default'];
+});
+define(
+  'transpiled/Grid',["./react-es6","./PropTypes","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var PropTypes = __dependency2__["default"];
+
+
+    var Grid = React.createClass({displayName: 'Grid',
+      propTypes: {
+        fluid: React.PropTypes.bool,
+        componentClass: PropTypes.componentClass
+      },
+
+      getDefaultProps: function () {
+        return {
+          componentClass: React.DOM.div
+        };
+      },
+
+      render: function () {
+        var componentClass = this.props.componentClass;
+
+        return this.transferPropsTo(
+          componentClass( {className:this.props.fluid ? 'container-fluid' : 'container'}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Grid;
+  });
+define('Grid',['./transpiled/Grid'], function (Grid) {
+  return Grid['default'];
 });
 define(
   'transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
@@ -3316,6 +3452,8 @@ define(
         title: React.PropTypes.renderable,
         backdrop: React.PropTypes.oneOf(['static', true, false]),
         keyboard: React.PropTypes.bool,
+        closeButton: React.PropTypes.bool,
+        animation: React.PropTypes.bool,
         onRequestHide: React.PropTypes.func.isRequired
       },
 
@@ -3324,7 +3462,8 @@ define(
           bsClass: 'modal',
           backdrop: true,
           keyboard: true,
-          animation: true
+          animation: true,
+          closeButton: true
         };
       },
 
@@ -3337,11 +3476,11 @@ define(
 
         var modal = this.transferPropsTo(
           React.DOM.div(
-            {tabIndex:"-1",
+            {title:null,
+            tabIndex:"-1",
             role:"dialog",
             style:modalStyle,
             className:classSet(classes),
-            onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
             ref:"modal"}, 
             React.DOM.div( {className:"modal-dialog"}, 
               React.DOM.div( {className:"modal-content"}, 
@@ -3364,18 +3503,28 @@ define(
 
         classes['in'] = !this.props.animation || !document.querySelectorAll;
 
+        var onClick = this.props.backdrop === true ?
+          this.handleBackdropClick : null;
+
         return (
           React.DOM.div(null, 
-            React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
+            React.DOM.div( {className:classSet(classes), ref:"backdrop", onClick:onClick} ),
             modal
           )
         );
       },
 
       renderHeader: function () {
+        var closeButton;
+        if (this.props.closeButton) {
+          closeButton = (
+              React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×")
+            );
+        }
+
         return (
           React.DOM.div( {className:"modal-header"}, 
-            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×"),
+            closeButton,
             this.renderTitle()
           )
         );
@@ -3484,7 +3633,7 @@ define(
             active: this.getChildActiveProp(child),
             activeKey: this.props.activeKey,
             activeHref: this.props.activeHref,
-            onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+            onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
           }
@@ -3496,6 +3645,61 @@ define(
   });
 define('Nav',['./transpiled/Nav'], function (Nav) {
   return Nav['default'];
+});
+define(
+  'transpiled/Navbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./PropTypes","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var PropTypes = __dependency4__["default"];
+
+
+    var Navbar = React.createClass({displayName: 'Navbar',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        fixedTop: React.PropTypes.bool,
+        fixedBottom: React.PropTypes.bool,
+        staticTop: React.PropTypes.bool,
+        inverse: React.PropTypes.bool,
+        role: React.PropTypes.string,
+        componentClass: PropTypes.componentClass
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'navbar',
+          bsStyle: 'default',
+          role: 'navigation',
+          componentClass: React.DOM.nav
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        var componentClass = this.props.componentClass;
+
+        classes['navbar-fixed-top'] = this.props.fixedTop;
+        classes['navbar-fixed-bottom'] = this.props.fixedBottom;
+        classes['navbar-static-top'] = this.props.staticTop;
+        classes['navbar-inverse'] = this.props.inverse;
+
+        return this.transferPropsTo(
+          componentClass( {className:classSet(classes), role:this.props.role}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Navbar;
+  });
+define('Navbar',['./transpiled/Navbar'], function (Navbar) {
+  return Navbar['default'];
 });
 define(
   'transpiled/NavItem',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
@@ -3572,7 +3776,7 @@ define(
 
       getDefaultProps: function () {
         return {
-          container: document.body
+          container: typeof document !== 'undefined' ? document.body : null
         };
       },
 
@@ -4086,7 +4290,7 @@ define(
         var classes = this.getBsClassSet();
         classes['panel'] = true;
 
-        return this.transferPropsTo(
+        return (
           React.DOM.div( {className:classSet(classes), id:this.props.isCollapsable ? null : this.props.id}, 
             this.renderHeading(),
             this.props.isCollapsable ? this.renderCollapsableBody() : this.renderBody(),
@@ -4389,6 +4593,43 @@ define('ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar) {
   return ProgressBar['default'];
 });
 define(
+  'transpiled/Row',["./react-es6","./PropTypes","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var PropTypes = __dependency2__["default"];
+
+
+    var Row = React.createClass({displayName: 'Row',
+      propTypes: {
+        componentClass: PropTypes.componentClass
+      },
+
+      getDefaultProps: function () {
+        return {
+          componentClass: React.DOM.div
+        };
+      },
+
+      render: function () {
+        var componentClass = this.props.componentClass;
+
+        return this.transferPropsTo(
+          componentClass( {className:"row"}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Row;
+  });
+define('Row',['./transpiled/Row'], function (Row) {
+  return Row['default'];
+});
+define(
   'transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./Button","./ButtonGroup","./DropdownMenu","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     
@@ -4600,7 +4841,7 @@ define(
           child,
           {
             active: this.getChildActiveProp(child),
-            onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+            onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
           }
@@ -4935,7 +5176,7 @@ define('Well',['./transpiled/Well'], function (Well) {
 });
 /*global define */
 
-define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Input','./Interpolate','./Jumbotron','./Label','./MenuItem','./Modal','./Nav','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./Popover','./ProgressBar','./SplitButton','./SubNav','./TabbedArea','./TabPane','./Tooltip','./Well'],function (require) {
+define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./Col','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Grid','./Input','./Interpolate','./Jumbotron','./Label','./MenuItem','./Modal','./Nav','./Navbar','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./Popover','./ProgressBar','./Row','./SplitButton','./SubNav','./TabbedArea','./TabPane','./Tooltip','./Well'],function (require) {
   
 
   return {
@@ -4950,11 +5191,13 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
     ButtonToolbar: require('./ButtonToolbar'),
     Carousel: require('./Carousel'),
     CarouselItem: require('./CarouselItem'),
+    Col: require('./Col'),
     DropdownButton: require('./DropdownButton'),
     DropdownMenu: require('./DropdownMenu'),
     DropdownStateMixin: require('./DropdownStateMixin'),
     FadeMixin: require('./FadeMixin'),
     Glyphicon: require('./Glyphicon'),
+    Grid: require('./Grid'),
     Input: require('./Input'),
     Interpolate: require('./Interpolate'),
     Jumbotron: require('./Jumbotron'),
@@ -4962,6 +5205,7 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
     MenuItem: require('./MenuItem'),
     Modal: require('./Modal'),
     Nav: require('./Nav'),
+    Navbar: require('./Navbar'),
     NavItem: require('./NavItem'),
     ModalTrigger: require('./ModalTrigger'),
     OverlayTrigger: require('./OverlayTrigger'),
@@ -4971,6 +5215,7 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
     PanelGroup: require('./PanelGroup'),
     Popover: require('./Popover'),
     ProgressBar: require('./ProgressBar'),
+    Row: require('./Row'),
     SplitButton: require('./SplitButton'),
     SubNav: require('./SubNav'),
     TabbedArea: require('./TabbedArea'),
