@@ -16,6 +16,7 @@ define(function (require) {
     Carousel: require('./Carousel'),
     CarouselItem: require('./CarouselItem'),
     Col: require('./Col'),
+    CollapsableMixin: require('./CollapsableMixin'),
     DropdownButton: require('./DropdownButton'),
     DropdownMenu: require('./DropdownMenu'),
     DropdownStateMixin: require('./DropdownStateMixin'),
@@ -43,6 +44,7 @@ define(function (require) {
     SplitButton: require('./SplitButton'),
     SubNav: require('./SubNav'),
     TabbedArea: require('./TabbedArea'),
+    Table: require('./Table'),
     TabPane: require('./TabPane'),
     Tooltip: require('./Tooltip'),
     Well: require('./Well')

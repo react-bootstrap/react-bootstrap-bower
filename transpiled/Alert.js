@@ -31,7 +31,7 @@ define(
             className:"close",
             onClick:this.props.onDismiss,
             'aria-hidden':"true"}, 
-            " × "
+            "×"
           )
         );
       },

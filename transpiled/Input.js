@@ -37,6 +37,12 @@ define(
         //minLength: React.PropTypes.int
       },
 
+      getInitialState: function () {
+        return {
+          error: false
+        };
+      },
+
       getValue: function () {
         return this.refs.input.getDOMNode().value;
       },

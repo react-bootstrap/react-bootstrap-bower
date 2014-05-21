@@ -1917,7 +1917,7 @@ define(
             className:"close",
             onClick:this.props.onDismiss,
             'aria-hidden':"true"}, 
-            " × "
+            "×"
           )
         );
       },
@@ -1995,7 +1995,9 @@ define(
       propTypes: {
         active:   React.PropTypes.bool,
         disabled: React.PropTypes.bool,
-        block:    React.PropTypes.bool
+        block:    React.PropTypes.bool,
+        navItem:    React.PropTypes.bool,
+        navDropdown: React.PropTypes.bool
       },
 
       getDefaultProps: function () {
@@ -2007,22 +2009,30 @@ define(
       },
 
       render: function () {
-        var classes = this.getBsClassSet();
+        var classes = this.props.navDropdown ? {} : this.getBsClassSet();
+        var renderFuncName;
+
         classes['active'] = this.props.active;
         classes['btn-block'] = this.props.block;
 
-        var renderFuncName = this.props.href ?
+        if (this.props.navItem) {
+          return this.renderNavItem(classes);
+        }
+
+        renderFuncName = this.props.href || this.props.navDropdown ?
           'renderAnchor' : 'renderButton';
 
         return this[renderFuncName](classes);
       },
 
       renderAnchor: function (classes) {
+        var href = this.props.href || '#';
         classes['disabled'] = this.props.disabled;
 
         return this.transferPropsTo(
           React.DOM.a(
-            {className:classSet(classes),
+            {href:href,
+            className:classSet(classes),
             role:"button"}, 
             this.props.children
           )
@@ -2034,6 +2044,18 @@ define(
           React.DOM.button(
             {className:classSet(classes)}, 
             this.props.children
+          )
+        );
+      },
+
+      renderNavItem: function (classes) {
+        var liClasses = {
+          active: this.props.active
+        };
+
+        return (
+          React.DOM.li( {className:classSet(liClasses)}, 
+            this.renderAnchor(classes)
           )
         );
       }
@@ -2778,6 +2800,130 @@ define('Col',['./transpiled/Col'], function (Col) {
   return Col['default'];
 });
 define(
+  'transpiled/CollapsableMixin',["./react-es6/lib/ReactTransitionEvents","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var ReactTransitionEvents = __dependency1__["default"];
+
+    var CollapsableMixin = {
+
+      getInitialState: function() {
+        return {
+          isOpen: this.props.defaultOpen != null ? this.props.defaultOpen : null,
+          isCollapsing: false
+        };
+      },
+
+      handleTransitionEnd: function () {
+        this._collapseEnd = true;
+        this.setState({
+          isCollapsing: false
+        });
+      },
+
+      componentWillReceiveProps: function (newProps) {
+        if (this.props.isCollapsable && newProps.isOpen !== this.props.isOpen) {
+          this._collapseEnd = false;
+          this.setState({
+            isCollapsing: true
+          });
+        }
+      },
+
+      _addEndTransitionListener: function () {
+        var node = this.getCollapsableDOMNode();
+
+        if (node) {
+          ReactTransitionEvents.addEndEventListener(
+            node,
+            this.handleTransitionEnd
+          );
+        }
+      },
+
+      _removeEndTransitionListener: function () {
+        var node = this.getCollapsableDOMNode();
+
+        if (node) {
+          ReactTransitionEvents.addEndEventListener(
+            node,
+            this.handleTransitionEnd
+          );
+        }
+      },
+
+      componentDidMount: function () {
+        this._afterRender();
+      },
+
+      componentWillUnmount: function () {
+        this._removeEndTransitionListener();
+      },
+
+      componentWillUpdate: function (nextProps) {
+        var dimension = (typeof this.getCollapsableDimension === 'function') ?
+          this.getCollapsableDimension() : 'height';
+        var node = this.getCollapsableDOMNode();
+
+        this._removeEndTransitionListener();
+        if (node && nextProps.isOpen !== this.props.isOpen && this.props.isOpen) {
+          node.style[dimension] = this.getCollapsableDimensionValue() + 'px';
+        }
+      },
+
+      componentDidUpdate: function () {
+        this._afterRender();
+      },
+
+      _afterRender: function () {
+        if (!this.props.isCollapsable) {
+          return;
+        }
+
+        this._addEndTransitionListener();
+        setTimeout(this._updateDimensionAfterRender, 0);
+      },
+
+      _updateDimensionAfterRender: function () {
+        var dimension = (typeof this.getCollapsableDimension === 'function') ?
+          this.getCollapsableDimension() : 'height';
+        var node = this.getCollapsableDOMNode();
+
+        if (node) {
+          node.style[dimension] = this.isOpen() ?
+            this.getCollapsableDimensionValue() + 'px' : '0px';
+        }
+      },
+
+      isOpen: function () {
+        return (this.props.isOpen != null) ? this.props.isOpen : this.state.isOpen;
+      },
+
+      getCollapsableClassSet: function (className) {
+        var classes = {};
+
+        if (typeof className === 'string') {
+          className.split(' ').forEach(function (className) {
+            if (className) {
+              classes[className] = true;
+            }
+          });
+        }
+
+        classes.collapsing = this.state.isCollapsing;
+        classes.collapse = !this.state.isCollapsing;
+        classes['in'] = this.isOpen() && !this.state.isCollapsing;
+
+        return classes;
+      }
+    };
+
+    __exports__["default"] = CollapsableMixin;
+  });
+define('CollapsableMixin',['./transpiled/CollapsableMixin'], function (CollapsableMixin) {
+  return CollapsableMixin['default'];
+});
+define(
   'transpiled/DropdownStateMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
@@ -2900,46 +3046,74 @@ define(
         title:    React.PropTypes.renderable,
         href:     React.PropTypes.string,
         onClick:  React.PropTypes.func,
-        onSelect: React.PropTypes.func
+        onSelect: React.PropTypes.func,
+        navItem:  React.PropTypes.bool
       },
 
       render: function () {
+        var className = this.props.className ?
+          this.props.className + ' dropdown-toggle' : 'dropdown-toggle';
+
+        var renderMethod = this.props.navItem ?
+          'renderNavItem' : 'renderButtonGroup';
+
+        return this[renderMethod]([
+          Button(
+            {ref:"dropdownButton",
+            href:this.props.href,
+            bsStyle:this.props.bsStyle,
+            className:className,
+            onClick:this.handleOpenClick,
+            id:this.props.id,
+            key:0,
+            navDropdown:this.props.navItem}, 
+            this.props.title,' ',
+            React.DOM.span( {className:"caret"} )
+          ),
+          DropdownMenu(
+            {ref:"menu",
+            'aria-labelledby':this.props.id,
+            onSelect:this.handleOptionSelect,
+            pullRight:this.props.pullRight,
+            key:1}, 
+            this.props.children
+          )
+        ]);
+      },
+
+      renderButtonGroup: function (children) {
         var groupClasses = {
             'open': this.state.open,
             'dropup': this.props.dropup
           };
 
-        var className = this.props.className ?
-          this.props.className + ' dropdown-toggle' : 'dropdown-toggle';
-
         return (
           ButtonGroup(
             {bsSize:this.props.bsSize,
             className:classSet(groupClasses)}, 
-            Button(
-              {ref:"dropdownButton",
-              href:this.props.href,
-              bsStyle:this.props.bsStyle,
-              className:className,
-              onClick:this.handleOpenClick,
-              id:this.props.id}, 
-              this.props.title,' ',
-              React.DOM.span( {className:"caret"} )
-            ),
-
-            DropdownMenu(
-              {ref:"menu",
-              'aria-labelledby':this.props.id,
-              onSelect:this.handleOptionSelect,
-              pullRight:this.props.pullRight}, 
-              this.props.children
-            )
+            children
           )
         );
       },
 
-      handleOpenClick: function () {
+      renderNavItem: function (children) {
+        var classes = {
+            'dropdown': true,
+            'open': this.state.open,
+            'dropup': this.props.dropup
+          };
+
+        return (
+          React.DOM.li( {className:classSet(classes)}, 
+            children
+          )
+        );
+      },
+
+      handleOpenClick: function (e) {
         this.setDropdownState(true);
+
+        e.preventDefault();
       },
 
       handleOptionSelect: function (key) {
@@ -3140,6 +3314,12 @@ define(
         required: React.PropTypes.bool,
         oneOf: React.PropTypes.array
         //minLength: React.PropTypes.int
+      },
+
+      getInitialState: function () {
+        return {
+          error: false
+        };
       },
 
       getValue: function () {
@@ -3566,25 +3746,30 @@ define('Modal',['./transpiled/Modal'], function (Modal) {
   return Modal['default'];
 });
 define(
-  'transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  'transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./CollapsableMixin","./utils","./domUtils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
-    var utils = __dependency4__["default"];
+    var CollapsableMixin = __dependency4__["default"];
+    var utils = __dependency5__["default"];
+    var domUtils = __dependency6__["default"];
 
 
     var Nav = React.createClass({displayName: 'Nav',
-      mixins: [BootstrapMixin],
+      mixins: [BootstrapMixin, CollapsableMixin],
 
       propTypes: {
         bsStyle: React.PropTypes.oneOf(['tabs','pills']),
         stacked: React.PropTypes.bool,
         justified: React.PropTypes.bool,
-        onSelect: React.PropTypes.func
+        onSelect: React.PropTypes.func,
+        isCollapsable: React.PropTypes.bool,
+        isOpen: React.PropTypes.bool,
+        navbar: React.PropTypes.bool
       },
 
       getDefaultProps: function () {
@@ -3593,17 +3778,44 @@ define(
         };
       },
 
+      getCollapsableDOMNode: function () {
+        return this.getDOMNode();
+      },
+
+      getCollapsableDimensionValue: function () {
+        var node = this.refs.ul.getDOMNode(),
+            height = node.offsetHeight,
+            computedStyles = domUtils.getComputedStyles(node);
+
+        return height + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
+      },
+
       render: function () {
+        var classes = this.props.isCollapsable ? this.getCollapsableClassSet() : {};
+
+        classes['navbar-collapse'] = this.props.isCollapsable;
+
+        if (this.props.navbar) {
+          return this.renderUl();
+        }
+
+        return this.transferPropsTo(
+          React.DOM.nav( {className:classSet(classes)}, 
+            this.renderUl()
+          )
+        );
+      },
+
+      renderUl: function () {
         var classes = this.getBsClassSet();
 
         classes['nav-stacked'] = this.props.stacked;
         classes['nav-justified'] = this.props.justified;
+        classes['navbar-nav'] = this.props.navbar;
 
-        return this.transferPropsTo(
-          React.DOM.nav(null, 
-            React.DOM.ul( {className:classSet(classes)}, 
-              utils.modifyChildren(this.props.children, this.renderNavItem)
-            )
+        return (
+          React.DOM.ul( {className:classSet(classes), ref:"ul"}, 
+            utils.modifyChildren(this.props.children, this.renderNavItem)
           )
         );
       },
@@ -3635,7 +3847,8 @@ define(
             activeHref: this.props.activeHref,
             onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
             ref: child.props.ref,
-            key: child.props.key
+            key: child.props.key,
+            navItem: true
           }
         );
       }
@@ -3647,8 +3860,8 @@ define('Nav',['./transpiled/Nav'], function (Nav) {
   return Nav['default'];
 });
 define(
-  'transpiled/Navbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./PropTypes","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  'transpiled/Navbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./PropTypes","./utils","./Nav","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     
     /** @jsx React.DOM */
 
@@ -3656,6 +3869,8 @@ define(
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
     var PropTypes = __dependency4__["default"];
+    var utils = __dependency5__["default"];
+    var Nav = __dependency6__["default"];
 
 
     var Navbar = React.createClass({displayName: 'Navbar',
@@ -3667,7 +3882,11 @@ define(
         staticTop: React.PropTypes.bool,
         inverse: React.PropTypes.bool,
         role: React.PropTypes.string,
-        componentClass: PropTypes.componentClass
+        componentClass: PropTypes.componentClass,
+        brand: React.PropTypes.renderable,
+        toggleButton: React.PropTypes.renderable,
+        onToggle: React.PropTypes.func,
+        fluid: React.PropTypes.func
       },
 
       getDefaultProps: function () {
@@ -3677,6 +3896,33 @@ define(
           role: 'navigation',
           componentClass: React.DOM.nav
         };
+      },
+
+      getInitialState: function () {
+        return {
+          navOpen: this.props.defaultNavOpen
+        };
+      },
+
+      shouldComponentUpdate: function() {
+        // Defer any updates to this component during the `onSelect` handler.
+        return !this._isChanging;
+      },
+
+      handleToggle: function () {
+        if (this.props.onToggle) {
+          this._isChanging = true;
+          this.props.onToggle();
+          this._isChanging = false;
+        }
+
+        this.setState({
+          navOpen: !this.state.navOpen
+        });
+      },
+
+      isNavOpen: function () {
+        return this.props.navOpen != null ? this.props.navOpen : this.state.navOpen;
       },
 
       render: function () {
@@ -3689,8 +3935,64 @@ define(
         classes['navbar-inverse'] = this.props.inverse;
 
         return this.transferPropsTo(
-          componentClass( {className:classSet(classes), role:this.props.role}, 
-            this.props.children
+          componentClass( {className:classSet(classes)}, 
+            React.DOM.div( {className:this.props.fluid ? 'container-fluid' : 'container'}, 
+              (this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null,
+              React.Children.map(this.props.children, this.renderChild)
+            )
+          )
+        );
+      },
+
+      renderChild: function (child) {
+        return utils.cloneWithProps(child, {
+          navbar: true,
+          isCollapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
+          isOpen: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavOpen(),
+          key: child.props.key,
+          ref: child.props.ref
+        });
+      },
+
+      renderHeader: function () {
+        var brand;
+
+        if (this.props.brand) {
+          brand = React.isValidComponent(this.props.brand) ?
+            utils.cloneWithProps(this.props.brand, {
+              className: 'navbar-brand'
+            }) : React.DOM.span( {className:"navbar-brand"}, this.props.brand);
+        }
+
+        return (
+          React.DOM.div( {className:"navbar-header"}, 
+            brand,
+            (this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderToggleButton() : null
+          )
+        );
+      },
+
+      renderToggleButton: function () {
+        var children;
+
+        if (React.isValidComponent(this.props.toggleButton)) {
+          return utils.cloneWithProps(this.props.toggleButton, {
+            className: 'navbar-toggle',
+            onClick: utils.createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
+          });
+        }
+
+        children = (this.props.toggleButton != null) ?
+          this.props.toggleButton : [
+            React.DOM.span( {className:"sr-only", key:0}, "Toggle navigation"),
+            React.DOM.span( {className:"icon-bar", key:1}),
+            React.DOM.span( {className:"icon-bar", key:2}),
+            React.DOM.span( {className:"icon-bar", key:3})
+        ];
+
+        return (
+          React.DOM.button( {className:"navbar-toggle", type:"button", onClick:this.handleToggle}, 
+            children
           )
         );
       }
@@ -4157,8 +4459,8 @@ define('PageHeader',['./transpiled/PageHeader'], function (PageHeader) {
   return PageHeader['default'];
 });
 define(
-  'transpiled/Panel',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  'transpiled/Panel',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","./BootstrapMixin","./CollapsableMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     
     /** @jsx React.DOM */
 
@@ -4166,10 +4468,11 @@ define(
     var classSet = __dependency2__["default"];
     var ReactTransitionEvents = __dependency3__["default"];
     var BootstrapMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
+    var CollapsableMixin = __dependency5__["default"];
+    var utils = __dependency6__["default"];
 
     var Panel = React.createClass({displayName: 'Panel',
-      mixins: [BootstrapMixin],
+      mixins: [BootstrapMixin, CollapsableMixin],
 
       propTypes: {
         header: React.PropTypes.renderable,
@@ -4183,13 +4486,6 @@ define(
         return {
           bsClass: 'panel',
           bsStyle: 'default'
-        };
-      },
-
-      getInitialState: function() {
-        return {
-          isOpen: this.props.defaultOpen != null ? this.props.defaultOpen : null,
-          isCollapsing: false
         };
       },
 
@@ -4211,79 +4507,16 @@ define(
         return !this._isChanging;
       },
 
-      handleTransitionEnd: function () {
-        this._collapseEnd = true;
-        this.setState({
-          collapsePhase: 'end',
-          isCollapsing: false
-        });
-      },
-
-      componentWillReceiveProps: function (newProps) {
-        if (newProps.isOpen !== this.props.isOpen) {
-          this._collapseEnd = false;
-          this.setState({
-            collapsePhase: 'start',
-            isCollapsing: true
-          });
-        }
-      },
-
-      _addEndTransitionListener: function () {
-        if (this.refs && this.refs.panel) {
-          ReactTransitionEvents.addEndEventListener(
-            this.refs.panel.getDOMNode(),
-            this.handleTransitionEnd
-          );
-        }
-      },
-
-      _removeEndTransitionListener: function () {
-        if (this.refs && this.refs.panel) {
-          ReactTransitionEvents.addEndEventListener(
-            this.refs.panel.getDOMNode(),
-            this.handleTransitionEnd
-          );
-        }
-      },
-
-      componentDidMount: function () {
-        this._afterRender();
-      },
-
-      componentWillUnmount: function () {
-        this._removeEndTransitionListener();
-      },
-
-      componentWillUpdate: function (nextProps) {
-        this._removeEndTransitionListener();
-        if (nextProps.isOpen !== this.props.isOpen && this.props.isOpen) {
-          this.refs.panel.getDOMNode().style.height = this._getBodyHeight() + 'px';
-        }
-      },
-
-      componentDidUpdate: function () {
-        this._afterRender();
-      },
-
-      _afterRender: function () {
-        this._addEndTransitionListener();
-        setTimeout(this._updateHeightAfterRender, 0);
-      },
-
-      _getBodyHeight: function () {
+      getCollapsableDimensionValue: function () {
         return this.refs.body.getDOMNode().offsetHeight;
       },
 
-      _updateHeightAfterRender: function () {
-        if (this.isMounted() && this.refs && this.refs.panel) {
-          this.refs.panel.getDOMNode().style.height = this.isOpen() ?
-            this._getBodyHeight() + 'px' : '0px';
+      getCollapsableDOMNode: function () {
+        if (!this.isMounted() || !this.refs || !this.refs.panel) {
+          return null;
         }
-      },
 
-      isOpen: function () {
-        return (this.props.isOpen != null) ? this.props.isOpen : this.state.isOpen;
+        return this.refs.panel.getDOMNode();
       },
 
       render: function () {
@@ -4300,16 +4533,8 @@ define(
       },
 
       renderCollapsableBody: function () {
-        var classes = {
-              'panel-collapse': true,
-              'collapsing': this.state.isCollapsing,
-              'collapse': !this.state.isCollapsing,
-              'in': this.isOpen() && !this.state.isCollapsing
-            };
-
-
         return (
-          React.DOM.div( {className:classSet(classes), id:this.props.id, ref:"panel"}, 
+          React.DOM.div( {className:classSet(this.getCollapsableClassSet('panel-collapse')), id:this.props.id, ref:"panel"}, 
             this.renderBody()
           )
         );
@@ -4990,6 +5215,52 @@ define('TabbedArea',['./transpiled/TabbedArea'], function (TabbedArea) {
   return TabbedArea['default'];
 });
 define(
+  'transpiled/Table',["./react-es6","./react-es6/lib/cx","./PropTypes","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var PropTypes = __dependency3__["default"];
+
+    var Table = React.createClass({displayName: 'Table',
+      propTypes: {
+        striped: React.PropTypes.bool,
+        bordered: React.PropTypes.bool,
+        condensed: React.PropTypes.bool,
+        hover: React.PropTypes.bool,
+        responsive: React.PropTypes.bool
+      },
+
+      render: function () {
+        var classes = {
+          'table': true,
+          'table-striped': this.props.striped,
+          'table-bordered': this.props.bordered,
+          'table-condensed': this.props.condensed,
+          'table-hover': this.props.hover
+        };
+        var table = this.transferPropsTo(
+          React.DOM.table( {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+
+        return this.props.responsive ? (
+          React.DOM.div( {className:"table-responsive"}, 
+            table
+          )
+        ) : table;
+      }
+    });
+
+    __exports__["default"] = Table;
+  });
+define('Table',['./transpiled/Table'], function (Table) {
+  return Table['default'];
+});
+define(
   'transpiled/TabPane',["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
@@ -5176,7 +5447,7 @@ define('Well',['./transpiled/Well'], function (Well) {
 });
 /*global define */
 
-define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./Col','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Grid','./Input','./Interpolate','./Jumbotron','./Label','./MenuItem','./Modal','./Nav','./Navbar','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./Popover','./ProgressBar','./Row','./SplitButton','./SubNav','./TabbedArea','./TabPane','./Tooltip','./Well'],function (require) {
+define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./Col','./CollapsableMixin','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Grid','./Input','./Interpolate','./Jumbotron','./Label','./MenuItem','./Modal','./Nav','./Navbar','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./Popover','./ProgressBar','./Row','./SplitButton','./SubNav','./TabbedArea','./Table','./TabPane','./Tooltip','./Well'],function (require) {
   
 
   return {
@@ -5192,6 +5463,7 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
     Carousel: require('./Carousel'),
     CarouselItem: require('./CarouselItem'),
     Col: require('./Col'),
+    CollapsableMixin: require('./CollapsableMixin'),
     DropdownButton: require('./DropdownButton'),
     DropdownMenu: require('./DropdownMenu'),
     DropdownStateMixin: require('./DropdownStateMixin'),
@@ -5219,6 +5491,7 @@ define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Al
     SplitButton: require('./SplitButton'),
     SubNav: require('./SubNav'),
     TabbedArea: require('./TabbedArea'),
+    Table: require('./Table'),
     TabPane: require('./TabPane'),
     Tooltip: require('./Tooltip'),
     Well: require('./Well')
