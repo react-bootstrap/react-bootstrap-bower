@@ -51,6 +51,7 @@ define(
             role:"dialog",
             style:modalStyle,
             className:classSet(classes),
+            onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
             ref:"modal"}, 
             React.DOM.div( {className:"modal-dialog"}, 
               React.DOM.div( {className:"modal-content"}, 

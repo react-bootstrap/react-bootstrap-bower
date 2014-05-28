@@ -4,6 +4,25 @@ define(
     "use strict";
     var React = __dependency1__["default"];
 
+    /**
+     * Checks whether a node is within
+     * a root nodes tree
+     *
+     * @param {DOMElement} node
+     * @param {DOMElement} root
+     * @returns {boolean}
+     */
+    function isNodeInRoot(node, root) {
+      while (node) {
+        if (node === root) {
+          return true;
+        }
+        node = node.parentNode;
+      }
+
+      return false;
+    }
+
     var DropdownStateMixin = {
       getInitialState: function () {
         return {
@@ -29,17 +48,23 @@ define(
         }
       },
 
-      handleClickOutside: function () {
+      handleDocumentClick: function (e) {
+        // If the click originated from within this component
+        // don't do anything.
+        if (isNodeInRoot(e.target, this.getDOMNode())) {
+          return;
+        }
+
         this.setDropdownState(false);
       },
 
       bindRootCloseHandlers: function () {
-        document.addEventListener('click', this.handleClickOutside);
+        document.addEventListener('click', this.handleDocumentClick);
         document.addEventListener('keyup', this.handleKeyUp);
       },
 
       unbindRootCloseHandlers: function () {
-        document.removeEventListener('click', this.handleClickOutside);
+        document.removeEventListener('click', this.handleDocumentClick);
         document.removeEventListener('keyup', this.handleKeyUp);
       },
 

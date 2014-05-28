@@ -1917,7 +1917,7 @@ define(
             className:"close",
             onClick:this.props.onDismiss,
             'aria-hidden':"true"}, 
-            "×"
+            " × "
           )
         );
       },
@@ -2929,6 +2929,25 @@ define(
     
     var React = __dependency1__["default"];
 
+    /**
+     * Checks whether a node is within
+     * a root nodes tree
+     *
+     * @param {DOMElement} node
+     * @param {DOMElement} root
+     * @returns {boolean}
+     */
+    function isNodeInRoot(node, root) {
+      while (node) {
+        if (node === root) {
+          return true;
+        }
+        node = node.parentNode;
+      }
+
+      return false;
+    }
+
     var DropdownStateMixin = {
       getInitialState: function () {
         return {
@@ -2954,17 +2973,23 @@ define(
         }
       },
 
-      handleClickOutside: function () {
+      handleDocumentClick: function (e) {
+        // If the click originated from within this component
+        // don't do anything.
+        if (isNodeInRoot(e.target, this.getDOMNode())) {
+          return;
+        }
+
         this.setDropdownState(false);
       },
 
       bindRootCloseHandlers: function () {
-        document.addEventListener('click', this.handleClickOutside);
+        document.addEventListener('click', this.handleDocumentClick);
         document.addEventListener('keyup', this.handleKeyUp);
       },
 
       unbindRootCloseHandlers: function () {
-        document.removeEventListener('click', this.handleClickOutside);
+        document.removeEventListener('click', this.handleDocumentClick);
         document.removeEventListener('keyup', this.handleKeyUp);
       },
 
@@ -3063,7 +3088,7 @@ define(
             href:this.props.href,
             bsStyle:this.props.bsStyle,
             className:className,
-            onClick:this.handleOpenClick,
+            onClick:this.handleDropdownClick,
             id:this.props.id,
             key:0,
             navDropdown:this.props.navItem}, 
@@ -3110,10 +3135,10 @@ define(
         );
       },
 
-      handleOpenClick: function (e) {
-        this.setDropdownState(true);
-
+      handleDropdownClick: function (e) {
         e.preventDefault();
+
+        this.setDropdownState(!this.state.open);
       },
 
       handleOptionSelect: function (key) {
@@ -3661,6 +3686,7 @@ define(
             role:"dialog",
             style:modalStyle,
             className:classSet(classes),
+            onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
             ref:"modal"}, 
             React.DOM.div( {className:"modal-dialog"}, 
               React.DOM.div( {className:"modal-content"}, 
@@ -4901,7 +4927,7 @@ define(
               {ref:"button",
               href:this.props.href,
               bsStyle:this.props.bsStyle,
-              onClick:this.props.onClick}, 
+              onClick:this.handleButtonClick}, 
               this.props.title
             ),
 
@@ -4909,7 +4935,7 @@ define(
               {ref:"dropdownButton",
               bsStyle:this.props.bsStyle,
               className:"dropdown-toggle",
-              onClick:this.handleOpenClick}, 
+              onClick:this.handleDropdownClick}, 
               React.DOM.span( {className:"sr-only"}, this.props.dropdownTitle),
               React.DOM.span( {className:"caret"} )
             ),
@@ -4925,10 +4951,20 @@ define(
         );
       },
 
-      handleOpenClick: function (e) {
+      handleButtonClick: function (e) {
+        if (this.state.open) {
+          this.setDropdownState(false);
+        }
+
+        if (this.props.onClick) {
+          this.props.onClick(e);
+        }
+      },
+
+      handleDropdownClick: function (e) {
         e.preventDefault();
 
-        this.setDropdownState(true);
+        this.setDropdownState(!this.state.open);
       },
 
       handleOptionSelect: function (key) {
@@ -4966,7 +5002,7 @@ define(
         disabled: React.PropTypes.bool,
         href: React.PropTypes.string,
         title: React.PropTypes.string,
-        text: React.PropTypes.renderable,
+        text: React.PropTypes.renderable
       },
 
       getDefaultProps: function () {
