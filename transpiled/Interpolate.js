@@ -1,6 +1,6 @@
 define(
-  ["./react-es6","./react-es6/lib/invariant","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./react-es6","./react-es6/lib/invariant","./utils","./ValidComponentChildren","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     // https://www.npmjs.org/package/react-interpolate-component
     'use strict';
@@ -8,6 +8,7 @@ define(
     var React = __dependency1__["default"];
     var invariant = __dependency2__["default"];
     var utils = __dependency3__["default"];
+    var ValidComponentChildren = __dependency4__["default"];
 
     function isString(object) {
       return Object.prototype.toString.call(object) === '[object String]';
@@ -23,7 +24,7 @@ define(
       },
 
       render: function() {
-        var format = this.props.children || this.props.format;
+        var format = ValidComponentChildren.hasValidComponent(this.props.children) ? this.props.children : this.props.format;
         var parent = this.props.component;
         var unsafe = this.props.unsafe === true;
         var props  = utils.extend({}, this.props);

@@ -1,8 +1,9 @@
 define(
-  ["./react-es6","exports"],
-  function(__dependency1__, __exports__) {
+  ["./react-es6","./react-es6/lib/EventListener","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     var React = __dependency1__["default"];
+    var EventListener = __dependency2__["default"];
 
     /**
      * Checks whether a node is within
@@ -42,7 +43,7 @@ define(
         }, onStateChangeComplete);
       },
 
-      handleKeyUp: function (e) {
+      handleDocumentKeyUp: function (e) {
         if (e.keyCode === 27) {
           this.setDropdownState(false);
         }
@@ -59,13 +60,20 @@ define(
       },
 
       bindRootCloseHandlers: function () {
-        document.addEventListener('click', this.handleDocumentClick);
-        document.addEventListener('keyup', this.handleKeyUp);
+        this._onDocumentClickListener =
+          EventListener.listen(document, 'click', this.handleDocumentClick);
+        this._onDocumentKeyupListener =
+          EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
       },
 
       unbindRootCloseHandlers: function () {
-        document.removeEventListener('click', this.handleDocumentClick);
-        document.removeEventListener('keyup', this.handleKeyUp);
+        if (this._onDocumentClickListener) {
+          this._onDocumentClickListener.remove();
+        }
+
+        if (this._onDocumentKeyupListener) {
+          this._onDocumentKeyupListener.remove();
+        }
       },
 
       componentWillUnmount: function () {

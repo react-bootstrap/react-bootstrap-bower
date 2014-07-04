@@ -1,6 +1,6 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","./ValidComponentChildren","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
@@ -9,6 +9,7 @@ define(
     var Interpolate = __dependency3__["default"];
     var BootstrapMixin = __dependency4__["default"];
     var utils = __dependency5__["default"];
+    var ValidComponentChildren = __dependency6__["default"];
 
 
     var ProgressBar = React.createClass({displayName: 'ProgressBar',
@@ -16,7 +17,7 @@ define(
         min: React.PropTypes.number,
         now: React.PropTypes.number,
         max: React.PropTypes.number,
-        label: React.PropTypes.string,
+        label: React.PropTypes.renderable,
         srOnly: React.PropTypes.bool,
         striped: React.PropTypes.bool,
         active: React.PropTypes.bool
@@ -48,7 +49,7 @@ define(
           classes['progress-striped'] = true;
         }
 
-        if (!this.props.children) {
+        if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
           if (!this.props.isChild) {
             return this.transferPropsTo(
               React.DOM.div( {className:classSet(classes)}, 
@@ -63,7 +64,7 @@ define(
         } else {
           return this.transferPropsTo(
             React.DOM.div( {className:classSet(classes)}, 
-              utils.modifyChildren(this.props.children, this.renderChildBar)
+              ValidComponentChildren.map(this.props.children, this.renderChildBar)
             )
           );
         }
@@ -86,9 +87,14 @@ define(
 
         var label;
 
-        if (this.props.label) {
-          label = this.props.srOnly ?
-            this.renderScreenReaderOnlyLabel(percentage) : this.renderLabel(percentage);
+        if (typeof this.props.label === "string") {
+          label = this.renderLabel(percentage);
+        } else if (this.props.label) {
+          label = this.props.label;
+        }
+
+        if (this.props.srOnly) {
+          label = this.renderScreenReaderOnlyLabel(label);
         }
 
         return (
@@ -117,10 +123,10 @@ define(
         );
       },
 
-      renderScreenReaderOnlyLabel: function (percentage) {
+      renderScreenReaderOnlyLabel: function (label) {
         return (
           React.DOM.span( {className:"sr-only"}, 
-            this.renderLabel(percentage)
+            label
           )
         );
       }

@@ -1,6 +1,6 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./PropTypes","./utils","./Nav","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./PropTypes","./utils","./Nav","./ValidComponentChildren","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
@@ -10,6 +10,7 @@ define(
     var PropTypes = __dependency4__["default"];
     var utils = __dependency5__["default"];
     var Nav = __dependency6__["default"];
+    var ValidComponentChildren = __dependency7__["default"];
 
 
     var Navbar = React.createClass({displayName: 'Navbar',
@@ -20,12 +21,14 @@ define(
         fixedBottom: React.PropTypes.bool,
         staticTop: React.PropTypes.bool,
         inverse: React.PropTypes.bool,
+        fluid: React.PropTypes.bool,
         role: React.PropTypes.string,
         componentClass: PropTypes.componentClass,
         brand: React.PropTypes.renderable,
         toggleButton: React.PropTypes.renderable,
         onToggle: React.PropTypes.func,
-        fluid: React.PropTypes.func
+        navExpanded: React.PropTypes.bool,
+        defaultNavExpanded: React.PropTypes.bool
       },
 
       getDefaultProps: function () {
@@ -39,7 +42,7 @@ define(
 
       getInitialState: function () {
         return {
-          navOpen: this.props.defaultNavOpen
+          navExpanded: this.props.defaultNavExpanded
         };
       },
 
@@ -77,7 +80,7 @@ define(
           componentClass( {className:classSet(classes)}, 
             React.DOM.div( {className:this.props.fluid ? 'container-fluid' : 'container'}, 
               (this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null,
-              React.Children.map(this.props.children, this.renderChild)
+              ValidComponentChildren.map(this.props.children, this.renderChild)
             )
           )
         );

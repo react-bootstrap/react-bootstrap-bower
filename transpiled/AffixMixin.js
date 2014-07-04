@@ -1,11 +1,12 @@
 define(
-  ["./react-es6","./domUtils","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["./react-es6","./domUtils","./react-es6/lib/EventListener","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     /* global window, document */
 
     var React = __dependency1__["default"];
     var domUtils = __dependency2__["default"];
+    var EventListener = __dependency3__["default"];
 
     var AffixMixin = {
       propTypes: {
@@ -108,13 +109,20 @@ define(
       },
 
       componentDidMount: function () {
-        window.addEventListener('scroll', this.checkPosition);
-        document.addEventListener('click', this.checkPositionWithEventLoop);
+        this._onWindowScrollListener =
+          EventListener.listen(window, 'scroll', this.checkPosition);
+        this._onDocumentClickListener =
+          EventListener.listen(document, 'click', this.checkPositionWithEventLoop);
       },
 
       componentWillUnmount: function () {
-        window.removeEventListener('scroll', this.checkPosition);
-        document.addEventListener('click', this.checkPositionWithEventLoop);
+        if (this._onWindowScrollListener) {
+          this._onWindowScrollListener.remove();
+        }
+
+        if (this._onDocumentClickListener) {
+          this._onDocumentClickListener.remove();
+        }
       },
 
       componentDidUpdate: function (prevProps, prevState) {

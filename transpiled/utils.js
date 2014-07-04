@@ -32,6 +32,10 @@ define(
        * Modify each item in a React children array without
        * unnecessarily allocating a new array.
        *
+       * @deprecated
+       * `React.Children.map` should be used instead,
+       * also see `ValidComponentChildren.map`.
+       *
        * @param {array|object} children
        * @param {function} modifier
        * @returns {*}
@@ -47,6 +51,11 @@ define(
       /**
        * Filter each item in a React children array without
        * unnecessarily allocating a new array.
+       *
+       * @deprecated
+       * `React.Children.map` should be used instead with a filter
+       * function to null out unwanted children,
+       * also see `ValidComponentChildren.map`.
        *
        * @param {array|object} children
        * @param {function} filter

@@ -21,7 +21,8 @@ define(
         href:          React.PropTypes.string,
         dropdownTitle: React.PropTypes.renderable,
         onClick:       React.PropTypes.func,
-        onSelect:      React.PropTypes.func
+        onSelect:      React.PropTypes.func,
+        disabled:      React.PropTypes.bool
       },
 
       getDefaultProps: function () {
@@ -36,28 +37,35 @@ define(
             'dropup': this.props.dropup
           };
 
+        var button = this.transferPropsTo(
+          Button(
+            {ref:"button",
+            onClick:this.handleButtonClick,
+            title:null,
+            id:null}, 
+            this.props.title
+          )
+        );
+
+        var dropdownButton = this.transferPropsTo(
+          Button(
+            {ref:"dropdownButton",
+            className:"dropdown-toggle",
+            onClick:this.handleDropdownClick,
+            title:null,
+            id:null}, 
+            React.DOM.span( {className:"sr-only"}, this.props.dropdownTitle),
+            React.DOM.span( {className:"caret"} )
+          )
+        );
+
         return (
           ButtonGroup(
             {bsSize:this.props.bsSize,
             className:classSet(groupClasses),
             id:this.props.id}, 
-            Button(
-              {ref:"button",
-              href:this.props.href,
-              bsStyle:this.props.bsStyle,
-              onClick:this.handleButtonClick}, 
-              this.props.title
-            ),
-
-            Button(
-              {ref:"dropdownButton",
-              bsStyle:this.props.bsStyle,
-              className:"dropdown-toggle",
-              onClick:this.handleDropdownClick}, 
-              React.DOM.span( {className:"sr-only"}, this.props.dropdownTitle),
-              React.DOM.span( {className:"caret"} )
-            ),
-
+            button,
+            dropdownButton,
             DropdownMenu(
               {ref:"menu",
               onSelect:this.handleOptionSelect,

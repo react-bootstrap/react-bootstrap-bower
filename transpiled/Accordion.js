@@ -11,8 +11,8 @@ define(
 
       render: function () {
         return this.transferPropsTo(
-          PanelGroup( {isAccordion:true}, 
-              this.props.children
+          PanelGroup( {accordion:true}, 
+            this.props.children
           )
         );
       }

@@ -1,12 +1,13 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./utils","./ValidComponentChildren","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var utils = __dependency3__["default"];
+    var ValidComponentChildren = __dependency4__["default"];
 
     var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
       propTypes: {
@@ -24,7 +25,7 @@ define(
             React.DOM.ul(
               {className:classSet(classes),
               role:"menu"}, 
-              utils.modifyChildren(this.props.children, this.renderMenuItem)
+              ValidComponentChildren.map(this.props.children, this.renderMenuItem)
             )
           );
       },

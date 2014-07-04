@@ -29,7 +29,7 @@ define(
       },
 
       handleAnimateOutEnd: function () {
-        if (typeof this.props.onAnimateOutEnd === 'function') {
+        if (this.props.onAnimateOutEnd && this.isMounted()) {
           this.props.onAnimateOutEnd(this.props.index);
         }
       },
@@ -56,6 +56,10 @@ define(
       },
 
       startAnimation: function () {
+        if (!this.isMounted()) {
+          return;
+        }
+
         this.setState({
           direction: this.props.direction === 'prev' ?
             'right' : 'left'

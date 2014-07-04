@@ -1,6 +1,6 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","./ValidComponentChildren","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
@@ -8,11 +8,15 @@ define(
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
     var utils = __dependency4__["default"];
+    var ValidComponentChildren = __dependency5__["default"];
 
     var PanelGroup = React.createClass({displayName: 'PanelGroup',
       mixins: [BootstrapMixin],
 
       propTypes: {
+        collapsable: React.PropTypes.bool,
+        activeKey: React.PropTypes.any,
+        defaultActiveKey: React.PropTypes.any,
         onSelect: React.PropTypes.func
       },
 
@@ -33,7 +37,7 @@ define(
       render: function () {
         return this.transferPropsTo(
           React.DOM.div( {className:classSet(this.getBsClassSet())}, 
-              utils.modifyChildren(this.props.children, this.renderPanel)
+            ValidComponentChildren.map(this.props.children, this.renderPanel)
           )
         );
       },
@@ -43,14 +47,14 @@ define(
           this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
         var props = {
-          bsStyle: this.props.bsStyle,
+          bsStyle: child.props.bsStyle || this.props.bsStyle,
           key: child.props.key,
           ref: child.props.ref
         };
 
-        if (this.props.isAccordion) {
-          props.isCollapsable = true;
-          props.isOpen = (child.props.key === activeKey);
+        if (this.props.accordion) {
+          props.collapsable = true;
+          props.expanded = (child.props.key === activeKey);
           props.onSelect = this.handleSelect;
         }
 

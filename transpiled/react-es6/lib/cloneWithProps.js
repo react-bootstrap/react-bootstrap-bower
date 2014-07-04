@@ -28,7 +28,8 @@ define(
         newProps.children = child.props.children;
       }
 
-      return child.constructor.ConvenienceConstructor(newProps);
+      return child.constructor.ConvenienceConstructor ?
+        child.constructor.ConvenienceConstructor(newProps) : child.constructor(newProps);
     }
 
     __exports__["default"] = cloneWithProps;

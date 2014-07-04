@@ -25,6 +25,7 @@ define(
 
       render: function () {
         var classes = this.getBsClassSet();
+        classes['btn-group'] = !this.props.vertical;
         classes['btn-group-vertical'] = this.props.vertical;
         classes['btn-group-justified'] = this.props.justified;
 
