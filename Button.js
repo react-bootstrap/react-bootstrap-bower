@@ -3,6 +3,7 @@ define(function (require, exports, module) {/** @jsx React.DOM */
 var React = require('react');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var Button = React.createClass({displayName: 'Button',
   mixins: [BootstrapMixin],
@@ -12,7 +13,8 @@ var Button = React.createClass({displayName: 'Button',
     disabled: React.PropTypes.bool,
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool
+    navDropdown: React.PropTypes.bool,
+    componentClass: CustomPropTypes.componentClass
   },
 
   getDefaultProps: function () {
@@ -41,11 +43,12 @@ var Button = React.createClass({displayName: 'Button',
   },
 
   renderAnchor: function (classes) {
+    var component = this.props.componentClass || React.DOM.a;
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
 
     return this.transferPropsTo(
-      React.DOM.a(
+      component(
         {href:href,
         className:classSet(classes),
         role:"button"}, 
@@ -55,8 +58,10 @@ var Button = React.createClass({displayName: 'Button',
   },
 
   renderButton: function (classes) {
+    var component = this.props.componentClass || React.DOM.button;
+
     return this.transferPropsTo(
-      React.DOM.button(
+      component(
         {className:classSet(classes)}, 
         this.props.children
       )
@@ -77,4 +82,5 @@ var Button = React.createClass({displayName: 'Button',
 });
 
 module.exports = Button;
+
 });

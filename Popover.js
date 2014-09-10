@@ -38,12 +38,12 @@ var Popover = React.createClass({displayName: 'Popover',
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return (
-      React.DOM.div( {className:classSet(classes), style:style}, 
+    return this.transferPropsTo(
+      React.DOM.div( {className:classSet(classes), style:style, title:null}, 
         React.DOM.div( {className:"arrow", style:arrowStyle} ),
         this.props.title ? this.renderTitle() : null,
         React.DOM.div( {className:"popover-content"}, 
-            this.props.children
+          this.props.children
         )
       )
     );

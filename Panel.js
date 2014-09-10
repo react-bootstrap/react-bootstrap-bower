@@ -10,9 +10,9 @@ var Panel = React.createClass({displayName: 'Panel',
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
+    onSelect: React.PropTypes.func,
     header: React.PropTypes.renderable,
-    footer: React.PropTypes.renderable,
-    onClick: React.PropTypes.func
+    footer: React.PropTypes.renderable
   },
 
   getDefaultProps: function () {
@@ -57,7 +57,7 @@ var Panel = React.createClass({displayName: 'Panel',
     classes['panel'] = true;
 
     return this.transferPropsTo(
-      React.DOM.div( {className:classSet(classes), id:this.props.collapsable ? null : this.props.id}, 
+      React.DOM.div( {className:classSet(classes), id:this.props.collapsable ? null : this.props.id, onSelect:null}, 
         this.renderHeading(),
         this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(),
         this.renderFooter()

@@ -32,7 +32,7 @@ var PanelGroup = React.createClass({displayName: 'PanelGroup',
 
   render: function () {
     return this.transferPropsTo(
-      React.DOM.div( {className:classSet(this.getBsClassSet())}, 
+      React.DOM.div( {className:classSet(this.getBsClassSet()), onSelect:null}, 
         ValidComponentChildren.map(this.props.children, this.renderPanel)
       )
     );
