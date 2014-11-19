@@ -1,15 +1,14 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
 
 var ModalTrigger = React.createClass({displayName: 'ModalTrigger',
   mixins: [OverlayMixin],
 
   propTypes: {
-    modal: React.PropTypes.renderable.isRequired
+    modal: React.PropTypes.node.isRequired
   },
 
   getInitialState: function () {
@@ -38,7 +37,7 @@ var ModalTrigger = React.createClass({displayName: 'ModalTrigger',
 
   renderOverlay: function () {
     if (!this.state.isOverlayShown) {
-      return React.DOM.span(null );
+      return React.createElement("span", null);
     }
 
     return cloneWithProps(

@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
 var Table = React.createClass({displayName: 'Table',
@@ -20,14 +19,14 @@ var Table = React.createClass({displayName: 'Table',
       'table-condensed': this.props.condensed,
       'table-hover': this.props.hover
     };
-    var table = this.transferPropsTo(
-      React.DOM.table( {className:classSet(classes)}, 
+    var table = (
+      React.createElement("table", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
         this.props.children
       )
     );
 
     return this.props.responsive ? (
-      React.DOM.div( {className:"table-responsive"}, 
+      React.createElement("div", {className: "table-responsive"}, 
         table
       )
     ) : table;

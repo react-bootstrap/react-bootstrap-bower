@@ -1,8 +1,8 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -17,7 +17,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.renderable
+    text: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -31,7 +31,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href);
       }
     }
   },
@@ -45,7 +45,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
       return true;
     }
 
-    if (this.props.activeKey != null && this.props.activeKey === child.props.key) {
+    if (this.props.activeKey != null && this.props.activeKey === child.props.eventKey) {
       return true;
     }
 
@@ -77,7 +77,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.props.eventKey == this.props.activeKey) {
         return true;
       }
     }
@@ -96,30 +96,30 @@ var SubNav = React.createClass({displayName: 'SubNav',
       'disabled': this.props.disabled
     };
 
-    return this.transferPropsTo(
-      React.DOM.li( {className:classSet(classes)}, 
-        React.DOM.a(
-          {href:this.props.href,
-          title:this.props.title,
-          onClick:this.handleClick,
-          ref:"anchor"}, 
+    return (
+      React.createElement("li", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+        React.createElement("a", {
+          href: this.props.href, 
+          title: this.props.title, 
+          onClick: this.handleClick, 
+          ref: "anchor"}, 
           this.props.text
-        ),
-        React.DOM.ul( {className:"nav"}, 
+        ), 
+        React.createElement("ul", {className: "nav"}, 
           ValidComponentChildren.map(this.props.children, this.renderNavItem)
         )
       )
     );
   },
 
-  renderNavItem: function (child) {
+  renderNavItem: function (child, index) {
     return cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        ref: child.ref,
+        key: child.key ? child.key : index
       }
     );
   }

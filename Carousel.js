@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -142,15 +141,16 @@ var Carousel = React.createClass({displayName: 'Carousel',
       slide: this.props.slide
     };
 
-    return this.transferPropsTo(
-      React.DOM.div(
-        {className:classSet(classes),
-        onMouseOver:this.handleMouseOver,
-        onMouseOut:this.handleMouseOut}, 
-        this.props.indicators ? this.renderIndicators() : null,
-        React.DOM.div( {className:"carousel-inner", ref:"inner"}, 
+    return (
+      React.createElement("div", React.__spread({}, 
+        this.props, 
+        {className: joinClasses(this.props.className, classSet(classes)), 
+        onMouseOver: this.handleMouseOver, 
+        onMouseOut: this.handleMouseOut}), 
+        this.props.indicators ? this.renderIndicators() : null, 
+        React.createElement("div", {className: "carousel-inner", ref: "inner"}, 
           ValidComponentChildren.map(this.props.children, this.renderItem)
-        ),
+        ), 
         this.props.controls ? this.renderControls() : null
       )
     );
@@ -158,16 +158,16 @@ var Carousel = React.createClass({displayName: 'Carousel',
 
   renderPrev: function () {
     return (
-      React.DOM.a( {className:"left carousel-control", href:"#prev", key:0, onClick:this.prev}, 
-        React.DOM.span( {className:"glyphicon glyphicon-chevron-left"} )
+      React.createElement("a", {className: "left carousel-control", href: "#prev", key: 0, onClick: this.prev}, 
+        React.createElement("span", {className: "glyphicon glyphicon-chevron-left"})
       )
     );
   },
 
   renderNext: function () {
     return (
-      React.DOM.a( {className:"right carousel-control", href:"#next", key:1, onClick:this.next}, 
-        React.DOM.span( {className:"glyphicon glyphicon-chevron-right"})
+      React.createElement("a", {className: "right carousel-control", href: "#next", key: 1, onClick: this.next}, 
+        React.createElement("span", {className: "glyphicon glyphicon-chevron-right"})
       )
     );
   },
@@ -194,10 +194,10 @@ var Carousel = React.createClass({displayName: 'Carousel',
       'active' : null;
 
     return (
-      React.DOM.li(
-        {key:index,
-        className:className,
-        onClick:this.handleSelect.bind(this, index, null)} )
+      React.createElement("li", {
+        key: index, 
+        className: className, 
+        onClick: this.handleSelect.bind(this, index, null)})
     );
   },
 
@@ -215,7 +215,7 @@ var Carousel = React.createClass({displayName: 'Carousel',
       }, this);
 
     return (
-      React.DOM.ol( {className:"carousel-indicators"}, 
+      React.createElement("ol", {className: "carousel-indicators"}, 
         indicators
       )
     );
@@ -248,9 +248,8 @@ var Carousel = React.createClass({displayName: 'Carousel',
         child,
         {
           active: isActive,
-          ref: child.props.ref,
-          key: child.props.key != null ?
-            child.props.key : index,
+          ref: child.ref,
+          key: child.key ? child.key : index,
           index: index,
           animateOut: isPreviousActive,
           animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,

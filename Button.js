@@ -1,9 +1,7 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
-var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var Button = React.createClass({displayName: 'Button',
   mixins: [BootstrapMixin],
@@ -14,7 +12,7 @@ var Button = React.createClass({displayName: 'Button',
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: CustomPropTypes.componentClass
+    componentClass: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -43,26 +41,29 @@ var Button = React.createClass({displayName: 'Button',
   },
 
   renderAnchor: function (classes) {
-    var component = this.props.componentClass || React.DOM.a;
+
+    var Component = this.props.componentClass || 'a';
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
 
-    return this.transferPropsTo(
-      component(
-        {href:href,
-        className:classSet(classes),
-        role:"button"}, 
+    return (
+      React.createElement(Component, React.__spread({}, 
+        this.props, 
+        {href: href, 
+        className: joinClasses(this.props.className, classSet(classes)), 
+        role: "button"}), 
         this.props.children
       )
     );
   },
 
   renderButton: function (classes) {
-    var component = this.props.componentClass || React.DOM.button;
+    var Component = this.props.componentClass || 'button';
 
-    return this.transferPropsTo(
-      component(
-        {className:classSet(classes)}, 
+    return (
+      React.createElement(Component, React.__spread({}, 
+        this.props, 
+        {className: joinClasses(this.props.className, classSet(classes))}), 
         this.props.children
       )
     );
@@ -74,7 +75,7 @@ var Button = React.createClass({displayName: 'Button',
     };
 
     return (
-      React.DOM.li( {className:classSet(liClasses)}, 
+      React.createElement("li", {className: classSet(liClasses)}, 
         this.renderAnchor(classes)
       )
     );

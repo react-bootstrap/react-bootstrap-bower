@@ -1,8 +1,8 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
@@ -18,7 +18,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
   propTypes: {
     pullRight: React.PropTypes.bool,
     dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.renderable,
+    title:     React.PropTypes.node,
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
@@ -32,24 +32,25 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
-      this.transferPropsTo(Button(
-        {ref:"dropdownButton",
-        className:className,
-        onClick:this.handleDropdownClick,
-        key:0,
-        navDropdown:this.props.navItem,
-        navItem:null,
-        title:null,
-        pullRight:null,
-        dropup:null}, 
-        this.props.title,' ',
-        React.DOM.span( {className:"caret"} )
-      )),
-      DropdownMenu(
-        {ref:"menu",
-        'aria-labelledby':this.props.id,
-        pullRight:this.props.pullRight,
-        key:1}, 
+      React.createElement(Button, React.__spread({}, 
+        this.props, 
+        {ref: "dropdownButton", 
+        className: joinClasses(this.props.className, className), 
+        onClick: this.handleDropdownClick, 
+        key: 0, 
+        navDropdown: this.props.navItem, 
+        navItem: null, 
+        title: null, 
+        pullRight: null, 
+        dropup: null}), 
+        this.props.title, ' ', 
+        React.createElement("span", {className: "caret"})
+      ),
+      React.createElement(DropdownMenu, {
+        ref: "menu", 
+        'aria-labelledby': this.props.id, 
+        pullRight: this.props.pullRight, 
+        key: 1}, 
         ValidComponentChildren.map(this.props.children, this.renderMenuItem)
       )
     ]);
@@ -62,9 +63,9 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
       };
 
     return (
-      ButtonGroup(
-        {bsSize:this.props.bsSize,
-        className:classSet(groupClasses)}, 
+      React.createElement(ButtonGroup, {
+        bsSize: this.props.bsSize, 
+        className: classSet(groupClasses)}, 
         children
       )
     );
@@ -78,13 +79,13 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
       };
 
     return (
-      React.DOM.li( {className:classSet(classes)}, 
+      React.createElement("li", {className: classSet(classes)}, 
         children
       )
     );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     // Only handle the option selection if an onSelect prop has been set on the
     // component or it's child, this allows a user not to pass an onSelect
     // handler and have the browser preform the default action.
@@ -98,8 +99,8 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key ? child.key : index,
+        ref: child.ref
       }
     );
   },

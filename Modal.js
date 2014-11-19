@@ -1,7 +1,7 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-/* global document:false */
+define(function (require, exports, module) {/* global document:false */
 
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
@@ -17,7 +17,7 @@ var Modal = React.createClass({displayName: 'Modal',
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
-    title: React.PropTypes.renderable,
+    title: React.PropTypes.node,
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
     closeButton: React.PropTypes.bool,
@@ -47,18 +47,19 @@ var Modal = React.createClass({displayName: 'Modal',
       'in': !this.props.animation || !document.querySelectorAll
     };
 
-    var modal = this.transferPropsTo(
-      React.DOM.div(
-        {title:null,
-        tabIndex:"-1",
-        role:"dialog",
-        style:modalStyle,
-        className:classSet(classes),
-        onClick:this.props.backdrop === true ? this.handleBackdropClick : null,
-        ref:"modal"}, 
-        React.DOM.div( {className:classSet(dialogClasses)}, 
-          React.DOM.div( {className:"modal-content"}, 
-            this.props.title ? this.renderHeader() : null,
+    var modal = (
+      React.createElement("div", React.__spread({}, 
+        this.props, 
+        {title: null, 
+        tabIndex: "-1", 
+        role: "dialog", 
+        style: modalStyle, 
+        className: joinClasses(this.props.className, classSet(classes)), 
+        onClick: this.props.backdrop === true ? this.handleBackdropClick : null, 
+        ref: "modal"}), 
+        React.createElement("div", {className: classSet(dialogClasses)}, 
+          React.createElement("div", {className: "modal-content"}, 
+            this.props.title ? this.renderHeader() : null, 
             this.props.children
           )
         )
@@ -81,8 +82,8 @@ var Modal = React.createClass({displayName: 'Modal',
       this.handleBackdropClick : null;
 
     return (
-      React.DOM.div(null, 
-        React.DOM.div( {className:classSet(classes), ref:"backdrop", onClick:onClick} ),
+      React.createElement("div", null, 
+        React.createElement("div", {className: classSet(classes), ref: "backdrop", onClick: onClick}), 
         modal
       )
     );
@@ -92,13 +93,13 @@ var Modal = React.createClass({displayName: 'Modal',
     var closeButton;
     if (this.props.closeButton) {
       closeButton = (
-          React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×")
+          React.createElement("button", {type: "button", className: "close", 'aria-hidden': "true", onClick: this.props.onRequestHide}, "×")
         );
     }
 
     return (
-      React.DOM.div( {className:"modal-header"}, 
-        closeButton,
+      React.createElement("div", {className: "modal-header"}, 
+        closeButton, 
         this.renderTitle()
       )
     );
@@ -106,8 +107,8 @@ var Modal = React.createClass({displayName: 'Modal',
 
   renderTitle: function () {
     return (
-      React.isValidComponent(this.props.title) ?
-        this.props.title : React.DOM.h4( {className:"modal-title"}, this.props.title)
+      React.isValidElement(this.props.title) ?
+        this.props.title : React.createElement("h4", {className: "modal-title"}, this.props.title)
     );
   },
 

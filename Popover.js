@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -14,7 +13,7 @@ var Popover = React.createClass({displayName: 'Popover',
     positionTop: React.PropTypes.number,
     arrowOffsetLeft: React.PropTypes.number,
     arrowOffsetTop: React.PropTypes.number,
-    title: React.PropTypes.renderable
+    title: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -38,11 +37,11 @@ var Popover = React.createClass({displayName: 'Popover',
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return this.transferPropsTo(
-      React.DOM.div( {className:classSet(classes), style:style, title:null}, 
-        React.DOM.div( {className:"arrow", style:arrowStyle} ),
-        this.props.title ? this.renderTitle() : null,
-        React.DOM.div( {className:"popover-content"}, 
+    return (
+      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style, title: null}), 
+        React.createElement("div", {className: "arrow", style: arrowStyle}), 
+        this.props.title ? this.renderTitle() : null, 
+        React.createElement("div", {className: "popover-content"}, 
           this.props.children
         )
       )
@@ -51,7 +50,7 @@ var Popover = React.createClass({displayName: 'Popover',
 
   renderTitle: function() {
     return (
-      React.DOM.h3( {className:"popover-title"}, this.props.title)
+      React.createElement("h3", {className: "popover-title"}, this.props.title)
     );
   }
 });

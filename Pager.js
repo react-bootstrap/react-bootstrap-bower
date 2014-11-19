@@ -1,7 +1,7 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -12,21 +12,22 @@ var Pager = React.createClass({displayName: 'Pager',
   },
 
   render: function () {
-    return this.transferPropsTo(
-      React.DOM.ul(
-        {className:"pager"}, 
+    return (
+      React.createElement("ul", React.__spread({}, 
+        this.props, 
+        {className: joinClasses(this.props.className, 'pager')}), 
         ValidComponentChildren.map(this.props.children, this.renderPageItem)
       )
     );
   },
 
-  renderPageItem: function (child) {
+  renderPageItem: function (child, index) {
     return cloneWithProps(
       child,
       {
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        ref: child.ref,
+        key: child.key ? child.key : index
       }
     );
   }

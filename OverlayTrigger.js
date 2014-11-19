@@ -1,11 +1,10 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var domUtils = require('./utils/domUtils');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
-var merge = require('./utils/merge');
+var assign = require('./utils/Object.assign');
 
 /**
  * Check if value one is inside or equal to the of value
@@ -34,7 +33,7 @@ var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
     delayShow: React.PropTypes.number,
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
-    overlay: React.PropTypes.renderable.isRequired
+    overlay: React.PropTypes.node.isRequired
   },
 
   getDefaultProps: function () {
@@ -74,7 +73,7 @@ var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
 
   renderOverlay: function () {
     if (!this.state.isOverlayShown) {
-      return React.DOM.span(null );
+      return React.createElement("span", null);
     }
 
     return cloneWithProps(
@@ -214,7 +213,7 @@ var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
     var offset = container.tagName == 'BODY' ?
       domUtils.getOffset(node) : domUtils.getPosition(node, container);
 
-    return merge(offset, {
+    return assign({}, offset, {
       height: node.offsetHeight,
       width: node.offsetWidth
     });

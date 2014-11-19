@@ -1,9 +1,9 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
@@ -13,8 +13,9 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
     bsStyle: React.PropTypes.oneOf(['danger','info','success','warning']),
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
-    header: React.PropTypes.renderable,
-    onClick: React.PropTypes.func
+    header: React.PropTypes.node,
+    onClick: React.PropTypes.func,
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -37,18 +38,19 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
   },
 
   renderSpan: function (classes) {
-    return this.transferPropsTo(
-      React.DOM.span( {className:classSet(classes)}, 
+    return (
+      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
         this.props.header ? this.renderStructuredContent() : this.props.children
       )
     );
   },
 
   renderAnchor: function (classes) {
-    return this.transferPropsTo(
-      React.DOM.a(
-        {className:classSet(classes),
-        onClick:this.handleClick}, 
+    return (
+      React.createElement("a", React.__spread({}, 
+        this.props, 
+        {className: joinClasses(this.props.className, classSet(classes)), 
+        onClick: this.handleClick}), 
         this.props.header ? this.renderStructuredContent() : this.props.children
       )
     );
@@ -56,20 +58,20 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
 
   renderStructuredContent: function () {
     var header;
-    if (React.isValidComponent(this.props.header)) {
+    if (React.isValidElement(this.props.header)) {
       header = cloneWithProps(this.props.header, {
         className: 'list-group-item-heading'
       });
     } else {
       header = (
-        React.DOM.h4( {className:"list-group-item-heading"}, 
+        React.createElement("h4", {className: "list-group-item-heading"}, 
           this.props.header
         )
       );
     }
 
     var content = (
-      React.DOM.p( {className:"list-group-item-text"}, 
+      React.createElement("p", {className: "list-group-item-text"}, 
         this.props.children
       )
     );
@@ -83,7 +85,7 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.props.key, this.props.href);
+      this.props.onClick(this.props.eventKey, this.props.href);
     }
   }
 });

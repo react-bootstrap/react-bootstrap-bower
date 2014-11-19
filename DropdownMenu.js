@@ -1,8 +1,8 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -18,16 +18,17 @@ var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
         'dropdown-menu-right': this.props.pullRight
       };
 
-    return this.transferPropsTo(
-        React.DOM.ul(
-          {className:classSet(classes),
-          role:"menu"}, 
+    return (
+        React.createElement("ul", React.__spread({}, 
+          this.props, 
+          {className: joinClasses(this.props.className, classSet(classes)), 
+          role: "menu"}), 
           ValidComponentChildren.map(this.props.children, this.renderMenuItem)
         )
       );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     return cloneWithProps(
       child,
       {
@@ -35,8 +36,8 @@ var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key ? child.key : index,
+        ref: child.ref
       }
     );
   }

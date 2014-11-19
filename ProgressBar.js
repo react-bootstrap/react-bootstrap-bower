@@ -1,10 +1,10 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
@@ -13,7 +13,7 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
     min: React.PropTypes.number,
     now: React.PropTypes.number,
     max: React.PropTypes.number,
-    label: React.PropTypes.renderable,
+    label: React.PropTypes.node,
     srOnly: React.PropTypes.bool,
     striped: React.PropTypes.bool,
     active: React.PropTypes.bool
@@ -47,30 +47,30 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
 
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
-        return this.transferPropsTo(
-          React.DOM.div( {className:classSet(classes)}, 
+        return (
+          React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
             this.renderProgressBar()
           )
         );
       } else {
-        return this.transferPropsTo(
+        return (
           this.renderProgressBar()
         );
       }
     } else {
-      return this.transferPropsTo(
-        React.DOM.div( {className:classSet(classes)}, 
+      return (
+        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
           ValidComponentChildren.map(this.props.children, this.renderChildBar)
         )
       );
     }
   },
 
-  renderChildBar: function (child) {
+  renderChildBar: function (child, index) {
     return cloneWithProps(child, {
       isChild: true,
-      key: child.props.key,
-      ref: child.props.ref
+      key: child.key ? child.key : index,
+      ref: child.ref
     });
   },
 
@@ -93,12 +93,14 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
       label = this.renderScreenReaderOnlyLabel(label);
     }
 
+    var classes = this.getBsClassSet();
+
     return (
-      React.DOM.div( {className:classSet(this.getBsClassSet()), role:"progressbar",
-        style:{width: percentage + '%'},
-        'aria-valuenow':this.props.now,
-        'aria-valuemin':this.props.min,
-        'aria-valuemax':this.props.max}, 
+      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), role: "progressbar", 
+        style: {width: percentage + '%'}, 
+        'aria-valuenow': this.props.now, 
+        'aria-valuemin': this.props.min, 
+        'aria-valuemax': this.props.max}), 
         label
       )
     );
@@ -108,12 +110,12 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
     var InterpolateClass = this.props.interpolateClass || Interpolate;
 
     return (
-      InterpolateClass(
-        {now:this.props.now,
-        min:this.props.min,
-        max:this.props.max,
-        percent:percentage,
-        bsStyle:this.props.bsStyle}, 
+      React.createElement(InterpolateClass, {
+        now: this.props.now, 
+        min: this.props.min, 
+        max: this.props.max, 
+        percent: percentage, 
+        bsStyle: this.props.bsStyle}, 
         this.props.label
       )
     );
@@ -121,7 +123,7 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
 
   renderScreenReaderOnlyLabel: function (label) {
     return (
-      React.DOM.span( {className:"sr-only"}, 
+      React.createElement("span", {className: "sr-only"}, 
         label
       )
     );

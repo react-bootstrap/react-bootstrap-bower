@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -36,10 +35,10 @@ var Tooltip = React.createClass({displayName: 'Tooltip',
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return this.transferPropsTo(
-        React.DOM.div( {className:classSet(classes), style:style}, 
-          React.DOM.div( {className:"tooltip-arrow", style:arrowStyle} ),
-          React.DOM.div( {className:"tooltip-inner"}, 
+    return (
+        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style}), 
+          React.createElement("div", {className: "tooltip-arrow", style: arrowStyle}), 
+          React.createElement("div", {className: "tooltip-inner"}, 
             this.props.children
           )
         )

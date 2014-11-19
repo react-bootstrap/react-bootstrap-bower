@@ -1,16 +1,17 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var Button = require('./Button');
 
 var Input = React.createClass({displayName: 'Input',
   propTypes: {
     type: React.PropTypes.string,
-    label: React.PropTypes.renderable,
-    help: React.PropTypes.renderable,
-    addonBefore: React.PropTypes.renderable,
-    addonAfter: React.PropTypes.renderable,
+    label: React.PropTypes.node,
+    help: React.PropTypes.node,
+    addonBefore: React.PropTypes.node,
+    addonAfter: React.PropTypes.node,
+    buttonBefore: React.PropTypes.node,
+    buttonAfter: React.PropTypes.node,
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component
@@ -23,7 +24,8 @@ var Input = React.createClass({displayName: 'Input',
     hasFeedback: React.PropTypes.bool,
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
-    labelClassName: React.PropTypes.string
+    labelClassName: React.PropTypes.string,
+    disabled: React.PropTypes.bool
   },
 
   getInputDOMNode: function () {
@@ -50,6 +52,10 @@ var Input = React.createClass({displayName: 'Input',
     return this.props.type === 'radio' || this.props.type === 'checkbox';
   },
 
+  isFile: function () {
+    return this.props.type === 'file';
+  },
+
   renderInput: function () {
     var input = null;
 
@@ -60,52 +66,66 @@ var Input = React.createClass({displayName: 'Input',
     switch (this.props.type) {
       case 'select':
         input = (
-          React.DOM.select( {className:"form-control", ref:"input", key:"input"}, 
+          React.createElement("select", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}), 
             this.props.children
           )
         );
         break;
       case 'textarea':
-        input = React.DOM.textarea( {className:"form-control", ref:"input", key:"input"} );
+        input = React.createElement("textarea", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}));
         break;
       case 'static':
         input = (
-          React.DOM.p( {className:"form-control-static", ref:"input",  key:"input"}, 
+          React.createElement("p", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control-static'), ref: "input", key: "input"}), 
             this.props.value
           )
         );
         break;
       case 'submit':
-        input = this.transferPropsTo(
-          Button( {componentClass:React.DOM.input} )
+        input = (
+          React.createElement(Button, React.__spread({},  this.props, {componentClass: "input", ref: "input", key: "input"}))
         );
         break;
       default:
-        var className = this.isCheckboxOrRadio() ? '' : 'form-control';
-        input = React.DOM.input( {className:className, ref:"input", key:"input"} );
+        var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
+        input = React.createElement("input", React.__spread({},  this.props, {className: joinClasses(this.props.className, className), ref: "input", key: "input"}));
     }
 
-    return this.transferPropsTo(input);
+    return input;
   },
 
   renderInputGroup: function (children) {
     var addonBefore = this.props.addonBefore ? (
-      React.DOM.span( {className:"input-group-addon", key:"addonBefore"}, 
+      React.createElement("span", {className: "input-group-addon", key: "addonBefore"}, 
         this.props.addonBefore
       )
     ) : null;
 
     var addonAfter = this.props.addonAfter ? (
-      React.DOM.span( {className:"input-group-addon", key:"addonAfter"}, 
+      React.createElement("span", {className: "input-group-addon", key: "addonAfter"}, 
         this.props.addonAfter
       )
     ) : null;
 
-    return addonBefore || addonAfter ? (
-      React.DOM.div( {className:"input-group", key:"input-group"}, 
-        addonBefore,
-        children,
-        addonAfter
+    var buttonBefore = this.props.buttonBefore ? (
+      React.createElement("span", {className: "input-group-btn"}, 
+        this.props.buttonBefore
+      )
+    ) : null;
+
+    var buttonAfter = this.props.buttonAfter ? (
+      React.createElement("span", {className: "input-group-btn"}, 
+        this.props.buttonAfter
+      )
+    ) : null;
+
+    return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
+      React.createElement("div", {className: "input-group", key: "input-group"}, 
+        addonBefore, 
+        buttonBefore, 
+        children, 
+        addonAfter, 
+        buttonAfter
       )
     ) : children;
   },
@@ -120,13 +140,13 @@ var Input = React.createClass({displayName: 'Input',
     };
 
     return this.props.hasFeedback ? (
-      React.DOM.span( {className:classSet(classes), key:"icon"} )
+      React.createElement("span", {className: classSet(classes), key: "icon"})
     ) : null;
   },
 
   renderHelp: function () {
     return this.props.help ? (
-      React.DOM.span( {className:"help-block", key:"help"}, 
+      React.createElement("span", {className: "help-block", key: "help"}, 
         this.props.help
       )
     ) : null;
@@ -139,7 +159,7 @@ var Input = React.createClass({displayName: 'Input',
     };
 
     return (
-      React.DOM.div( {className:classSet(classes), key:"checkboxRadioWrapper"}, 
+      React.createElement("div", {className: classSet(classes), key: "checkboxRadioWrapper"}, 
         children
       )
     );
@@ -147,7 +167,7 @@ var Input = React.createClass({displayName: 'Input',
 
   renderWrapper: function (children) {
     return this.props.wrapperClassName ? (
-      React.DOM.div( {className:this.props.wrapperClassName, key:"wrapper"}, 
+      React.createElement("div", {className: this.props.wrapperClassName, key: "wrapper"}, 
         children
       )
     ) : children;
@@ -160,8 +180,8 @@ var Input = React.createClass({displayName: 'Input',
     classes[this.props.labelClassName] = this.props.labelClassName;
 
     return this.props.label ? (
-      React.DOM.label( {htmlFor:this.props.id, className:classSet(classes), key:"label"}, 
-        children,
+      React.createElement("label", {htmlFor: this.props.id, className: classSet(classes), key: "label"}, 
+        children, 
         this.props.label
       )
     ) : children;
@@ -178,7 +198,7 @@ var Input = React.createClass({displayName: 'Input',
     classes[this.props.groupClassName] = this.props.groupClassName;
 
     return (
-      React.DOM.div( {className:classSet(classes)}, 
+      React.createElement("div", {className: classSet(classes)}, 
         children
       )
     );

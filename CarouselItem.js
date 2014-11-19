@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
 
@@ -9,7 +8,7 @@ var CarouselItem = React.createClass({displayName: 'CarouselItem',
     direction: React.PropTypes.oneOf(['prev', 'next']),
     onAnimateOutEnd: React.PropTypes.func,
     active: React.PropTypes.bool,
-    caption: React.PropTypes.renderable
+    caption: React.PropTypes.node
   },
 
   getInitialState: function () {
@@ -74,9 +73,9 @@ var CarouselItem = React.createClass({displayName: 'CarouselItem',
       classes[this.state.direction] = true;
     }
 
-    return this.transferPropsTo(
-      React.DOM.div( {className:classSet(classes)}, 
-        this.props.children,
+    return (
+      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+        this.props.children, 
         this.props.caption ? this.renderCaption() : null
       )
     );
@@ -84,7 +83,7 @@ var CarouselItem = React.createClass({displayName: 'CarouselItem',
 
   renderCaption: function () {
     return (
-      React.DOM.div( {className:"carousel-caption"}, 
+      React.createElement("div", {className: "carousel-caption"}, 
         this.props.caption
       )
     );

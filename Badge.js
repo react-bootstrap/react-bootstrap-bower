@@ -1,21 +1,23 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var classSet = require('./utils/classSet');
 
 var Badge = React.createClass({displayName: 'Badge',
   propTypes: {
-    pullRight: React.PropTypes.bool,
+    pullRight: React.PropTypes.bool
   },
 
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,
-      'badge': ValidComponentChildren.hasValidComponent(this.props.children)
+      'badge': (ValidComponentChildren.hasValidComponent(this.props.children)
+        || (typeof this.props.children === 'string'))
     };
-    return this.transferPropsTo(
-      React.DOM.span( {className:classSet(classes)}, 
+    return (
+      React.createElement("span", React.__spread({}, 
+        this.props, 
+        {className: joinClasses(this.props.className, classSet(classes))}), 
         this.props.children
       )
     );

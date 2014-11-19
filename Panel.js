@@ -1,8 +1,8 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 
@@ -11,8 +11,9 @@ var Panel = React.createClass({displayName: 'Panel',
 
   propTypes: {
     onSelect: React.PropTypes.func,
-    header: React.PropTypes.renderable,
-    footer: React.PropTypes.renderable
+    header: React.PropTypes.node,
+    footer: React.PropTypes.node,
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -25,7 +26,7 @@ var Panel = React.createClass({displayName: 'Panel',
   handleSelect: function (e) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this.props.eventKey);
       this._isChanging = false;
     }
 
@@ -56,10 +57,11 @@ var Panel = React.createClass({displayName: 'Panel',
     var classes = this.getBsClassSet();
     classes['panel'] = true;
 
-    return this.transferPropsTo(
-      React.DOM.div( {className:classSet(classes), id:this.props.collapsable ? null : this.props.id, onSelect:null}, 
-        this.renderHeading(),
-        this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(),
+    return (
+      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), 
+        id: this.props.collapsable ? null : this.props.id, onSelect: null}), 
+        this.renderHeading(), 
+        this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(), 
         this.renderFooter()
       )
     );
@@ -67,7 +69,7 @@ var Panel = React.createClass({displayName: 'Panel',
 
   renderCollapsableBody: function () {
     return (
-      React.DOM.div( {className:classSet(this.getCollapsableClassSet('panel-collapse')), id:this.props.id, ref:"panel"}, 
+      React.createElement("div", {className: classSet(this.getCollapsableClassSet('panel-collapse')), id: this.props.id, ref: "panel"}, 
         this.renderBody()
       )
     );
@@ -75,7 +77,7 @@ var Panel = React.createClass({displayName: 'Panel',
 
   renderBody: function () {
     return (
-      React.DOM.div( {className:"panel-body", ref:"body"}, 
+      React.createElement("div", {className: "panel-body", ref: "body"}, 
         this.props.children
       )
     );
@@ -88,7 +90,7 @@ var Panel = React.createClass({displayName: 'Panel',
       return null;
     }
 
-    if (!React.isValidComponent(header) || Array.isArray(header)) {
+    if (!React.isValidElement(header) || Array.isArray(header)) {
       header = this.props.collapsable ?
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {
@@ -103,7 +105,7 @@ var Panel = React.createClass({displayName: 'Panel',
     }
 
     return (
-      React.DOM.div( {className:"panel-heading"}, 
+      React.createElement("div", {className: "panel-heading"}, 
         header
       )
     );
@@ -111,10 +113,10 @@ var Panel = React.createClass({displayName: 'Panel',
 
   renderAnchor: function (header) {
     return (
-      React.DOM.a(
-        {href:'#' + (this.props.id || ''),
-        className:this.isExpanded() ? null : 'collapsed',
-        onClick:this.handleSelect}, 
+      React.createElement("a", {
+        href: '#' + (this.props.id || ''), 
+        className: this.isExpanded() ? null : 'collapsed', 
+        onClick: this.handleSelect}, 
         header
       )
     );
@@ -122,7 +124,7 @@ var Panel = React.createClass({displayName: 'Panel',
 
   renderCollapsableTitle: function (header) {
     return (
-      React.DOM.h4( {className:"panel-title"}, 
+      React.createElement("h4", {className: "panel-title"}, 
         this.renderAnchor(header)
       )
     );
@@ -134,7 +136,7 @@ var Panel = React.createClass({displayName: 'Panel',
     }
 
     return (
-      React.DOM.div( {className:"panel-footer"}, 
+      React.createElement("div", {className: "panel-footer"}, 
         this.props.footer
       )
     );

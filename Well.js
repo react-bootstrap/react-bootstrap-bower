@@ -1,6 +1,5 @@
-define(function (require, exports, module) {/** @jsx React.DOM */
-
-var React = require('react');
+define(function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -16,8 +15,8 @@ var Well = React.createClass({displayName: 'Well',
   render: function () {
     var classes = this.getBsClassSet();
 
-    return this.transferPropsTo(
-      React.DOM.div( {className:classSet(classes)}, 
+    return (
+      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
         this.props.children
       )
     );
