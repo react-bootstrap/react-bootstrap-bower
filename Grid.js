@@ -1,7 +1,7 @@
 define(function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Grid = React.createClass({displayName: 'Grid',
+var Grid = React.createClass({displayName: "Grid",
   propTypes: {
     fluid: React.PropTypes.bool,
     componentClass: React.PropTypes.node.isRequired

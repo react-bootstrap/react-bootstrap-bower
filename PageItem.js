@@ -2,9 +2,11 @@ define(function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
-var PageItem = React.createClass({displayName: 'PageItem',
+var PageItem = React.createClass({displayName: "PageItem",
 
   propTypes: {
+    href: React.PropTypes.string,
+    target: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
@@ -32,6 +34,7 @@ var PageItem = React.createClass({displayName: 'PageItem',
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
+          target: this.props.target, 
           onClick: this.handleSelect, 
           ref: "anchor"}, 
           this.props.children
@@ -45,7 +48,7 @@ var PageItem = React.createClass({displayName: 'PageItem',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   }

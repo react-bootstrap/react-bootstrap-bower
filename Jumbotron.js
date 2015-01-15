@@ -1,7 +1,7 @@
 define(function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Jumbotron = React.createClass({displayName: 'Jumbotron',
+var Jumbotron = React.createClass({displayName: "Jumbotron",
 
   render: function () {
     return (

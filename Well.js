@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var Well = React.createClass({displayName: 'Well',
+var Well = React.createClass({displayName: "Well",
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {

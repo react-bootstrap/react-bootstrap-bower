@@ -10,7 +10,7 @@ var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
 
-var Nav = React.createClass({displayName: 'Nav',
+var Nav = React.createClass({displayName: "Nav",
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {

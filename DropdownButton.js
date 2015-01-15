@@ -12,7 +12,7 @@ var DropdownMenu = require('./DropdownMenu');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
-var DropdownButton = React.createClass({displayName: 'DropdownButton',
+var DropdownButton = React.createClass({displayName: "DropdownButton",
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
@@ -48,7 +48,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
       ),
       React.createElement(DropdownMenu, {
         ref: "menu", 
-        'aria-labelledby': this.props.id, 
+        "aria-labelledby": this.props.id, 
         pullRight: this.props.pullRight, 
         key: 1}, 
         ValidComponentChildren.map(this.props.children, this.renderMenuItem)

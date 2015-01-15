@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
 
-var TabPane = React.createClass({displayName: 'TabPane',
+var TabPane = React.createClass({displayName: "TabPane",
   getDefaultProps: function () {
     return {
       animation: true

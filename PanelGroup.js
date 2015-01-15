@@ -6,7 +6,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var PanelGroup = React.createClass({displayName: 'PanelGroup',
+var PanelGroup = React.createClass({displayName: "PanelGroup",
   mixins: [BootstrapMixin],
 
   propTypes: {

@@ -1,7 +1,7 @@
 define(function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Row = React.createClass({displayName: 'Row',
+var Row = React.createClass({displayName: "Row",
   propTypes: {
     componentClass: React.PropTypes.node.isRequired
   },

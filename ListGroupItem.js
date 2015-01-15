@@ -6,7 +6,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
+var ListGroupItem = React.createClass({displayName: "ListGroupItem",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -15,7 +15,9 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
     onClick: React.PropTypes.func,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    href: React.PropTypes.string,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -30,7 +32,7 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
     classes['active'] = this.props.active;
     classes['disabled'] = this.props.disabled;
 
-    if (this.props.href || this.props.onClick) {
+    if (this.props.href || this.props.target || this.props.onClick) {
       return this.renderAnchor(classes);
     } else {
       return this.renderSpan(classes);
@@ -85,7 +87,7 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.props.eventKey, this.props.href);
+      this.props.onClick(this.props.eventKey, this.props.href, this.props.target);
     }
   }
 });

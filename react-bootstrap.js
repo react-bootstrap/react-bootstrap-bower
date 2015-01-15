@@ -1002,7 +1002,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var PanelGroup = React.createClass({displayName: 'PanelGroup',
+var PanelGroup = React.createClass({displayName: "PanelGroup",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -1085,7 +1085,7 @@ module.exports = PanelGroup;
 define('Accordion',['require','exports','module','react','./PanelGroup'],function (require, exports, module) {var React = require('react');
 var PanelGroup = require('./PanelGroup');
 
-var Accordion = React.createClass({displayName: 'Accordion',
+var Accordion = React.createClass({displayName: "Accordion",
   render: function () {
     return (
       React.createElement(PanelGroup, React.__spread({},  this.props, {accordion: true}), 
@@ -1404,7 +1404,7 @@ var joinClasses = require('./utils/joinClasses');
 var AffixMixin = require('./AffixMixin');
 var domUtils = require('./utils/domUtils');
 
-var Affix = React.createClass({displayName: 'Affix',
+var Affix = React.createClass({displayName: "Affix",
   statics: {
     domUtils: domUtils
   },
@@ -1430,7 +1430,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Alert = React.createClass({displayName: 'Alert',
+var Alert = React.createClass({displayName: "Alert",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -1451,7 +1451,7 @@ var Alert = React.createClass({displayName: 'Alert',
         type: "button", 
         className: "close", 
         onClick: this.props.onDismiss, 
-        'aria-hidden': "true"}, 
+        "aria-hidden": "true"}, 
         "×"
       )
     );
@@ -1490,16 +1490,21 @@ var joinClasses = require('./utils/joinClasses');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var classSet = require('./utils/classSet');
 
-var Badge = React.createClass({displayName: 'Badge',
+var Badge = React.createClass({displayName: "Badge",
   propTypes: {
     pullRight: React.PropTypes.bool
+  },
+
+  hasContent: function () {
+    return ValidComponentChildren.hasValidComponent(this.props.children) ||
+      (typeof this.props.children === 'string') ||
+      (typeof this.props.children === 'number')
   },
 
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,
-      'badge': (ValidComponentChildren.hasValidComponent(this.props.children)
-        || (typeof this.props.children === 'string'))
+      'badge': this.hasContent()
     };
     return (
       React.createElement("span", React.__spread({}, 
@@ -1520,7 +1525,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var Button = React.createClass({displayName: 'Button',
+var Button = React.createClass({displayName: "Button",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -1529,7 +1534,9 @@ var Button = React.createClass({displayName: 'Button',
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: React.PropTypes.node
+    componentClass: React.PropTypes.node,
+    href: React.PropTypes.string,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -1551,7 +1558,7 @@ var Button = React.createClass({displayName: 'Button',
       return this.renderNavItem(classes);
     }
 
-    renderFuncName = this.props.href || this.props.navDropdown ?
+    renderFuncName = this.props.href || this.props.target || this.props.navDropdown ?
       'renderAnchor' : 'renderButton';
 
     return this[renderFuncName](classes);
@@ -1609,7 +1616,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+var ButtonGroup = React.createClass({displayName: "ButtonGroup",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -1648,7 +1655,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-var ButtonToolbar = React.createClass({displayName: 'ButtonToolbar',
+var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {
@@ -1681,7 +1688,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var Carousel = React.createClass({displayName: 'Carousel',
+var Carousel = React.createClass({displayName: "Carousel",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -2086,7 +2093,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
 
-var CarouselItem = React.createClass({displayName: 'CarouselItem',
+var CarouselItem = React.createClass({displayName: "CarouselItem",
   propTypes: {
     direction: React.PropTypes.oneOf(['prev', 'next']),
     onAnimateOutEnd: React.PropTypes.func,
@@ -2182,7 +2189,7 @@ var classSet = require('./utils/classSet');
 var constants = require('./constants');
 
 
-var Col = React.createClass({displayName: 'Col',
+var Col = React.createClass({displayName: "Col",
   propTypes: {
     xs: React.PropTypes.number,
     sm: React.PropTypes.number,
@@ -2492,7 +2499,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
+var DropdownMenu = React.createClass({displayName: "DropdownMenu",
   propTypes: {
     pullRight: React.PropTypes.bool,
     onSelect: React.PropTypes.func
@@ -2546,7 +2553,7 @@ var DropdownMenu = require('./DropdownMenu');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
-var DropdownButton = React.createClass({displayName: 'DropdownButton',
+var DropdownButton = React.createClass({displayName: "DropdownButton",
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
@@ -2582,7 +2589,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
       ),
       React.createElement(DropdownMenu, {
         ref: "menu", 
-        'aria-labelledby': this.props.id, 
+        "aria-labelledby": this.props.id, 
         pullRight: this.props.pullRight, 
         key: 1}, 
         ValidComponentChildren.map(this.props.children, this.renderMenuItem)
@@ -2735,7 +2742,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var constants = require('./constants');
 
-var Glyphicon = React.createClass({displayName: 'Glyphicon',
+var Glyphicon = React.createClass({displayName: "Glyphicon",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -2767,7 +2774,7 @@ module.exports = Glyphicon;
 define('Grid',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Grid = React.createClass({displayName: 'Grid',
+var Grid = React.createClass({displayName: "Grid",
   propTypes: {
     fluid: React.PropTypes.bool,
     componentClass: React.PropTypes.node.isRequired
@@ -2801,7 +2808,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var Button = require('./Button');
 
-var Input = React.createClass({displayName: 'Input',
+var Input = React.createClass({displayName: "Input",
   propTypes: {
     type: React.PropTypes.string,
     label: React.PropTypes.node,
@@ -3122,7 +3129,7 @@ module.exports = Interpolate;
 define('Jumbotron',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Jumbotron = React.createClass({displayName: 'Jumbotron',
+var Jumbotron = React.createClass({displayName: "Jumbotron",
 
   render: function () {
     return (
@@ -3141,7 +3148,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var Label = React.createClass({displayName: 'Label',
+var Label = React.createClass({displayName: "Label",
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {
@@ -3172,7 +3179,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var ListGroup = React.createClass({displayName: 'ListGroup',
+var ListGroup = React.createClass({displayName: "ListGroup",
   propTypes: {
     onClick: React.PropTypes.func
   },
@@ -3206,7 +3213,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
+var ListGroupItem = React.createClass({displayName: "ListGroupItem",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -3215,7 +3222,9 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
     onClick: React.PropTypes.func,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    href: React.PropTypes.string,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -3230,7 +3239,7 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
     classes['active'] = this.props.active;
     classes['disabled'] = this.props.disabled;
 
-    if (this.props.href || this.props.onClick) {
+    if (this.props.href || this.props.target || this.props.onClick) {
       return this.renderAnchor(classes);
     } else {
       return this.renderSpan(classes);
@@ -3285,7 +3294,7 @@ var ListGroupItem = React.createClass({displayName: 'ListGroupItem',
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.props.eventKey, this.props.href);
+      this.props.onClick(this.props.eventKey, this.props.href, this.props.target);
     }
   }
 });
@@ -3298,14 +3307,15 @@ define('MenuItem',['require','exports','module','react','./utils/joinClasses','.
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
-var MenuItem = React.createClass({displayName: 'MenuItem',
+var MenuItem = React.createClass({displayName: "MenuItem",
   propTypes: {
     header:    React.PropTypes.bool,
     divider:   React.PropTypes.bool,
     href:      React.PropTypes.string,
     title:     React.PropTypes.string,
+    target:    React.PropTypes.string,
     onSelect:  React.PropTypes.func,
-    eventKey: React.PropTypes.any
+    eventKey:  React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -3317,13 +3327,13 @@ var MenuItem = React.createClass({displayName: 'MenuItem',
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
     }
   },
 
   renderAnchor: function () {
     return (
-      React.createElement("a", {onClick: this.handleClick, href: this.props.href, title: this.props.title, tabIndex: "-1"}, 
+      React.createElement("a", {onClick: this.handleClick, href: this.props.href, target: this.props.target, title: this.props.title, tabIndex: "-1"}, 
         this.props.children
       )
     );
@@ -3369,7 +3379,7 @@ var EventListener = require('./utils/EventListener');
 // - Add `modal-body` div if only one child passed in that doesn't already have it
 // - Tests
 
-var Modal = React.createClass({displayName: 'Modal',
+var Modal = React.createClass({displayName: "Modal",
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
@@ -3449,7 +3459,7 @@ var Modal = React.createClass({displayName: 'Modal',
     var closeButton;
     if (this.props.closeButton) {
       closeButton = (
-          React.createElement("button", {type: "button", className: "close", 'aria-hidden': "true", onClick: this.props.onRequestHide}, "×")
+          React.createElement("button", {type: "button", className: "close", "aria-hidden": "true", onClick: this.props.onRequestHide}, "×")
         );
     }
 
@@ -3480,6 +3490,9 @@ var Modal = React.createClass({displayName: 'Modal',
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
 
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className += container.className.length ? ' modal-open' : 'modal-open';
+
     if (this.props.backdrop) {
       this.iosClickHack();
     }
@@ -3493,6 +3506,8 @@ var Modal = React.createClass({displayName: 'Modal',
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className = container.className.replace(/ ?modal-open/, '');
   },
 
   handleBackdropClick: function (e) {
@@ -3526,7 +3541,7 @@ var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
 
-var Nav = React.createClass({displayName: 'Nav',
+var Nav = React.createClass({displayName: "Nav",
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
@@ -3640,7 +3655,7 @@ var createChainedFunction = require('./utils/createChainedFunction');
 var Nav = require('./Nav');
 
 
-var Navbar = React.createClass({displayName: 'Navbar',
+var Navbar = React.createClass({displayName: "Navbar",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -3776,7 +3791,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var NavItem = React.createClass({displayName: 'NavItem',
+var NavItem = React.createClass({displayName: "NavItem",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -3785,7 +3800,8 @@ var NavItem = React.createClass({displayName: 'NavItem',
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -3801,7 +3817,8 @@ var NavItem = React.createClass({displayName: 'NavItem',
         
         
         
-           this.props,disabled=$__0.disabled,active=$__0.active,href=$__0.href,title=$__0.title,children=$__0.children,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{disabled:1,active:1,href:1,title:1,children:1}),
+        
+           this.props,disabled=$__0.disabled,active=$__0.active,href=$__0.href,title=$__0.title,target=$__0.target,children=$__0.children,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{disabled:1,active:1,href:1,title:1,target:1,children:1}),
         classes = {
           'active': active,
           'disabled': disabled
@@ -3812,6 +3829,7 @@ var NavItem = React.createClass({displayName: 'NavItem',
         React.createElement("a", {
           href: href, 
           title: title, 
+          target: target, 
           onClick: this.handleClick, 
           ref: "anchor"}, 
           children 
@@ -3825,7 +3843,7 @@ var NavItem = React.createClass({displayName: 'NavItem',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   }
@@ -3980,7 +3998,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var ModalTrigger = React.createClass({displayName: 'ModalTrigger',
+var ModalTrigger = React.createClass({displayName: "ModalTrigger",
   mixins: [OverlayMixin],
 
   propTypes: {
@@ -4060,7 +4078,7 @@ function isOneOf(one, of) {
   return one === of;
 }
 
-var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
+var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
   mixins: [OverlayMixin],
 
   propTypes: {
@@ -4156,6 +4174,10 @@ var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
 
   componentWillUnmount: function() {
     clearTimeout(this._hoverDelay);
+  },
+
+  componentDidMount: function() {
+    this.updateOverlayPosition();
   },
 
   handleDelayedShow: function () {
@@ -4266,7 +4288,7 @@ module.exports = OverlayTrigger;
 define('PageHeader',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var PageHeader = React.createClass({displayName: 'PageHeader',
+var PageHeader = React.createClass({displayName: "PageHeader",
 
   render: function () {
     return (
@@ -4288,7 +4310,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 
-var Panel = React.createClass({displayName: 'Panel',
+var Panel = React.createClass({displayName: "Panel",
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
@@ -4432,9 +4454,11 @@ define('PageItem',['require','exports','module','react','./utils/joinClasses','.
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
-var PageItem = React.createClass({displayName: 'PageItem',
+var PageItem = React.createClass({displayName: "PageItem",
 
   propTypes: {
+    href: React.PropTypes.string,
+    target: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
@@ -4462,6 +4486,7 @@ var PageItem = React.createClass({displayName: 'PageItem',
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
+          target: this.props.target, 
           onClick: this.handleSelect, 
           ref: "anchor"}, 
           this.props.children
@@ -4475,7 +4500,7 @@ var PageItem = React.createClass({displayName: 'PageItem',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   }
@@ -4491,7 +4516,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var Pager = React.createClass({displayName: 'Pager',
+var Pager = React.createClass({displayName: "Pager",
 
   propTypes: {
     onSelect: React.PropTypes.func
@@ -4528,7 +4553,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Popover = React.createClass({displayName: 'Popover',
+var Popover = React.createClass({displayName: "Popover",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -4592,7 +4617,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
-var ProgressBar = React.createClass({displayName: 'ProgressBar',
+var ProgressBar = React.createClass({displayName: "ProgressBar",
   propTypes: {
     min: React.PropTypes.number,
     now: React.PropTypes.number,
@@ -4682,9 +4707,9 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
     return (
       React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), role: "progressbar", 
         style: {width: percentage + '%'}, 
-        'aria-valuenow': this.props.now, 
-        'aria-valuemin': this.props.min, 
-        'aria-valuemax': this.props.max}), 
+        "aria-valuenow": this.props.now, 
+        "aria-valuemin": this.props.min, 
+        "aria-valuemax": this.props.max}), 
         label
       )
     );
@@ -4721,7 +4746,7 @@ module.exports = ProgressBar;
 define('Row',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
-var Row = React.createClass({displayName: 'Row',
+var Row = React.createClass({displayName: "Row",
   propTypes: {
     componentClass: React.PropTypes.node.isRequired
   },
@@ -4755,13 +4780,14 @@ var Button = require('./Button');
 var ButtonGroup = require('./ButtonGroup');
 var DropdownMenu = require('./DropdownMenu');
 
-var SplitButton = React.createClass({displayName: 'SplitButton',
+var SplitButton = React.createClass({displayName: "SplitButton",
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
     pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.node,
     href:          React.PropTypes.string,
+    target:        React.PropTypes.string,
     dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
@@ -4798,6 +4824,8 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
         className: joinClasses(this.props.className, 'dropdown-toggle'), 
         onClick: this.handleDropdownClick, 
         title: null, 
+        href: null, 
+        target: null, 
         id: null}), 
         React.createElement("span", {className: "sr-only"}, this.props.dropdownTitle), 
         React.createElement("span", {className: "caret"})
@@ -4814,7 +4842,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
         React.createElement(DropdownMenu, {
           ref: "menu", 
           onSelect: this.handleOptionSelect, 
-          'aria-labelledby': this.props.id, 
+          "aria-labelledby": this.props.id, 
           pullRight: this.props.pullRight}, 
           this.props.children
         )
@@ -4828,7 +4856,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
     }
 
     if (this.props.onClick) {
-      this.props.onClick(e);
+      this.props.onClick(e, this.props.href, this.props.target);
     }
   },
 
@@ -4861,7 +4889,7 @@ var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var SubNav = React.createClass({displayName: 'SubNav',
+var SubNav = React.createClass({displayName: "SubNav",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -4870,7 +4898,8 @@ var SubNav = React.createClass({displayName: 'SubNav',
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.node
+    text: React.PropTypes.node,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -4884,7 +4913,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   },
@@ -4954,6 +4983,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
+          target: this.props.target, 
           onClick: this.handleClick, 
           ref: "anchor"}, 
           this.props.text
@@ -5002,7 +5032,7 @@ function getDefaultActiveKeyFromChildren(children) {
   return defaultActiveKey;
 }
 
-var TabbedArea = React.createClass({displayName: 'TabbedArea',
+var TabbedArea = React.createClass({displayName: "TabbedArea",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -5127,7 +5157,7 @@ define('Table',['require','exports','module','react','./utils/joinClasses','./ut
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
-var Table = React.createClass({displayName: 'Table',
+var Table = React.createClass({displayName: "Table",
   propTypes: {
     striped: React.PropTypes.bool,
     bordered: React.PropTypes.bool,
@@ -5166,7 +5196,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
 
-var TabPane = React.createClass({displayName: 'TabPane',
+var TabPane = React.createClass({displayName: "TabPane",
   getDefaultProps: function () {
     return {
       animation: true
@@ -5251,7 +5281,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Tooltip = React.createClass({displayName: 'Tooltip',
+var Tooltip = React.createClass({displayName: "Tooltip",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -5301,7 +5331,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var Well = React.createClass({displayName: 'Well',
+var Well = React.createClass({displayName: "Well",
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {

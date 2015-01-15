@@ -6,7 +6,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 
-var Panel = React.createClass({displayName: 'Panel',
+var Panel = React.createClass({displayName: "Panel",
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {

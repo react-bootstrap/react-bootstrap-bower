@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var constants = require('./constants');
 
 
-var Col = React.createClass({displayName: 'Col',
+var Col = React.createClass({displayName: "Col",
   propTypes: {
     xs: React.PropTypes.number,
     sm: React.PropTypes.number,

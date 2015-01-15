@@ -3,16 +3,21 @@ var joinClasses = require('./utils/joinClasses');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var classSet = require('./utils/classSet');
 
-var Badge = React.createClass({displayName: 'Badge',
+var Badge = React.createClass({displayName: "Badge",
   propTypes: {
     pullRight: React.PropTypes.bool
+  },
+
+  hasContent: function () {
+    return ValidComponentChildren.hasValidComponent(this.props.children) ||
+      (typeof this.props.children === 'string') ||
+      (typeof this.props.children === 'number')
   },
 
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,
-      'badge': (ValidComponentChildren.hasValidComponent(this.props.children)
-        || (typeof this.props.children === 'string'))
+      'badge': this.hasContent()
     };
     return (
       React.createElement("span", React.__spread({}, 

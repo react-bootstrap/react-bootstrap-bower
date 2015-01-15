@@ -5,7 +5,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var ListGroup = React.createClass({displayName: 'ListGroup',
+var ListGroup = React.createClass({displayName: "ListGroup",
   propTypes: {
     onClick: React.PropTypes.func
   },

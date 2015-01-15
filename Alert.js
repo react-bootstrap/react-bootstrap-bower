@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Alert = React.createClass({displayName: 'Alert',
+var Alert = React.createClass({displayName: "Alert",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -25,7 +25,7 @@ var Alert = React.createClass({displayName: 'Alert',
         type: "button", 
         className: "close", 
         onClick: this.props.onDismiss, 
-        'aria-hidden': "true"}, 
+        "aria-hidden": "true"}, 
         "×"
       )
     );

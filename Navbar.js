@@ -9,7 +9,7 @@ var createChainedFunction = require('./utils/createChainedFunction');
 var Nav = require('./Nav');
 
 
-var Navbar = React.createClass({displayName: 'Navbar',
+var Navbar = React.createClass({displayName: "Navbar",
   mixins: [BootstrapMixin],
 
   propTypes: {

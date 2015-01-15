@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Tooltip = React.createClass({displayName: 'Tooltip',
+var Tooltip = React.createClass({displayName: "Tooltip",
   mixins: [BootstrapMixin],
 
   propTypes: {

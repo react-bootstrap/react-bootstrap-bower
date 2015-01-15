@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
-var NavItem = React.createClass({displayName: 'NavItem',
+var NavItem = React.createClass({displayName: "NavItem",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -12,7 +12,8 @@ var NavItem = React.createClass({displayName: 'NavItem',
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -28,7 +29,8 @@ var NavItem = React.createClass({displayName: 'NavItem',
         
         
         
-           this.props,disabled=$__0.disabled,active=$__0.active,href=$__0.href,title=$__0.title,children=$__0.children,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{disabled:1,active:1,href:1,title:1,children:1}),
+        
+           this.props,disabled=$__0.disabled,active=$__0.active,href=$__0.href,title=$__0.title,target=$__0.target,children=$__0.children,props=(function(source, exclusion) {var rest = {};var hasOwn = Object.prototype.hasOwnProperty;if (source == null) {throw new TypeError();}for (var key in source) {if (hasOwn.call(source, key) && !hasOwn.call(exclusion, key)) {rest[key] = source[key];}}return rest;})($__0,{disabled:1,active:1,href:1,title:1,target:1,children:1}),
         classes = {
           'active': active,
           'disabled': disabled
@@ -39,6 +41,7 @@ var NavItem = React.createClass({displayName: 'NavItem',
         React.createElement("a", {
           href: href, 
           title: title, 
+          target: target, 
           onClick: this.handleClick, 
           ref: "anchor"}, 
           children 
@@ -52,7 +55,7 @@ var NavItem = React.createClass({displayName: 'NavItem',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   }

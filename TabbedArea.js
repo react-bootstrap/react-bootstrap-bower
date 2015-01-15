@@ -18,7 +18,7 @@ function getDefaultActiveKeyFromChildren(children) {
   return defaultActiveKey;
 }
 
-var TabbedArea = React.createClass({displayName: 'TabbedArea',
+var TabbedArea = React.createClass({displayName: "TabbedArea",
   mixins: [BootstrapMixin],
 
   propTypes: {

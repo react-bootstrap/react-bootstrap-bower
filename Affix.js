@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var AffixMixin = require('./AffixMixin');
 var domUtils = require('./utils/domUtils');
 
-var Affix = React.createClass({displayName: 'Affix',
+var Affix = React.createClass({displayName: "Affix",
   statics: {
     domUtils: domUtils
   },

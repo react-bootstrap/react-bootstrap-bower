@@ -8,7 +8,7 @@ var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var SubNav = React.createClass({displayName: 'SubNav',
+var SubNav = React.createClass({displayName: "SubNav",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -17,7 +17,8 @@ var SubNav = React.createClass({displayName: 'SubNav',
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.node
+    text: React.PropTypes.node,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -31,7 +32,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   },
@@ -101,6 +102,7 @@ var SubNav = React.createClass({displayName: 'SubNav',
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
+          target: this.props.target, 
           onClick: this.handleClick, 
           ref: "anchor"}, 
           this.props.text

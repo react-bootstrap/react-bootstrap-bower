@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var Button = require('./Button');
 
-var Input = React.createClass({displayName: 'Input',
+var Input = React.createClass({displayName: "Input",
   propTypes: {
     type: React.PropTypes.string,
     label: React.PropTypes.node,

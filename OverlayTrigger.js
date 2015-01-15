@@ -20,7 +20,7 @@ function isOneOf(one, of) {
   return one === of;
 }
 
-var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
+var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
   mixins: [OverlayMixin],
 
   propTypes: {
@@ -116,6 +116,10 @@ var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
 
   componentWillUnmount: function() {
     clearTimeout(this._hoverDelay);
+  },
+
+  componentDidMount: function() {
+    this.updateOverlayPosition();
   },
 
   handleDelayedShow: function () {

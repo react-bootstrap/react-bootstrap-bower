@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+var ButtonGroup = React.createClass({displayName: "ButtonGroup",
   mixins: [BootstrapMixin],
 
   propTypes: {

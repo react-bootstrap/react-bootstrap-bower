@@ -3,7 +3,7 @@ var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
 
-var CarouselItem = React.createClass({displayName: 'CarouselItem',
+var CarouselItem = React.createClass({displayName: "CarouselItem",
   propTypes: {
     direction: React.PropTypes.oneOf(['prev', 'next']),
     onAnimateOutEnd: React.PropTypes.func,

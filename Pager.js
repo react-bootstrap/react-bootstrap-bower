@@ -5,7 +5,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var Pager = React.createClass({displayName: 'Pager',
+var Pager = React.createClass({displayName: "Pager",
 
   propTypes: {
     onSelect: React.PropTypes.func

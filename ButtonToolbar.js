@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-var ButtonToolbar = React.createClass({displayName: 'ButtonToolbar',
+var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {

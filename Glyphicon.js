@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var constants = require('./constants');
 
-var Glyphicon = React.createClass({displayName: 'Glyphicon',
+var Glyphicon = React.createClass({displayName: "Glyphicon",
   mixins: [BootstrapMixin],
 
   propTypes: {

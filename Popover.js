@@ -4,7 +4,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
-var Popover = React.createClass({displayName: 'Popover',
+var Popover = React.createClass({displayName: "Popover",
   mixins: [BootstrapMixin],
 
   propTypes: {

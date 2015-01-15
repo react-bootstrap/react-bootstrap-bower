@@ -13,7 +13,7 @@ var EventListener = require('./utils/EventListener');
 // - Add `modal-body` div if only one child passed in that doesn't already have it
 // - Tests
 
-var Modal = React.createClass({displayName: 'Modal',
+var Modal = React.createClass({displayName: "Modal",
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
@@ -93,7 +93,7 @@ var Modal = React.createClass({displayName: 'Modal',
     var closeButton;
     if (this.props.closeButton) {
       closeButton = (
-          React.createElement("button", {type: "button", className: "close", 'aria-hidden': "true", onClick: this.props.onRequestHide}, "×")
+          React.createElement("button", {type: "button", className: "close", "aria-hidden": "true", onClick: this.props.onRequestHide}, "×")
         );
     }
 
@@ -124,6 +124,9 @@ var Modal = React.createClass({displayName: 'Modal',
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
 
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className += container.className.length ? ' modal-open' : 'modal-open';
+
     if (this.props.backdrop) {
       this.iosClickHack();
     }
@@ -137,6 +140,8 @@ var Modal = React.createClass({displayName: 'Modal',
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className = container.className.replace(/ ?modal-open/, '');
   },
 
   handleBackdropClick: function (e) {

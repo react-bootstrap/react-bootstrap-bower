@@ -6,7 +6,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
-var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
+var DropdownMenu = React.createClass({displayName: "DropdownMenu",
   propTypes: {
     pullRight: React.PropTypes.bool,
     onSelect: React.PropTypes.func

@@ -4,7 +4,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 
 var createChainedFunction = require('./utils/createChainedFunction');
 
-var ModalTrigger = React.createClass({displayName: 'ModalTrigger',
+var ModalTrigger = React.createClass({displayName: "ModalTrigger",
   mixins: [OverlayMixin],
 
   propTypes: {

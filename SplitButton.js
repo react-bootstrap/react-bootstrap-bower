@@ -7,13 +7,14 @@ var Button = require('./Button');
 var ButtonGroup = require('./ButtonGroup');
 var DropdownMenu = require('./DropdownMenu');
 
-var SplitButton = React.createClass({displayName: 'SplitButton',
+var SplitButton = React.createClass({displayName: "SplitButton",
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
     pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.node,
     href:          React.PropTypes.string,
+    target:        React.PropTypes.string,
     dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
@@ -50,6 +51,8 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
         className: joinClasses(this.props.className, 'dropdown-toggle'), 
         onClick: this.handleDropdownClick, 
         title: null, 
+        href: null, 
+        target: null, 
         id: null}), 
         React.createElement("span", {className: "sr-only"}, this.props.dropdownTitle), 
         React.createElement("span", {className: "caret"})
@@ -66,7 +69,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
         React.createElement(DropdownMenu, {
           ref: "menu", 
           onSelect: this.handleOptionSelect, 
-          'aria-labelledby': this.props.id, 
+          "aria-labelledby": this.props.id, 
           pullRight: this.props.pullRight}, 
           this.props.children
         )
@@ -80,7 +83,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
     }
 
     if (this.props.onClick) {
-      this.props.onClick(e);
+      this.props.onClick(e, this.props.href, this.props.target);
     }
   },
 

@@ -8,7 +8,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
-var ProgressBar = React.createClass({displayName: 'ProgressBar',
+var ProgressBar = React.createClass({displayName: "ProgressBar",
   propTypes: {
     min: React.PropTypes.number,
     now: React.PropTypes.number,
@@ -98,9 +98,9 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
     return (
       React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), role: "progressbar", 
         style: {width: percentage + '%'}, 
-        'aria-valuenow': this.props.now, 
-        'aria-valuemin': this.props.min, 
-        'aria-valuemax': this.props.max}), 
+        "aria-valuenow": this.props.now, 
+        "aria-valuemin": this.props.min, 
+        "aria-valuemax": this.props.max}), 
         label
       )
     );

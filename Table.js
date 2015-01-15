@@ -2,7 +2,7 @@ define(function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
-var Table = React.createClass({displayName: 'Table',
+var Table = React.createClass({displayName: "Table",
   propTypes: {
     striped: React.PropTypes.bool,
     bordered: React.PropTypes.bool,
