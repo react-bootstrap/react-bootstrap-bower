@@ -663,6 +663,7 @@ define('constants',['require','exports','module'],function (require, exports, mo
     'asterisk',
     'plus',
     'euro',
+    'eur',
     'minus',
     'cloud',
     'envelope',
@@ -859,7 +860,65 @@ define('constants',['require','exports','module'],function (require, exports, mo
     'cloud-download',
     'cloud-upload',
     'tree-conifer',
-    'tree-deciduous'
+    'tree-deciduous',
+    'cd',
+    'save-file',
+    'open-file',
+    'level-up',
+    'copy',
+    'paste',
+    'alert',
+    'equalizer',
+    'king',
+    'queen',
+    'pawn',
+    'bishop',
+    'knight',
+    'baby-formula',
+    'tent',
+    'blackboard',
+    'bed',
+    'apple',
+    'erase',
+    'hourglass',
+    'lamp',
+    'duplicate',
+    'piggy-bank',
+    'scissors',
+    'bitcoin',
+    'yen',
+    'ruble',
+    'scale',
+    'ice-lolly',
+    'ice-lolly-tasted',
+    'education',
+    'option-horizontal',
+    'option-vertical',
+    'menu-hamburger',
+    'modal-window',
+    'oil',
+    'grain',
+    'sunglasses',
+    'text-size',
+    'text-color',
+    'text-background',
+    'object-align-top',
+    'object-align-bottom',
+    'object-align-horizontal',
+    'object-align-left',
+    'object-align-vertical',
+    'object-align-right',
+    'triangle-right',
+    'triangle-left',
+    'triangle-bottom',
+    'triangle-top',
+    'console',
+    'superscript',
+    'subscript',
+    'menu-left',
+    'menu-right',
+    'menu-down',
+    'menu-up'
   ]
 };
 
@@ -2563,7 +2622,8 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
-    navItem:   React.PropTypes.bool
+    navItem:   React.PropTypes.bool,
+    noCaret:   React.PropTypes.bool
   },
 
   render: function () {
@@ -2571,6 +2631,9 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
 
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
+
+    var caret = this.props.noCaret ?
+        null : (React.createElement("span", {className: "caret"}));
 
     return this[renderMethod]([
       React.createElement(Button, React.__spread({}, 
@@ -2585,7 +2648,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
         pullRight: null, 
         dropup: null}), 
         this.props.title, ' ', 
-        React.createElement("span", {className: "caret"})
+        caret
       ),
       React.createElement(DropdownMenu, {
         ref: "menu", 
@@ -2842,7 +2905,11 @@ var Input = React.createClass({displayName: "Input",
       return this.props.value;
     }
     else if (this.props.type) {
-      return this.getInputDOMNode().value;
+      if (this.props.type == "select" && this.props.multiple) {
+        return this.getSelectedOptions();
+      } else {
+        return this.getInputDOMNode().value;
+      }
     }
     else {
       throw Error('Cannot use getValue without specifying input type.');
@@ -2851,6 +2918,23 @@ var Input = React.createClass({displayName: "Input",
 
   getChecked: function () {
     return this.getInputDOMNode().checked;
+  },
+
+  getSelectedOptions: function () {
+    var values = [];
+
+    Array.prototype.forEach.call(
+      this.getInputDOMNode().getElementsByTagName('option'),
+      function (option) {
+        if (option.selected) {
+          var value = option.getAttribute('value') || option.innerHTML;
+
+          values.push(value);
+        }
+      }
+    );
+
+    return values;
   },
 
   isCheckboxOrRadio: function () {
@@ -4357,7 +4441,7 @@ var Panel = React.createClass({displayName: "Panel",
   },
 
   getCollapsableDimensionValue: function () {
-    return this.refs.body.getDOMNode().offsetHeight;
+    return this.refs.panel.getDOMNode().scrollHeight;
   },
 
   getCollapsableDOMNode: function () {
@@ -4391,11 +4475,51 @@ var Panel = React.createClass({displayName: "Panel",
   },
 
   renderBody: function () {
-    return (
-      React.createElement("div", {className: "panel-body", ref: "body"}, 
-        this.props.children
-      )
-    );
+    var allChildren = this.props.children;
+    var bodyElements = [];
+
+    function getProps() {
+      return {key: bodyElements.length};
+    }
+
+    function addPanelBody (children) {
+      bodyElements.push(
+        React.createElement("div", React.__spread({className: "panel-body"},  getProps()), 
+          children
+        )
+      );
+    }
+
+    // Handle edge cases where we should not iterate through children.
+    if (!Array.isArray(allChildren) || allChildren.length == 0) {
+      addPanelBody(allChildren);
+    } else {
+      var panelBodyChildren = [];
+
+      function maybeRenderPanelBody () {
+        if (panelBodyChildren.length == 0) {
+          return;
+        }
+
+        addPanelBody(panelBodyChildren);
+        panelBodyChildren = [];
+      }
+
+      allChildren.forEach(function(child) {
+        if (React.isValidElement(child) && child.props.fill != null) {
+          maybeRenderPanelBody();
+
+          // Separately add the filled element.
+          bodyElements.push(cloneWithProps(child, getProps()));
+        } else {
+          panelBodyChildren.push(child);
+        }
+      });
+
+      maybeRenderPanelBody();
+    }
+
+    return bodyElements;
   },
 
   renderHeading: function () {
@@ -4459,6 +4583,7 @@ var Panel = React.createClass({displayName: "Panel",
 });
 
 module.exports = Panel;
+
 });
 
 define('PageItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');

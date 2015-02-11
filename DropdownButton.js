@@ -22,7 +22,8 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
-    navItem:   React.PropTypes.bool
+    navItem:   React.PropTypes.bool,
+    noCaret:   React.PropTypes.bool
   },
 
   render: function () {
@@ -30,6 +31,9 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
 
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
+
+    var caret = this.props.noCaret ?
+        null : (React.createElement("span", {className: "caret"}));
 
     return this[renderMethod]([
       React.createElement(Button, React.__spread({}, 
@@ -44,7 +48,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
         pullRight: null, 
         dropup: null}), 
         this.props.title, ' ', 
-        React.createElement("span", {className: "caret"})
+        caret
       ),
       React.createElement(DropdownMenu, {
         ref: "menu", 
