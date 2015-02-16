@@ -341,7 +341,7 @@ var requirejs, require, define;
 
 define("almond", function(){});
 
-define('utils/joinClasses',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/joinClasses',['require','exports','module'],function (require, exports, module) {/**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
  *
@@ -384,7 +384,7 @@ module.exports = joinClasses;
 
 });
 
-define('utils/classSet',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/classSet',['require','exports','module'],function (require, exports, module) {/**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
  *
@@ -425,7 +425,7 @@ function cx(classNames) {
 module.exports = cx;
 });
 
-define('utils/Object.assign',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/Object.assign',['require','exports','module'],function (require, exports, module) {/**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
  *
@@ -475,7 +475,7 @@ module.exports = assign;
 
 });
 
-define('utils/cloneWithProps',['require','exports','module','react','./joinClasses','./Object.assign'],function (require, exports, module) {/**
+define('lib/utils/cloneWithProps',['require','exports','module','react','./joinClasses','./Object.assign'],function (require, exports, module) {/**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
  *
@@ -620,7 +620,7 @@ function cloneWithProps(child, props) {
 module.exports = cloneWithProps;
 });
 
-define('constants',['require','exports','module'],function (require, exports, module) {module.exports = {
+define('lib/constants',['require','exports','module'],function (require, exports, module) {module.exports = {
   CLASSES: {
     'alert': 'alert',
     'button': 'btn',
@@ -924,7 +924,7 @@ define('constants',['require','exports','module'],function (require, exports, mo
 
 });
 
-define('BootstrapMixin',['require','exports','module','react','./constants'],function (require, exports, module) {var React = require('react');
+define('lib/BootstrapMixin',['require','exports','module','react','./constants'],function (require, exports, module) {var React = require('react');
 var constants = require('./constants');
 
 var BootstrapMixin = {
@@ -961,7 +961,7 @@ var BootstrapMixin = {
 module.exports = BootstrapMixin;
 });
 
-define('utils/ValidComponentChildren',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
+define('lib/utils/ValidComponentChildren',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
 
 /**
  * Maps children that are typically specified as `props.children`,
@@ -1053,7 +1053,7 @@ module.exports = {
 };
 });
 
-define('PanelGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/PanelGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -1141,7 +1141,7 @@ var PanelGroup = React.createClass({displayName: "PanelGroup",
 module.exports = PanelGroup;
 });
 
-define('Accordion',['require','exports','module','react','./PanelGroup'],function (require, exports, module) {var React = require('react');
+define('lib/Accordion',['require','exports','module','react','./PanelGroup'],function (require, exports, module) {var React = require('react');
 var PanelGroup = require('./PanelGroup');
 
 var Accordion = React.createClass({displayName: "Accordion",
@@ -1157,7 +1157,7 @@ var Accordion = React.createClass({displayName: "Accordion",
 module.exports = Accordion;
 });
 
-define('utils/domUtils',['require','exports','module'],function (require, exports, module) {
+define('lib/utils/domUtils',['require','exports','module'],function (require, exports, module) {
 /**
  * Shortcut to compute element style
  *
@@ -1268,7 +1268,7 @@ module.exports = {
 };
 });
 
-define('utils/EventListener',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/EventListener',['require','exports','module'],function (require, exports, module) {/**
  * Copyright 2013-2014 Facebook, Inc.
  *
  * This file contains a modified version of:
@@ -1325,7 +1325,7 @@ module.exports = EventListener;
 
 });
 
-define('AffixMixin',['require','exports','module','react','./utils/domUtils','./utils/EventListener'],function (require, exports, module) {/* global window, document */
+define('lib/AffixMixin',['require','exports','module','react','./utils/domUtils','./utils/EventListener'],function (require, exports, module) {/* global window, document */
 
 var React = require('react');
 var domUtils = require('./utils/domUtils');
@@ -1458,7 +1458,7 @@ var AffixMixin = {
 module.exports = AffixMixin;
 });
 
-define('Affix',['require','exports','module','react','./utils/joinClasses','./AffixMixin','./utils/domUtils'],function (require, exports, module) {var React = require('react');
+define('lib/Affix',['require','exports','module','react','./utils/joinClasses','./AffixMixin','./utils/domUtils'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var AffixMixin = require('./AffixMixin');
 var domUtils = require('./utils/domUtils');
@@ -1483,7 +1483,7 @@ var Affix = React.createClass({displayName: "Affix",
 module.exports = Affix;
 });
 
-define('Alert',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Alert',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -1544,7 +1544,7 @@ var Alert = React.createClass({displayName: "Alert",
 module.exports = Alert;
 });
 
-define('Badge',['require','exports','module','react','./utils/joinClasses','./utils/ValidComponentChildren','./utils/classSet'],function (require, exports, module) {var React = require('react');
+define('lib/Badge',['require','exports','module','react','./utils/joinClasses','./utils/ValidComponentChildren','./utils/classSet'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var classSet = require('./utils/classSet');
@@ -1579,7 +1579,7 @@ module.exports = Badge;
 
 });
 
-define('Button',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Button',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -1669,7 +1669,7 @@ module.exports = Button;
 
 });
 
-define('ButtonGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
+define('lib/ButtonGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -1708,7 +1708,7 @@ var ButtonGroup = React.createClass({displayName: "ButtonGroup",
 module.exports = ButtonGroup;
 });
 
-define('ButtonToolbar',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
+define('lib/ButtonToolbar',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -1740,7 +1740,7 @@ var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
 module.exports = ButtonToolbar;
 });
 
-define('Carousel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/Carousel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -2031,7 +2031,7 @@ var Carousel = React.createClass({displayName: "Carousel",
 module.exports = Carousel;
 });
 
-define('utils/TransitionEvents',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/TransitionEvents',['require','exports','module'],function (require, exports, module) {/**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
  *
@@ -2147,7 +2147,7 @@ module.exports = ReactTransitionEvents;
 
 });
 
-define('CarouselItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
+define('lib/CarouselItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
@@ -2242,7 +2242,7 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
 module.exports = CarouselItem;
 });
 
-define('Col',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./constants'],function (require, exports, module) {var React = require('react');
+define('lib/Col',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./constants'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var constants = require('./constants');
@@ -2318,7 +2318,7 @@ var Col = React.createClass({displayName: "Col",
 module.exports = Col;
 });
 
-define('CollapsableMixin',['require','exports','module','react','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
+define('lib/CollapsableMixin',['require','exports','module','react','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var CollapsableMixin = {
@@ -2441,7 +2441,7 @@ module.exports = CollapsableMixin;
 
 });
 
-define('utils/createChainedFunction',['require','exports','module'],function (require, exports, module) {/**
+define('lib/utils/createChainedFunction',['require','exports','module'],function (require, exports, module) {/**
  * Safe chained function
  *
  * Will only create a new function if needed,
@@ -2468,7 +2468,7 @@ function createChainedFunction(one, two) {
 module.exports = createChainedFunction;
 });
 
-define('DropdownStateMixin',['require','exports','module','react','./utils/EventListener'],function (require, exports, module) {var React = require('react');
+define('lib/DropdownStateMixin',['require','exports','module','react','./utils/EventListener'],function (require, exports, module) {var React = require('react');
 var EventListener = require('./utils/EventListener');
 
 /**
@@ -2550,7 +2550,7 @@ var DropdownStateMixin = {
 module.exports = DropdownStateMixin;
 });
 
-define('DropdownMenu',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/DropdownMenu',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -2598,7 +2598,7 @@ var DropdownMenu = React.createClass({displayName: "DropdownMenu",
 module.exports = DropdownMenu;
 });
 
-define('DropdownButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/DropdownButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -2726,7 +2726,7 @@ module.exports = DropdownButton;
 
 });
 
-define('FadeMixin',['require','exports','module'],function (require, exports, module) {/*global document */
+define('lib/FadeMixin',['require','exports','module'],function (require, exports, module) {/*global document */
 // TODO: listen for onTransitionEnd to remove el
 function getElementsAndSelf (root, classes){
   var els = root.querySelectorAll('.' + classes.join('.'));
@@ -2798,7 +2798,7 @@ module.exports = {
 
 });
 
-define('Glyphicon',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./constants'],function (require, exports, module) {var React = require('react');
+define('lib/Glyphicon',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./constants'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -2833,7 +2833,7 @@ var Glyphicon = React.createClass({displayName: "Glyphicon",
 module.exports = Glyphicon;
 });
 
-define('Grid',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
+define('lib/Grid',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
 var Grid = React.createClass({displayName: "Grid",
@@ -2865,7 +2865,7 @@ var Grid = React.createClass({displayName: "Grid",
 module.exports = Grid;
 });
 
-define('Input',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./Button'],function (require, exports, module) {var React = require('react');
+define('lib/Input',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./Button'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var Button = require('./Button');
@@ -3124,7 +3124,7 @@ module.exports = Input;
 
 });
 
-define('Interpolate',['require','exports','module','react','./utils/ValidComponentChildren','./utils/Object.assign'],function (require, exports, module) {// https://www.npmjs.org/package/react-interpolate-component
+define('lib/Interpolate',['require','exports','module','react','./utils/ValidComponentChildren','./utils/Object.assign'],function (require, exports, module) {// https://www.npmjs.org/package/react-interpolate-component
 
 
 var React = require('react');
@@ -3209,7 +3209,7 @@ module.exports = Interpolate;
 
 });
 
-define('Jumbotron',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
+define('lib/Jumbotron',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
 var Jumbotron = React.createClass({displayName: "Jumbotron",
@@ -3226,7 +3226,7 @@ var Jumbotron = React.createClass({displayName: "Jumbotron",
 module.exports = Jumbotron;
 });
 
-define('Label',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Label',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -3255,7 +3255,7 @@ var Label = React.createClass({displayName: "Label",
 module.exports = Label;
 });
 
-define('ListGroup',['require','exports','module','react','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+define('lib/ListGroup',['require','exports','module','react','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 
@@ -3288,7 +3288,7 @@ module.exports = ListGroup;
 
 });
 
-define('ListGroupItem',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/ListGroupItem',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
@@ -3386,7 +3386,7 @@ module.exports = ListGroupItem;
 
 });
 
-define('MenuItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
+define('lib/MenuItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
@@ -3447,7 +3447,7 @@ var MenuItem = React.createClass({displayName: "MenuItem",
 module.exports = MenuItem;
 });
 
-define('Modal',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./FadeMixin','./utils/EventListener'],function (require, exports, module) {/* global document:false */
+define('lib/Modal',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./FadeMixin','./utils/EventListener'],function (require, exports, module) {/* global document:false */
 
 var React = require('react');
 var joinClasses = require('./utils/joinClasses');
@@ -3612,7 +3612,7 @@ module.exports = Modal;
 
 });
 
-define('Nav',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./CollapsableMixin','./utils/classSet','./utils/domUtils','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+define('lib/Nav',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./CollapsableMixin','./utils/classSet','./utils/domUtils','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
@@ -3727,7 +3727,7 @@ module.exports = Nav;
 
 });
 
-define('Navbar',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./Nav'],function (require, exports, module) {var React = require('react');
+define('lib/Navbar',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./Nav'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
@@ -3869,7 +3869,7 @@ module.exports = Navbar;
 
 });
 
-define('NavItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/NavItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -3935,7 +3935,7 @@ var NavItem = React.createClass({displayName: "NavItem",
 module.exports = NavItem;
 });
 
-define('utils/CustomPropTypes',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
+define('lib/utils/CustomPropTypes',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
 
 var ANONYMOUS = '<<anonymous>>';
 
@@ -3999,7 +3999,7 @@ function createMountableChecker() {
 module.exports = CustomPropTypes;
 });
 
-define('OverlayMixin',['require','exports','module','react','./utils/CustomPropTypes'],function (require, exports, module) {var React = require('react');
+define('lib/OverlayMixin',['require','exports','module','react','./utils/CustomPropTypes'],function (require, exports, module) {var React = require('react');
 var CustomPropTypes = require('./utils/CustomPropTypes');
 
 module.exports = {
@@ -4086,7 +4086,7 @@ module.exports = {
 
 });
 
-define('ModalTrigger',['require','exports','module','react','./OverlayMixin','./utils/cloneWithProps','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+define('lib/ModalTrigger',['require','exports','module','react','./OverlayMixin','./utils/cloneWithProps','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var cloneWithProps = require('./utils/cloneWithProps');
 
@@ -4150,7 +4150,7 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
 module.exports = ModalTrigger;
 });
 
-define('OverlayTrigger',['require','exports','module','react','./OverlayMixin','./utils/domUtils','./utils/cloneWithProps','./utils/createChainedFunction','./utils/Object.assign'],function (require, exports, module) {var React = require('react');
+define('lib/OverlayTrigger',['require','exports','module','react','./OverlayMixin','./utils/domUtils','./utils/cloneWithProps','./utils/createChainedFunction','./utils/Object.assign'],function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var domUtils = require('./utils/domUtils');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -4379,7 +4379,7 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
 module.exports = OverlayTrigger;
 });
 
-define('PageHeader',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
+define('lib/PageHeader',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
 var PageHeader = React.createClass({displayName: "PageHeader",
@@ -4396,7 +4396,7 @@ var PageHeader = React.createClass({displayName: "PageHeader",
 module.exports = PageHeader;
 });
 
-define('Panel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./CollapsableMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Panel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./CollapsableMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -4597,7 +4597,7 @@ module.exports = Panel;
 
 });
 
-define('PageItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
+define('lib/PageItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
@@ -4656,7 +4656,7 @@ var PageItem = React.createClass({displayName: "PageItem",
 module.exports = PageItem;
 });
 
-define('Pager',['require','exports','module','react','./utils/joinClasses','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+define('lib/Pager',['require','exports','module','react','./utils/joinClasses','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var cloneWithProps = require('./utils/cloneWithProps');
 
@@ -4694,7 +4694,7 @@ var Pager = React.createClass({displayName: "Pager",
 module.exports = Pager;
 });
 
-define('Popover',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Popover',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -4754,7 +4754,7 @@ var Popover = React.createClass({displayName: "Popover",
 module.exports = Popover;
 });
 
-define('ProgressBar',['require','exports','module','react','./utils/joinClasses','./Interpolate','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+define('lib/ProgressBar',['require','exports','module','react','./utils/joinClasses','./Interpolate','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -4890,7 +4890,7 @@ module.exports = ProgressBar;
 
 });
 
-define('Row',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
+define('lib/Row',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 
 var Row = React.createClass({displayName: "Row",
@@ -4918,7 +4918,7 @@ var Row = React.createClass({displayName: "Row",
 module.exports = Row;
 });
 
-define('SplitButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu'],function (require, exports, module) {var React = require('react');
+define('lib/SplitButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -5026,7 +5026,7 @@ module.exports = SplitButton;
 
 });
 
-define('SubNav',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/SubNav',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
@@ -5159,7 +5159,7 @@ module.exports = SubNav;
 
 });
 
-define('TabbedArea',['require','exports','module','react','./BootstrapMixin','./utils/cloneWithProps','./utils/ValidComponentChildren','./Nav','./NavItem'],function (require, exports, module) {var React = require('react');
+define('lib/TabbedArea',['require','exports','module','react','./BootstrapMixin','./utils/cloneWithProps','./utils/ValidComponentChildren','./Nav','./NavItem'],function (require, exports, module) {var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
 var cloneWithProps = require('./utils/cloneWithProps');
 
@@ -5300,7 +5300,7 @@ var TabbedArea = React.createClass({displayName: "TabbedArea",
 module.exports = TabbedArea;
 });
 
-define('Table',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
+define('lib/Table',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 
@@ -5338,7 +5338,7 @@ var Table = React.createClass({displayName: "Table",
 module.exports = Table;
 });
 
-define('TabPane',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
+define('lib/TabPane',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var TransitionEvents = require('./utils/TransitionEvents');
@@ -5422,7 +5422,7 @@ var TabPane = React.createClass({displayName: "TabPane",
 module.exports = TabPane;
 });
 
-define('Tooltip',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Tooltip',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -5473,7 +5473,7 @@ var Tooltip = React.createClass({displayName: "Tooltip",
 module.exports = Tooltip;
 });
 
-define('Well',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+define('lib/Well',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
 var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -5503,58 +5503,58 @@ module.exports = Well;
 
 /*global define */
 
-define('react-bootstrap',['require','./Accordion','./Affix','./AffixMixin','./Alert','./BootstrapMixin','./Badge','./Button','./ButtonGroup','./ButtonToolbar','./Carousel','./CarouselItem','./Col','./CollapsableMixin','./DropdownButton','./DropdownMenu','./DropdownStateMixin','./FadeMixin','./Glyphicon','./Grid','./Input','./Interpolate','./Jumbotron','./Label','./ListGroup','./ListGroupItem','./MenuItem','./Modal','./Nav','./Navbar','./NavItem','./ModalTrigger','./OverlayTrigger','./OverlayMixin','./PageHeader','./Panel','./PanelGroup','./PageItem','./Pager','./Popover','./ProgressBar','./Row','./SplitButton','./SubNav','./TabbedArea','./Table','./TabPane','./Tooltip','./Well'],function (require) {
+define('react-bootstrap',['require','./lib/Accordion','./lib/Affix','./lib/AffixMixin','./lib/Alert','./lib/BootstrapMixin','./lib/Badge','./lib/Button','./lib/ButtonGroup','./lib/ButtonToolbar','./lib/Carousel','./lib/CarouselItem','./lib/Col','./lib/CollapsableMixin','./lib/DropdownButton','./lib/DropdownMenu','./lib/DropdownStateMixin','./lib/FadeMixin','./lib/Glyphicon','./lib/Grid','./lib/Input','./lib/Interpolate','./lib/Jumbotron','./lib/Label','./lib/ListGroup','./lib/ListGroupItem','./lib/MenuItem','./lib/Modal','./lib/Nav','./lib/Navbar','./lib/NavItem','./lib/ModalTrigger','./lib/OverlayTrigger','./lib/OverlayMixin','./lib/PageHeader','./lib/Panel','./lib/PanelGroup','./lib/PageItem','./lib/Pager','./lib/Popover','./lib/ProgressBar','./lib/Row','./lib/SplitButton','./lib/SubNav','./lib/TabbedArea','./lib/Table','./lib/TabPane','./lib/Tooltip','./lib/Well'],function (require) {
   
 
   return {
-    Accordion: require('./Accordion'),
-    Affix: require('./Affix'),
-    AffixMixin: require('./AffixMixin'),
-    Alert: require('./Alert'),
-    BootstrapMixin: require('./BootstrapMixin'),
-    Badge: require('./Badge'),
-    Button: require('./Button'),
-    ButtonGroup: require('./ButtonGroup'),
-    ButtonToolbar: require('./ButtonToolbar'),
-    Carousel: require('./Carousel'),
-    CarouselItem: require('./CarouselItem'),
-    Col: require('./Col'),
-    CollapsableMixin: require('./CollapsableMixin'),
-    DropdownButton: require('./DropdownButton'),
-    DropdownMenu: require('./DropdownMenu'),
-    DropdownStateMixin: require('./DropdownStateMixin'),
-    FadeMixin: require('./FadeMixin'),
-    Glyphicon: require('./Glyphicon'),
-    Grid: require('./Grid'),
-    Input: require('./Input'),
-    Interpolate: require('./Interpolate'),
-    Jumbotron: require('./Jumbotron'),
-    Label: require('./Label'),
-    ListGroup: require('./ListGroup'),
-    ListGroupItem: require('./ListGroupItem'),
-    MenuItem: require('./MenuItem'),
-    Modal: require('./Modal'),
-    Nav: require('./Nav'),
-    Navbar: require('./Navbar'),
-    NavItem: require('./NavItem'),
-    ModalTrigger: require('./ModalTrigger'),
-    OverlayTrigger: require('./OverlayTrigger'),
-    OverlayMixin: require('./OverlayMixin'),
-    PageHeader: require('./PageHeader'),
-    Panel: require('./Panel'),
-    PanelGroup: require('./PanelGroup'),
-    PageItem: require('./PageItem'),
-    Pager: require('./Pager'),
-    Popover: require('./Popover'),
-    ProgressBar: require('./ProgressBar'),
-    Row: require('./Row'),
-    SplitButton: require('./SplitButton'),
-    SubNav: require('./SubNav'),
-    TabbedArea: require('./TabbedArea'),
-    Table: require('./Table'),
-    TabPane: require('./TabPane'),
-    Tooltip: require('./Tooltip'),
-    Well: require('./Well')
+    Accordion: require('./lib/Accordion'),
+    Affix: require('./lib/Affix'),
+    AffixMixin: require('./lib/AffixMixin'),
+    Alert: require('./lib/Alert'),
+    BootstrapMixin: require('./lib/BootstrapMixin'),
+    Badge: require('./lib/Badge'),
+    Button: require('./lib/Button'),
+    ButtonGroup: require('./lib/ButtonGroup'),
+    ButtonToolbar: require('./lib/ButtonToolbar'),
+    Carousel: require('./lib/Carousel'),
+    CarouselItem: require('./lib/CarouselItem'),
+    Col: require('./lib/Col'),
+    CollapsableMixin: require('./lib/CollapsableMixin'),
+    DropdownButton: require('./lib/DropdownButton'),
+    DropdownMenu: require('./lib/DropdownMenu'),
+    DropdownStateMixin: require('./lib/DropdownStateMixin'),
+    FadeMixin: require('./lib/FadeMixin'),
+    Glyphicon: require('./lib/Glyphicon'),
+    Grid: require('./lib/Grid'),
+    Input: require('./lib/Input'),
+    Interpolate: require('./lib/Interpolate'),
+    Jumbotron: require('./lib/Jumbotron'),
+    Label: require('./lib/Label'),
+    ListGroup: require('./lib/ListGroup'),
+    ListGroupItem: require('./lib/ListGroupItem'),
+    MenuItem: require('./lib/MenuItem'),
+    Modal: require('./lib/Modal'),
+    Nav: require('./lib/Nav'),
+    Navbar: require('./lib/Navbar'),
+    NavItem: require('./lib/NavItem'),
+    ModalTrigger: require('./lib/ModalTrigger'),
+    OverlayTrigger: require('./lib/OverlayTrigger'),
+    OverlayMixin: require('./lib/OverlayMixin'),
+    PageHeader: require('./lib/PageHeader'),
+    Panel: require('./lib/Panel'),
+    PanelGroup: require('./lib/PanelGroup'),
+    PageItem: require('./lib/PageItem'),
+    Pager: require('./lib/Pager'),
+    Popover: require('./lib/Popover'),
+    ProgressBar: require('./lib/ProgressBar'),
+    Row: require('./lib/Row'),
+    SplitButton: require('./lib/SplitButton'),
+    SubNav: require('./lib/SubNav'),
+    TabbedArea: require('./lib/TabbedArea'),
+    Table: require('./lib/Table'),
+    TabPane: require('./lib/TabPane'),
+    Tooltip: require('./lib/Tooltip'),
+    Well: require('./lib/Well')
   };
 });
 
