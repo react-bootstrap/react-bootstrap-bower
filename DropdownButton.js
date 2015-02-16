@@ -27,8 +27,6 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
   },
 
   render: function () {
-    var className = 'dropdown-toggle';
-
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
@@ -39,7 +37,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
       React.createElement(Button, React.__spread({}, 
         this.props, 
         {ref: "dropdownButton", 
-        className: joinClasses(this.props.className, className), 
+        className: "dropdown-toggle", 
         onClick: this.handleDropdownClick, 
         key: 0, 
         navDropdown: this.props.navItem, 
@@ -69,7 +67,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     return (
       React.createElement(ButtonGroup, {
         bsSize: this.props.bsSize, 
-        className: classSet(groupClasses)}, 
+        className: joinClasses(this.props.className, classSet(groupClasses))}, 
         children
       )
     );
@@ -83,7 +81,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
       };
 
     return (
-      React.createElement("li", {className: classSet(classes)}, 
+      React.createElement("li", {className: joinClasses(this.props.className, classSet(classes))}, 
         children
       )
     );
@@ -125,4 +123,5 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
 });
 
 module.exports = DropdownButton;
+
 });

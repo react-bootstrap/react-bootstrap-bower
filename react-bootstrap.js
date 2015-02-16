@@ -2627,8 +2627,6 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
   },
 
   render: function () {
-    var className = 'dropdown-toggle';
-
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
@@ -2639,7 +2637,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
       React.createElement(Button, React.__spread({}, 
         this.props, 
         {ref: "dropdownButton", 
-        className: joinClasses(this.props.className, className), 
+        className: "dropdown-toggle", 
         onClick: this.handleDropdownClick, 
         key: 0, 
         navDropdown: this.props.navItem, 
@@ -2669,7 +2667,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     return (
       React.createElement(ButtonGroup, {
         bsSize: this.props.bsSize, 
-        className: classSet(groupClasses)}, 
+        className: joinClasses(this.props.className, classSet(groupClasses))}, 
         children
       )
     );
@@ -2683,7 +2681,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
       };
 
     return (
-      React.createElement("li", {className: classSet(classes)}, 
+      React.createElement("li", {className: joinClasses(this.props.className, classSet(classes))}, 
         children
       )
     );
@@ -2725,6 +2723,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
 });
 
 module.exports = DropdownButton;
+
 });
 
 define('FadeMixin',['require','exports','module'],function (require, exports, module) {/*global document */
@@ -4482,6 +4481,10 @@ var Panel = React.createClass({displayName: "Panel",
       return {key: bodyElements.length};
     }
 
+    function addPanelChild (child) {
+      bodyElements.push(cloneWithProps(child, getProps()));
+    }
+
     function addPanelBody (children) {
       bodyElements.push(
         React.createElement("div", React.__spread({className: "panel-body"},  getProps()), 
@@ -4492,7 +4495,11 @@ var Panel = React.createClass({displayName: "Panel",
 
     // Handle edge cases where we should not iterate through children.
     if (!Array.isArray(allChildren) || allChildren.length == 0) {
-      addPanelBody(allChildren);
+      if (this.shouldRenderFill(allChildren)) {
+        addPanelChild(allChildren);
+      } else {
+        addPanelBody(allChildren);
+      }
     } else {
       var panelBodyChildren = [];
 
@@ -4506,20 +4513,24 @@ var Panel = React.createClass({displayName: "Panel",
       }
 
       allChildren.forEach(function(child) {
-        if (React.isValidElement(child) && child.props.fill != null) {
+        if (this.shouldRenderFill(child)) {
           maybeRenderPanelBody();
 
           // Separately add the filled element.
-          bodyElements.push(cloneWithProps(child, getProps()));
+          addPanelChild(child);
         } else {
           panelBodyChildren.push(child);
         }
-      });
+      }.bind(this));
 
       maybeRenderPanelBody();
     }
 
     return bodyElements;
+  },
+
+  shouldRenderFill: function (child) {
+    return React.isValidElement(child) && child.props.fill != null
   },
 
   renderHeading: function () {
