@@ -3277,7 +3277,6 @@ var ListGroup = React.createClass({displayName: "ListGroup",
 
   renderListItem: function (child, index) {
     return cloneWithProps(child, {
-      onClick: createChainedFunction(child.props.onClick, this.props.onClick),
       ref: child.ref,
       key: child.key ? child.key : index
     });
@@ -3341,8 +3340,8 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
     return (
       React.createElement("a", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes)), 
-        onClick: this.handleClick}), 
+        {className: joinClasses(this.props.className, classSet(classes))
+      }), 
         this.props.header ? this.renderStructuredContent() : this.props.children
       )
     );
@@ -3372,13 +3371,6 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
       header: header,
       content: content
     };
-  },
-
-  handleClick: function (e) {
-    if (this.props.onClick) {
-      e.preventDefault();
-      this.props.onClick(this.props.eventKey, this.props.href, this.props.target);
-    }
   }
 });
 
@@ -3507,7 +3499,7 @@ var Modal = React.createClass({displayName: "Modal",
         onClick: this.props.backdrop === true ? this.handleBackdropClick : null, 
         ref: "modal"}), 
         React.createElement("div", {className: classSet(dialogClasses)}, 
-          React.createElement("div", {className: "modal-content"}, 
+          React.createElement("div", {className: "modal-content", style: {overflow: 'hidden'}}, 
             this.props.title ? this.renderHeader() : null, 
             this.props.children
           )
@@ -3546,8 +3538,17 @@ var Modal = React.createClass({displayName: "Modal",
         );
     }
 
+    var style = this.props.bsStyle;
+    var classes = {
+      'modal-header': true
+    };
+    classes['bg-' + style] = style;
+    classes['text-' + style] = style;
+
+    var className = classSet(classes);
+
     return (
-      React.createElement("div", {className: "modal-header"}, 
+      React.createElement("div", {className: className}, 
         closeButton, 
         this.renderTitle()
       )
@@ -3751,6 +3752,10 @@ var Navbar = React.createClass({displayName: "Navbar",
     componentClass: React.PropTypes.node.isRequired,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
+    toggleNavKey: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     onToggle: React.PropTypes.func,
     navExpanded: React.PropTypes.bool,
     defaultNavExpanded: React.PropTypes.bool
@@ -3804,7 +3809,7 @@ var Navbar = React.createClass({displayName: "Navbar",
     return (
       React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
         React.createElement("div", {className: this.props.fluid ? 'container-fluid' : 'container'}, 
-          (this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null, 
+          (this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null, 
           ValidComponentChildren.map(this.props.children, this.renderChild)
         )
       )
