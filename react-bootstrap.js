@@ -2871,6 +2871,7 @@ var classSet = require('./utils/classSet');
 var Button = require('./Button');
 
 var Input = React.createClass({displayName: "Input",
+
   propTypes: {
     type: React.PropTypes.string,
     label: React.PropTypes.node,
@@ -2879,6 +2880,7 @@ var Input = React.createClass({displayName: "Input",
     addonAfter: React.PropTypes.node,
     buttonBefore: React.PropTypes.node,
     buttonAfter: React.PropTypes.node,
+    bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component
@@ -3007,8 +3009,14 @@ var Input = React.createClass({displayName: "Input",
       )
     ) : null;
 
+    var inputGroupClassName;
+    switch (this.props.bsSize) {
+      case 'small': inputGroupClassName = 'input-group-sm'; break;
+      case 'large': inputGroupClassName = 'input-group-lg'; break;
+    }
+
     return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
-      React.createElement("div", {className: "input-group", key: "input-group"}, 
+      React.createElement("div", {className: joinClasses(inputGroupClassName, 'input-group'), key: "input-group"}, 
         addonBefore, 
         buttonBefore, 
         children, 
