@@ -955,10 +955,15 @@ var BootstrapMixin = {
     }
 
     return classes;
+  },
+
+  prefixClass: function(subClass) {
+    return constants.CLASSES[this.props.bsClass] + '-' + subClass;
   }
 };
 
 module.exports = BootstrapMixin;
+
 });
 
 define('lib/utils/ValidComponentChildren',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
@@ -1121,7 +1126,9 @@ var PanelGroup = React.createClass({displayName: "PanelGroup",
     return !this._isChanging;
   },
 
-  handleSelect: function (key) {
+  handleSelect: function (e, key) {
+    e.preventDefault();
+      
     if (this.props.onSelect) {
       this._isChanging = true;
       this.props.onSelect(key);
@@ -2290,19 +2297,19 @@ var Col = React.createClass({displayName: "Col",
 
       prop = size + 'Offset';
       classPart = size + '-offset-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
 
       prop = size + 'Push';
       classPart = size + '-push-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
 
       prop = size + 'Pull';
       classPart = size + '-pull-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
     }, this);
@@ -2316,106 +2323,313 @@ var Col = React.createClass({displayName: "Col",
 });
 
 module.exports = Col;
+
 });
 
-define('lib/CollapsableMixin',['require','exports','module','react','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
-var TransitionEvents = require('./utils/TransitionEvents');
+define('react/lib/ExecutionEnvironment',['require','exports','module'],function (require, exports, module) {/**
+ * Copyright 2013-2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ExecutionEnvironment
+ */
+
+/*jslint evil: true */
+
+
+
+var canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
+/**
+ * Simple, lightweight module assisting with the detection and context of
+ * Worker. Helps avoid circular dependencies and allows code to reason about
+ * whether or not they are in a Worker, even if they never include the main
+ * `ReactWorker` dependency.
+ */
+var ExecutionEnvironment = {
+
+  canUseDOM: canUseDOM,
+
+  canUseWorkers: typeof Worker !== 'undefined',
+
+  canUseEventListeners:
+    canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+  canUseViewport: canUseDOM && !!window.screen,
+
+  isInWorker: !canUseDOM // For now, this is true - might change in the future.
+
+};
+
+module.exports = ExecutionEnvironment;
+
+});
+
+define('react/lib/ReactTransitionEvents',['require','exports','module','./ExecutionEnvironment'],function (require, exports, module) {/**
+ * Copyright 2013-2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ReactTransitionEvents
+ */
+
+
+
+var ExecutionEnvironment = require("./ExecutionEnvironment");
+
+/**
+ * EVENT_NAME_MAP is used to determine which event fired when a
+ * transition/animation ends, based on the style property used to
+ * define that event.
+ */
+var EVENT_NAME_MAP = {
+  transitionend: {
+    'transition': 'transitionend',
+    'WebkitTransition': 'webkitTransitionEnd',
+    'MozTransition': 'mozTransitionEnd',
+    'OTransition': 'oTransitionEnd',
+    'msTransition': 'MSTransitionEnd'
+  },
+
+  animationend: {
+    'animation': 'animationend',
+    'WebkitAnimation': 'webkitAnimationEnd',
+    'MozAnimation': 'mozAnimationEnd',
+    'OAnimation': 'oAnimationEnd',
+    'msAnimation': 'MSAnimationEnd'
+  }
+};
+
+var endEvents = [];
+
+function detectEvents() {
+  var testEl = document.createElement('div');
+  var style = testEl.style;
+
+  // On some platforms, in particular some releases of Android 4.x,
+  // the un-prefixed "animation" and "transition" properties are defined on the
+  // style object but the events that fire will still be prefixed, so we need
+  // to check if the un-prefixed events are useable, and if not remove them
+  // from the map
+  if (!('AnimationEvent' in window)) {
+    delete EVENT_NAME_MAP.animationend.animation;
+  }
+
+  if (!('TransitionEvent' in window)) {
+    delete EVENT_NAME_MAP.transitionend.transition;
+  }
+
+  for (var baseEventName in EVENT_NAME_MAP) {
+    var baseEvents = EVENT_NAME_MAP[baseEventName];
+    for (var styleName in baseEvents) {
+      if (styleName in style) {
+        endEvents.push(baseEvents[styleName]);
+        break;
+      }
+    }
+  }
+}
+
+if (ExecutionEnvironment.canUseDOM) {
+  detectEvents();
+}
+
+// We use the raw {add|remove}EventListener() call because EventListener
+// does not know how to remove event listeners and we really should
+// clean up. Also, these events are not triggered in older browsers
+// so we should be A-OK here.
+
+function addEventListener(node, eventName, eventListener) {
+  node.addEventListener(eventName, eventListener, false);
+}
+
+function removeEventListener(node, eventName, eventListener) {
+  node.removeEventListener(eventName, eventListener, false);
+}
+
+var ReactTransitionEvents = {
+  addEndEventListener: function(node, eventListener) {
+    if (endEvents.length === 0) {
+      // If CSS transitions are not supported, trigger an "end animation"
+      // event immediately.
+      window.setTimeout(eventListener, 0);
+      return;
+    }
+    endEvents.forEach(function(endEvent) {
+      addEventListener(node, endEvent, eventListener);
+    });
+  },
+
+  removeEndEventListener: function(node, eventListener) {
+    if (endEvents.length === 0) {
+      return;
+    }
+    endEvents.forEach(function(endEvent) {
+      removeEventListener(node, endEvent, eventListener);
+    });
+  }
+};
+
+module.exports = ReactTransitionEvents;
+
+});
+
+define('lib/CollapsableMixin',['require','exports','module','react','react/lib/ReactTransitionEvents'],function (require, exports, module) {var React = require('react');
+var TransitionEvents = require('react/lib/ReactTransitionEvents');
 
 var CollapsableMixin = {
 
   propTypes: {
-    collapsable: React.PropTypes.bool,
     defaultExpanded: React.PropTypes.bool,
     expanded: React.PropTypes.bool
   },
 
-  getInitialState: function () {
+  getInitialState: function(){
+    var defaultExpanded = this.props.defaultExpanded != null ?
+      this.props.defaultExpanded :
+        this.props.expanded != null ?
+        this.props.expanded :
+        false;
+
     return {
-      expanded: this.props.defaultExpanded != null ? this.props.defaultExpanded : null,
+      expanded: defaultExpanded,
       collapsing: false
     };
   },
 
-  handleTransitionEnd: function () {
-    this._collapseEnd = true;
-    this.setState({
-      collapsing: false
-    });
-  },
-
-  componentWillReceiveProps: function (newProps) {
-    if (this.props.collapsable && newProps.expanded !== this.props.expanded) {
-      this._collapseEnd = false;
-      this.setState({
-        collapsing: true
-      });
-    }
-  },
-
-  _addEndTransitionListener: function () {
-    var node = this.getCollapsableDOMNode();
-
-    if (node) {
-      TransitionEvents.addEndEventListener(
-        node,
-        this.handleTransitionEnd
-      );
-    }
-  },
-
-  _removeEndTransitionListener: function () {
-    var node = this.getCollapsableDOMNode();
-
-    if (node) {
-      TransitionEvents.removeEndEventListener(
-        node,
-        this.handleTransitionEnd
-      );
-    }
-  },
-
-  componentDidMount: function () {
-    this._afterRender();
-  },
-
-  componentWillUnmount: function () {
-    this._removeEndTransitionListener();
-  },
-
-  componentWillUpdate: function (nextProps) {
-    var dimension = (typeof this.getCollapsableDimension === 'function') ?
-      this.getCollapsableDimension() : 'height';
-    var node = this.getCollapsableDOMNode();
-
-    this._removeEndTransitionListener();
-  },
-
-  componentDidUpdate: function (prevProps, prevState) {
-    this._afterRender();
-  },
-
-  _afterRender: function () {
-    if (!this.props.collapsable) {
+  componentWillUpdate: function(nextProps, nextState){
+    var willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
+    if (willExpanded === this.isExpanded()) {
       return;
     }
 
-    this._addEndTransitionListener();
-    setTimeout(this._updateDimensionAfterRender, 0);
+    // if the expanded state is being toggled, ensure node has a dimension value
+    // this is needed for the animation to work and needs to be set before
+    // the collapsing class is applied (after collapsing is applied the in class
+    // is removed and the node's dimension will be wrong)
+
+    var node = this.getCollapsableDOMNode();
+    var dimension = this.dimension();
+    var value = '0';
+
+    if(!willExpanded){
+      value = this.getCollapsableDimensionValue();
+    }
+
+    node.style[dimension] = value + 'px';
+
+    this._afterWillUpdate();
   },
 
-  _updateDimensionAfterRender: function () {
+  componentDidUpdate: function(prevProps, prevState){
+    // check if expanded is being toggled; if so, set collapsing
+    this._checkToggleCollapsing(prevProps, prevState);
+
+    // check if collapsing was turned on; if so, start animation
+    this._checkStartAnimation(); 
+  },
+
+  // helps enable test stubs
+  _afterWillUpdate: function(){
+  },
+
+  _checkStartAnimation: function(){
+    if(!this.state.collapsing) {
+      return;
+    }
+
     var node = this.getCollapsableDOMNode();
-    if (node) {
-        var dimension = (typeof this.getCollapsableDimension === 'function') ?
-            this.getCollapsableDimension() : 'height';
-        node.style[dimension] = this.isExpanded() ?
-            this.getCollapsableDimensionValue() + 'px' : '0px';
+    var dimension = this.dimension();
+    var value = this.getCollapsableDimensionValue();
+
+    // setting the dimension here starts the transition animation
+    var result;
+    if(this.isExpanded()) {
+      result = value + 'px';
+    } else {
+      result = '0px';
+    }
+    node.style[dimension] = result;
+  },
+
+  _checkToggleCollapsing: function(prevProps, prevState){
+    var wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
+    var isExpanded = this.isExpanded();
+    if(wasExpanded !== isExpanded){
+      if(wasExpanded) {
+        this._handleCollapse();
+      } else {
+        this._handleExpand();
+      }
     }
   },
 
-  isExpanded: function () {
-    return (this.props.expanded != null) ?
-      this.props.expanded : this.state.expanded;
+  _handleExpand: function(){
+    var node = this.getCollapsableDOMNode();
+    var dimension = this.dimension();
+
+    var complete = (function (){
+      this._removeEndEventListener(node, complete);
+      // remove dimension value - this ensures the collapsable item can grow
+      // in dimension after initial display (such as an image loading)
+      node.style[dimension] = '';
+      this.setState({
+        collapsing:false
+      });
+    }).bind(this);
+
+    this._addEndEventListener(node, complete);
+
+    this.setState({
+      collapsing: true
+    });
+  },
+
+  _handleCollapse: function(){
+    var node = this.getCollapsableDOMNode();
+
+    var complete = (function (){
+      this._removeEndEventListener(node, complete);
+      this.setState({
+        collapsing: false
+      });
+    }).bind(this);
+
+    this._addEndEventListener(node, complete);
+
+    this.setState({
+      collapsing: true
+    });
+  },
+
+  // helps enable test stubs
+  _addEndEventListener: function(node, complete){
+    TransitionEvents.addEndEventListener(node, complete);
+  },
+
+  // helps enable test stubs
+  _removeEndEventListener: function(node, complete){
+    TransitionEvents.removeEndEventListener(node, complete);
+  },
+
+  dimension: function(){
+    return (typeof this.getCollapsableDimension === 'function') ?
+      this.getCollapsableDimension() :
+      'height';
+  },
+
+  isExpanded: function(){
+    return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 
   getCollapsableClassSet: function (className) {
@@ -2466,6 +2680,119 @@ function createChainedFunction(one, two) {
 }
 
 module.exports = createChainedFunction;
+});
+
+define('lib/CollapsableNav',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./CollapsableMixin','./utils/classSet','./utils/domUtils','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+var joinClasses = require('./utils/joinClasses');
+var BootstrapMixin = require('./BootstrapMixin');
+var CollapsableMixin = require('./CollapsableMixin');
+var classSet = require('./utils/classSet');
+var domUtils = require('./utils/domUtils');
+var cloneWithProps = require('./utils/cloneWithProps');
+
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var createChainedFunction = require('./utils/createChainedFunction');
+
+
+var CollapsableNav = React.createClass({displayName: "CollapsableNav",
+  mixins: [BootstrapMixin, CollapsableMixin],
+
+  propTypes: {
+    onSelect: React.PropTypes.func,
+    expanded: React.PropTypes.bool,
+    eventKey: React.PropTypes.any
+  },
+
+  getCollapsableDOMNode: function () {
+    return this.getDOMNode();
+  },
+
+  getCollapsableDimensionValue: function () {
+    var height = 0;
+    var nodes = this.refs;
+    for (var key in nodes) {
+      if (nodes.hasOwnProperty(key)) {
+
+        var n = nodes[key].getDOMNode()
+          , h = n.offsetHeight
+          , computedStyles = domUtils.getComputedStyles(n);
+
+        height += (h + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10));
+      }
+    }
+    return height;
+  },
+
+  render: function () {
+    /*
+     * this.props.collapsable is set in NavBar when a eventKey is supplied.
+     */
+    var classes = this.props.collapsable ? this.getCollapsableClassSet() : {};
+    /*
+     * prevent duplicating navbar-collapse call if passed as prop. kind of overkill... good cadidate to have check implemented as a util that can
+     * also be used elsewhere.
+     */
+    if (this.props.className == undefined || this.props.className.split(" ").indexOf('navbar-collapse') == -1)
+      classes['navbar-collapse'] = this.props.collapsable;
+
+    return (
+      React.createElement("div", {eventKey: this.props.eventKey, className: joinClasses(this.props.className, classSet(classes))}, 
+        ValidComponentChildren.map(this.props.children, (this.props.collapsable) ? this.renderCollapsableNavChildren : this.renderChildren)
+      )
+    );
+  },
+
+  getChildActiveProp: function (child) {
+    if (child.props.active) {
+      return true;
+    }
+    if (this.props.activeKey != null) {
+      if (child.props.eventKey == this.props.activeKey) {
+        return true;
+      }
+    }
+    if (this.props.activeHref != null) {
+      if (child.props.href === this.props.activeHref) {
+        return true;
+      }
+    }
+
+    return child.props.active;
+  },
+
+  renderChildren: function (child, index) {
+    var key = child.key ? child.key : index;
+    return cloneWithProps(
+      child,
+      {
+        activeKey: this.props.activeKey,
+        activeHref: this.props.activeHref,
+        ref: 'nocollapse_' + key,
+        key: key,
+        navItem: true
+      }
+    );
+  },
+
+  renderCollapsableNavChildren: function (child, index) {
+    var key = child.key ? child.key : index;
+    return cloneWithProps(
+      child,
+      {
+        active: this.getChildActiveProp(child),
+        activeKey: this.props.activeKey,
+        activeHref: this.props.activeHref,
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
+        ref: 'collapsable_' + key,
+        key: key,
+        navItem: true
+      }
+    );
+  }
+});
+
+module.exports = CollapsableNav;
+
 });
 
 define('lib/DropdownStateMixin',['require','exports','module','react','./utils/EventListener'],function (require, exports, module) {var React = require('react');
@@ -3907,7 +4234,7 @@ var NavItem = React.createClass({displayName: "NavItem",
   },
 
   render: function () {
-    var $__0= 
+    var $__0=
         
         
         
@@ -3918,16 +4245,22 @@ var NavItem = React.createClass({displayName: "NavItem",
         classes = {
           'active': active,
           'disabled': disabled
+        },
+        linkProps = {
+          href:href,
+          title:title,
+          target:target,
+          onClick: this.handleClick,
+          ref: 'anchor'
         };
+
+    if (href === '#') {
+      linkProps.role = 'button';
+    }
 
     return (
       React.createElement("li", React.__spread({},  props, {className: joinClasses(props.className, classSet(classes))}), 
-        React.createElement("a", {
-          href: href, 
-          title: title, 
-          target: target, 
-          onClick: this.handleClick, 
-          ref: "anchor"}, 
+        React.createElement("a", React.__spread({},  linkProps), 
           children 
         )
       )
@@ -3946,6 +4279,7 @@ var NavItem = React.createClass({displayName: "NavItem",
 });
 
 module.exports = NavItem;
+
 });
 
 define('lib/utils/CustomPropTypes',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
@@ -4284,7 +4618,9 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
   },
 
   componentDidMount: function() {
-    this.updateOverlayPosition();
+    if (this.props.defaultOverlayShown) {
+      this.updateOverlayPosition();
+    }
   },
 
   handleDelayedShow: function () {
@@ -4421,6 +4757,7 @@ var Panel = React.createClass({displayName: "Panel",
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
+    collapsable: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
     footer: React.PropTypes.node,
@@ -4434,22 +4771,22 @@ var Panel = React.createClass({displayName: "Panel",
     };
   },
 
-  handleSelect: function (e) {
+  handleSelect: function(e){
+    e.selected = true;
+
     if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(this.props.eventKey);
-      this._isChanging = false;
+      this.props.onSelect(e, this.props.eventKey);
+    } else {
+      e.preventDefault();
     }
 
-    e.preventDefault();
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    if (e.selected) {
+      this.handleToggle();
+    }
   },
 
-  shouldComponentUpdate: function () {
-    return !this._isChanging;
+  handleToggle: function(){
+    this.setState({expanded:!this.state.expanded});
   },
 
   getCollapsableDimensionValue: function () {
@@ -4466,10 +4803,10 @@ var Panel = React.createClass({displayName: "Panel",
 
   render: function () {
     var classes = this.getBsClassSet();
-    classes['panel'] = true;
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), 
+      React.createElement("div", React.__spread({},  this.props, 
+        {className: joinClasses(this.props.className, classSet(classes)), 
         id: this.props.collapsable ? null : this.props.id, onSelect: null}), 
         this.renderHeading(), 
         this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(), 
@@ -4479,8 +4816,14 @@ var Panel = React.createClass({displayName: "Panel",
   },
 
   renderCollapsableBody: function () {
+    var collapseClass = this.prefixClass('collapse');
+
     return (
-      React.createElement("div", {className: classSet(this.getCollapsableClassSet('panel-collapse')), id: this.props.id, ref: "panel"}, 
+      React.createElement("div", {
+        className: classSet(this.getCollapsableClassSet(collapseClass)), 
+        id: this.props.id, 
+        ref: "panel", 
+        "aria-expanded": this.isExpanded() ? 'true' : 'false'}, 
         this.renderBody()
       )
     );
@@ -4489,6 +4832,8 @@ var Panel = React.createClass({displayName: "Panel",
   renderBody: function () {
     var allChildren = this.props.children;
     var bodyElements = [];
+    var panelBodyChildren = [];
+    var bodyClass = this.prefixClass('body');
 
     function getProps() {
       return {key: bodyElements.length};
@@ -4500,30 +4845,29 @@ var Panel = React.createClass({displayName: "Panel",
 
     function addPanelBody (children) {
       bodyElements.push(
-        React.createElement("div", React.__spread({className: "panel-body"},  getProps()), 
+        React.createElement("div", React.__spread({className: bodyClass},  getProps()), 
           children
         )
       );
     }
 
+    function maybeRenderPanelBody () {
+      if (panelBodyChildren.length === 0) {
+        return;
+      }
+
+      addPanelBody(panelBodyChildren);
+      panelBodyChildren = [];
+    }
+
     // Handle edge cases where we should not iterate through children.
-    if (!Array.isArray(allChildren) || allChildren.length == 0) {
+    if (!Array.isArray(allChildren) || allChildren.length === 0) {
       if (this.shouldRenderFill(allChildren)) {
         addPanelChild(allChildren);
       } else {
         addPanelBody(allChildren);
       }
     } else {
-      var panelBodyChildren = [];
-
-      function maybeRenderPanelBody () {
-        if (panelBodyChildren.length == 0) {
-          return;
-        }
-
-        addPanelBody(panelBodyChildren);
-        panelBodyChildren = [];
-      }
 
       allChildren.forEach(function(child) {
         if (this.shouldRenderFill(child)) {
@@ -4543,7 +4887,7 @@ var Panel = React.createClass({displayName: "Panel",
   },
 
   shouldRenderFill: function (child) {
-    return React.isValidElement(child) && child.props.fill != null
+    return React.isValidElement(child) && child.props.fill != null;
   },
 
   renderHeading: function () {
@@ -4558,17 +4902,17 @@ var Panel = React.createClass({displayName: "Panel",
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {
       header = cloneWithProps(header, {
-        className: 'panel-title',
+        className: this.prefixClass('title'),
         children: this.renderAnchor(header.props.children)
       });
     } else {
       header = cloneWithProps(header, {
-        className: 'panel-title'
+        className: this.prefixClass('title')
       });
     }
 
     return (
-      React.createElement("div", {className: "panel-heading"}, 
+      React.createElement("div", {className: this.prefixClass('heading')}, 
         header
       )
     );
@@ -4579,6 +4923,7 @@ var Panel = React.createClass({displayName: "Panel",
       React.createElement("a", {
         href: '#' + (this.props.id || ''), 
         className: this.isExpanded() ? null : 'collapsed', 
+        "aria-expanded": this.isExpanded() ? 'true' : 'false', 
         onClick: this.handleSelect}, 
         header
       )
@@ -4587,7 +4932,7 @@ var Panel = React.createClass({displayName: "Panel",
 
   renderCollapsableTitle: function (header) {
     return (
-      React.createElement("h4", {className: "panel-title"}, 
+      React.createElement("h4", {className: this.prefixClass('title')}, 
         this.renderAnchor(header)
       )
     );
@@ -4599,7 +4944,7 @@ var Panel = React.createClass({displayName: "Panel",
     }
 
     return (
-      React.createElement("div", {className: "panel-footer"}, 
+      React.createElement("div", {className: this.prefixClass('footer')}, 
         this.props.footer
       )
     );
@@ -5516,7 +5861,7 @@ module.exports = Well;
 
 /*global define */
 
-define('react-bootstrap',['require','./lib/Accordion','./lib/Affix','./lib/AffixMixin','./lib/Alert','./lib/BootstrapMixin','./lib/Badge','./lib/Button','./lib/ButtonGroup','./lib/ButtonToolbar','./lib/Carousel','./lib/CarouselItem','./lib/Col','./lib/CollapsableMixin','./lib/DropdownButton','./lib/DropdownMenu','./lib/DropdownStateMixin','./lib/FadeMixin','./lib/Glyphicon','./lib/Grid','./lib/Input','./lib/Interpolate','./lib/Jumbotron','./lib/Label','./lib/ListGroup','./lib/ListGroupItem','./lib/MenuItem','./lib/Modal','./lib/Nav','./lib/Navbar','./lib/NavItem','./lib/ModalTrigger','./lib/OverlayTrigger','./lib/OverlayMixin','./lib/PageHeader','./lib/Panel','./lib/PanelGroup','./lib/PageItem','./lib/Pager','./lib/Popover','./lib/ProgressBar','./lib/Row','./lib/SplitButton','./lib/SubNav','./lib/TabbedArea','./lib/Table','./lib/TabPane','./lib/Tooltip','./lib/Well'],function (require) {
+define('react-bootstrap',['require','./lib/Accordion','./lib/Affix','./lib/AffixMixin','./lib/Alert','./lib/BootstrapMixin','./lib/Badge','./lib/Button','./lib/ButtonGroup','./lib/ButtonToolbar','./lib/Carousel','./lib/CarouselItem','./lib/Col','./lib/CollapsableNav','./lib/CollapsableMixin','./lib/DropdownButton','./lib/DropdownMenu','./lib/DropdownStateMixin','./lib/FadeMixin','./lib/Glyphicon','./lib/Grid','./lib/Input','./lib/Interpolate','./lib/Jumbotron','./lib/Label','./lib/ListGroup','./lib/ListGroupItem','./lib/MenuItem','./lib/Modal','./lib/Nav','./lib/Navbar','./lib/NavItem','./lib/ModalTrigger','./lib/OverlayTrigger','./lib/OverlayMixin','./lib/PageHeader','./lib/Panel','./lib/PanelGroup','./lib/PageItem','./lib/Pager','./lib/Popover','./lib/ProgressBar','./lib/Row','./lib/SplitButton','./lib/SubNav','./lib/TabbedArea','./lib/Table','./lib/TabPane','./lib/Tooltip','./lib/Well'],function (require) {
   
 
   return {
@@ -5532,6 +5877,7 @@ define('react-bootstrap',['require','./lib/Accordion','./lib/Affix','./lib/Affix
     Carousel: require('./lib/Carousel'),
     CarouselItem: require('./lib/CarouselItem'),
     Col: require('./lib/Col'),
+    CollapsableNav: require('./lib/CollapsableNav'),
     CollapsableMixin: require('./lib/CollapsableMixin'),
     DropdownButton: require('./lib/DropdownButton'),
     DropdownMenu: require('./lib/DropdownMenu'),
