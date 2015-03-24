@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "homepage": "http://react-bootstrap.github.io/",
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "**/.*"
   ],
   "dependencies": {
-    "react": ">= 0.12.0"
+    "react": ">= 0.13.0",
+    "classnames": "1.1.4"
   }
 }

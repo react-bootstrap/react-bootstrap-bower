@@ -341,284 +341,40 @@ var requirejs, require, define;
 
 define("almond", function(){});
 
-define('lib/utils/joinClasses',['require','exports','module'],function (require, exports, module) {/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/utils/joinClasses.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
+define('classnames/index',['require','exports','module'],function (require, exports, module) {function classNames() {
+	var classes = '';
+	var arg;
 
+	for (var i = 0; i < arguments.length; i++) {
+		arg = arguments[i];
+		if (!arg) {
+			continue;
+		}
 
-
-/**
- * Combines multiple className strings into one.
- * http://jsperf.com/joinclasses-args-vs-array
- *
- * @param {...?string} classes
- * @return {string}
- */
-function joinClasses(className/*, ... */) {
-  if (!className) {
-    className = '';
-  }
-  var nextClass;
-  var argLength = arguments.length;
-  if (argLength > 1) {
-    for (var ii = 1; ii < argLength; ii++) {
-      nextClass = arguments[ii];
-      if (nextClass) {
-        className = (className ? className + ' ' : '') + nextClass;
-      }
-    }
-  }
-  return className;
+		if ('string' === typeof arg || 'number' === typeof arg) {
+			classes += ' ' + arg;
+		} else if (Object.prototype.toString.call(arg) === '[object Array]') {
+			classes += ' ' + classNames.apply(null, arg);
+		} else if ('object' === typeof arg) {
+			for (var key in arg) {
+				if (!arg.hasOwnProperty(key) || !arg[key]) {
+					continue;
+				}
+				classes += ' ' + key;
+			}
+		}
+	}
+	return classes.substr(1);
 }
 
-module.exports = joinClasses;
+// safely export classNames in case the script is included directly on a page
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = classNames;
+}
 
 });
 
-define('lib/utils/classSet',['require','exports','module'],function (require, exports, module) {/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/cx.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-/**
- * This function is used to mark string literals representing CSS class names
- * so that they can be transformed statically. This allows for modularization
- * and minification of CSS class names.
- *
- * In static_upstream, this function is actually implemented, but it should
- * eventually be replaced with something more descriptive, and the transform
- * that is used in the main stack should be ported for use elsewhere.
- *
- * @param string|object className to modularize, or an object of key/values.
- *                      In the object case, the values are conditions that
- *                      determine if the className keys should be included.
- * @param [string ...]  Variable list of classNames in the string case.
- * @return string       Renderable space-separated CSS className.
- */
-function cx(classNames) {
-  if (typeof classNames == 'object') {
-    return Object.keys(classNames).filter(function(className) {
-      return classNames[className];
-    }).join(' ');
-  } else {
-    return Array.prototype.join.call(arguments, ' ');
-  }
-}
-
-module.exports = cx;
-});
-
-define('lib/utils/Object.assign',['require','exports','module'],function (require, exports, module) {/**
- * Copyright 2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains an unmodified version of:
- * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/Object.assign.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- */
-
-// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
-
-function assign(target, sources) {
-  if (target == null) {
-    throw new TypeError('Object.assign target cannot be null or undefined');
-  }
-
-  var to = Object(target);
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-    var nextSource = arguments[nextIndex];
-    if (nextSource == null) {
-      continue;
-    }
-
-    var from = Object(nextSource);
-
-    // We don't currently support accessors nor proxies. Therefore this
-    // copy cannot throw. If we ever supported this then we must handle
-    // exceptions and side-effects. We don't support symbols so they won't
-    // be transferred.
-
-    for (var key in from) {
-      if (hasOwnProperty.call(from, key)) {
-        to[key] = from[key];
-      }
-    }
-  }
-
-  return to;
-};
-
-module.exports = assign;
-
-});
-
-define('lib/utils/cloneWithProps',['require','exports','module','react','./joinClasses','./Object.assign'],function (require, exports, module) {/**
- * Copyright 2013-2014, Facebook, Inc.
- * All rights reserved.
- *
- * This file contains modified versions of:
- * https://github.com/facebook/react/blob/v0.12.0/src/utils/cloneWithProps.js
- * https://github.com/facebook/react/blob/v0.12.0/src/core/ReactPropTransferer.js
- *
- * This source code is licensed under the BSD-style license found here:
- * https://github.com/facebook/react/blob/v0.12.0/LICENSE
- * An additional grant of patent rights can be found here:
- * https://github.com/facebook/react/blob/v0.12.0/PATENTS
- *
- * TODO: This should be replaced as soon as cloneWithProps is available via
- *  the core React package or a separate package.
- *  @see https://github.com/facebook/react/issues/1906
- */
-
-var React = require('react');
-var joinClasses = require('./joinClasses');
-var assign = require("./Object.assign");
-
-/**
- * Creates a transfer strategy that will merge prop values using the supplied
- * `mergeStrategy`. If a prop was previously unset, this just sets it.
- *
- * @param {function} mergeStrategy
- * @return {function}
- */
-function createTransferStrategy(mergeStrategy) {
-  return function(props, key, value) {
-    if (!props.hasOwnProperty(key)) {
-      props[key] = value;
-    } else {
-      props[key] = mergeStrategy(props[key], value);
-    }
-  };
-}
-
-var transferStrategyMerge = createTransferStrategy(function(a, b) {
-  // `merge` overrides the first object's (`props[key]` above) keys using the
-  // second object's (`value`) keys. An object's style's existing `propA` would
-  // get overridden. Flip the order here.
-  return assign({}, b, a);
-});
-
-function emptyFunction() {}
-
-/**
- * Transfer strategies dictate how props are transferred by `transferPropsTo`.
- * NOTE: if you add any more exceptions to this list you should be sure to
- * update `cloneWithProps()` accordingly.
- */
-var TransferStrategies = {
-  /**
-   * Never transfer `children`.
-   */
-  children: emptyFunction,
-  /**
-   * Transfer the `className` prop by merging them.
-   */
-  className: createTransferStrategy(joinClasses),
-  /**
-   * Transfer the `style` prop (which is an object) by merging them.
-   */
-  style: transferStrategyMerge
-};
-
-/**
- * Mutates the first argument by transferring the properties from the second
- * argument.
- *
- * @param {object} props
- * @param {object} newProps
- * @return {object}
- */
-function transferInto(props, newProps) {
-  for (var thisKey in newProps) {
-    if (!newProps.hasOwnProperty(thisKey)) {
-      continue;
-    }
-
-    var transferStrategy = TransferStrategies[thisKey];
-
-    if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
-      transferStrategy(props, thisKey, newProps[thisKey]);
-    } else if (!props.hasOwnProperty(thisKey)) {
-      props[thisKey] = newProps[thisKey];
-    }
-  }
-  return props;
-}
-
-/**
- * Merge two props objects using TransferStrategies.
- *
- * @param {object} oldProps original props (they take precedence)
- * @param {object} newProps new props to merge in
- * @return {object} a new object containing both sets of props merged.
- */
-function mergeProps(oldProps, newProps) {
-  return transferInto(assign({}, oldProps), newProps);
-}
-
-
-var ReactPropTransferer = {
-  mergeProps: mergeProps
-};
-
-var CHILDREN_PROP = 'children';
-
-/**
- * Sometimes you want to change the props of a child passed to you. Usually
- * this is to add a CSS class.
- *
- * @param {object} child child component you'd like to clone
- * @param {object} props props you'd like to modify. They will be merged
- * as if you used `transferPropsTo()`.
- * @return {object} a clone of child with props merged in.
- */
-function cloneWithProps(child, props) {
-  var newProps = ReactPropTransferer.mergeProps(props, child.props);
-
-  // Use `child.props.children` if it is provided.
-  if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
-    child.props.hasOwnProperty(CHILDREN_PROP)) {
-    newProps.children = child.props.children;
-  }
-
-  if (React.version.substr(0, 4) === '0.12'){
-    var mockLegacyFactory = function(){};
-    mockLegacyFactory.isReactLegacyFactory = true;
-    mockLegacyFactory.type = child.type;
-
-    return React.createElement(mockLegacyFactory, newProps);
-  }
-
-  // The current API doesn't retain _owner and _context, which is why this
-  // doesn't use ReactElement.cloneAndReplaceProps.
-  return React.createElement(child.type, newProps);
-}
-
-module.exports = cloneWithProps;
-});
+define('classnames', ['classnames/index'], function (main) { return main; });
 
 define('lib/constants',['require','exports','module'],function (require, exports, module) {module.exports = {
   CLASSES: {
@@ -1058,10 +814,10 @@ module.exports = {
 };
 });
 
-define('lib/PanelGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/PanelGroup',['require','exports','module','react','classnames','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
@@ -1093,7 +849,7 @@ var PanelGroup = React.createClass({displayName: "PanelGroup",
   render: function () {
     var classes = this.getBsClassSet();
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), onSelect: null}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes), onSelect: null}), 
         ValidComponentChildren.map(this.props.children, this.renderPanel)
       )
     );
@@ -1115,7 +871,7 @@ var PanelGroup = React.createClass({displayName: "PanelGroup",
       props.onSelect = this.handleSelect;
     }
 
-    return cloneWithProps(
+    return cloneElement(
       child,
       props
     );
@@ -1373,7 +1129,7 @@ var AffixMixin = {
       return;
     }
 
-    DOMNode = this.getDOMNode();
+    DOMNode = React.findDOMNode(this);
     scrollHeight = document.documentElement.offsetHeight;
     scrollTop = window.pageYOffset;
     position = domUtils.getOffset(DOMNode);
@@ -1465,8 +1221,8 @@ var AffixMixin = {
 module.exports = AffixMixin;
 });
 
-define('lib/Affix',['require','exports','module','react','./utils/joinClasses','./AffixMixin','./utils/domUtils'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Affix',['require','exports','module','react','classnames','./AffixMixin','./utils/domUtils'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 var AffixMixin = require('./AffixMixin');
 var domUtils = require('./utils/domUtils');
 
@@ -1480,7 +1236,7 @@ var Affix = React.createClass({displayName: "Affix",
   render: function () {
     var holderStyle = {top: this.state.affixPositionTop};
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, this.state.affixClass), style: holderStyle}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, this.state.affixClass), style: holderStyle}), 
         this.props.children
       )
     );
@@ -1490,9 +1246,9 @@ var Affix = React.createClass({displayName: "Affix",
 module.exports = Affix;
 });
 
-define('lib/Alert',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Alert',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
@@ -1530,7 +1286,7 @@ var Alert = React.createClass({displayName: "Alert",
     classes['alert-dismissable'] = isDismissable;
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         isDismissable ? this.renderDismissButton() : null, 
         this.props.children
       )
@@ -1551,10 +1307,10 @@ var Alert = React.createClass({displayName: "Alert",
 module.exports = Alert;
 });
 
-define('lib/Badge',['require','exports','module','react','./utils/joinClasses','./utils/ValidComponentChildren','./utils/classSet'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Badge',['require','exports','module','react','./utils/ValidComponentChildren','classnames'],function (require, exports, module) {var React = require('react');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 
 var Badge = React.createClass({displayName: "Badge",
   propTypes: {
@@ -1575,7 +1331,7 @@ var Badge = React.createClass({displayName: "Badge",
     return (
       React.createElement("span", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
+        {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -1586,9 +1342,9 @@ module.exports = Badge;
 
 });
 
-define('lib/Button',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Button',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Button = React.createClass({displayName: "Button",
@@ -1640,7 +1396,7 @@ var Button = React.createClass({displayName: "Button",
       React.createElement(Component, React.__spread({}, 
         this.props, 
         {href: href, 
-        className: joinClasses(this.props.className, classSet(classes)), 
+        className: classSet(this.props.className, classes), 
         role: "button"}), 
         this.props.children
       )
@@ -1653,7 +1409,7 @@ var Button = React.createClass({displayName: "Button",
     return (
       React.createElement(Component, React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
+        {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -1676,9 +1432,9 @@ module.exports = Button;
 
 });
 
-define('lib/ButtonGroup',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/ButtonGroup',['require','exports','module','react','classnames','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
@@ -1705,7 +1461,7 @@ var ButtonGroup = React.createClass({displayName: "ButtonGroup",
     return (
       React.createElement("div", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
+        {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -1715,9 +1471,9 @@ var ButtonGroup = React.createClass({displayName: "ButtonGroup",
 module.exports = ButtonGroup;
 });
 
-define('lib/ButtonToolbar',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/ButtonToolbar',['require','exports','module','react','classnames','./BootstrapMixin','./Button'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
@@ -1737,7 +1493,7 @@ var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
       React.createElement("div", React.__spread({}, 
         this.props, 
         {role: "toolbar", 
-        className: joinClasses(this.props.className, classSet(classes))}), 
+        className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -1747,10 +1503,10 @@ var ButtonToolbar = React.createClass({displayName: "ButtonToolbar",
 module.exports = ButtonToolbar;
 });
 
-define('lib/Carousel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/Carousel',['require','exports','module','react','classnames','./BootstrapMixin','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -1893,7 +1649,7 @@ var Carousel = React.createClass({displayName: "Carousel",
     return (
       React.createElement("div", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes)), 
+        {className: classSet(this.props.className, classes), 
         onMouseOver: this.handleMouseOver, 
         onMouseOut: this.handleMouseOut}), 
         this.props.indicators ? this.renderIndicators() : null, 
@@ -1993,7 +1749,7 @@ var Carousel = React.createClass({displayName: "Carousel",
     var isPreviousActive = this.state.previousActiveIndex != null &&
             this.state.previousActiveIndex === index && this.props.slide;
 
-    return cloneWithProps(
+    return cloneElement(
         child,
         {
           active: isActive,
@@ -2154,9 +1910,9 @@ module.exports = ReactTransitionEvents;
 
 });
 
-define('lib/CarouselItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/CarouselItem',['require','exports','module','react','classnames','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var CarouselItem = React.createClass({displayName: "CarouselItem",
@@ -2196,7 +1952,7 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
   componentDidUpdate: function (prevProps) {
     if (!this.props.active && prevProps.active) {
       TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
+        React.findDOMNode(this),
         this.handleAnimateOutEnd
       );
     }
@@ -2230,7 +1986,7 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
     }
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children, 
         this.props.caption ? this.renderCaption() : null
       )
@@ -2249,9 +2005,9 @@ var CarouselItem = React.createClass({displayName: "CarouselItem",
 module.exports = CarouselItem;
 });
 
-define('lib/Col',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./constants'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Col',['require','exports','module','react','classnames','./constants'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var constants = require('./constants');
 
 
@@ -2315,7 +2071,7 @@ var Col = React.createClass({displayName: "Col",
     }, this);
 
     return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement(ComponentClass, React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -2327,7 +2083,7 @@ module.exports = Col;
 });
 
 define('react/lib/ExecutionEnvironment',['require','exports','module'],function (require, exports, module) {/**
- * Copyright 2013-2014, Facebook, Inc.
+ * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -2342,9 +2098,8 @@ define('react/lib/ExecutionEnvironment',['require','exports','module'],function 
 
 
 var canUseDOM = !!(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
+  (typeof window !== 'undefined' &&
+  window.document && window.document.createElement)
 );
 
 /**
@@ -2373,7 +2128,7 @@ module.exports = ExecutionEnvironment;
 });
 
 define('react/lib/ReactTransitionEvents',['require','exports','module','./ExecutionEnvironment'],function (require, exports, module) {/**
- * Copyright 2013-2014, Facebook, Inc.
+ * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -2682,13 +2437,12 @@ function createChainedFunction(one, two) {
 module.exports = createChainedFunction;
 });
 
-define('lib/CollapsableNav',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./CollapsableMixin','./utils/classSet','./utils/domUtils','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/CollapsableNav',['require','exports','module','react','./BootstrapMixin','./CollapsableMixin','classnames','./utils/domUtils','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -2736,8 +2490,8 @@ var CollapsableNav = React.createClass({displayName: "CollapsableNav",
       classes['navbar-collapse'] = this.props.collapsable;
 
     return (
-      React.createElement("div", {eventKey: this.props.eventKey, className: joinClasses(this.props.className, classSet(classes))}, 
-        ValidComponentChildren.map(this.props.children, (this.props.collapsable) ? this.renderCollapsableNavChildren : this.renderChildren)
+      React.createElement("div", {eventKey: this.props.eventKey, className: classSet(this.props.className, classes)}, 
+        ValidComponentChildren.map(this.props.children, this.props.collapsable ? this.renderCollapsableNavChildren : this.renderChildren)
       )
     );
   },
@@ -2762,7 +2516,7 @@ var CollapsableNav = React.createClass({displayName: "CollapsableNav",
 
   renderChildren: function (child, index) {
     var key = child.key ? child.key : index;
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         activeKey: this.props.activeKey,
@@ -2776,7 +2530,7 @@ var CollapsableNav = React.createClass({displayName: "CollapsableNav",
 
   renderCollapsableNavChildren: function (child, index) {
     var key = child.key ? child.key : index;
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         active: this.getChildActiveProp(child),
@@ -2845,7 +2599,7 @@ var DropdownStateMixin = {
   handleDocumentClick: function (e) {
     // If the click originated from within this component
     // don't do anything.
-    if (isNodeInRoot(e.target, this.getDOMNode())) {
+    if (isNodeInRoot(e.target, React.findDOMNode(this))) {
       return;
     }
 
@@ -2877,10 +2631,10 @@ var DropdownStateMixin = {
 module.exports = DropdownStateMixin;
 });
 
-define('lib/DropdownMenu',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/DropdownMenu',['require','exports','module','react','classnames','./utils/createChainedFunction','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
@@ -2900,7 +2654,7 @@ var DropdownMenu = React.createClass({displayName: "DropdownMenu",
     return (
         React.createElement("ul", React.__spread({}, 
           this.props, 
-          {className: joinClasses(this.props.className, classSet(classes)), 
+          {className: classSet(this.props.className, classes), 
           role: "menu"}), 
           ValidComponentChildren.map(this.props.children, this.renderMenuItem)
         )
@@ -2908,7 +2662,7 @@ var DropdownMenu = React.createClass({displayName: "DropdownMenu",
   },
 
   renderMenuItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         // Capture onSelect events
@@ -2916,7 +2670,6 @@ var DropdownMenu = React.createClass({displayName: "DropdownMenu",
 
         // Force special props to be transferred
         key: child.key ? child.key : index,
-        ref: child.ref
       }
     );
   }
@@ -2925,10 +2678,10 @@ var DropdownMenu = React.createClass({displayName: "DropdownMenu",
 module.exports = DropdownMenu;
 });
 
-define('lib/DropdownButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/createChainedFunction','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/DropdownButton',['require','exports','module','react','classnames','./utils/createChainedFunction','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -2994,7 +2747,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     return (
       React.createElement(ButtonGroup, {
         bsSize: this.props.bsSize, 
-        className: joinClasses(this.props.className, classSet(groupClasses))}, 
+        className: classSet(this.props.className, groupClasses)}, 
         children
       )
     );
@@ -3008,7 +2761,7 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
       };
 
     return (
-      React.createElement("li", {className: joinClasses(this.props.className, classSet(classes))}, 
+      React.createElement("li", {className: classSet(this.props.className, classes)}, 
         children
       )
     );
@@ -3021,15 +2774,12 @@ var DropdownButton = React.createClass({displayName: "DropdownButton",
     var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
       this.handleOptionSelect : null;
 
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         // Capture onSelect events
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
-
-        // Force special props to be transferred
         key: child.key ? child.key : index,
-        ref: child.ref
       }
     );
   },
@@ -3053,7 +2803,9 @@ module.exports = DropdownButton;
 
 });
 
-define('lib/FadeMixin',['require','exports','module'],function (require, exports, module) {/*global document */
+define('lib/FadeMixin',['require','exports','module','react'],function (require, exports, module) {/*global document */
+var React = require('react');
+
 // TODO: listen for onTransitionEnd to remove el
 function getElementsAndSelf (root, classes){
   var els = root.querySelectorAll('.' + classes.join('.'));
@@ -3074,7 +2826,7 @@ module.exports = {
     var els;
 
     if (this.isMounted()) {
-      els = getElementsAndSelf(this.getDOMNode(), ['fade']);
+      els = getElementsAndSelf(React.findDOMNode(this), ['fade']);
 
       if (els.length) {
         els.forEach(function (el) {
@@ -3110,13 +2862,13 @@ module.exports = {
   },
 
   componentWillUnmount: function () {
-    var els = getElementsAndSelf(this.getDOMNode(), ['fade']),
-        container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    var els = getElementsAndSelf(React.findDOMNode(this), ['fade']),
+        container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
 
     if (els.length) {
       this._fadeOutEl = document.createElement('div');
       container.appendChild(this._fadeOutEl);
-      this._fadeOutEl.appendChild(this.getDOMNode().cloneNode(true));
+      this._fadeOutEl.appendChild(React.findDOMNode(this).cloneNode(true));
       // Firefox needs delay for transition to be triggered
       setTimeout(this._fadeOut, 20);
     }
@@ -3125,9 +2877,9 @@ module.exports = {
 
 });
 
-define('lib/Glyphicon',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./constants'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Glyphicon',['require','exports','module','react','classnames','./BootstrapMixin','./constants'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var constants = require('./constants');
 
@@ -3150,7 +2902,7 @@ var Glyphicon = React.createClass({displayName: "Glyphicon",
     classes['glyphicon-' + this.props.glyph] = true;
 
     return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("span", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -3160,8 +2912,8 @@ var Glyphicon = React.createClass({displayName: "Glyphicon",
 module.exports = Glyphicon;
 });
 
-define('lib/Grid',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Grid',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 
 var Grid = React.createClass({displayName: "Grid",
   propTypes: {
@@ -3182,7 +2934,7 @@ var Grid = React.createClass({displayName: "Grid",
     return (
       React.createElement(ComponentClass, React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, className)}), 
+        {className: classSet(this.props.className, className)}), 
         this.props.children
       )
     );
@@ -3192,9 +2944,9 @@ var Grid = React.createClass({displayName: "Grid",
 module.exports = Grid;
 });
 
-define('lib/Input',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./Button'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Input',['require','exports','module','react','classnames','./Button'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var Button = require('./Button');
 
 var Input = React.createClass({displayName: "Input",
@@ -3225,7 +2977,7 @@ var Input = React.createClass({displayName: "Input",
   },
 
   getInputDOMNode: function () {
-    return this.refs.input.getDOMNode();
+    return React.findDOMNode(this.refs.input);
   },
 
   getValue: function () {
@@ -3283,17 +3035,17 @@ var Input = React.createClass({displayName: "Input",
     switch (this.props.type) {
       case 'select':
         input = (
-          React.createElement("select", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}), 
+          React.createElement("select", React.__spread({},  this.props, {className: classSet(this.props.className, 'form-control'), ref: "input", key: "input"}), 
             this.props.children
           )
         );
         break;
       case 'textarea':
-        input = React.createElement("textarea", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control'), ref: "input", key: "input"}));
+        input = React.createElement("textarea", React.__spread({},  this.props, {className: classSet(this.props.className, 'form-control'), ref: "input", key: "input"}));
         break;
       case 'static':
         input = (
-          React.createElement("p", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'form-control-static'), ref: "input", key: "input"}), 
+          React.createElement("p", React.__spread({},  this.props, {className: classSet(this.props.className, 'form-control-static'), ref: "input", key: "input"}), 
             this.props.value
           )
         );
@@ -3305,7 +3057,7 @@ var Input = React.createClass({displayName: "Input",
         break;
       default:
         var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = React.createElement("input", React.__spread({},  this.props, {className: joinClasses(this.props.className, className), ref: "input", key: "input"}));
+        input = React.createElement("input", React.__spread({},  this.props, {className: classSet(this.props.className, className), ref: "input", key: "input"}));
     }
 
     return input;
@@ -3343,7 +3095,7 @@ var Input = React.createClass({displayName: "Input",
     }
 
     return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
-      React.createElement("div", {className: joinClasses(inputGroupClassName, 'input-group'), key: "input-group"}, 
+      React.createElement("div", {className: classSet(inputGroupClassName, 'input-group'), key: "input-group"}, 
         addonBefore, 
         buttonBefore, 
         children, 
@@ -3459,6 +3211,56 @@ module.exports = Input;
 
 });
 
+define('lib/utils/Object.assign',['require','exports','module'],function (require, exports, module) {/**
+ * Copyright 2014, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This file contains an unmodified version of:
+ * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/Object.assign.js
+ *
+ * This source code is licensed under the BSD-style license found here:
+ * https://github.com/facebook/react/blob/v0.12.0/LICENSE
+ * An additional grant of patent rights can be found here:
+ * https://github.com/facebook/react/blob/v0.12.0/PATENTS
+ */
+
+// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
+
+function assign(target, sources) {
+  if (target == null) {
+    throw new TypeError('Object.assign target cannot be null or undefined');
+  }
+
+  var to = Object(target);
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+    var nextSource = arguments[nextIndex];
+    if (nextSource == null) {
+      continue;
+    }
+
+    var from = Object(nextSource);
+
+    // We don't currently support accessors nor proxies. Therefore this
+    // copy cannot throw. If we ever supported this then we must handle
+    // exceptions and side-effects. We don't support symbols so they won't
+    // be transferred.
+
+    for (var key in from) {
+      if (hasOwnProperty.call(from, key)) {
+        to[key] = from[key];
+      }
+    }
+  }
+
+  return to;
+};
+
+module.exports = assign;
+
+});
+
 define('lib/Interpolate',['require','exports','module','react','./utils/ValidComponentChildren','./utils/Object.assign'],function (require, exports, module) {// https://www.npmjs.org/package/react-interpolate-component
 
 
@@ -3544,14 +3346,14 @@ module.exports = Interpolate;
 
 });
 
-define('lib/Jumbotron',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Jumbotron',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 
 var Jumbotron = React.createClass({displayName: "Jumbotron",
 
   render: function () {
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'jumbotron')}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, 'jumbotron')}), 
         this.props.children
       )
     );
@@ -3561,9 +3363,9 @@ var Jumbotron = React.createClass({displayName: "Jumbotron",
 module.exports = Jumbotron;
 });
 
-define('lib/Label',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Label',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Label = React.createClass({displayName: "Label",
@@ -3580,7 +3382,7 @@ var Label = React.createClass({displayName: "Label",
     var classes = this.getBsClassSet();
 
     return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("span", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -3590,9 +3392,9 @@ var Label = React.createClass({displayName: "Label",
 module.exports = Label;
 });
 
-define('lib/ListGroup',['require','exports','module','react','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/ListGroup',['require','exports','module','react','classnames','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -3611,8 +3413,7 @@ var ListGroup = React.createClass({displayName: "ListGroup",
   },
 
   renderListItem: function (child, index) {
-    return cloneWithProps(child, {
-      ref: child.ref,
+    return cloneElement(child, {
       key: child.key ? child.key : index
     });
   }
@@ -3622,11 +3423,11 @@ module.exports = ListGroup;
 
 });
 
-define('lib/ListGroupItem',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/ListGroupItem',['require','exports','module','react','./BootstrapMixin','classnames','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -3665,7 +3466,7 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
 
   renderSpan: function (classes) {
     return (
-      React.createElement("span", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("span", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.header ? this.renderStructuredContent() : this.props.children
       )
     );
@@ -3675,7 +3476,7 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
     return (
       React.createElement("a", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))
+        {className: classSet(this.props.className, classes)
       }), 
         this.props.header ? this.renderStructuredContent() : this.props.children
       )
@@ -3685,27 +3486,25 @@ var ListGroupItem = React.createClass({displayName: "ListGroupItem",
   renderStructuredContent: function () {
     var header;
     if (React.isValidElement(this.props.header)) {
-      header = cloneWithProps(this.props.header, {
-        className: 'list-group-item-heading'
+      header = cloneElement(this.props.header, {
+        key: 'header',
+        className: classSet(this.props.header.props.className, 'list-group-item-heading')
       });
     } else {
       header = (
-        React.createElement("h4", {className: "list-group-item-heading"}, 
+        React.createElement("h4", {key: "header", className: "list-group-item-heading"}, 
           this.props.header
         )
       );
     }
 
     var content = (
-      React.createElement("p", {className: "list-group-item-text"}, 
+      React.createElement("p", {key: "content", className: "list-group-item-text"}, 
         this.props.children
       )
     );
 
-    return {
-      header: header,
-      content: content
-    };
+    return [header, content];
   }
 });
 
@@ -3713,9 +3512,9 @@ module.exports = ListGroupItem;
 
 });
 
-define('lib/MenuItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/MenuItem',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 
 var MenuItem = React.createClass({displayName: "MenuItem",
   propTypes: {
@@ -3764,7 +3563,7 @@ var MenuItem = React.createClass({displayName: "MenuItem",
 
     return (
       React.createElement("li", React.__spread({},  this.props, {role: "presentation", title: null, href: null, 
-        className: joinClasses(this.props.className, classSet(classes))}), 
+        className: classSet(this.props.className, classes)}), 
         children
       )
     );
@@ -3774,11 +3573,11 @@ var MenuItem = React.createClass({displayName: "MenuItem",
 module.exports = MenuItem;
 });
 
-define('lib/Modal',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./FadeMixin','./utils/EventListener'],function (require, exports, module) {/* global document:false */
+define('lib/Modal',['require','exports','module','react','classnames','./BootstrapMixin','./FadeMixin','./utils/EventListener'],function (require, exports, module) {/* global document:false */
 
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
 var EventListener = require('./utils/EventListener');
@@ -3830,7 +3629,7 @@ var Modal = React.createClass({displayName: "Modal",
         tabIndex: "-1", 
         role: "dialog", 
         style: modalStyle, 
-        className: joinClasses(this.props.className, classSet(classes)), 
+        className: classSet(this.props.className, classes), 
         onClick: this.props.backdrop === true ? this.handleBackdropClick : null, 
         ref: "modal"}), 
         React.createElement("div", {className: classSet(dialogClasses)}, 
@@ -3901,15 +3700,15 @@ var Modal = React.createClass({displayName: "Modal",
     // IOS only allows click events to be delegated to the document on elements
     // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
     // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    this.refs.modal.getDOMNode().onclick = function () {};
-    this.refs.backdrop.getDOMNode().onclick = function () {};
+    React.findDOMNode(this.refs.modal).onclick = function () {};
+    React.findDOMNode(this.refs.backdrop).onclick = function () {};
   },
 
   componentDidMount: function () {
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
 
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    var container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
     if (this.props.backdrop) {
@@ -3925,7 +3724,8 @@ var Modal = React.createClass({displayName: "Modal",
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    var container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+
     container.className = container.className.replace(/ ?modal-open/, '');
   },
 
@@ -3948,13 +3748,13 @@ module.exports = Modal;
 
 });
 
-define('lib/Nav',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./CollapsableMixin','./utils/classSet','./utils/domUtils','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Nav',['require','exports','module','react','./BootstrapMixin','./CollapsableMixin','classnames','./utils/domUtils','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -3982,11 +3782,11 @@ var Nav = React.createClass({displayName: "Nav",
   },
 
   getCollapsableDOMNode: function () {
-    return this.getDOMNode();
+    return React.findDOMNode(this);
   },
 
   getCollapsableDimensionValue: function () {
-    var node = this.refs.ul.getDOMNode(),
+    var node = React.findDOMNode(this.refs.ul),
         height = node.offsetHeight,
         computedStyles = domUtils.getComputedStyles(node);
 
@@ -4003,7 +3803,7 @@ var Nav = React.createClass({displayName: "Nav",
     }
 
     return (
-      React.createElement("nav", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("nav", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.renderUl()
       )
     );
@@ -4019,7 +3819,7 @@ var Nav = React.createClass({displayName: "Nav",
     classes['navbar-right'] = this.props.right;
 
     return (
-      React.createElement("ul", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), ref: "ul"}), 
+      React.createElement("ul", React.__spread({},  this.props, {className: classSet(this.props.className, classes), ref: "ul"}), 
         ValidComponentChildren.map(this.props.children, this.renderNavItem)
       )
     );
@@ -4044,14 +3844,13 @@ var Nav = React.createClass({displayName: "Nav",
   },
 
   renderNavItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         active: this.getChildActiveProp(child),
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
         key: child.key ? child.key : index,
         navItem: true
       }
@@ -4063,11 +3862,11 @@ module.exports = Nav;
 
 });
 
-define('lib/Navbar',['require','exports','module','react','./utils/joinClasses','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./Nav'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Navbar',['require','exports','module','react','./BootstrapMixin','classnames','./utils/ValidComponentChildren','./utils/createChainedFunction','./Nav'],function (require, exports, module) {var React = require('react');
+
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -4142,7 +3941,7 @@ var Navbar = React.createClass({displayName: "Navbar",
     classes['navbar-inverse'] = this.props.inverse;
 
     return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement(ComponentClass, React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         React.createElement("div", {className: this.props.fluid ? 'container-fluid' : 'container'}, 
           (this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null, 
           ValidComponentChildren.map(this.props.children, this.renderChild)
@@ -4152,12 +3951,11 @@ var Navbar = React.createClass({displayName: "Navbar",
   },
 
   renderChild: function (child, index) {
-    return cloneWithProps(child, {
+    return cloneElement(child, {
       navbar: true,
       collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey,
       expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey && this.isNavExpanded(),
       key: child.key ? child.key : index,
-      ref: child.ref
     });
   },
 
@@ -4165,10 +3963,13 @@ var Navbar = React.createClass({displayName: "Navbar",
     var brand;
 
     if (this.props.brand) {
-      brand = React.isValidElement(this.props.brand) ?
-        cloneWithProps(this.props.brand, {
-          className: 'navbar-brand'
-        }) : React.createElement("span", {className: "navbar-brand"}, this.props.brand);
+      brand = this.props.brand;
+
+      brand = React.isValidElement(brand) ?
+        cloneElement(brand, {
+          className: classSet(brand.props.className,'navbar-brand')
+        }) 
+        : React.createElement("span", {className: "navbar-brand"}, brand);
     }
 
     return (
@@ -4183,8 +3984,11 @@ var Navbar = React.createClass({displayName: "Navbar",
     var children;
 
     if (React.isValidElement(this.props.toggleButton)) {
-      return cloneWithProps(this.props.toggleButton, {
-        className: 'navbar-toggle',
+
+      return cloneElement(this.props.toggleButton, {
+        
+        className: classSet(this.props.toggleButton.props.className,'navbar-toggle'),
+
         onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
       });
     }
@@ -4209,9 +4013,9 @@ module.exports = Navbar;
 
 });
 
-define('lib/NavItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/NavItem',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({displayName: "NavItem",
@@ -4259,7 +4063,7 @@ var NavItem = React.createClass({displayName: "NavItem",
     }
 
     return (
-      React.createElement("li", React.__spread({},  props, {className: joinClasses(props.className, classSet(classes))}), 
+      React.createElement("li", React.__spread({},  props, {className: classSet(props.className, classes)}), 
         React.createElement("a", React.__spread({},  linkProps), 
           children 
         )
@@ -4279,7 +4083,6 @@ var NavItem = React.createClass({displayName: "NavItem",
 });
 
 module.exports = NavItem;
-
 });
 
 define('lib/utils/CustomPropTypes',['require','exports','module','react'],function (require, exports, module) {var React = require('react');
@@ -4332,10 +4135,10 @@ function createChainableTypeChecker(validate) {
 function createMountableChecker() {
   function validate(props, propName, componentName) {
     if (typeof props[propName] !== 'object' ||
-      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
+      typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
       return new Error(
         'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a DOM element or an object that has a `getDOMNode` method'
+          '`' + componentName + '`, expected a DOM element or an object that has a `render` method'
       );
     }
   }
@@ -4352,21 +4155,6 @@ var CustomPropTypes = require('./utils/CustomPropTypes');
 module.exports = {
   propTypes: {
     container: CustomPropTypes.mountable
-  },
-
-  getDefaultProps: function () {
-    return {
-      container: {
-        // Provide `getDOMNode` fn mocking a React component API. The `document.body`
-        // reference needs to be contained within this function so that it is not accessed
-        // in environments where it would not be defined, e.g. nodejs. Equally this is needed
-        // before the body is defined where `document.body === null`, this ensures
-        // `document.body` is only accessed after componentDidMount.
-        getDOMNode: function getDOMNode() {
-          return document.body;
-        }
-      }
-    };
   },
 
   componentWillUnmount: function () {
@@ -4419,23 +4207,22 @@ module.exports = {
     }
 
     if (this._overlayInstance) {
-      return this._overlayInstance.getDOMNode();
+      return React.findDOMNode(this._overlayInstance);
     }
 
     return null;
   },
 
   getContainerDOMNode: function () {
-    return this.props.container.getDOMNode ?
-      this.props.container.getDOMNode() : this.props.container;
+    return React.findDOMNode(this.props.container || document.body);
   }
 };
 
 });
 
-define('lib/ModalTrigger',['require','exports','module','react','./OverlayMixin','./utils/cloneWithProps','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+define('lib/ModalTrigger',['require','exports','module','react','./OverlayMixin','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -4475,7 +4262,7 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
       return React.createElement("span", null);
     }
 
-    return cloneWithProps(
+    return cloneElement(
       this.props.modal,
       {
         onRequestHide: this.hide
@@ -4485,7 +4272,7 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
 
   render: function () {
     var child = React.Children.only(this.props.children);
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         onClick: createChainedFunction(child.props.onClick, this.toggle)
@@ -4497,10 +4284,10 @@ var ModalTrigger = React.createClass({displayName: "ModalTrigger",
 module.exports = ModalTrigger;
 });
 
-define('lib/OverlayTrigger',['require','exports','module','react','./OverlayMixin','./utils/domUtils','./utils/cloneWithProps','./utils/createChainedFunction','./utils/Object.assign'],function (require, exports, module) {var React = require('react');
+define('lib/OverlayTrigger',['require','exports','module','react','./OverlayMixin','./utils/domUtils','./utils/createChainedFunction','./utils/Object.assign'],function (require, exports, module) {var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var assign = require('./utils/Object.assign');
@@ -4575,7 +4362,7 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
       return React.createElement("span", null);
     }
 
-    return cloneWithProps(
+    return cloneElement(
       this.props.overlay,
       {
         onRequestHide: this.hide,
@@ -4607,7 +4394,7 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
       props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
     }
 
-    return cloneWithProps(
+    return cloneElement(
       React.Children.only(this.props.children),
       props
     );
@@ -4712,7 +4499,7 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
   },
 
   getPosition: function () {
-    var node = this.getDOMNode();
+    var node = React.findDOMNode(this);
     var container = this.getContainerDOMNode();
 
     var offset = container.tagName == 'BODY' ?
@@ -4728,14 +4515,14 @@ var OverlayTrigger = React.createClass({displayName: "OverlayTrigger",
 module.exports = OverlayTrigger;
 });
 
-define('lib/PageHeader',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/PageHeader',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 
 var PageHeader = React.createClass({displayName: "PageHeader",
 
   render: function () {
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, 'page-header')}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, 'page-header')}), 
         React.createElement("h1", null, this.props.children)
       )
     );
@@ -4745,10 +4532,10 @@ var PageHeader = React.createClass({displayName: "PageHeader",
 module.exports = PageHeader;
 });
 
-define('lib/Panel',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./BootstrapMixin','./CollapsableMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/Panel',['require','exports','module','react','classnames','./BootstrapMixin','./CollapsableMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
@@ -4790,7 +4577,7 @@ var Panel = React.createClass({displayName: "Panel",
   },
 
   getCollapsableDimensionValue: function () {
-    return this.refs.panel.getDOMNode().scrollHeight;
+    return React.findDOMNode(this.refs.panel).scrollHeight;
   },
 
   getCollapsableDOMNode: function () {
@@ -4798,7 +4585,7 @@ var Panel = React.createClass({displayName: "Panel",
       return null;
     }
 
-    return this.refs.panel.getDOMNode();
+    return React.findDOMNode(this.refs.panel);
   },
 
   render: function () {
@@ -4806,7 +4593,7 @@ var Panel = React.createClass({displayName: "Panel",
 
     return (
       React.createElement("div", React.__spread({},  this.props, 
-        {className: joinClasses(this.props.className, classSet(classes)), 
+        {className: classSet(this.props.className, classes), 
         id: this.props.collapsable ? null : this.props.id, onSelect: null}), 
         this.renderHeading(), 
         this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(), 
@@ -4840,7 +4627,7 @@ var Panel = React.createClass({displayName: "Panel",
     }
 
     function addPanelChild (child) {
-      bodyElements.push(cloneWithProps(child, getProps()));
+      bodyElements.push(cloneElement(child, getProps()));
     }
 
     function addPanelBody (children) {
@@ -4901,13 +4688,15 @@ var Panel = React.createClass({displayName: "Panel",
       header = this.props.collapsable ?
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {
-      header = cloneWithProps(header, {
-        className: this.prefixClass('title'),
+
+      header = cloneElement(header, {
+        className: classSet(this.prefixClass('title')),
         children: this.renderAnchor(header.props.children)
       });
     } else {
-      header = cloneWithProps(header, {
-        className: this.prefixClass('title')
+
+      header = cloneElement(header, {
+        className: classSet(this.prefixClass('title'))
       });
     }
 
@@ -4955,9 +4744,9 @@ module.exports = Panel;
 
 });
 
-define('lib/PageItem',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/PageItem',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 
 var PageItem = React.createClass({displayName: "PageItem",
 
@@ -4987,7 +4776,7 @@ var PageItem = React.createClass({displayName: "PageItem",
     return (
       React.createElement("li", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, classSet(classes))}), 
+        {className: classSet(this.props.className, classes)}), 
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
@@ -5014,9 +4803,9 @@ var PageItem = React.createClass({displayName: "PageItem",
 module.exports = PageItem;
 });
 
-define('lib/Pager',['require','exports','module','react','./utils/joinClasses','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/Pager',['require','exports','module','react','classnames','./utils/ValidComponentChildren','./utils/createChainedFunction'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -5031,18 +4820,17 @@ var Pager = React.createClass({displayName: "Pager",
     return (
       React.createElement("ul", React.__spread({}, 
         this.props, 
-        {className: joinClasses(this.props.className, 'pager')}), 
+        {className: classSet(this.props.className, 'pager')}), 
         ValidComponentChildren.map(this.props.children, this.renderPageItem)
       )
     );
   },
 
   renderPageItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
         key: child.key ? child.key : index
       }
     );
@@ -5052,9 +4840,9 @@ var Pager = React.createClass({displayName: "Pager",
 module.exports = Pager;
 });
 
-define('lib/Popover',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Popover',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
@@ -5092,7 +4880,7 @@ var Popover = React.createClass({displayName: "Popover",
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style, title: null}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes), style: style, title: null}), 
         React.createElement("div", {className: "arrow", style: arrowStyle}), 
         this.props.title ? this.renderTitle() : null, 
         React.createElement("div", {className: "popover-content"}, 
@@ -5112,12 +4900,12 @@ var Popover = React.createClass({displayName: "Popover",
 module.exports = Popover;
 });
 
-define('lib/ProgressBar',['require','exports','module','react','./utils/joinClasses','./Interpolate','./BootstrapMixin','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/ProgressBar',['require','exports','module','react','./Interpolate','./BootstrapMixin','classnames','./utils/ValidComponentChildren'],function (require, exports, module) {var React = require('react');
+
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -5162,7 +4950,7 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
         return (
-          React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+          React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
             this.renderProgressBar()
           )
         );
@@ -5173,7 +4961,7 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
       }
     } else {
       return (
-        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+        React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
           ValidComponentChildren.map(this.props.children, this.renderChildBar)
         )
       );
@@ -5181,10 +4969,9 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
   },
 
   renderChildBar: function (child, index) {
-    return cloneWithProps(child, {
+    return cloneElement(child, {
       isChild: true,
-      key: child.key ? child.key : index,
-      ref: child.ref
+      key: child.key ? child.key : index
     });
   },
 
@@ -5210,7 +4997,7 @@ var ProgressBar = React.createClass({displayName: "ProgressBar",
     var classes = this.getBsClassSet();
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), role: "progressbar", 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes), role: "progressbar", 
         style: {width: percentage + '%'}, 
         "aria-valuenow": this.props.now, 
         "aria-valuemin": this.props.min, 
@@ -5248,8 +5035,8 @@ module.exports = ProgressBar;
 
 });
 
-define('lib/Row',['require','exports','module','react','./utils/joinClasses'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+define('lib/Row',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 
 var Row = React.createClass({displayName: "Row",
   propTypes: {
@@ -5266,7 +5053,7 @@ var Row = React.createClass({displayName: "Row",
     var ComponentClass = this.props.componentClass;
 
     return (
-      React.createElement(ComponentClass, React.__spread({},  this.props, {className: joinClasses(this.props.className, 'row')}), 
+      React.createElement(ComponentClass, React.__spread({},  this.props, {className: classSet(this.props.className, 'row')}), 
         this.props.children
       )
     );
@@ -5276,9 +5063,9 @@ var Row = React.createClass({displayName: "Row",
 module.exports = Row;
 });
 
-define('lib/SplitButton',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/SplitButton',['require','exports','module','react','classnames','./BootstrapMixin','./DropdownStateMixin','./Button','./ButtonGroup','./DropdownMenu'],function (require, exports, module) {var React = require('react');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
 var Button = require('./Button');
@@ -5326,14 +5113,15 @@ var SplitButton = React.createClass({displayName: "SplitButton",
       React.createElement(Button, React.__spread({}, 
         this.props, 
         {ref: "dropdownButton", 
-        className: joinClasses(this.props.className, 'dropdown-toggle'), 
+        className: classSet(this.props.className, 'dropdown-toggle'), 
         onClick: this.handleDropdownClick, 
         title: null, 
         href: null, 
         target: null, 
         id: null}), 
         React.createElement("span", {className: "sr-only"}, this.props.dropdownTitle), 
-        React.createElement("span", {className: "caret"})
+        React.createElement("span", {className: "caret"}), 
+        React.createElement("span", {style: {letterSpacing: '-.3em'}}, " ")
       )
     );
 
@@ -5384,10 +5172,9 @@ module.exports = SplitButton;
 
 });
 
-define('lib/SubNav',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/cloneWithProps','./utils/ValidComponentChildren','./utils/createChainedFunction','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+define('lib/SubNav',['require','exports','module','react','classnames','./utils/ValidComponentChildren','./utils/createChainedFunction','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -5484,7 +5271,7 @@ var SubNav = React.createClass({displayName: "SubNav",
     };
 
     return (
-      React.createElement("li", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("li", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         React.createElement("a", {
           href: this.props.href, 
           title: this.props.title, 
@@ -5501,12 +5288,11 @@ var SubNav = React.createClass({displayName: "SubNav",
   },
 
   renderNavItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
         key: child.key ? child.key : index
       }
     );
@@ -5517,9 +5303,9 @@ module.exports = SubNav;
 
 });
 
-define('lib/TabbedArea',['require','exports','module','react','./BootstrapMixin','./utils/cloneWithProps','./utils/ValidComponentChildren','./Nav','./NavItem'],function (require, exports, module) {var React = require('react');
+define('lib/TabbedArea',['require','exports','module','react','./BootstrapMixin','./utils/ValidComponentChildren','./Nav','./NavItem'],function (require, exports, module) {var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
@@ -5611,12 +5397,11 @@ var TabbedArea = React.createClass({displayName: "TabbedArea",
   renderPane: function (child, index) {
     var activeKey = this.getActiveKey();
 
-    return cloneWithProps(
+    return cloneElement(
         child,
         {
           active: (child.props.eventKey === activeKey &&
             (this.state.previousActiveKey == null || !this.props.animation)),
-          ref: child.ref,
           key: child.key ? child.key : index,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&
@@ -5658,9 +5443,8 @@ var TabbedArea = React.createClass({displayName: "TabbedArea",
 module.exports = TabbedArea;
 });
 
-define('lib/Table',['require','exports','module','react','./utils/joinClasses','./utils/classSet'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Table',['require','exports','module','react','classnames'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 
 var Table = React.createClass({displayName: "Table",
   propTypes: {
@@ -5680,7 +5464,7 @@ var Table = React.createClass({displayName: "Table",
       'table-hover': this.props.hover
     };
     var table = (
-      React.createElement("table", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("table", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -5696,9 +5480,8 @@ var Table = React.createClass({displayName: "Table",
 module.exports = Table;
 });
 
-define('lib/TabPane',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/TabPane',['require','exports','module','react','classnames','./utils/TransitionEvents'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var TabPane = React.createClass({displayName: "TabPane",
@@ -5735,7 +5518,7 @@ var TabPane = React.createClass({displayName: "TabPane",
     }
     if (this.state.animateOut) {
       TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
+        React.findDOMNode(this),
         this.stopAnimateOut
       );
     }
@@ -5770,7 +5553,7 @@ var TabPane = React.createClass({displayName: "TabPane",
     };
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
@@ -5780,9 +5563,8 @@ var TabPane = React.createClass({displayName: "TabPane",
 module.exports = TabPane;
 });
 
-define('lib/Tooltip',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Tooltip',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
@@ -5818,7 +5600,7 @@ var Tooltip = React.createClass({displayName: "Tooltip",
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
     return (
-        React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes)), style: style}), 
+        React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes), style: style}), 
           React.createElement("div", {className: "tooltip-arrow", style: arrowStyle}), 
           React.createElement("div", {className: "tooltip-inner"}, 
             this.props.children
@@ -5831,9 +5613,8 @@ var Tooltip = React.createClass({displayName: "Tooltip",
 module.exports = Tooltip;
 });
 
-define('lib/Well',['require','exports','module','react','./utils/joinClasses','./utils/classSet','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+define('lib/Well',['require','exports','module','react','classnames','./BootstrapMixin'],function (require, exports, module) {var React = require('react');
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Well = React.createClass({displayName: "Well",
@@ -5849,7 +5630,7 @@ var Well = React.createClass({displayName: "Well",
     var classes = this.getBsClassSet();
 
     return (
-      React.createElement("div", React.__spread({},  this.props, {className: joinClasses(this.props.className, classSet(classes))}), 
+      React.createElement("div", React.__spread({},  this.props, {className: classSet(this.props.className, classes)}), 
         this.props.children
       )
     );
