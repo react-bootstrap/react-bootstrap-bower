@@ -7,7 +7,7 @@
 		exports["ReactBootstrap"] = factory(require("react"));
 	else
 		root["ReactBootstrap"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_49__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_50__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -76,83 +76,85 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ButtonToolbar = _interopRequire(__webpack_require__(9));
 
-	var Carousel = _interopRequire(__webpack_require__(10));
+	var CollapsableNav = _interopRequire(__webpack_require__(10));
 
-	var CarouselItem = _interopRequire(__webpack_require__(11));
+	var Carousel = _interopRequire(__webpack_require__(11));
 
-	var Col = _interopRequire(__webpack_require__(12));
+	var CarouselItem = _interopRequire(__webpack_require__(12));
 
-	var CollapsableMixin = _interopRequire(__webpack_require__(13));
+	var Col = _interopRequire(__webpack_require__(13));
 
-	var DropdownButton = _interopRequire(__webpack_require__(14));
+	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var DropdownMenu = _interopRequire(__webpack_require__(15));
+	var DropdownButton = _interopRequire(__webpack_require__(15));
 
-	var DropdownStateMixin = _interopRequire(__webpack_require__(16));
+	var DropdownMenu = _interopRequire(__webpack_require__(16));
 
-	var FadeMixin = _interopRequire(__webpack_require__(17));
+	var DropdownStateMixin = _interopRequire(__webpack_require__(17));
 
-	var Glyphicon = _interopRequire(__webpack_require__(18));
+	var FadeMixin = _interopRequire(__webpack_require__(18));
 
-	var Grid = _interopRequire(__webpack_require__(19));
+	var Glyphicon = _interopRequire(__webpack_require__(19));
 
-	var Input = _interopRequire(__webpack_require__(20));
+	var Grid = _interopRequire(__webpack_require__(20));
 
-	var Interpolate = _interopRequire(__webpack_require__(21));
+	var Input = _interopRequire(__webpack_require__(21));
 
-	var Jumbotron = _interopRequire(__webpack_require__(22));
+	var Interpolate = _interopRequire(__webpack_require__(22));
 
-	var Label = _interopRequire(__webpack_require__(23));
+	var Jumbotron = _interopRequire(__webpack_require__(23));
 
-	var ListGroup = _interopRequire(__webpack_require__(24));
+	var Label = _interopRequire(__webpack_require__(24));
 
-	var ListGroupItem = _interopRequire(__webpack_require__(25));
+	var ListGroup = _interopRequire(__webpack_require__(25));
 
-	var MenuItem = _interopRequire(__webpack_require__(26));
+	var ListGroupItem = _interopRequire(__webpack_require__(26));
 
-	var Modal = _interopRequire(__webpack_require__(27));
+	var MenuItem = _interopRequire(__webpack_require__(27));
 
-	var Nav = _interopRequire(__webpack_require__(28));
+	var Modal = _interopRequire(__webpack_require__(28));
 
-	var Navbar = _interopRequire(__webpack_require__(29));
+	var Nav = _interopRequire(__webpack_require__(29));
 
-	var NavItem = _interopRequire(__webpack_require__(30));
+	var Navbar = _interopRequire(__webpack_require__(30));
 
-	var ModalTrigger = _interopRequire(__webpack_require__(31));
+	var NavItem = _interopRequire(__webpack_require__(31));
 
-	var OverlayTrigger = _interopRequire(__webpack_require__(32));
+	var ModalTrigger = _interopRequire(__webpack_require__(32));
 
-	var OverlayMixin = _interopRequire(__webpack_require__(33));
+	var OverlayTrigger = _interopRequire(__webpack_require__(33));
 
-	var PageHeader = _interopRequire(__webpack_require__(34));
+	var OverlayMixin = _interopRequire(__webpack_require__(34));
 
-	var Panel = _interopRequire(__webpack_require__(35));
+	var PageHeader = _interopRequire(__webpack_require__(35));
 
-	var PanelGroup = _interopRequire(__webpack_require__(36));
+	var Panel = _interopRequire(__webpack_require__(36));
 
-	var PageItem = _interopRequire(__webpack_require__(37));
+	var PanelGroup = _interopRequire(__webpack_require__(37));
 
-	var Pager = _interopRequire(__webpack_require__(38));
+	var PageItem = _interopRequire(__webpack_require__(38));
 
-	var Popover = _interopRequire(__webpack_require__(39));
+	var Pager = _interopRequire(__webpack_require__(39));
 
-	var ProgressBar = _interopRequire(__webpack_require__(40));
+	var Popover = _interopRequire(__webpack_require__(40));
 
-	var Row = _interopRequire(__webpack_require__(41));
+	var ProgressBar = _interopRequire(__webpack_require__(41));
 
-	var SplitButton = _interopRequire(__webpack_require__(42));
+	var Row = _interopRequire(__webpack_require__(42));
 
-	var SubNav = _interopRequire(__webpack_require__(43));
+	var SplitButton = _interopRequire(__webpack_require__(43));
 
-	var TabbedArea = _interopRequire(__webpack_require__(44));
+	var SubNav = _interopRequire(__webpack_require__(44));
 
-	var Table = _interopRequire(__webpack_require__(45));
+	var TabbedArea = _interopRequire(__webpack_require__(45));
 
-	var TabPane = _interopRequire(__webpack_require__(46));
+	var Table = _interopRequire(__webpack_require__(46));
 
-	var Tooltip = _interopRequire(__webpack_require__(47));
+	var TabPane = _interopRequire(__webpack_require__(47));
 
-	var Well = _interopRequire(__webpack_require__(48));
+	var Tooltip = _interopRequire(__webpack_require__(48));
+
+	var Well = _interopRequire(__webpack_require__(49));
 
 	module.exports = {
 	  Accordion: Accordion,
@@ -164,6 +166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Button: Button,
 	  ButtonGroup: ButtonGroup,
 	  ButtonToolbar: ButtonToolbar,
+	  CollapsableNav: CollapsableNav,
 	  Carousel: Carousel,
 	  CarouselItem: CarouselItem,
 	  Col: Col,
@@ -215,9 +218,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var PanelGroup = _interopRequire(__webpack_require__(36));
+	var PanelGroup = _interopRequire(__webpack_require__(37));
 
 	var Accordion = React.createClass({
 	  displayName: "Accordion",
@@ -243,13 +246,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var AffixMixin = _interopRequire(__webpack_require__(3));
 
-	var domUtils = _interopRequire(__webpack_require__(50));
+	var domUtils = _interopRequire(__webpack_require__(51));
 
 	var Affix = React.createClass({
 	  displayName: "Affix",
@@ -283,11 +286,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var domUtils = _interopRequire(__webpack_require__(50));
+	var domUtils = _interopRequire(__webpack_require__(51));
 
-	var EventListener = _interopRequire(__webpack_require__(51));
+	var EventListener = _interopRequire(__webpack_require__(52));
 
 	var AffixMixin = {
 	  propTypes: {
@@ -425,9 +428,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -495,9 +498,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var constants = _interopRequire(__webpack_require__(52));
+	var constants = _interopRequire(__webpack_require__(53));
 
 	var BootstrapMixin = {
 	  propTypes: {
@@ -546,11 +549,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Badge = React.createClass({
 	  displayName: "Badge",
@@ -589,9 +592,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -688,9 +691,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -737,9 +740,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -777,19 +780,141 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var BootstrapMixin = _interopRequire(__webpack_require__(5));
+
+	var CollapsableMixin = _interopRequire(__webpack_require__(14));
+
+	var classSet = _interopRequire(__webpack_require__(59));
+
+	var domUtils = _interopRequire(__webpack_require__(51));
+
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+
+	var createChainedFunction = _interopRequire(__webpack_require__(55));
+
+	var CollapsableNav = React.createClass({
+	  displayName: "CollapsableNav",
+
+	  mixins: [BootstrapMixin, CollapsableMixin],
+
+	  propTypes: {
+	    onSelect: React.PropTypes.func,
+	    expanded: React.PropTypes.bool,
+	    eventKey: React.PropTypes.any
+	  },
+
+	  getCollapsableDOMNode: function getCollapsableDOMNode() {
+	    return this.getDOMNode();
+	  },
+
+	  getCollapsableDimensionValue: function getCollapsableDimensionValue() {
+	    var height = 0;
+	    var nodes = this.refs;
+	    for (var key in nodes) {
+	      if (nodes.hasOwnProperty(key)) {
+
+	        var n = nodes[key].getDOMNode(),
+	            h = n.offsetHeight,
+	            computedStyles = domUtils.getComputedStyles(n);
+
+	        height += h + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
+	      }
+	    }
+	    return height;
+	  },
+
+	  render: function render() {
+	    /*
+	     * this.props.collapsable is set in NavBar when a eventKey is supplied.
+	     */
+	    var classes = this.props.collapsable ? this.getCollapsableClassSet() : {};
+	    /*
+	     * prevent duplicating navbar-collapse call if passed as prop. kind of overkill... good cadidate to have check implemented as a util that can
+	     * also be used elsewhere.
+	     */
+	    if (this.props.className === undefined || this.props.className.split(" ").indexOf("navbar-collapse") === -2) {
+	      classes["navbar-collapse"] = this.props.collapsable;
+	    }
+
+	    return React.createElement(
+	      "div",
+	      { eventKey: this.props.eventKey, className: classSet(this.props.className, classes) },
+	      ValidComponentChildren.map(this.props.children, this.props.collapsable ? this.renderCollapsableNavChildren : this.renderChildren)
+	    );
+	  },
+
+	  getChildActiveProp: function getChildActiveProp(child) {
+	    if (child.props.active) {
+	      return true;
+	    }
+	    if (this.props.activeKey != null) {
+	      if (child.props.eventKey === this.props.activeKey) {
+	        return true;
+	      }
+	    }
+	    if (this.props.activeHref != null) {
+	      if (child.props.href === this.props.activeHref) {
+	        return true;
+	      }
+	    }
+
+	    return child.props.active;
+	  },
+
+	  renderChildren: function renderChildren(child, index) {
+	    var key = child.key ? child.key : index;
+	    return cloneElement(child, {
+	      activeKey: this.props.activeKey,
+	      activeHref: this.props.activeHref,
+	      ref: "nocollapse_" + key,
+	      key: key,
+	      navItem: true
+	    });
+	  },
+
+	  renderCollapsableNavChildren: function renderCollapsableNavChildren(child, index) {
+	    var key = child.key ? child.key : index;
+	    return cloneElement(child, {
+	      active: this.getChildActiveProp(child),
+	      activeKey: this.props.activeKey,
+	      activeHref: this.props.activeHref,
+	      onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
+	      ref: "collapsable_" + key,
+	      key: key,
+	      navItem: true
+	    });
+	  }
+	});
+
+	module.exports = CollapsableNav;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(50);
+
+	var React = _interopRequire(_react);
+
+	var cloneElement = _react.cloneElement;
+
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var Carousel = React.createClass({
 	  displayName: "Carousel",
@@ -1058,7 +1183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Carousel;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1067,11 +1192,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(54));
+	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
 	var CarouselItem = React.createClass({
 	  displayName: "CarouselItem",
@@ -1161,7 +1286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CarouselItem;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1170,11 +1295,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var constants = _interopRequire(__webpack_require__(52));
+	var constants = _interopRequire(__webpack_require__(53));
 
 	var Col = React.createClass({
 	  displayName: "Col",
@@ -1248,16 +1373,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Col;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(59));
+	var TransitionEvents = _interopRequire(__webpack_require__(60));
 
 	var CollapsableMixin = {
 
@@ -1423,7 +1548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CollapsableMixin;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1432,27 +1557,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var DropdownStateMixin = _interopRequire(__webpack_require__(16));
+	var DropdownStateMixin = _interopRequire(__webpack_require__(17));
 
 	var Button = _interopRequire(__webpack_require__(7));
 
 	var ButtonGroup = _interopRequire(__webpack_require__(8));
 
-	var DropdownMenu = _interopRequire(__webpack_require__(15));
+	var DropdownMenu = _interopRequire(__webpack_require__(16));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var DropdownButton = React.createClass({
 	  displayName: "DropdownButton",
@@ -1561,7 +1686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DropdownButton;
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1570,17 +1695,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var DropdownMenu = React.createClass({
 	  displayName: "DropdownMenu",
@@ -1619,16 +1744,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DropdownMenu;
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var EventListener = _interopRequire(__webpack_require__(51));
+	var EventListener = _interopRequire(__webpack_require__(52));
 
 	/**
 	 * Checks whether a node is within
@@ -1707,14 +1832,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DropdownStateMixin;
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
 	// TODO: listen for onTransitionEnd to remove el
 	function getElementsAndSelf(root, classes) {
@@ -1788,7 +1913,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1797,13 +1922,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var constants = _interopRequire(__webpack_require__(52));
+	var constants = _interopRequire(__webpack_require__(53));
 
 	var Glyphicon = React.createClass({
 	  displayName: "Glyphicon",
@@ -1836,7 +1961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Glyphicon;
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1845,9 +1970,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Grid = React.createClass({
 	  displayName: "Grid",
@@ -1879,7 +2004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Grid;
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1888,9 +2013,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Button = _interopRequire(__webpack_require__(7));
 
@@ -2130,7 +2255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Input;
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2140,11 +2265,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	// https://www.npmjs.org/package/react-interpolate-component
 	// TODO: Drop this in favor of es6 string interpolation
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var assign = _interopRequire(__webpack_require__(56));
+	var assign = _interopRequire(__webpack_require__(57));
 
 	var REGEXP = /\%\((.+?)\)s/;
 
@@ -2221,7 +2346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Interpolate;
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2230,9 +2355,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Jumbotron = React.createClass({
 	  displayName: "Jumbotron",
@@ -2249,7 +2374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Jumbotron;
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2258,9 +2383,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -2290,20 +2415,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Label;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var ListGroup = React.createClass({
 	  displayName: "ListGroup",
@@ -2330,7 +2455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ListGroup;
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2339,7 +2464,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
@@ -2347,7 +2472,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var ListGroupItem = React.createClass({
 	  displayName: "ListGroupItem",
@@ -2430,7 +2555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ListGroupItem;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2439,9 +2564,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var MenuItem = React.createClass({
 	  displayName: "MenuItem",
@@ -2502,7 +2627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = MenuItem;
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2511,15 +2636,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var FadeMixin = _interopRequire(__webpack_require__(17));
+	var FadeMixin = _interopRequire(__webpack_require__(18));
 
-	var EventListener = _interopRequire(__webpack_require__(51));
+	var EventListener = _interopRequire(__webpack_require__(52));
 
 	// TODO:
 	// - aria-labelledby
@@ -2689,7 +2814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Modal;
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2698,7 +2823,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
@@ -2706,13 +2831,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var CollapsableMixin = _interopRequire(__webpack_require__(13));
+	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var domUtils = _interopRequire(__webpack_require__(50));
+	var domUtils = _interopRequire(__webpack_require__(51));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -2816,7 +2941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Nav;
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2825,7 +2950,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
@@ -2833,9 +2958,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -2979,7 +3104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Navbar;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2990,9 +3115,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3069,20 +3194,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = NavItem;
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var OverlayMixin = _interopRequire(__webpack_require__(33));
+	var OverlayMixin = _interopRequire(__webpack_require__(34));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -3140,26 +3265,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ModalTrigger;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var OverlayMixin = _interopRequire(__webpack_require__(33));
+	var OverlayMixin = _interopRequire(__webpack_require__(34));
 
-	var domUtils = _interopRequire(__webpack_require__(50));
+	var domUtils = _interopRequire(__webpack_require__(51));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
-	var assign = _interopRequire(__webpack_require__(56));
+	var assign = _interopRequire(__webpack_require__(57));
 
 	/**
 	 * Check if value one is inside or equal to the of value
@@ -3376,16 +3501,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = OverlayTrigger;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var CustomPropTypes = _interopRequire(__webpack_require__(57));
+	var CustomPropTypes = _interopRequire(__webpack_require__(58));
 
 	module.exports = {
 	  propTypes: {
@@ -3452,7 +3577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3461,9 +3586,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var PageHeader = React.createClass({
 	  displayName: "PageHeader",
@@ -3484,7 +3609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = PageHeader;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3493,17 +3618,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var CollapsableMixin = _interopRequire(__webpack_require__(13));
+	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
 	var Panel = React.createClass({
 	  displayName: "Panel",
@@ -3709,7 +3834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Panel;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3718,17 +3843,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var PanelGroup = React.createClass({
 	  displayName: "PanelGroup",
@@ -3810,7 +3935,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = PanelGroup;
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3819,9 +3944,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var PageItem = React.createClass({
 	  displayName: "PageItem",
@@ -3880,7 +4005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = PageItem;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3889,15 +4014,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -3928,7 +4053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Pager;
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3939,9 +4064,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4015,7 +4140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Popover;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4024,19 +4149,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var Interpolate = _interopRequire(__webpack_require__(21));
+	var Interpolate = _interopRequire(__webpack_require__(22));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var ProgressBar = React.createClass({
 	  displayName: "ProgressBar",
@@ -4158,7 +4283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ProgressBar;
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4167,9 +4292,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Row = React.createClass({
 	  displayName: "Row",
@@ -4198,7 +4323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Row;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4207,19 +4332,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var DropdownStateMixin = _interopRequire(__webpack_require__(16));
+	var DropdownStateMixin = _interopRequire(__webpack_require__(17));
 
 	var Button = _interopRequire(__webpack_require__(7));
 
 	var ButtonGroup = _interopRequire(__webpack_require__(8));
 
-	var DropdownMenu = _interopRequire(__webpack_require__(15));
+	var DropdownMenu = _interopRequire(__webpack_require__(16));
 
 	var SplitButton = React.createClass({
 	  displayName: "SplitButton",
@@ -4330,7 +4455,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = SplitButton;
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4339,15 +4464,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -4483,7 +4608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = SubNav;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4492,7 +4617,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(49);
+	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
@@ -4500,11 +4625,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(53));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var Nav = _interopRequire(__webpack_require__(28));
+	var Nav = _interopRequire(__webpack_require__(29));
 
-	var NavItem = _interopRequire(__webpack_require__(30));
+	var NavItem = _interopRequire(__webpack_require__(31));
 
 	function getDefaultActiveKeyFromChildren(children) {
 	  var defaultActiveKey = undefined;
@@ -4635,7 +4760,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = TabbedArea;
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4644,9 +4769,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var Table = React.createClass({
 	  displayName: "Table",
@@ -4684,7 +4809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Table;
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4693,11 +4818,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(54));
+	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
 	var TabPane = React.createClass({
 	  displayName: "TabPane",
@@ -4777,7 +4902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = TabPane;
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4788,9 +4913,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4853,7 +4978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Tooltip;
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4862,9 +4987,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(58));
+	var classSet = _interopRequire(__webpack_require__(59));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4893,13 +5018,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Well;
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_49__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_50__;
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5012,7 +5137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5073,7 +5198,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EventListener;
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5121,14 +5246,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(49));
+	var React = _interopRequire(__webpack_require__(50));
 
 	/**
 	 * Maps children that are typically specified as `props.children`,
@@ -5222,7 +5347,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 54 */
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Safe chained function
+	 *
+	 * Will only create a new function if needed,
+	 * otherwise will pass back existing functions or null.
+	 *
+	 * @param {function} one
+	 * @param {function} two
+	 * @returns {function|null}
+	 */
+	"use strict";
+
+	function createChainedFunction(one, two) {
+	  var hasOne = typeof one === "function";
+	  var hasTwo = typeof two === "function";
+
+	  if (!hasOne && !hasTwo) {
+	    return null;
+	  }
+	  if (!hasOne) {
+	    return two;
+	  }
+	  if (!hasTwo) {
+	    return one;
+	  }
+
+	  return function chainedFunction() {
+	    one.apply(this, arguments);
+	    two.apply(this, arguments);
+	  };
+	}
+
+	module.exports = createChainedFunction;
+
+/***/ },
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5338,45 +5501,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Safe chained function
-	 *
-	 * Will only create a new function if needed,
-	 * otherwise will pass back existing functions or null.
-	 *
-	 * @param {function} one
-	 * @param {function} two
-	 * @returns {function|null}
-	 */
-	"use strict";
-
-	function createChainedFunction(one, two) {
-	  var hasOne = typeof one === "function";
-	  var hasTwo = typeof two === "function";
-
-	  if (!hasOne && !hasTwo) {
-	    return null;
-	  }
-	  if (!hasOne) {
-	    return two;
-	  }
-	  if (!hasTwo) {
-	    return one;
-	  }
-
-	  return function chainedFunction() {
-	    one.apply(this, arguments);
-	    two.apply(this, arguments);
-	  };
-	}
-
-	module.exports = createChainedFunction;
-
-/***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5430,7 +5555,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = assign;
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5490,7 +5615,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CustomPropTypes;
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	function classNames() {
@@ -5526,7 +5651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5542,7 +5667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(60);
+	var ExecutionEnvironment = __webpack_require__(61);
 
 	/**
 	 * EVENT_NAME_MAP is used to determine which event fired when a
@@ -5641,7 +5766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
