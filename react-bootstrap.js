@@ -248,7 +248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var AffixMixin = _interopRequire(__webpack_require__(3));
 
@@ -396,7 +396,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentDidMount: function componentDidMount() {
 	    this._onWindowScrollListener = EventListener.listen(window, "scroll", this.checkPosition);
-	    this._onDocumentClickListener = EventListener.listen(document, "click", this.checkPositionWithEventLoop);
+	    this._onDocumentClickListener = EventListener.listen(React.findDOMNode(this).ownerDocument, "click", this.checkPositionWithEventLoop);
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
@@ -430,7 +430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -553,7 +553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Badge = React.createClass({
 	  displayName: "Badge",
@@ -594,7 +594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -693,7 +693,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -742,7 +742,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -790,7 +790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var domUtils = _interopRequire(__webpack_require__(51));
 
@@ -910,7 +910,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -1083,7 +1083,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  renderControls: function renderControls() {
-	    if (this.props.wrap) {
+	    if (!this.props.wrap) {
 	      var activeIndex = this.getActiveIndex();
 	      var count = ValidComponentChildren.numberOf(this.props.children);
 
@@ -1194,7 +1194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
@@ -1297,7 +1297,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var constants = _interopRequire(__webpack_require__(53));
 
@@ -1382,7 +1382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(60));
+	var TransitionEvents = _interopRequire(__webpack_require__(61));
 
 	var CollapsableMixin = {
 
@@ -1563,7 +1563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -1701,7 +1701,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -1810,8 +1810,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  bindRootCloseHandlers: function bindRootCloseHandlers() {
-	    this._onDocumentClickListener = EventListener.listen(document, "click", this.handleDocumentClick);
-	    this._onDocumentKeyupListener = EventListener.listen(document, "keyup", this.handleDocumentKeyUp);
+	    var doc = React.findDOMNode(this).ownerDocument;
+
+	    this._onDocumentClickListener = EventListener.listen(doc, "click", this.handleDocumentClick);
+	    this._onDocumentKeyupListener = EventListener.listen(doc, "keyup", this.handleDocumentKeyUp);
 	  },
 
 	  unbindRootCloseHandlers: function unbindRootCloseHandlers() {
@@ -1900,7 +1902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    var els = getElementsAndSelf(React.findDOMNode(this), ["fade"]),
-	        container = this.props.container && React.findDOMNode(this.props.container) || document.body;
+	        container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
 
 	    if (els.length) {
 	      this._fadeOutEl = document.createElement("div");
@@ -1924,7 +1926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -1972,7 +1974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Grid = React.createClass({
 	  displayName: "Grid",
@@ -2015,9 +2017,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Button = _interopRequire(__webpack_require__(7));
+
+	var FormGroup = _interopRequire(__webpack_require__(57));
 
 	var Input = React.createClass({
 	  displayName: "Input",
@@ -2226,29 +2230,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ) : children;
 	  },
 
-	  renderFormGroup: function renderFormGroup(children) {
-	    var classes = {
-	      "form-group": true,
-	      "has-feedback": this.props.hasFeedback,
-	      "has-success": this.props.bsStyle === "success",
-	      "has-warning": this.props.bsStyle === "warning",
-	      "has-error": this.props.bsStyle === "error"
-	    };
-	    classes[this.props.groupClassName] = this.props.groupClassName;
+	  render: function render() {
+	    var children = undefined;
+
+	    if (this.isCheckboxOrRadio()) {
+	      children = this.renderWrapper([this.renderCheckboxandRadioWrapper(this.renderLabel(this.renderInput())), this.renderHelp()]);
+	    } else {
+	      children = [this.renderLabel(), this.renderWrapper([this.renderInputGroup(this.renderInput()), this.renderIcon(), this.renderHelp()])];
+	    }
 
 	    return React.createElement(
-	      "div",
-	      { className: classSet(classes) },
+	      FormGroup,
+	      this.props,
 	      children
 	    );
-	  },
-
-	  render: function render() {
-	    if (this.isCheckboxOrRadio()) {
-	      return this.renderFormGroup(this.renderWrapper([this.renderCheckboxandRadioWrapper(this.renderLabel(this.renderInput())), this.renderHelp()]));
-	    } else {
-	      return this.renderFormGroup([this.renderLabel(), this.renderWrapper([this.renderInputGroup(this.renderInput()), this.renderIcon(), this.renderHelp()])]);
-	    }
 	  }
 	});
 
@@ -2269,7 +2264,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var assign = _interopRequire(__webpack_require__(57));
+	var assign = _interopRequire(__webpack_require__(58));
 
 	var REGEXP = /\%\((.+?)\)s/;
 
@@ -2357,7 +2352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Jumbotron = React.createClass({
 	  displayName: "Jumbotron",
@@ -2385,7 +2380,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -2422,35 +2417,55 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
 	var _react = __webpack_require__(50);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
+	var classSet = _interopRequire(__webpack_require__(60));
+
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var ListGroup = React.createClass({
-	  displayName: "ListGroup",
+	var ListGroup = (function (_React$Component) {
+	  function ListGroup() {
+	    _classCallCheck(this, ListGroup);
 
-	  propTypes: {
-	    onClick: React.PropTypes.func
-	  },
-
-	  render: function render() {
-	    return React.createElement(
-	      "div",
-	      { className: "list-group" },
-	      ValidComponentChildren.map(this.props.children, this.renderListItem)
-	    );
-	  },
-
-	  renderListItem: function renderListItem(child, index) {
-	    return cloneElement(child, {
-	      key: child.key ? child.key : index
-	    });
+	    if (_React$Component != null) {
+	      _React$Component.apply(this, arguments);
+	    }
 	  }
-	});
+
+	  _inherits(ListGroup, _React$Component);
+
+	  _createClass(ListGroup, {
+	    render: {
+	      value: function render() {
+	        var items = ValidComponentChildren.map(this.props.children, function (item, index) {
+	          return cloneElement(item, { key: item.key ? item.key : index });
+	        });
+
+	        return React.createElement(
+	          "div",
+	          { className: classSet(this.props.className, "list-group") },
+	          items
+	        );
+	      }
+	    }
+	  });
+
+	  return ListGroup;
+	})(React.Component);
+
+	ListGroup.propTypes = {
+	  className: React.PropTypes.string
+	};
 
 	module.exports = ListGroup;
 
@@ -2472,7 +2487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var ListGroupItem = React.createClass({
 	  displayName: "ListGroupItem",
@@ -2566,7 +2581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var MenuItem = React.createClass({
 	  displayName: "MenuItem",
@@ -2638,7 +2653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -2774,9 +2789,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  componentDidMount: function componentDidMount() {
-	    this._onDocumentKeyupListener = EventListener.listen(document, "keyup", this.handleDocumentKeyUp);
+	    this._onDocumentKeyupListener = EventListener.listen(React.findDOMNode(this).ownerDocument, "keyup", this.handleDocumentKeyUp);
 
-	    var container = this.props.container && React.findDOMNode(this.props.container) || document.body;
+	    var container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
 	    container.className += container.className.length ? " modal-open" : "modal-open";
 
 	    if (this.props.backdrop) {
@@ -2792,7 +2807,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    this._onDocumentKeyupListener.remove();
-	    var container = this.props.container && React.findDOMNode(this.props.container) || document.body;
+	    var container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
 	    container.className = container.className.replace(/ ?modal-open/, "");
 	  },
 
@@ -2833,7 +2848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var domUtils = _interopRequire(__webpack_require__(51));
 
@@ -2958,7 +2973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -3117,7 +3132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3131,7 +3146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    active: React.PropTypes.bool,
 	    disabled: React.PropTypes.bool,
 	    href: React.PropTypes.string,
-	    title: React.PropTypes.string,
+	    title: React.PropTypes.node,
 	    eventKey: React.PropTypes.any,
 	    target: React.PropTypes.string
 	  },
@@ -3284,7 +3299,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
-	var assign = _interopRequire(__webpack_require__(57));
+	var assign = _interopRequire(__webpack_require__(58));
 
 	/**
 	 * Check if value one is inside or equal to the of value
@@ -3510,7 +3525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var CustomPropTypes = _interopRequire(__webpack_require__(58));
+	var CustomPropTypes = _interopRequire(__webpack_require__(59));
 
 	module.exports = {
 	  propTypes: {
@@ -3572,7 +3587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  getContainerDOMNode: function getContainerDOMNode() {
-	    return React.findDOMNode(this.props.container || document.body);
+	    return React.findDOMNode(this.props.container || React.findDOMNode(this).ownerDocument.body);
 	  }
 	};
 
@@ -3588,7 +3603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var PageHeader = React.createClass({
 	  displayName: "PageHeader",
@@ -3624,7 +3639,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3849,7 +3864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3946,7 +3961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var PageItem = React.createClass({
 	  displayName: "PageItem",
@@ -4020,7 +4035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4066,7 +4081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4159,7 +4174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4294,7 +4309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Row = React.createClass({
 	  displayName: "Row",
@@ -4334,7 +4349,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4470,7 +4485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4771,7 +4786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var Table = React.createClass({
 	  displayName: "Table",
@@ -4820,7 +4835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
@@ -4915,7 +4930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4989,7 +5004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(50));
 
-	var classSet = _interopRequire(__webpack_require__(59));
+	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -5052,7 +5067,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return window.jQuery(DOMNode).offset();
 	  }
 
-	  var docElem = document.documentElement;
+	  var docElem = DOMNode.ownerDocument.documentElement;
 	  var box = { top: 0, left: 0 };
 
 	  // If we don't have gBCR, just use 0,0 rather than error
@@ -5119,7 +5134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {HTMLElement}
 	 */
 	function offsetParentFunc(elem) {
-	  var docElem = document.documentElement;
+	  var docElem = elem.ownerDocument.documentElement;
 	  var offsetParent = elem.offsetParent || docElem;
 
 	  while (offsetParent && (offsetParent.nodeName !== "HTML" && getComputedStyles(offsetParent).position === "static")) {
@@ -5504,6 +5519,71 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+	var React = _interopRequire(__webpack_require__(50));
+
+	var classSet = _interopRequire(__webpack_require__(60));
+
+	var FormGroup = (function (_React$Component) {
+	  function FormGroup() {
+	    _classCallCheck(this, FormGroup);
+
+	    if (_React$Component != null) {
+	      _React$Component.apply(this, arguments);
+	    }
+	  }
+
+	  _inherits(FormGroup, _React$Component);
+
+	  _createClass(FormGroup, {
+	    render: {
+	      value: function render() {
+	        var classes = {
+	          "form-group": !this.props.standalone,
+	          "has-feedback": this.props.hasFeedback,
+	          "has-success": this.props.bsStyle === "success",
+	          "has-warning": this.props.bsStyle === "warning",
+	          "has-error": this.props.bsStyle === "error"
+	        };
+
+	        return React.createElement(
+	          "div",
+	          { className: classSet(classes, this.props.groupClassName) },
+	          this.props.children
+	        );
+	      }
+	    }
+	  });
+
+	  return FormGroup;
+	})(React.Component);
+
+	FormGroup.defaultProps = {
+	  standalone: false
+	};
+
+	FormGroup.propTypes = {
+	  standalone: React.PropTypes.bool,
+	  hasFeedback: React.PropTypes.bool,
+	  bsStyle: React.PropTypes.oneOf(["success", "warning", "error"]),
+	  groupClassName: React.PropTypes.string
+	};
+
+	module.exports = FormGroup;
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Copyright 2014, Facebook, Inc.
 	 * All rights reserved.
@@ -5555,7 +5635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = assign;
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5615,7 +5695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CustomPropTypes;
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	function classNames() {
@@ -5651,7 +5731,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5667,7 +5747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(61);
+	var ExecutionEnvironment = __webpack_require__(62);
 
 	/**
 	 * EVENT_NAME_MAP is used to determine which event fired when a
@@ -5766,7 +5846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
