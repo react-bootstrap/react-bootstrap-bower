@@ -7,7 +7,7 @@
 		exports["ReactBootstrap"] = factory(require("react"));
 	else
 		root["ReactBootstrap"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_50__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_51__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -156,6 +156,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Well = _interopRequire(__webpack_require__(49));
 
+	var constants = _interopRequire(__webpack_require__(50));
+
 	module.exports = {
 	  Accordion: Accordion,
 	  Affix: Affix,
@@ -205,7 +207,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Table: Table,
 	  TabPane: TabPane,
 	  Tooltip: Tooltip,
-	  Well: Well
+	  Well: Well,
+	  constants: constants
 	};
 
 /***/ },
@@ -218,7 +221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var PanelGroup = _interopRequire(__webpack_require__(37));
 
@@ -246,13 +249,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
 	var AffixMixin = _interopRequire(__webpack_require__(3));
 
-	var domUtils = _interopRequire(__webpack_require__(51));
+	var domUtils = _interopRequire(__webpack_require__(52));
 
 	var Affix = React.createClass({
 	  displayName: "Affix",
@@ -286,11 +289,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
-	var domUtils = _interopRequire(__webpack_require__(51));
+	var domUtils = _interopRequire(__webpack_require__(52));
 
-	var EventListener = _interopRequire(__webpack_require__(52));
+	var EventListener = _interopRequire(__webpack_require__(53));
 
 	var AffixMixin = {
 	  propTypes: {
@@ -428,7 +431,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -498,9 +501,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
-	var constants = _interopRequire(__webpack_require__(53));
+	var constants = _interopRequire(__webpack_require__(50));
 
 	var BootstrapMixin = {
 	  propTypes: {
@@ -549,7 +552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -592,7 +595,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -691,7 +694,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -740,7 +743,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -780,7 +783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -792,7 +795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
-	var domUtils = _interopRequire(__webpack_require__(51));
+	var domUtils = _interopRequire(__webpack_require__(52));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -904,7 +907,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -1192,7 +1195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -1295,11 +1298,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
-	var constants = _interopRequire(__webpack_require__(53));
+	var constants = _interopRequire(__webpack_require__(50));
 
 	var Col = React.createClass({
 	  displayName: "Col",
@@ -1380,7 +1383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var TransitionEvents = _interopRequire(__webpack_require__(61));
 
@@ -1557,7 +1560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -1695,7 +1698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -1751,9 +1754,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
-	var EventListener = _interopRequire(__webpack_require__(52));
+	var EventListener = _interopRequire(__webpack_require__(53));
 
 	/**
 	 * Checks whether a node is within
@@ -1841,7 +1844,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	// TODO: listen for onTransitionEnd to remove el
 	function getElementsAndSelf(root, classes) {
@@ -1924,13 +1927,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var constants = _interopRequire(__webpack_require__(53));
+	var constants = _interopRequire(__webpack_require__(50));
 
 	var Glyphicon = React.createClass({
 	  displayName: "Glyphicon",
@@ -1972,7 +1975,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2015,7 +2018,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2260,7 +2263,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// https://www.npmjs.org/package/react-interpolate-component
 	// TODO: Drop this in favor of es6 string interpolation
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -2350,7 +2353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2378,7 +2381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2423,7 +2426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -2479,7 +2482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -2579,7 +2582,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2651,7 +2654,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -2659,7 +2662,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var FadeMixin = _interopRequire(__webpack_require__(18));
 
-	var EventListener = _interopRequire(__webpack_require__(52));
+	var EventListener = _interopRequire(__webpack_require__(53));
 
 	// TODO:
 	// - aria-labelledby
@@ -2838,7 +2841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -2850,7 +2853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
-	var domUtils = _interopRequire(__webpack_require__(51));
+	var domUtils = _interopRequire(__webpack_require__(52));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -2965,7 +2968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -3130,7 +3133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -3216,7 +3219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -3287,7 +3290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -3295,7 +3298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var OverlayMixin = _interopRequire(__webpack_require__(34));
 
-	var domUtils = _interopRequire(__webpack_require__(51));
+	var domUtils = _interopRequire(__webpack_require__(52));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -3523,7 +3526,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var CustomPropTypes = _interopRequire(__webpack_require__(59));
 
@@ -3601,7 +3604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -3633,7 +3636,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -3858,7 +3861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -3959,7 +3962,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4029,7 +4032,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -4079,7 +4082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4164,7 +4167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -4307,7 +4310,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4347,7 +4350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4479,7 +4482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -4632,7 +4635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _react = __webpack_require__(50);
+	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
@@ -4784,7 +4787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4833,7 +4836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -4928,7 +4931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -5002,7 +5005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
@@ -5036,10 +5039,58 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_50__;
+	"use strict";
+
+	module.exports = {
+	  CLASSES: {
+	    alert: "alert",
+	    button: "btn",
+	    "button-group": "btn-group",
+	    "button-toolbar": "btn-toolbar",
+	    column: "col",
+	    "input-group": "input-group",
+	    form: "form",
+	    glyphicon: "glyphicon",
+	    label: "label",
+	    "list-group-item": "list-group-item",
+	    panel: "panel",
+	    "panel-group": "panel-group",
+	    "progress-bar": "progress-bar",
+	    nav: "nav",
+	    navbar: "navbar",
+	    modal: "modal",
+	    row: "row",
+	    well: "well"
+	  },
+	  STYLES: {
+	    "default": "default",
+	    primary: "primary",
+	    success: "success",
+	    info: "info",
+	    warning: "warning",
+	    danger: "danger",
+	    link: "link",
+	    inline: "inline",
+	    tabs: "tabs",
+	    pills: "pills"
+	  },
+	  SIZES: {
+	    large: "lg",
+	    medium: "md",
+	    small: "sm",
+	    xsmall: "xs"
+	  },
+	  GLYPHS: ["asterisk", "plus", "euro", "eur", "minus", "cloud", "envelope", "pencil", "glass", "music", "search", "heart", "star", "star-empty", "user", "film", "th-large", "th", "th-list", "ok", "remove", "zoom-in", "zoom-out", "off", "signal", "cog", "trash", "home", "file", "time", "road", "download-alt", "download", "upload", "inbox", "play-circle", "repeat", "refresh", "list-alt", "lock", "flag", "headphones", "volume-off", "volume-down", "volume-up", "qrcode", "barcode", "tag", "tags", "book", "bookmark", "print", "camera", "font", "bold", "italic", "text-height", "text-width", "align-left", "align-center", "align-right", "align-justify", "list", "indent-left", "indent-right", "facetime-video", "picture", "map-marker", "adjust", "tint", "edit", "share", "check", "move", "step-backward", "fast-backward", "backward", "play", "pause", "stop", "forward", "fast-forward", "step-forward", "eject", "chevron-left", "chevron-right", "plus-sign", "minus-sign", "remove-sign", "ok-sign", "question-sign", "info-sign", "screenshot", "remove-circle", "ok-circle", "ban-circle", "arrow-left", "arrow-right", "arrow-up", "arrow-down", "share-alt", "resize-full", "resize-small", "exclamation-sign", "gift", "leaf", "fire", "eye-open", "eye-close", "warning-sign", "plane", "calendar", "random", "comment", "magnet", "chevron-up", "chevron-down", "retweet", "shopping-cart", "folder-close", "folder-open", "resize-vertical", "resize-horizontal", "hdd", "bullhorn", "bell", "certificate", "thumbs-up", "thumbs-down", "hand-right", "hand-left", "hand-up", "hand-down", "circle-arrow-right", "circle-arrow-left", "circle-arrow-up", "circle-arrow-down", "globe", "wrench", "tasks", "filter", "briefcase", "fullscreen", "dashboard", "paperclip", "heart-empty", "link", "phone", "pushpin", "usd", "gbp", "sort", "sort-by-alphabet", "sort-by-alphabet-alt", "sort-by-order", "sort-by-order-alt", "sort-by-attributes", "sort-by-attributes-alt", "unchecked", "expand", "collapse-down", "collapse-up", "log-in", "flash", "log-out", "new-window", "record", "save", "open", "saved", "import", "export", "send", "floppy-disk", "floppy-saved", "floppy-remove", "floppy-save", "floppy-open", "credit-card", "transfer", "cutlery", "header", "compressed", "earphone", "phone-alt", "tower", "stats", "sd-video", "hd-video", "subtitles", "sound-stereo", "sound-dolby", "sound-5-1", "sound-6-1", "sound-7-1", "copyright-mark", "registration-mark", "cloud-download", "cloud-upload", "tree-conifer", "tree-deciduous", "cd", "save-file", "open-file", "level-up", "copy", "paste", "alert", "equalizer", "king", "queen", "pawn", "bishop", "knight", "baby-formula", "tent", "blackboard", "bed", "apple", "erase", "hourglass", "lamp", "duplicate", "piggy-bank", "scissors", "bitcoin", "yen", "ruble", "scale", "ice-lolly", "ice-lolly-tasted", "education", "option-horizontal", "option-vertical", "menu-hamburger", "modal-window", "oil", "grain", "sunglasses", "text-size", "text-color", "text-background", "object-align-top", "object-align-bottom", "object-align-horizontal", "object-align-left", "object-align-vertical", "object-align-right", "triangle-right", "triangle-left", "triangle-bottom", "triangle-top", "console", "superscript", "subscript", "menu-left", "menu-right", "menu-down", "menu-up"]
+	};
 
 /***/ },
 /* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_51__;
+
+/***/ },
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5152,7 +5203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5213,54 +5264,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EventListener;
 
 /***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	module.exports = {
-	  CLASSES: {
-	    alert: "alert",
-	    button: "btn",
-	    "button-group": "btn-group",
-	    "button-toolbar": "btn-toolbar",
-	    column: "col",
-	    "input-group": "input-group",
-	    form: "form",
-	    glyphicon: "glyphicon",
-	    label: "label",
-	    "list-group-item": "list-group-item",
-	    panel: "panel",
-	    "panel-group": "panel-group",
-	    "progress-bar": "progress-bar",
-	    nav: "nav",
-	    navbar: "navbar",
-	    modal: "modal",
-	    row: "row",
-	    well: "well"
-	  },
-	  STYLES: {
-	    "default": "default",
-	    primary: "primary",
-	    success: "success",
-	    info: "info",
-	    warning: "warning",
-	    danger: "danger",
-	    link: "link",
-	    inline: "inline",
-	    tabs: "tabs",
-	    pills: "pills"
-	  },
-	  SIZES: {
-	    large: "lg",
-	    medium: "md",
-	    small: "sm",
-	    xsmall: "xs"
-	  },
-	  GLYPHS: ["asterisk", "plus", "euro", "eur", "minus", "cloud", "envelope", "pencil", "glass", "music", "search", "heart", "star", "star-empty", "user", "film", "th-large", "th", "th-list", "ok", "remove", "zoom-in", "zoom-out", "off", "signal", "cog", "trash", "home", "file", "time", "road", "download-alt", "download", "upload", "inbox", "play-circle", "repeat", "refresh", "list-alt", "lock", "flag", "headphones", "volume-off", "volume-down", "volume-up", "qrcode", "barcode", "tag", "tags", "book", "bookmark", "print", "camera", "font", "bold", "italic", "text-height", "text-width", "align-left", "align-center", "align-right", "align-justify", "list", "indent-left", "indent-right", "facetime-video", "picture", "map-marker", "adjust", "tint", "edit", "share", "check", "move", "step-backward", "fast-backward", "backward", "play", "pause", "stop", "forward", "fast-forward", "step-forward", "eject", "chevron-left", "chevron-right", "plus-sign", "minus-sign", "remove-sign", "ok-sign", "question-sign", "info-sign", "screenshot", "remove-circle", "ok-circle", "ban-circle", "arrow-left", "arrow-right", "arrow-up", "arrow-down", "share-alt", "resize-full", "resize-small", "exclamation-sign", "gift", "leaf", "fire", "eye-open", "eye-close", "warning-sign", "plane", "calendar", "random", "comment", "magnet", "chevron-up", "chevron-down", "retweet", "shopping-cart", "folder-close", "folder-open", "resize-vertical", "resize-horizontal", "hdd", "bullhorn", "bell", "certificate", "thumbs-up", "thumbs-down", "hand-right", "hand-left", "hand-up", "hand-down", "circle-arrow-right", "circle-arrow-left", "circle-arrow-up", "circle-arrow-down", "globe", "wrench", "tasks", "filter", "briefcase", "fullscreen", "dashboard", "paperclip", "heart-empty", "link", "phone", "pushpin", "usd", "gbp", "sort", "sort-by-alphabet", "sort-by-alphabet-alt", "sort-by-order", "sort-by-order-alt", "sort-by-attributes", "sort-by-attributes-alt", "unchecked", "expand", "collapse-down", "collapse-up", "log-in", "flash", "log-out", "new-window", "record", "save", "open", "saved", "import", "export", "send", "floppy-disk", "floppy-saved", "floppy-remove", "floppy-save", "floppy-open", "credit-card", "transfer", "cutlery", "header", "compressed", "earphone", "phone-alt", "tower", "stats", "sd-video", "hd-video", "subtitles", "sound-stereo", "sound-dolby", "sound-5-1", "sound-6-1", "sound-7-1", "copyright-mark", "registration-mark", "cloud-download", "cloud-upload", "tree-conifer", "tree-deciduous", "cd", "save-file", "open-file", "level-up", "copy", "paste", "alert", "equalizer", "king", "queen", "pawn", "bishop", "knight", "baby-formula", "tent", "blackboard", "bed", "apple", "erase", "hourglass", "lamp", "duplicate", "piggy-bank", "scissors", "bitcoin", "yen", "ruble", "scale", "ice-lolly", "ice-lolly-tasted", "education", "option-horizontal", "option-vertical", "menu-hamburger", "modal-window", "oil", "grain", "sunglasses", "text-size", "text-color", "text-background", "object-align-top", "object-align-bottom", "object-align-horizontal", "object-align-left", "object-align-vertical", "object-align-right", "triangle-right", "triangle-left", "triangle-bottom", "triangle-top", "console", "superscript", "subscript", "menu-left", "menu-right", "menu-down", "menu-up"]
-	};
-
-/***/ },
 /* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5268,7 +5271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	/**
 	 * Maps children that are typically specified as `props.children`,
@@ -5529,7 +5532,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-	var React = _interopRequire(__webpack_require__(50));
+	var React = _interopRequire(__webpack_require__(51));
 
 	var classSet = _interopRequire(__webpack_require__(60));
 
