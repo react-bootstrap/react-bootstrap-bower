@@ -399,7 +399,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentDidMount: function componentDidMount() {
 	    this._onWindowScrollListener = EventListener.listen(window, "scroll", this.checkPosition);
-	    this._onDocumentClickListener = EventListener.listen(React.findDOMNode(this).ownerDocument, "click", this.checkPositionWithEventLoop);
+	    this._onDocumentClickListener = EventListener.listen(domUtils.ownerDocument(this), "click", this.checkPositionWithEventLoop);
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
@@ -808,6 +808,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  propTypes: {
 	    onSelect: React.PropTypes.func,
+	    activeHref: React.PropTypes.string,
+	    activeKey: React.PropTypes.any,
 	    expanded: React.PropTypes.bool,
 	    eventKey: React.PropTypes.any
 	  },
@@ -1756,6 +1758,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
+	var domUtils = _interopRequire(__webpack_require__(52));
+
 	var EventListener = _interopRequire(__webpack_require__(53));
 
 	/**
@@ -1813,7 +1817,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  bindRootCloseHandlers: function bindRootCloseHandlers() {
-	    var doc = React.findDOMNode(this).ownerDocument;
+	    var doc = domUtils.ownerDocument(this);
 
 	    this._onDocumentClickListener = EventListener.listen(doc, "click", this.handleDocumentClick);
 	    this._onDocumentKeyupListener = EventListener.listen(doc, "keyup", this.handleDocumentKeyUp);
@@ -1845,6 +1849,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 	var React = _interopRequire(__webpack_require__(51));
+
+	var domUtils = _interopRequire(__webpack_require__(52));
 
 	// TODO: listen for onTransitionEnd to remove el
 	function getElementsAndSelf(root, classes) {
@@ -1905,7 +1911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    var els = getElementsAndSelf(React.findDOMNode(this), ["fade"]),
-	        container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
+	        container = this.props.container && React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
 
 	    if (els.length) {
 	      this._fadeOutEl = document.createElement("div");
@@ -2048,6 +2054,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return React.PropTypes.oneOf(["success", "warning", "error"]).apply(null, arguments);
 	    },
 	    hasFeedback: React.PropTypes.bool,
+	    id: React.PropTypes.string,
 	    groupClassName: React.PropTypes.string,
 	    wrapperClassName: React.PropTypes.string,
 	    labelClassName: React.PropTypes.string,
@@ -2662,6 +2669,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var FadeMixin = _interopRequire(__webpack_require__(18));
 
+	var domUtils = _interopRequire(__webpack_require__(52));
+
 	var EventListener = _interopRequire(__webpack_require__(53));
 
 	// TODO:
@@ -2792,9 +2801,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  componentDidMount: function componentDidMount() {
-	    this._onDocumentKeyupListener = EventListener.listen(React.findDOMNode(this).ownerDocument, "keyup", this.handleDocumentKeyUp);
+	    this._onDocumentKeyupListener = EventListener.listen(domUtils.ownerDocument(this), "keyup", this.handleDocumentKeyUp);
 
-	    var container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
+	    var container = this.props.container && React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
 	    container.className += container.className.length ? " modal-open" : "modal-open";
 
 	    if (this.props.backdrop) {
@@ -2810,7 +2819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    this._onDocumentKeyupListener.remove();
-	    var container = this.props.container && React.findDOMNode(this.props.container) || React.findDOMNode(this).ownerDocument.body;
+	    var container = this.props.container && React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
 	    container.className = container.className.replace(/ ?modal-open/, "");
 	  },
 
@@ -2865,6 +2874,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  mixins: [BootstrapMixin, CollapsableMixin],
 
 	  propTypes: {
+	    activeHref: React.PropTypes.string,
+	    activeKey: React.PropTypes.any,
 	    bsStyle: React.PropTypes.oneOf(["tabs", "pills"]),
 	    stacked: React.PropTypes.bool,
 	    justified: React.PropTypes.bool,
@@ -3530,6 +3541,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var CustomPropTypes = _interopRequire(__webpack_require__(59));
 
+	var domUtils = _interopRequire(__webpack_require__(52));
+
 	module.exports = {
 	  propTypes: {
 	    container: CustomPropTypes.mountable
@@ -3590,7 +3603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  getContainerDOMNode: function getContainerDOMNode() {
-	    return React.findDOMNode(this.props.container || React.findDOMNode(this).ownerDocument.body);
+	    return React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
 	  }
 	};
 
@@ -3657,6 +3670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    collapsable: React.PropTypes.bool,
 	    onSelect: React.PropTypes.func,
 	    header: React.PropTypes.node,
+	    id: React.PropTypes.string,
 	    footer: React.PropTypes.node,
 	    eventKey: React.PropTypes.any
 	  },
@@ -4373,6 +4387,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    pullRight: React.PropTypes.bool,
 	    title: React.PropTypes.node,
 	    href: React.PropTypes.string,
+	    id: React.PropTypes.string,
 	    target: React.PropTypes.string,
 	    dropdownTitle: React.PropTypes.node,
 	    onClick: React.PropTypes.func,
@@ -4504,6 +4519,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  propTypes: {
 	    onSelect: React.PropTypes.func,
 	    active: React.PropTypes.bool,
+	    activeHref: React.PropTypes.string,
+	    activeKey: React.PropTypes.any,
 	    disabled: React.PropTypes.bool,
 	    href: React.PropTypes.string,
 	    title: React.PropTypes.string,
@@ -4667,8 +4684,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  mixins: [BootstrapMixin],
 
 	  propTypes: {
+	    activeKey: React.PropTypes.any,
+	    defaultActiveKey: React.PropTypes.any,
 	    bsStyle: React.PropTypes.oneOf(["tabs", "pills"]),
 	    animation: React.PropTypes.bool,
+	    id: React.PropTypes.string,
 	    onSelect: React.PropTypes.func
 	  },
 
@@ -4844,6 +4864,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var TabPane = React.createClass({
 	  displayName: "TabPane",
+
+	  propTypes: {
+	    active: React.PropTypes.bool
+	  },
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -5093,16 +5117,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+	var React = _interopRequire(__webpack_require__(51));
+
+	/**
+	 * Get elements owner document
+	 *
+	 * @param {ReactComponent|HTMLElement} componentOrElement
+	 * @returns {HTMLElement}
+	 */
+	function ownerDocument(componentOrElement) {
+	  var elem = React.findDOMNode(componentOrElement);
+	  return elem && elem.ownerDocument || document;
+	}
+
 	/**
 	 * Shortcut to compute element style
 	 *
 	 * @param {HTMLElement} elem
 	 * @returns {CssStyle}
 	 */
-	"use strict";
-
 	function getComputedStyles(elem) {
-	  return elem.ownerDocument.defaultView.getComputedStyle(elem, null);
+	  return ownerDocument(elem).defaultView.getComputedStyle(elem, null);
 	}
 
 	/**
@@ -5118,7 +5157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return window.jQuery(DOMNode).offset();
 	  }
 
-	  var docElem = DOMNode.ownerDocument.documentElement;
+	  var docElem = ownerDocument(DOMNode).documentElement;
 	  var box = { top: 0, left: 0 };
 
 	  // If we don't have gBCR, just use 0,0 rather than error
@@ -5185,7 +5224,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {HTMLElement}
 	 */
 	function offsetParentFunc(elem) {
-	  var docElem = elem.ownerDocument.documentElement;
+	  var docElem = ownerDocument(elem).documentElement;
 	  var offsetParent = elem.offsetParent || docElem;
 
 	  while (offsetParent && (offsetParent.nodeName !== "HTML" && getComputedStyles(offsetParent).position === "static")) {
@@ -5196,6 +5235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = {
+	  ownerDocument: ownerDocument,
 	  getComputedStyles: getComputedStyles,
 	  getOffset: getOffset,
 	  getPosition: getPosition,
