@@ -251,7 +251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var AffixMixin = _interopRequire(__webpack_require__(3));
 
@@ -272,7 +272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, this.state.affixClass),
+	        className: classNames(this.props.className, this.state.affixClass),
 	        style: holderStyle }),
 	      this.props.children
 	    );
@@ -433,7 +433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -474,7 +474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      isDismissable ? this.renderDismissButton() : null,
 	      this.props.children
 	    );
@@ -556,7 +556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Badge = React.createClass({
 	  displayName: "Badge",
@@ -577,7 +577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "span",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -597,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -652,7 +652,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Component,
 	      _extends({}, this.props, {
 	        href: href,
-	        className: classSet(this.props.className, classes),
+	        className: classNames(this.props.className, classes),
 	        role: "button" }),
 	      this.props.children
 	    );
@@ -664,7 +664,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      Component,
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  },
@@ -676,7 +676,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "li",
-	      { className: classSet(liClasses) },
+	      { className: classNames(liClasses) },
 	      this.renderAnchor(classes)
 	    );
 	  }
@@ -696,7 +696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -725,7 +725,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -745,7 +745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -767,7 +767,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      "div",
 	      _extends({}, this.props, {
 	        role: "toolbar",
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -793,7 +793,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
@@ -810,6 +810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onSelect: React.PropTypes.func,
 	    activeHref: React.PropTypes.string,
 	    activeKey: React.PropTypes.any,
+	    collapsable: React.PropTypes.bool,
 	    expanded: React.PropTypes.bool,
 	    eventKey: React.PropTypes.any
 	  },
@@ -849,7 +850,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      { eventKey: this.props.eventKey, className: classSet(this.props.className, classes) },
+	      { eventKey: this.props.eventKey, className: classNames(this.props.className, classes) },
 	      ValidComponentChildren.map(this.props.children, this.props.collapsable ? this.renderCollapsableNavChildren : this.renderChildren)
 	    );
 	  },
@@ -915,7 +916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -929,6 +930,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  propTypes: {
 	    slide: React.PropTypes.bool,
 	    indicators: React.PropTypes.bool,
+	    interval: React.PropTypes.number,
 	    controls: React.PropTypes.bool,
 	    pauseOnHover: React.PropTypes.bool,
 	    wrap: React.PropTypes.bool,
@@ -1058,7 +1060,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes),
+	        className: classNames(this.props.className, classes),
 	        onMouseOver: this.handleMouseOver,
 	        onMouseOut: this.handleMouseOut }),
 	      this.props.indicators ? this.renderIndicators() : null,
@@ -1199,7 +1201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
@@ -1210,7 +1212,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    direction: React.PropTypes.oneOf(["prev", "next"]),
 	    onAnimateOutEnd: React.PropTypes.func,
 	    active: React.PropTypes.bool,
-	    caption: React.PropTypes.node
+	    animateIn: React.PropTypes.bool,
+	    animateOut: React.PropTypes.bool,
+	    caption: React.PropTypes.node,
+	    index: React.PropTypes.number
 	  },
 
 	  getInitialState: function getInitialState() {
@@ -1273,7 +1278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children,
 	      this.props.caption ? this.renderCaption() : null
 	    );
@@ -1302,7 +1307,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var constants = _interopRequire(__webpack_require__(50));
 
@@ -1369,7 +1374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      ComponentClass,
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -1568,7 +1573,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -1641,7 +1646,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ButtonGroup,
 	      {
 	        bsSize: this.props.bsSize,
-	        className: classSet(this.props.className, groupClasses) },
+	        className: classNames(this.props.className, groupClasses) },
 	      children
 	    );
 	  },
@@ -1655,7 +1660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "li",
-	      { className: classSet(this.props.className, classes) },
+	      { className: classNames(this.props.className, classes) },
 	      children
 	    );
 	  },
@@ -1706,7 +1711,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var createChainedFunction = _interopRequire(__webpack_require__(55));
 
@@ -1729,7 +1734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "ul",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes),
+	        className: classNames(this.props.className, classes),
 	        role: "menu" }),
 	      ValidComponentChildren.map(this.props.children, this.renderMenuItem)
 	    );
@@ -1935,7 +1940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -1963,7 +1968,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "span",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -1983,7 +1988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Grid = React.createClass({
 	  displayName: "Grid",
@@ -2006,7 +2011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      ComponentClass,
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, className) }),
+	        className: classNames(this.props.className, className) }),
 	      this.props.children
 	    );
 	  }
@@ -2026,7 +2031,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Button = _interopRequire(__webpack_require__(7));
 
@@ -2058,7 +2063,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    groupClassName: React.PropTypes.string,
 	    wrapperClassName: React.PropTypes.string,
 	    labelClassName: React.PropTypes.string,
-	    disabled: React.PropTypes.bool
+	    multiple: React.PropTypes.bool,
+	    disabled: React.PropTypes.bool,
+	    value: React.PropTypes.any
 	  },
 
 	  getInputDOMNode: function getInputDOMNode() {
@@ -2116,17 +2123,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case "select":
 	        input = React.createElement(
 	          "select",
-	          _extends({}, this.props, { className: classSet(this.props.className, "form-control"), ref: "input", key: "input" }),
+	          _extends({}, this.props, { className: classNames(this.props.className, "form-control"), ref: "input", key: "input" }),
 	          this.props.children
 	        );
 	        break;
 	      case "textarea":
-	        input = React.createElement("textarea", _extends({}, this.props, { className: classSet(this.props.className, "form-control"), ref: "input", key: "input" }));
+	        input = React.createElement("textarea", _extends({}, this.props, { className: classNames(this.props.className, "form-control"), ref: "input", key: "input" }));
 	        break;
 	      case "static":
 	        input = React.createElement(
 	          "p",
-	          _extends({}, this.props, { className: classSet(this.props.className, "form-control-static"), ref: "input", key: "input" }),
+	          _extends({}, this.props, { className: classNames(this.props.className, "form-control-static"), ref: "input", key: "input" }),
 	          this.props.value
 	        );
 	        break;
@@ -2135,7 +2142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        break;
 	      default:
 	        var className = this.isCheckboxOrRadio() || this.isFile() ? "" : "form-control";
-	        input = React.createElement("input", _extends({}, this.props, { className: classSet(this.props.className, className), ref: "input", key: "input" }));
+	        input = React.createElement("input", _extends({}, this.props, { className: classNames(this.props.className, className), ref: "input", key: "input" }));
 	    }
 
 	    return input;
@@ -2176,7 +2183,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return addonBefore || addonAfter || buttonBefore || buttonAfter ? React.createElement(
 	      "div",
-	      { className: classSet(inputGroupClassName, "input-group"), key: "input-group" },
+	      { className: classNames(inputGroupClassName, "input-group"), key: "input-group" },
 	      addonBefore,
 	      buttonBefore,
 	      children,
@@ -2194,7 +2201,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      "glyphicon-remove": this.props.bsStyle === "error"
 	    };
 
-	    return this.props.hasFeedback ? React.createElement("span", { className: classSet(classes), key: "icon" }) : null;
+	    return this.props.hasFeedback ? React.createElement("span", { className: classNames(classes), key: "icon" }) : null;
 	  },
 
 	  renderHelp: function renderHelp() {
@@ -2213,7 +2220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      { className: classSet(classes), key: "checkboxRadioWrapper" },
+	      { className: classNames(classes), key: "checkboxRadioWrapper" },
 	      children
 	    );
 	  },
@@ -2234,7 +2241,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return this.props.label ? React.createElement(
 	      "label",
-	      { htmlFor: this.props.id, className: classSet(classes), key: "label" },
+	      { htmlFor: this.props.id, className: classNames(classes), key: "label" },
 	      children,
 	      this.props.label
 	    ) : children;
@@ -2362,7 +2369,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Jumbotron = React.createClass({
 	  displayName: "Jumbotron",
@@ -2370,7 +2377,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, "jumbotron") }),
+	      _extends({}, this.props, { className: classNames(this.props.className, "jumbotron") }),
 	      this.props.children
 	    );
 	  }
@@ -2390,7 +2397,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -2411,7 +2418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "span",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -2439,7 +2446,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -2463,7 +2470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return React.createElement(
 	          "div",
-	          { className: classSet(this.props.className, "list-group") },
+	          { className: classNames(this.props.className, "list-group") },
 	          items
 	        );
 	      }
@@ -2497,7 +2504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ListGroupItem = React.createClass({
 	  displayName: "ListGroupItem",
@@ -2537,7 +2544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  renderSpan: function renderSpan(classes) {
 	    return React.createElement(
 	      "span",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.header ? this.renderStructuredContent() : this.props.children
 	    );
 	  },
@@ -2546,7 +2553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "a",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes)
+	        className: classNames(this.props.className, classes)
 	      }),
 	      this.props.header ? this.renderStructuredContent() : this.props.children
 	    );
@@ -2557,7 +2564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (React.isValidElement(this.props.header)) {
 	      header = cloneElement(this.props.header, {
 	        key: "header",
-	        className: classSet(this.props.header.props.className, "list-group-item-heading")
+	        className: classNames(this.props.header.props.className, "list-group-item-heading")
 	      });
 	    } else {
 	      header = React.createElement(
@@ -2591,7 +2598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var MenuItem = React.createClass({
 	  displayName: "MenuItem",
@@ -2643,7 +2650,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "li",
 	      _extends({}, this.props, { role: "presentation", title: null, href: null,
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      children
 	    );
 	  }
@@ -2663,7 +2670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -2721,12 +2728,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        tabIndex: "-1",
 	        role: "dialog",
 	        style: modalStyle,
-	        className: classSet(this.props.className, classes),
+	        className: classNames(this.props.className, classes),
 	        onClick: this.props.backdrop === true ? this.handleBackdropClick : null,
 	        ref: "modal" }),
 	      React.createElement(
 	        "div",
-	        { className: classSet(dialogClasses) },
+	        { className: classNames(dialogClasses) },
 	        React.createElement(
 	          "div",
 	          { className: "modal-content", style: { overflow: "hidden" } },
@@ -2752,7 +2759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement("div", { className: classSet(classes), ref: "backdrop", onClick: onClick }),
+	      React.createElement("div", { className: classNames(classes), ref: "backdrop", onClick: onClick }),
 	      modal
 	    );
 	  },
@@ -2774,7 +2781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    classes["bg-" + style] = style;
 	    classes["text-" + style] = style;
 
-	    var className = classSet(classes);
+	    var className = classNames(classes);
 
 	    return React.createElement(
 	      "div",
@@ -2860,7 +2867,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var CollapsableMixin = _interopRequire(__webpack_require__(14));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
@@ -2884,6 +2891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    expanded: React.PropTypes.bool,
 	    navbar: React.PropTypes.bool,
 	    eventKey: React.PropTypes.any,
+	    pullRight: React.PropTypes.bool,
 	    right: React.PropTypes.bool
 	  },
 
@@ -2916,7 +2924,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "nav",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.renderUl()
 	    );
 	  },
@@ -2932,7 +2940,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "ul",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes), ref: "ul" }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes), ref: "ul" }),
 	      ValidComponentChildren.map(this.props.children, this.renderNavItem)
 	    );
 	  },
@@ -2987,7 +2995,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -3061,7 +3069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      ComponentClass,
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      React.createElement(
 	        "div",
 	        { className: this.props.fluid ? "container-fluid" : "container" },
@@ -3086,7 +3094,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.brand) {
 	      if (React.isValidElement(this.props.brand)) {
 	        brand = cloneElement(this.props.brand, {
-	          className: classSet(this.props.brand.props.className, "navbar-brand")
+	          className: classNames(this.props.brand.props.className, "navbar-brand")
 	        });
 	      } else {
 	        brand = React.createElement(
@@ -3111,7 +3119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (React.isValidElement(this.props.toggleButton)) {
 
 	      return cloneElement(this.props.toggleButton, {
-	        className: classSet(this.props.toggleButton.props.className, "navbar-toggle"),
+	        className: classNames(this.props.toggleButton.props.className, "navbar-toggle"),
 	        onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
 	      });
 	    }
@@ -3146,7 +3154,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3200,7 +3208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "li",
-	      _extends({}, props, { className: classSet(props.className, classes) }),
+	      _extends({}, props, { className: classNames(props.className, classes) }),
 	      React.createElement(
 	        "a",
 	        linkProps,
@@ -3619,7 +3627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var PageHeader = React.createClass({
 	  displayName: "PageHeader",
@@ -3627,7 +3635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, "page-header") }),
+	      _extends({}, this.props, { className: classNames(this.props.className, "page-header") }),
 	      React.createElement(
 	        "h1",
 	        null,
@@ -3655,7 +3663,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3718,7 +3726,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes),
+	        className: classNames(this.props.className, classes),
 	        id: this.props.collapsable ? null : this.props.id, onSelect: null }),
 	      this.renderHeading(),
 	      this.props.collapsable ? this.renderCollapsableBody() : this.renderBody(),
@@ -3732,7 +3740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "div",
 	      {
-	        className: classSet(this.getCollapsableClassSet(collapseClass)),
+	        className: classNames(this.getCollapsableClassSet(collapseClass)),
 	        id: this.props.id,
 	        ref: "panel",
 	        "aria-expanded": this.isExpanded() ? "true" : "false" },
@@ -3813,13 +3821,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else if (this.props.collapsable) {
 
 	      header = cloneElement(header, {
-	        className: classSet(this.prefixClass("title")),
+	        className: classNames(this.prefixClass("title")),
 	        children: this.renderAnchor(header.props.children)
 	      });
 	    } else {
 
 	      header = cloneElement(header, {
-	        className: classSet(this.prefixClass("title"))
+	        className: classNames(this.prefixClass("title"))
 	      });
 	    }
 
@@ -3875,13 +3883,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	/* eslint react/prop-types: [1, {ignore: ["children", "className", "bsStyle"]}]*/
+	/* BootstrapMixin contains `bsStyle` type validation */
+
 	var _react = __webpack_require__(51);
 
 	var React = _interopRequire(_react);
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -3894,6 +3905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  propTypes: {
 	    collapsable: React.PropTypes.bool,
+	    accordion: React.PropTypes.bool,
 	    activeKey: React.PropTypes.any,
 	    defaultActiveKey: React.PropTypes.any,
 	    onSelect: React.PropTypes.func
@@ -3917,7 +3929,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var classes = this.getBsClassSet();
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes), onSelect: null }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes), onSelect: null }),
 	      ValidComponentChildren.map(this.props.children, this.renderPanel)
 	    );
 	  },
@@ -3978,7 +3990,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var PageItem = React.createClass({
 	  displayName: "PageItem",
@@ -3986,6 +3998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  propTypes: {
 	    href: React.PropTypes.string,
 	    target: React.PropTypes.string,
+	    title: React.PropTypes.string,
 	    disabled: React.PropTypes.bool,
 	    previous: React.PropTypes.bool,
 	    next: React.PropTypes.bool,
@@ -4009,7 +4022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "li",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, classes) }),
+	        className: classNames(this.props.className, classes) }),
 	      React.createElement(
 	        "a",
 	        {
@@ -4052,7 +4065,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4069,7 +4082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      "ul",
 	      _extends({}, this.props, {
-	        className: classSet(this.props.className, "pager") }),
+	        className: classNames(this.props.className, "pager") }),
 	      ValidComponentChildren.map(this.props.children, this.renderPageItem)
 	    );
 	  },
@@ -4098,7 +4111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4149,7 +4162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes), style: style, title: null }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes), style: style, title: null }),
 	      React.createElement("div", { className: "arrow", style: arrowStyle }),
 	      this.props.title ? this.renderTitle() : null,
 	      React.createElement(
@@ -4191,7 +4204,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4238,7 +4251,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!this.props.isChild) {
 	        return React.createElement(
 	          "div",
-	          _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	          _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	          this.renderProgressBar()
 	        );
 	      } else {
@@ -4247,7 +4260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      return React.createElement(
 	        "div",
-	        _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	        _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	        ValidComponentChildren.map(this.props.children, this.renderChildBar)
 	      );
 	    }
@@ -4279,7 +4292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes), role: "progressbar",
+	      _extends({}, this.props, { className: classNames(this.props.className, classes), role: "progressbar",
 	        style: { width: percentage + "%" },
 	        "aria-valuenow": this.props.now,
 	        "aria-valuemin": this.props.min,
@@ -4326,7 +4339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Row = React.createClass({
 	  displayName: "Row",
@@ -4346,7 +4359,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      ComponentClass,
-	      _extends({}, this.props, { className: classSet(this.props.className, "row") }),
+	      _extends({}, this.props, { className: classNames(this.props.className, "row") }),
 	      this.props.children
 	    );
 	  }
@@ -4364,9 +4377,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	/* eslint react/prop-types: [1, {ignore: ["children", "className", "bsSize"]}]*/
+	/* BootstrapMixin contains `bsSize` type validation */
+
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4390,6 +4406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    id: React.PropTypes.string,
 	    target: React.PropTypes.string,
 	    dropdownTitle: React.PropTypes.node,
+	    dropup: React.PropTypes.bool,
 	    onClick: React.PropTypes.func,
 	    onSelect: React.PropTypes.func,
 	    disabled: React.PropTypes.bool
@@ -4421,7 +4438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Button,
 	      _extends({}, this.props, {
 	        ref: "dropdownButton",
-	        className: classSet(this.props.className, "dropdown-toggle"),
+	        className: classNames(this.props.className, "dropdown-toggle"),
 	        onClick: this.handleDropdownClick,
 	        title: null,
 	        href: null,
@@ -4444,7 +4461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ButtonGroup,
 	      {
 	        bsSize: this.props.bsSize,
-	        className: classSet(groupClasses),
+	        className: classNames(groupClasses),
 	        id: this.props.id },
 	      button,
 	      dropdownButton,
@@ -4503,7 +4520,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var cloneElement = _react.cloneElement;
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
 
@@ -4522,6 +4539,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    activeHref: React.PropTypes.string,
 	    activeKey: React.PropTypes.any,
 	    disabled: React.PropTypes.bool,
+	    eventKey: React.PropTypes.any,
 	    href: React.PropTypes.string,
 	    title: React.PropTypes.string,
 	    text: React.PropTypes.node,
@@ -4612,7 +4630,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "li",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      React.createElement(
 	        "a",
 	        {
@@ -4809,7 +4827,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var Table = React.createClass({
 	  displayName: "Table",
@@ -4832,7 +4850,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    var table = React.createElement(
 	      "table",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 
@@ -4858,7 +4876,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var TransitionEvents = _interopRequire(__webpack_require__(56));
 
@@ -4866,7 +4884,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: "TabPane",
 
 	  propTypes: {
-	    active: React.PropTypes.bool
+	    active: React.PropTypes.bool,
+	    animation: React.PropTypes.bool,
+	    onAnimateOutEnd: React.PropTypes.func
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
@@ -4919,7 +4939,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        animateOut: false
 	      });
 
-	      if (typeof this.props.onAnimateOutEnd === "function") {
+	      if (this.props.onAnimateOutEnd) {
 	        this.props.onAnimateOutEnd();
 	      }
 	    }
@@ -4935,7 +4955,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -4957,7 +4977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -5006,7 +5026,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes), style: style }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes), style: style }),
 	      React.createElement("div", { className: "tooltip-arrow", style: arrowStyle }),
 	      React.createElement(
 	        "div",
@@ -5031,7 +5051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -5051,7 +5071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return React.createElement(
 	      "div",
-	      _extends({}, this.props, { className: classSet(this.props.className, classes) }),
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.children
 	    );
 	  }
@@ -5574,7 +5594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var classSet = _interopRequire(__webpack_require__(60));
+	var classNames = _interopRequire(__webpack_require__(60));
 
 	var FormGroup = (function (_React$Component) {
 	  function FormGroup() {
@@ -5600,7 +5620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        return React.createElement(
 	          "div",
-	          { className: classSet(classes, this.props.groupClassName) },
+	          { className: classNames(classes, this.props.groupClassName) },
 	          this.props.children
 	        );
 	      }
