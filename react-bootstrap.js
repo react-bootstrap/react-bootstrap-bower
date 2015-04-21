@@ -156,7 +156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Well = _interopRequire(__webpack_require__(49));
 
-	var constants = _interopRequire(__webpack_require__(50));
+	var styleMaps = _interopRequire(__webpack_require__(50));
 
 	module.exports = {
 	  Accordion: Accordion,
@@ -208,7 +208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  TabPane: TabPane,
 	  Tooltip: Tooltip,
 	  Well: Well,
-	  constants: constants
+	  styleMaps: styleMaps
 	};
 
 /***/ },
@@ -501,32 +501,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-	var React = _interopRequire(__webpack_require__(51));
+	var styleMaps = _interopRequire(__webpack_require__(50));
 
-	var constants = _interopRequire(__webpack_require__(50));
+	var CustomPropTypes = _interopRequire(__webpack_require__(54));
 
 	var BootstrapMixin = {
 	  propTypes: {
-	    bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
-	    bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-	    bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
+	    bsClass: CustomPropTypes.keyOf(styleMaps.CLASSES),
+	    bsStyle: CustomPropTypes.keyOf(styleMaps.STYLES),
+	    bsSize: CustomPropTypes.keyOf(styleMaps.SIZES)
 	  },
 
 	  getBsClassSet: function getBsClassSet() {
 	    var classes = {};
 
-	    var bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
+	    var bsClass = this.props.bsClass && styleMaps.CLASSES[this.props.bsClass];
 	    if (bsClass) {
 	      classes[bsClass] = true;
 
 	      var prefix = bsClass + "-";
 
-	      var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
+	      var bsSize = this.props.bsSize && styleMaps.SIZES[this.props.bsSize];
 	      if (bsSize) {
 	        classes[prefix + bsSize] = true;
 	      }
 
-	      var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
+	      var bsStyle = this.props.bsStyle && styleMaps.STYLES[this.props.bsStyle];
 	      if (this.props.bsStyle) {
 	        classes[prefix + bsStyle] = true;
 	      }
@@ -536,7 +536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  prefixClass: function prefixClass(subClass) {
-	    return constants.CLASSES[this.props.bsClass] + "-" + subClass;
+	    return styleMaps.CLASSES[this.props.bsClass] + "-" + subClass;
 	  }
 	};
 
@@ -554,7 +554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
@@ -566,7 +566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  hasContent: function hasContent() {
-	    return ValidComponentChildren.hasValidComponent(this.props.children) || typeof this.props.children === "string" || typeof this.props.children === "number";
+	    return ValidComponentChildren.hasValidComponent(this.props.children) || React.Children.count(this.props.children) > 1 || typeof this.props.children === "string" || typeof this.props.children === "number";
 	  },
 
 	  render: function render() {
@@ -797,9 +797,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var CollapsableNav = React.createClass({
 	  displayName: "CollapsableNav",
@@ -920,7 +920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var Carousel = React.createClass({
 	  displayName: "Carousel",
@@ -1203,7 +1203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(56));
+	var TransitionEvents = _interopRequire(__webpack_require__(57));
 
 	var CarouselItem = React.createClass({
 	  displayName: "CarouselItem",
@@ -1309,7 +1309,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var constants = _interopRequire(__webpack_require__(50));
+	var styleMaps = _interopRequire(__webpack_require__(50));
 
 	var Col = React.createClass({
 	  displayName: "Col",
@@ -1344,8 +1344,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var ComponentClass = this.props.componentClass;
 	    var classes = {};
 
-	    Object.keys(constants.SIZES).forEach(function (key) {
-	      var size = constants.SIZES[key];
+	    Object.keys(styleMaps.SIZES).forEach(function (key) {
+	      var size = styleMaps.SIZES[key];
 	      var prop = size;
 	      var classPart = size + "-";
 
@@ -1575,7 +1575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -1587,7 +1587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var DropdownMenu = _interopRequire(__webpack_require__(16));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var DropdownButton = React.createClass({
 	  displayName: "DropdownButton",
@@ -1713,9 +1713,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var DropdownMenu = React.createClass({
 	  displayName: "DropdownMenu",
@@ -1944,7 +1944,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var constants = _interopRequire(__webpack_require__(50));
+	var styleMaps = _interopRequire(__webpack_require__(50));
 
 	var Glyphicon = React.createClass({
 	  displayName: "Glyphicon",
@@ -1952,7 +1952,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  mixins: [BootstrapMixin],
 
 	  propTypes: {
-	    glyph: React.PropTypes.oneOf(constants.GLYPHS).isRequired
+	    glyph: React.PropTypes.oneOf(styleMaps.GLYPHS).isRequired
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
@@ -2035,7 +2035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Button = _interopRequire(__webpack_require__(7));
 
-	var FormGroup = _interopRequire(__webpack_require__(57));
+	var FormGroup = _interopRequire(__webpack_require__(58));
 
 	var Input = React.createClass({
 	  displayName: "Input",
@@ -2279,9 +2279,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var assign = _interopRequire(__webpack_require__(58));
+	var assign = _interopRequire(__webpack_require__(59));
 
 	var REGEXP = /\%\((.+?)\)s/;
 
@@ -2448,7 +2448,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var ListGroup = (function (_React$Component) {
 	  function ListGroup() {
@@ -2468,6 +2468,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return cloneElement(item, { key: item.key ? item.key : index });
 	        });
 
+	        var childrenAnchors = false;
+
+	        if (!this.props.children) {
+	          return this.renderDiv(items);
+	        } else if (React.Children.count(this.props.children) === 1) {
+	          var child = this.props.children;
+
+	          childrenAnchors = child.props.href ? true : false;
+	        } else {
+
+	          childrenAnchors = Array.prototype.some.call(this.props.children, function (child) {
+	            return child.props.href;
+	          });
+	        }
+
+	        if (childrenAnchors) {
+	          return this.renderDiv(items);
+	        } else {
+	          return this.renderUL(items);
+	        }
+	      }
+	    },
+	    renderUL: {
+	      value: function renderUL(items) {
+	        var listItems = ValidComponentChildren.map(items, function (item, index) {
+	          return cloneElement(item, { listItem: true });
+	        });
+
+	        return React.createElement(
+	          "ul",
+	          { className: classNames(this.props.className, "list-group") },
+	          listItems
+	        );
+	      }
+	    },
+	    renderDiv: {
+	      value: function renderDiv(items) {
 	        return React.createElement(
 	          "div",
 	          { className: classNames(this.props.className, "list-group") },
@@ -2513,9 +2550,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  propTypes: {
 	    bsStyle: React.PropTypes.oneOf(["danger", "info", "success", "warning"]),
+	    className: React.PropTypes.string,
 	    active: React.PropTypes.any,
 	    disabled: React.PropTypes.any,
 	    header: React.PropTypes.node,
+	    listItem: React.PropTypes.bool,
 	    onClick: React.PropTypes.func,
 	    eventKey: React.PropTypes.any,
 	    href: React.PropTypes.string,
@@ -2536,14 +2575,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (this.props.href || this.props.target || this.props.onClick) {
 	      return this.renderAnchor(classes);
+	    } else if (this.props.listItem) {
+	      return this.renderLi(classes);
 	    } else {
 	      return this.renderSpan(classes);
 	    }
 	  },
 
-	  renderSpan: function renderSpan(classes) {
+	  renderLi: function renderLi(classes) {
 	    return React.createElement(
-	      "span",
+	      "li",
 	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.header ? this.renderStructuredContent() : this.props.children
 	    );
@@ -2555,6 +2596,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _extends({}, this.props, {
 	        className: classNames(this.props.className, classes)
 	      }),
+	      this.props.header ? this.renderStructuredContent() : this.props.children
+	    );
+	  },
+
+	  renderSpan: function renderSpan(classes) {
+	    return React.createElement(
+	      "span",
+	      _extends({}, this.props, { className: classNames(this.props.className, classes) }),
 	      this.props.header ? this.renderStructuredContent() : this.props.children
 	    );
 	  },
@@ -2871,9 +2920,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var Nav = React.createClass({
 	  displayName: "Nav",
@@ -2997,9 +3046,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var Navbar = React.createClass({
 	  displayName: "Navbar",
@@ -3246,7 +3295,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var OverlayMixin = _interopRequire(__webpack_require__(34));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var ModalTrigger = React.createClass({
 	  displayName: "ModalTrigger",
@@ -3319,9 +3368,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
-	var assign = _interopRequire(__webpack_require__(58));
+	var assign = _interopRequire(__webpack_require__(59));
 
 	/**
 	 * Check if value one is inside or equal to the of value
@@ -3547,7 +3596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = _interopRequire(__webpack_require__(51));
 
-	var CustomPropTypes = _interopRequire(__webpack_require__(59));
+	var CustomPropTypes = _interopRequire(__webpack_require__(54));
 
 	var domUtils = _interopRequire(__webpack_require__(52));
 
@@ -3896,7 +3945,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var PanelGroup = React.createClass({
 	  displayName: "PanelGroup",
@@ -4067,9 +4116,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var Pager = React.createClass({
 	  displayName: "Pager",
@@ -4206,7 +4255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var ProgressBar = React.createClass({
 	  displayName: "ProgressBar",
@@ -4232,7 +4281,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  getPercentage: function getPercentage(now, min, max) {
-	    return Math.ceil((now - min) / (max - min) * 100);
+	    var roundPrecision = 1000;
+	    return Math.round((now - min) / (max - min) * 100 * roundPrecision) / roundPrecision;
 	  },
 
 	  render: function render() {
@@ -4522,9 +4572,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
-	var createChainedFunction = _interopRequire(__webpack_require__(55));
+	var createChainedFunction = _interopRequire(__webpack_require__(56));
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
@@ -4678,7 +4728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BootstrapMixin = _interopRequire(__webpack_require__(5));
 
-	var ValidComponentChildren = _interopRequire(__webpack_require__(54));
+	var ValidComponentChildren = _interopRequire(__webpack_require__(55));
 
 	var Nav = _interopRequire(__webpack_require__(29));
 
@@ -4878,7 +4928,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var classNames = _interopRequire(__webpack_require__(60));
 
-	var TransitionEvents = _interopRequire(__webpack_require__(56));
+	var TransitionEvents = _interopRequire(__webpack_require__(57));
 
 	var TabPane = React.createClass({
 	  displayName: "TabPane",
@@ -5085,7 +5135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
-	module.exports = {
+	var styleMaps = {
 	  CLASSES: {
 	    alert: "alert",
 	    button: "btn",
@@ -5118,6 +5168,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    tabs: "tabs",
 	    pills: "pills"
 	  },
+	  addStyle: function addStyle(name) {
+	    styleMaps.STYLES[name] = name;
+	  },
 	  SIZES: {
 	    large: "lg",
 	    medium: "md",
@@ -5126,6 +5179,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  GLYPHS: ["asterisk", "plus", "euro", "eur", "minus", "cloud", "envelope", "pencil", "glass", "music", "search", "heart", "star", "star-empty", "user", "film", "th-large", "th", "th-list", "ok", "remove", "zoom-in", "zoom-out", "off", "signal", "cog", "trash", "home", "file", "time", "road", "download-alt", "download", "upload", "inbox", "play-circle", "repeat", "refresh", "list-alt", "lock", "flag", "headphones", "volume-off", "volume-down", "volume-up", "qrcode", "barcode", "tag", "tags", "book", "bookmark", "print", "camera", "font", "bold", "italic", "text-height", "text-width", "align-left", "align-center", "align-right", "align-justify", "list", "indent-left", "indent-right", "facetime-video", "picture", "map-marker", "adjust", "tint", "edit", "share", "check", "move", "step-backward", "fast-backward", "backward", "play", "pause", "stop", "forward", "fast-forward", "step-forward", "eject", "chevron-left", "chevron-right", "plus-sign", "minus-sign", "remove-sign", "ok-sign", "question-sign", "info-sign", "screenshot", "remove-circle", "ok-circle", "ban-circle", "arrow-left", "arrow-right", "arrow-up", "arrow-down", "share-alt", "resize-full", "resize-small", "exclamation-sign", "gift", "leaf", "fire", "eye-open", "eye-close", "warning-sign", "plane", "calendar", "random", "comment", "magnet", "chevron-up", "chevron-down", "retweet", "shopping-cart", "folder-close", "folder-open", "resize-vertical", "resize-horizontal", "hdd", "bullhorn", "bell", "certificate", "thumbs-up", "thumbs-down", "hand-right", "hand-left", "hand-up", "hand-down", "circle-arrow-right", "circle-arrow-left", "circle-arrow-up", "circle-arrow-down", "globe", "wrench", "tasks", "filter", "briefcase", "fullscreen", "dashboard", "paperclip", "heart-empty", "link", "phone", "pushpin", "usd", "gbp", "sort", "sort-by-alphabet", "sort-by-alphabet-alt", "sort-by-order", "sort-by-order-alt", "sort-by-attributes", "sort-by-attributes-alt", "unchecked", "expand", "collapse-down", "collapse-up", "log-in", "flash", "log-out", "new-window", "record", "save", "open", "saved", "import", "export", "send", "floppy-disk", "floppy-saved", "floppy-remove", "floppy-save", "floppy-open", "credit-card", "transfer", "cutlery", "header", "compressed", "earphone", "phone-alt", "tower", "stats", "sd-video", "hd-video", "subtitles", "sound-stereo", "sound-dolby", "sound-5-1", "sound-6-1", "sound-7-1", "copyright-mark", "registration-mark", "cloud-download", "cloud-upload", "tree-conifer", "tree-deciduous", "cd", "save-file", "open-file", "level-up", "copy", "paste", "alert", "equalizer", "king", "queen", "pawn", "bishop", "knight", "baby-formula", "tent", "blackboard", "bed", "apple", "erase", "hourglass", "lamp", "duplicate", "piggy-bank", "scissors", "bitcoin", "yen", "ruble", "scale", "ice-lolly", "ice-lolly-tasted", "education", "option-horizontal", "option-vertical", "menu-hamburger", "modal-window", "oil", "grain", "sunglasses", "text-size", "text-color", "text-background", "object-align-top", "object-align-bottom", "object-align-horizontal", "object-align-left", "object-align-vertical", "object-align-right", "triangle-right", "triangle-left", "triangle-bottom", "triangle-top", "console", "superscript", "subscript", "menu-left", "menu-right", "menu-down", "menu-up"]
 	};
+
+	module.exports = styleMaps;
 
 /***/ },
 /* 51 */
@@ -5329,6 +5384,86 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 
+	var ANONYMOUS = "<<anonymous>>";
+
+	var CustomPropTypes = {
+	  /**
+	   * Checks whether a prop provides a DOM element
+	   *
+	   * The element can be provided in two forms:
+	   * - Directly passed
+	   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
+	   *
+	   * @param props
+	   * @param propName
+	   * @param componentName
+	   * @returns {Error|undefined}
+	   */
+	  mountable: createMountableChecker(),
+	  /**
+	   * Checks whether a prop matches a key of an associated object
+	   *
+	   * @param props
+	   * @param propName
+	   * @param componentName
+	   * @returns {Error|undefined}
+	   */
+	  keyOf: createKeyOfChecker
+	};
+
+	/**
+	 * Create chain-able isRequired validator
+	 *
+	 * Largely copied directly from:
+	 *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
+	 */
+	function createChainableTypeChecker(validate) {
+	  function checkType(isRequired, props, propName, componentName) {
+	    componentName = componentName || ANONYMOUS;
+	    if (props[propName] == null) {
+	      if (isRequired) {
+	        return new Error("Required prop `" + propName + "` was not specified in " + "`" + componentName + "`.");
+	      }
+	    } else {
+	      return validate(props, propName, componentName);
+	    }
+	  }
+
+	  var chainedCheckType = checkType.bind(null, false);
+	  chainedCheckType.isRequired = checkType.bind(null, true);
+
+	  return chainedCheckType;
+	}
+
+	function createMountableChecker() {
+	  function validate(props, propName, componentName) {
+	    if (typeof props[propName] !== "object" || typeof props[propName].render !== "function" && props[propName].nodeType !== 1) {
+	      return new Error("Invalid prop `" + propName + "` supplied to " + "`" + componentName + "`, expected a DOM element or an object that has a `render` method");
+	    }
+	  }
+
+	  return createChainableTypeChecker(validate);
+	}
+
+	function createKeyOfChecker(obj) {
+	  function validate(props, propName, componentName) {
+	    var propValue = props[propName];
+	    if (!obj.hasOwnProperty(propValue)) {
+	      var valuesString = JSON.stringify(Object.keys(obj));
+	      return new Error("Invalid prop '" + propName + "' of value '" + propValue + "' " + ("supplied to '" + componentName + "', expected one of " + valuesString + "."));
+	    }
+	  }
+	  return createChainableTypeChecker(validate);
+	}
+
+	module.exports = CustomPropTypes;
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
 	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
 	var React = _interopRequire(__webpack_require__(51));
@@ -5425,7 +5560,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5463,7 +5598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = createChainedFunction;
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5579,7 +5714,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5644,7 +5779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FormGroup;
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5696,66 +5831,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = assign;
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var ANONYMOUS = "<<anonymous>>";
-
-	var CustomPropTypes = {
-	  /**
-	   * Checks whether a prop provides a DOM element
-	   *
-	   * The element can be provided in two forms:
-	   * - Directly passed
-	   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
-	   *
-	   * @param props
-	   * @param propName
-	   * @param componentName
-	   * @returns {Error|undefined}
-	   */
-	  mountable: createMountableChecker()
-	};
-
-	/**
-	 * Create chain-able isRequired validator
-	 *
-	 * Largely copied directly from:
-	 *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
-	 */
-	function createChainableTypeChecker(validate) {
-	  function checkType(isRequired, props, propName, componentName) {
-	    componentName = componentName || ANONYMOUS;
-	    if (props[propName] == null) {
-	      if (isRequired) {
-	        return new Error("Required prop `" + propName + "` was not specified in " + "`" + componentName + "`.");
-	      }
-	    } else {
-	      return validate(props, propName, componentName);
-	    }
-	  }
-
-	  var chainedCheckType = checkType.bind(null, false);
-	  chainedCheckType.isRequired = checkType.bind(null, true);
-
-	  return chainedCheckType;
-	}
-
-	function createMountableChecker() {
-	  function validate(props, propName, componentName) {
-	    if (typeof props[propName] !== "object" || typeof props[propName].render !== "function" && props[propName].nodeType !== 1) {
-	      return new Error("Invalid prop `" + propName + "` supplied to " + "`" + componentName + "`, expected a DOM element or an object that has a `render` method");
-	    }
-	  }
-
-	  return createChainableTypeChecker(validate);
-	}
-
-	module.exports = CustomPropTypes;
 
 /***/ },
 /* 60 */
