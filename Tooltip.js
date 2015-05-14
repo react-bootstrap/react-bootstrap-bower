@@ -22,8 +22,8 @@ define(['exports', 'module', 'react', 'classnames', './BootstrapMixin'], functio
       placement: _React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
       positionLeft: _React.PropTypes.number,
       positionTop: _React.PropTypes.number,
-      arrowOffsetLeft: _React.PropTypes.number,
-      arrowOffsetTop: _React.PropTypes.number
+      arrowOffsetLeft: _React.PropTypes.oneOfType([_React.PropTypes.number, _React.PropTypes.string]),
+      arrowOffsetTop: _React.PropTypes.oneOfType([_React.PropTypes.number, _React.PropTypes.string])
     },
 
     getDefaultProps: function getDefaultProps() {

@@ -4873,8 +4873,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    placement: _react2['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 	    positionLeft: _react2['default'].PropTypes.number,
 	    positionTop: _react2['default'].PropTypes.number,
-	    arrowOffsetLeft: _react2['default'].PropTypes.number,
-	    arrowOffsetTop: _react2['default'].PropTypes.number,
+	    arrowOffsetLeft: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]),
+	    arrowOffsetTop: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]),
 	    title: _react2['default'].PropTypes.node
 	  },
 
@@ -5826,8 +5826,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    placement: _react2['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 	    positionLeft: _react2['default'].PropTypes.number,
 	    positionTop: _react2['default'].PropTypes.number,
-	    arrowOffsetLeft: _react2['default'].PropTypes.number,
-	    arrowOffsetTop: _react2['default'].PropTypes.number
+	    arrowOffsetLeft: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string]),
+	    arrowOffsetTop: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.string])
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
