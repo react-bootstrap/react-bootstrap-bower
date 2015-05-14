@@ -41,13 +41,15 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/domUtils', './u
       delayShow: _React.PropTypes.number,
       delayHide: _React.PropTypes.number,
       defaultOverlayShown: _React.PropTypes.bool,
-      overlay: _React.PropTypes.node.isRequired
+      overlay: _React.PropTypes.node.isRequired,
+      containerPadding: _React.PropTypes.number
     },
 
     getDefaultProps: function getDefaultProps() {
       return {
         placement: 'right',
-        trigger: ['hover', 'focus']
+        trigger: ['hover', 'focus'],
+        containerPadding: 0
       };
     },
 
@@ -55,7 +57,9 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/domUtils', './u
       return {
         isOverlayShown: this.props.defaultOverlayShown == null ? false : this.props.defaultOverlayShown,
         overlayLeft: null,
-        overlayTop: null
+        overlayTop: null,
+        arrowOffsetLeft: null,
+        arrowOffsetTop: null
       };
     },
 
@@ -90,7 +94,9 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/domUtils', './u
         onRequestHide: this.hide,
         placement: this.props.placement,
         positionLeft: this.state.overlayLeft,
-        positionTop: this.state.overlayTop
+        positionTop: this.state.overlayTop,
+        arrowOffsetLeft: this.state.arrowOffsetLeft,
+        arrowOffsetTop: this.state.arrowOffsetTop
       });
     },
 
@@ -175,12 +181,7 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/domUtils', './u
         return;
       }
 
-      var pos = this.calcOverlayPosition();
-
-      this.setState({
-        overlayLeft: pos.left,
-        overlayTop: pos.top
-      });
+      this.setState(this.calcOverlayPosition());
     },
 
     calcOverlayPosition: function calcOverlayPosition() {
@@ -190,30 +191,96 @@ define(['exports', 'module', 'react', './OverlayMixin', './utils/domUtils', './u
       var overlayHeight = overlayNode.offsetHeight;
       var overlayWidth = overlayNode.offsetWidth;
 
-      switch (this.props.placement) {
-        case 'right':
-          return {
-            top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
-            left: childOffset.left + childOffset.width
-          };
-        case 'left':
-          return {
-            top: childOffset.top + childOffset.height / 2 - overlayHeight / 2,
-            left: childOffset.left - overlayWidth
-          };
-        case 'top':
-          return {
-            top: childOffset.top - overlayHeight,
-            left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
-          };
-        case 'bottom':
-          return {
-            top: childOffset.top + childOffset.height,
-            left: childOffset.left + childOffset.width / 2 - overlayWidth / 2
-          };
-        default:
-          throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
+      var placement = this.props.placement;
+      var overlayLeft = undefined,
+          overlayTop = undefined,
+          arrowOffsetLeft = undefined,
+          arrowOffsetTop = undefined;
+
+      if (placement === 'left' || placement === 'right') {
+        overlayTop = childOffset.top + (childOffset.height - overlayHeight) / 2;
+
+        if (placement === 'left') {
+          overlayLeft = childOffset.left - overlayWidth;
+        } else {
+          overlayLeft = childOffset.left + childOffset.width;
+        }
+
+        var topDelta = this._getTopDelta(overlayTop, overlayHeight);
+        overlayTop += topDelta;
+        arrowOffsetTop = 50 * (1 - 2 * topDelta / overlayHeight) + '%';
+        arrowOffsetLeft = null;
+      } else if (placement === 'top' || placement === 'bottom') {
+        overlayLeft = childOffset.left + (childOffset.width - overlayWidth) / 2;
+
+        if (placement === 'top') {
+          overlayTop = childOffset.top - overlayHeight;
+        } else {
+          overlayTop = childOffset.top + childOffset.height;
+        }
+
+        var leftDelta = this._getLeftDelta(overlayLeft, overlayWidth);
+        overlayLeft += leftDelta;
+        arrowOffsetLeft = 50 * (1 - 2 * leftDelta / overlayWidth) + '%';
+        arrowOffsetTop = null;
+      } else {
+        throw new Error('calcOverlayPosition(): No such placement of "' + this.props.placement + '" found.');
       }
+
+      return { overlayLeft: overlayLeft, overlayTop: overlayTop, arrowOffsetLeft: arrowOffsetLeft, arrowOffsetTop: arrowOffsetTop };
+    },
+
+    _getTopDelta: function _getTopDelta(top, overlayHeight) {
+      var containerDimensions = this._getContainerDimensions();
+      var containerScroll = containerDimensions.scroll;
+      var containerHeight = containerDimensions.height;
+
+      var padding = this.props.containerPadding;
+      var topEdgeOffset = top - padding - containerScroll;
+      var bottomEdgeOffset = top + padding - containerScroll + overlayHeight;
+
+      if (topEdgeOffset < 0) {
+        return -topEdgeOffset;
+      } else if (bottomEdgeOffset > containerHeight) {
+        return containerHeight - bottomEdgeOffset;
+      } else {
+        return 0;
+      }
+    },
+
+    _getLeftDelta: function _getLeftDelta(left, overlayWidth) {
+      var containerDimensions = this._getContainerDimensions();
+      var containerWidth = containerDimensions.width;
+
+      var padding = this.props.containerPadding;
+      var leftEdgeOffset = left - padding;
+      var rightEdgeOffset = left + padding + overlayWidth;
+
+      if (leftEdgeOffset < 0) {
+        return -leftEdgeOffset;
+      } else if (rightEdgeOffset > containerWidth) {
+        return containerWidth - rightEdgeOffset;
+      } else {
+        return 0;
+      }
+    },
+
+    _getContainerDimensions: function _getContainerDimensions() {
+      var containerNode = this.getContainerDOMNode();
+      var width = undefined,
+          height = undefined;
+      if (containerNode.tagName === 'BODY') {
+        width = window.innerWidth;
+        height = window.innerHeight;
+      } else {
+        width = containerNode.offsetWidth;
+        height = containerNode.offsetHeight;
+      }
+
+      return {
+        width: width, height: height,
+        scroll: containerNode.scrollTop
+      };
     },
 
     getPosition: function getPosition() {

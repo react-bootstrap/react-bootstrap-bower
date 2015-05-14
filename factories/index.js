@@ -1,4 +1,4 @@
-define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './Button', './ButtonGroup', './ButtonToolbar', './CollapsableNav', './CollapsibleNav', './Carousel', './CarouselItem', './Col', './DropdownButton', './DropdownMenu', './Glyphicon', './Grid', './Input', './Interpolate', './Jumbotron', './Label', './ListGroup', './ListGroupItem', './MenuItem', './Modal', './Nav', './Navbar', './NavItem', './ModalTrigger', './OverlayTrigger', './PageHeader', './Panel', './PanelGroup', './PageItem', './Pager', './Popover', './ProgressBar', './Row', './SplitButton', './SubNav', './TabbedArea', './Table', './TabPane', './Tooltip', './Well'], function (exports, module, _Accordion, _Affix, _Alert, _Badge, _Button, _ButtonGroup, _ButtonToolbar, _CollapsableNav, _CollapsibleNav, _Carousel, _CarouselItem, _Col, _DropdownButton, _DropdownMenu, _Glyphicon, _Grid, _Input, _Interpolate, _Jumbotron, _Label, _ListGroup, _ListGroupItem, _MenuItem, _Modal, _Nav, _Navbar, _NavItem, _ModalTrigger, _OverlayTrigger, _PageHeader, _Panel, _PanelGroup, _PageItem, _Pager, _Popover, _ProgressBar, _Row, _SplitButton, _SubNav, _TabbedArea, _Table, _TabPane, _Tooltip, _Well) {
+define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './Button', './ButtonGroup', './ButtonInput', './ButtonToolbar', './CollapsableNav', './CollapsibleNav', './Carousel', './CarouselItem', './Col', './DropdownButton', './DropdownMenu', './Glyphicon', './Grid', './Input', './Interpolate', './Jumbotron', './Label', './ListGroup', './ListGroupItem', './MenuItem', './Modal', './Nav', './Navbar', './NavItem', './ModalTrigger', './OverlayTrigger', './PageHeader', './Panel', './PanelGroup', './PageItem', './Pager', './Popover', './ProgressBar', './Row', './SplitButton', './SubNav', './TabbedArea', './Table', './TabPane', './Tooltip', './Well'], function (exports, module, _Accordion, _Affix, _Alert, _Badge, _Button, _ButtonGroup, _ButtonInput, _ButtonToolbar, _CollapsableNav, _CollapsibleNav, _Carousel, _CarouselItem, _Col, _DropdownButton, _DropdownMenu, _Glyphicon, _Grid, _Input, _Interpolate, _Jumbotron, _Label, _ListGroup, _ListGroupItem, _MenuItem, _Modal, _Nav, _Navbar, _NavItem, _ModalTrigger, _OverlayTrigger, _PageHeader, _Panel, _PanelGroup, _PageItem, _Pager, _Popover, _ProgressBar, _Row, _SplitButton, _SubNav, _TabbedArea, _Table, _TabPane, _Tooltip, _Well) {
   'use strict';
 
   function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
@@ -14,6 +14,8 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
   var _Button2 = _interopRequire(_Button);
 
   var _ButtonGroup2 = _interopRequire(_ButtonGroup);
+
+  var _ButtonInput2 = _interopRequire(_ButtonInput);
 
   var _ButtonToolbar2 = _interopRequire(_ButtonToolbar);
 
@@ -104,6 +106,8 @@ define(['exports', 'module', './Accordion', './Affix', './Alert', './Badge', './
     Button: _Button2,
 
     ButtonGroup: _ButtonGroup2,
+
+    ButtonInput: _ButtonInput2,
 
     ButtonToolbar: _ButtonToolbar2,
 
