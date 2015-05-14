@@ -5636,13 +5636,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var eventKey = _child$props.eventKey;
 	    var className = _child$props.className;
 	    var tab = _child$props.tab;
+	    var disabled = _child$props.disabled;
 
 	    return _react2['default'].createElement(
 	      _NavItem2['default'],
 	      {
 	        ref: 'tab' + eventKey,
 	        eventKey: eventKey,
-	        className: className },
+	        className: className,
+	        disabled: disabled },
 	      tab
 	    );
 	  },
@@ -5759,7 +5761,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  propTypes: {
 	    active: _react2['default'].PropTypes.bool,
 	    animation: _react2['default'].PropTypes.bool,
-	    onAnimateOutEnd: _react2['default'].PropTypes.func
+	    onAnimateOutEnd: _react2['default'].PropTypes.func,
+	    disabled: _react2['default'].PropTypes.bool
 	  },
 
 	  getDefaultProps: function getDefaultProps() {

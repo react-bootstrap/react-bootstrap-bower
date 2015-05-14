@@ -17,7 +17,8 @@ define(['exports', 'module', 'react', 'classnames', './utils/TransitionEvents'],
     propTypes: {
       active: _React.PropTypes.bool,
       animation: _React.PropTypes.bool,
-      onAnimateOutEnd: _React.PropTypes.func
+      onAnimateOutEnd: _React.PropTypes.func,
+      disabled: _React.PropTypes.bool
     },
 
     getDefaultProps: function getDefaultProps() {

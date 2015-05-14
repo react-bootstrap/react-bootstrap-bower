@@ -116,13 +116,15 @@ define(['exports', 'module', 'react', './BootstrapMixin', './utils/ValidComponen
       var eventKey = _child$props.eventKey;
       var className = _child$props.className;
       var tab = _child$props.tab;
+      var disabled = _child$props.disabled;
 
       return _React.createElement(
         _NavItem2,
         {
           ref: 'tab' + eventKey,
           eventKey: eventKey,
-          className: className },
+          className: className,
+          disabled: disabled },
         tab
       );
     },
