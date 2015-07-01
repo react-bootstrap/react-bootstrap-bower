@@ -5234,7 +5234,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.props.children
 	    );
 	    // I can't think of another way to not break back compat while defaulting container
-	    if (show != null) {
+	    if (!this.props.__isUsedInModalTrigger && show != null) {
 	      return _react2['default'].createElement(
 	        _Portal2['default'],
 	        { container: props.container },
@@ -6117,6 +6117,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utilsCreateContextWrapper2 = _interopRequireDefault(_utilsCreateContextWrapper);
 
+	var _OverlayMixin = __webpack_require__(48);
+
 	function createHideDepreciationWrapper(hide) {
 	  return function () {
 	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
@@ -6131,6 +6133,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var ModalTrigger = _react2['default'].createClass({
 	  displayName: 'ModalTrigger',
+
+	  mixins: [_OverlayMixin.OverlayMixin],
 
 	  propTypes: {
 	    modal: _react2['default'].PropTypes.node.isRequired,
@@ -6168,29 +6172,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  },
 
-	  componentDidMount: function componentDidMount() {
-	    this._overlay = document.createElement('div');
-	    _react2['default'].render(this.getOverlay(), this._overlay);
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    _react2['default'].unmountComponentAtNode(this._overlay);
-	    this._overlay = null;
-	    clearTimeout(this._hoverDelay);
-	  },
-
-	  componentDidUpdate: function componentDidUpdate() {
-	    _react2['default'].render(this.getOverlay(), this._overlay);
-	  },
-
-	  getOverlay: function getOverlay() {
+	  renderOverlay: function renderOverlay() {
 	    var modal = this.props.modal;
 
+	    if (!this.state.isOverlayShown) {
+	      return _react2['default'].createElement('span', null);
+	    }
+
 	    return (0, _react.cloneElement)(modal, {
-	      show: this.state.isOverlayShown,
 	      onHide: this.hide,
 	      onRequestHide: createHideDepreciationWrapper(this.hide),
-	      container: modal.props.container || this.props.container
+	      __isUsedInModalTrigger: true
 	    });
 	  },
 
