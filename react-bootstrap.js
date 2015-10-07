@@ -5839,7 +5839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var mixin = {
 	  shouldComponentUpdate: function shouldComponentUpdate() {
-	    //let the setState trigger the update
+	    //let the forceUpdate trigger the update
 	    return !this._notifying;
 	  }
 	};
@@ -5924,8 +5924,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }, {});
 	      },
 
-	      render: function render() {
+	      /**
+	       * If a prop switches from controlled to Uncontrolled
+	       * reset its value to the defaultValue
+	       */
+	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        var _this = this;
+
+	        var props = this.props,
+	            keys = Object.keys(controlledValues);
+
+	        keys.forEach(function (key) {
+	          if (utils.getValue(nextProps, key) === undefined && utils.getValue(props, key) !== undefined) {
+	            _this._values[key] = nextProps[utils.defaultKey(key)];
+	          }
+	        });
+	      },
+
+	      render: function render() {
+	        var _this2 = this;
 
 	        var newProps = {};
 	        var _props = this.props;
@@ -5936,21 +5953,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        utils.each(controlledValues, function (handle, propName) {
 	          var linkPropName = utils.getLinkName(propName),
-	              prop = _this.props[propName];
+	              prop = _this2.props[propName];
 
-	          if (linkPropName && !isProp(_this.props, propName) && isProp(_this.props, linkPropName)) {
-	            prop = _this.props[linkPropName].value;
+	          if (linkPropName && !isProp(_this2.props, propName) && isProp(_this2.props, linkPropName)) {
+	            prop = _this2.props[linkPropName].value;
 	          }
 
-	          newProps[propName] = prop !== undefined ? prop : _this._values[propName];
+	          newProps[propName] = prop !== undefined ? prop : _this2._values[propName];
 
-	          newProps[handle] = setAndNotify.bind(_this, propName);
+	          newProps[handle] = setAndNotify.bind(_this2, propName);
 	        });
 
 	        newProps = _extends({}, props, newProps, { ref: 'inner' });
 
 	        return _react2['default'].createElement(Component, newProps);
 	      }
+
 	    }));
 
 	    component.ControlledComponent = Component;
@@ -5990,6 +6008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.customPropType = customPropType;
 	exports.uncontrolledPropTypes = uncontrolledPropTypes;
 	exports.getType = getType;
+	exports.getValue = getValue;
 	exports.getLinkName = getLinkName;
 	exports.defaultKey = defaultKey;
 	exports.chain = chain;
@@ -6009,7 +6028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function customPropType(handler, propType, name) {
 
-	  return function (props, propName, componentName) {
+	  return function (props, propName) {
 
 	    if (props[propName] !== undefined) {
 	      if (!props[handler]) {
@@ -6047,6 +6066,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (version[0] === 0 && version[1] >= 13) return component;
 
 	  return component.type;
+	}
+
+	function getValue(props, name) {
+	  var linkPropName = getLinkName(name);
+
+	  if (linkPropName && !isProp(props, name) && isProp(props, linkPropName)) return props[linkPropName].value;
+
+	  return props[name];
+	}
+
+	function isProp(props, prop) {
+	  return props[prop] !== undefined;
 	}
 
 	function getLinkName(name) {
