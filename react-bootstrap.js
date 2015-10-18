@@ -9371,10 +9371,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _Button2 = _interopRequireDefault(_Button);
 
-	var _reactPropTypesLibSinglePropFrom = __webpack_require__(5);
-
-	var _reactPropTypesLibSinglePropFrom2 = _interopRequireDefault(_reactPropTypesLibSinglePropFrom);
-
 	var _SafeAnchor = __webpack_require__(49);
 
 	var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
@@ -9411,7 +9407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        type: 'button',
 	        'aria-haspopup': true,
 	        'aria-expanded': this.props.open }),
-	      this.props.title || this.props.children,
+	      this.props.children || this.props.title,
 	      caret
 	    );
 	  };
@@ -9421,8 +9417,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports['default'] = DropdownToggle;
 
-	var titleAndChildrenValidation = _reactPropTypesLibSinglePropFrom2['default']('title', 'children');
-
 	DropdownToggle.defaultProps = {
 	  open: false,
 	  useAnchor: false,
@@ -9431,10 +9425,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	DropdownToggle.propTypes = {
 	  bsRole: _react2['default'].PropTypes.string,
-	  children: titleAndChildrenValidation,
 	  noCaret: _react2['default'].PropTypes.bool,
 	  open: _react2['default'].PropTypes.bool,
-	  title: titleAndChildrenValidation,
+	  title: _react2['default'].PropTypes.string,
 	  useAnchor: _react2['default'].PropTypes.bool
 	};
 
@@ -10467,17 +10460,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _classCallCheck = __webpack_require__(61)['default'];
 
+	var _objectWithoutProperties = __webpack_require__(26)['default'];
+
+	var _extends = __webpack_require__(9)['default'];
+
 	var _interopRequireDefault = __webpack_require__(1)['default'];
 
 	exports.__esModule = true;
 
-	var _react = __webpack_require__(4);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _classnames = __webpack_require__(27);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
 
 	var _reactPropTypesLibAll = __webpack_require__(69);
 
@@ -10486,6 +10483,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _SafeAnchor = __webpack_require__(49);
 
 	var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
+
+	var _utilsCreateChainedFunction = __webpack_require__(6);
+
+	var _utilsCreateChainedFunction2 = _interopRequireDefault(_utilsCreateChainedFunction);
 
 	var MenuItem = (function (_React$Component) {
 	  _inherits(MenuItem, _React$Component);
@@ -10525,6 +10526,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      );
 	    }
 
+	    var _props = this.props;
+	    var className = _props.className;
+	    var style = _props.style;
+	    var onClick = _props.onClick;
+
+	    var props = _objectWithoutProperties(_props, ['className', 'style', 'onClick']);
+
 	    var classes = {
 	      disabled: this.props.disabled,
 	      active: this.props.active
@@ -10533,22 +10541,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2['default'].createElement(
 	      'li',
 	      { role: 'presentation',
-	        className: _classnames2['default'](this.props.className, classes),
-	        style: this.props.style
+	        className: _classnames2['default'](className, classes),
+	        style: style
 	      },
-	      _react2['default'].createElement(
-	        _SafeAnchor2['default'],
-	        {
-	          role: 'menuitem',
-	          tabIndex: '-1',
-	          id: this.props.id,
-	          target: this.props.target,
-	          title: this.props.title,
-	          href: this.props.href || '',
-	          onKeyDown: this.props.onKeyDown,
-	          onClick: this.handleClick },
-	        this.props.children
-	      )
+	      _react2['default'].createElement(_SafeAnchor2['default'], _extends({}, props, {
+	        role: 'menuitem',
+	        tabIndex: '-1',
+	        onClick: _utilsCreateChainedFunction2['default'](onClick, this.handleClick)
+	      }))
 	    );
 	  };
 
@@ -10570,6 +10570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  href: _react2['default'].PropTypes.string,
 	  target: _react2['default'].PropTypes.string,
 	  title: _react2['default'].PropTypes.string,
+	  onClick: _react2['default'].PropTypes.func,
 	  onKeyDown: _react2['default'].PropTypes.func,
 	  onSelect: _react2['default'].PropTypes.func,
 	  id: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number])
@@ -12417,13 +12418,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
-	var _react = __webpack_require__(4);
-
-	var _react2 = _interopRequireDefault(_react);
-
 	var _classnames = __webpack_require__(27);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
 
 	var _BootstrapMixin = __webpack_require__(28);
 
@@ -12432,6 +12433,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _SafeAnchor = __webpack_require__(49);
 
 	var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
+
+	var _utilsCreateChainedFunction = __webpack_require__(6);
+
+	var _utilsCreateChainedFunction2 = _interopRequireDefault(_utilsCreateChainedFunction);
 
 	var NavItem = _react2['default'].createClass({
 	  displayName: 'NavItem',
@@ -12444,6 +12449,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    active: _react2['default'].PropTypes.bool,
 	    disabled: _react2['default'].PropTypes.bool,
 	    href: _react2['default'].PropTypes.string,
+	    onClick: _react2['default'].PropTypes.func,
 	    role: _react2['default'].PropTypes.string,
 	    title: _react2['default'].PropTypes.node,
 	    eventKey: _react2['default'].PropTypes.any,
@@ -12465,13 +12471,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var disabled = _props.disabled;
 	    var active = _props.active;
 	    var href = _props.href;
+	    var onClick = _props.onClick;
 	    var title = _props.title;
 	    var target = _props.target;
 	    var children = _props.children;
 	    var tabIndex = _props.tabIndex;
 	    var ariaControls = _props['aria-controls'];
 
-	    var props = _objectWithoutProperties(_props, ['role', 'linkId', 'disabled', 'active', 'href', 'title', 'target', 'children', 'tabIndex', 'aria-controls']);
+	    var props = _objectWithoutProperties(_props, ['role', 'linkId', 'disabled', 'active', 'href', 'onClick', 'title', 'target', 'children', 'tabIndex', 'aria-controls']);
 
 	    var classes = {
 	      active: active,
@@ -12480,15 +12487,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var linkProps = {
 	      role: role,
 	      href: href,
+	      onClick: _utilsCreateChainedFunction2['default'](onClick, this.handleClick),
 	      title: title,
 	      target: target,
 	      tabIndex: tabIndex,
-	      id: linkId,
-	      onClick: this.handleClick
+	      id: linkId
 	    };
 
 	    if (!role && href === '#') {
 	      linkProps.role = 'button';
+	    } else if (role === 'tab') {
+	      linkProps['aria-selected'] = active;
 	    }
 
 	    return _react2['default'].createElement(
@@ -12496,7 +12505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _extends({}, props, { role: 'presentation', className: _classnames2['default'](props.className, classes) }),
 	      _react2['default'].createElement(
 	        _SafeAnchor2['default'],
-	        _extends({}, linkProps, { 'aria-selected': active, 'aria-controls': ariaControls }),
+	        _extends({}, linkProps, { 'aria-controls': ariaControls }),
 	        children
 	      )
 	    );
@@ -13940,11 +13949,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	    activePage: _react2['default'].PropTypes.number,
 	    items: _react2['default'].PropTypes.number,
 	    maxButtons: _react2['default'].PropTypes.number,
-	    ellipsis: _react2['default'].PropTypes.bool,
-	    first: _react2['default'].PropTypes.bool,
-	    last: _react2['default'].PropTypes.bool,
-	    prev: _react2['default'].PropTypes.bool,
-	    next: _react2['default'].PropTypes.bool,
+	    /**
+	     * When `true`, will display the default node value ('...').
+	     * Otherwise, will display provided node (when specified).
+	     */
+	    ellipsis: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
+	    /**
+	     * When `true`, will display the default node value ('&laquo;').
+	     * Otherwise, will display provided node (when specified).
+	     */
+	    first: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
+	    /**
+	     * When `true`, will display the default node value ('&raquo;').
+	     * Otherwise, will display provided node (when specified).
+	     */
+	    last: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
+	    /**
+	     * When `true`, will display the default node value ('&lsaquo;').
+	     * Otherwise, will display provided node (when specified).
+	     */
+	    prev: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
+	    /**
+	     * When `true`, will display the default node value ('&rsaquo;').
+	     * Otherwise, will display provided node (when specified).
+	     */
+	    next: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.node]),
 	    onSelect: _react2['default'].PropTypes.func,
 	    /**
 	     * You can use a custom element for the buttons
@@ -14022,7 +14051,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2['default'].createElement(
 	          'span',
 	          { 'aria-label': 'More' },
-	          '...'
+	          this.props.ellipsis === true ? '...' : this.props.ellipsis
 	        )
 	      ));
 	    }
@@ -14046,7 +14075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2['default'].createElement(
 	        'span',
 	        { 'aria-label': 'Previous' },
-	        '‹'
+	        this.props.prev === true ? '‹' : this.props.prev
 	      )
 	    );
 	  },
@@ -14067,7 +14096,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2['default'].createElement(
 	        'span',
 	        { 'aria-label': 'Next' },
-	        '›'
+	        this.props.next === true ? '›' : this.props.next
 	      )
 	    );
 	  },
@@ -14088,7 +14117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2['default'].createElement(
 	        'span',
 	        { 'aria-label': 'First' },
-	        '«'
+	        this.props.first === true ? '«' : this.props.first
 	      )
 	    );
 	  },
@@ -14109,7 +14138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2['default'].createElement(
 	        'span',
 	        { 'aria-label': 'Last' },
-	        '»'
+	        this.props.last === true ? '»' : this.props.last
 	      )
 	    );
 	  },
