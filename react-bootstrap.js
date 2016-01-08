@@ -1327,8 +1327,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This source code is licensed under the BSD-style license found in the
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
 	 */
 
 	'use strict';
@@ -1362,9 +1360,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
 	      error = new Error(
-	        'Invariant Violation: ' +
 	        format.replace(/%s/g, function() { return args[argIndex++]; })
 	      );
+	      error.name = 'Invariant Violation';
 	    }
 
 	    error.framesToPop = 1; // we don't care about invariant's own frame
@@ -1620,8 +1618,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
@@ -1633,7 +1631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		var hasOwn = {}.hasOwnProperty;
 
 		function classNames () {
-			var classes = '';
+			var classes = [];
 
 			for (var i = 0; i < arguments.length; i++) {
 				var arg = arguments[i];
@@ -1642,28 +1640,28 @@ return /******/ (function(modules) { // webpackBootstrap
 				var argType = typeof arg;
 
 				if (argType === 'string' || argType === 'number') {
-					classes += ' ' + arg;
+					classes.push(arg);
 				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
+					classes.push(classNames.apply(null, arg));
 				} else if (argType === 'object') {
 					for (var key in arg) {
 						if (hasOwn.call(arg, key) && arg[key]) {
-							classes += ' ' + key;
+							classes.push(key);
 						}
 					}
 				}
 			}
 
-			return classes.substr(1);
+			return classes.join(' ');
 		}
 
 		if (typeof module !== 'undefined' && module.exports) {
 			module.exports = classNames;
 		} else if (true) {
 			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
@@ -1718,7 +1716,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        type: 'button',
 	        className: 'close',
 	        onClick: this.props.onDismiss,
-	        'aria-hidden': 'true' },
+	        'aria-hidden': 'true',
+	        tabIndex: '-1' },
 	      _react2['default'].createElement(
 	        'span',
 	        null,
@@ -1891,7 +1890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  renderBreadcrumbItem: function renderBreadcrumbItem(child, index) {
-	    return _react.cloneElement(child, { key: child.key ? child.key : index });
+	    return _react.cloneElement(child, { key: child.key || index });
 	  }
 	});
 
@@ -1919,10 +1918,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _warning = __webpack_require__(33);
-
-	var _warning2 = _interopRequireDefault(_warning);
 
 	var _SafeAnchor = __webpack_require__(42);
 
@@ -1976,8 +1971,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var target = _props.target;
 
 	    var props = _objectWithoutProperties(_props, ['active', 'className', 'id', 'linkId', 'children', 'href', 'title', 'target']);
-
-	     true ? _warning2['default'](!(href && active), '[react-bootstrap] `href` and `active` properties cannot be set at the same time') : undefined;
 
 	    var linkProps = {
 	      href: href,
@@ -3710,6 +3703,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    lg: _react2['default'].PropTypes.number,
 	    /**
+	     * Hide column
+	     *
+	     * on Extra small devices Phones
+	     *
+	     * adds class `hidden-xs`
+	     */
+	    xsHidden: _react2['default'].PropTypes.bool,
+	    /**
+	     * Hide column
+	     *
+	     * on Small devices Tablets
+	     *
+	     * adds class `hidden-sm`
+	     */
+	    smHidden: _react2['default'].PropTypes.bool,
+	    /**
+	     * Hide column
+	     *
+	     * on Medium devices Desktops
+	     *
+	     * adds class `hidden-md`
+	     */
+	    mdHidden: _react2['default'].PropTypes.bool,
+	    /**
+	     * Hide column
+	     *
+	     * on Large devices Desktops
+	     *
+	     * adds class `hidden-lg`
+	     */
+	    lgHidden: _react2['default'].PropTypes.bool,
+	    /**
 	     * Move columns to the right
 	     *
 	     * for Extra small devices Phones
@@ -3831,6 +3856,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (_this.props[prop]) {
 	        classes['col-' + classPart + _this.props[prop]] = true;
 	      }
+
+	      classes['hidden-' + size] = _this.props[size + 'Hidden'];
 
 	      prop = size + 'Offset';
 	      classPart = size + '-offset-';
@@ -8347,7 +8374,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  component._values[propName] = value;
-	  component.forceUpdate();
+
+	  if (component.isMounted()) component.forceUpdate();
 	}
 
 	exports['default'] = _createUncontrollable2['default']([mixin], set);
@@ -8467,6 +8495,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }));
 
 	    component.ControlledComponent = Component;
+
+	    /**
+	     * useful when wrapping a Component and you want to control
+	     * everything
+	     */
+	    component.deferControlTo = function (newComponent, additions, nextMethods) {
+	      if (additions === undefined) additions = {};
+
+	      return uncontrollable(newComponent, _extends({}, controlledValues, additions), nextMethods);
+	    };
 
 	    return component;
 
@@ -10528,6 +10566,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  },
 
+	  componentWillUnmount: function componentWillUnmount() {
+	    _domHelpersEvents2['default'].off(window, 'resize', this.handleWindowResize);
+	  },
+
 	  render: function render() {
 	    var _this = this;
 
@@ -11050,7 +11092,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return _react2['default'].createElement(
 	      'div',
-	      _extends({}, this.props, {
+	      _extends({}, props, {
 	        className: _classnames2['default'](this.props.className, _utilsBootstrapUtils2['default'].prefix(this.props, 'header'))
 	      }),
 	      this.props.closeButton && _react2['default'].createElement(
@@ -12712,15 +12754,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      props.role = 'navigation';
 	    }
 
-	    var classes = _utilsBootstrapUtils2['default'].getClassSet(this.props);
+	    if (inverse) {
+	      props.bsStyle = _styleMaps.INVERSE;
+	    }
+
+	    var classes = _utilsBootstrapUtils2['default'].getClassSet(props);
 
 	    classes[_utilsBootstrapUtils2['default'].prefix(this.props, 'fixed-top')] = fixedTop;
 	    classes[_utilsBootstrapUtils2['default'].prefix(this.props, 'fixed-bottom')] = fixedBottom;
 	    classes[_utilsBootstrapUtils2['default'].prefix(this.props, 'static-top')] = staticTop;
-
-	    // handle built-in styles manually to provide the convenience `inverse` prop
-	    classes[_utilsBootstrapUtils2['default'].prefix(this.props, _styleMaps.INVERSE)] = inverse;
-	    classes[_utilsBootstrapUtils2['default'].prefix(this.props, _styleMaps.DEFAULT)] = !inverse;
 
 	    return _react2['default'].createElement(
 	      ComponentClass,
