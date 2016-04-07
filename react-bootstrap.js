@@ -14029,7 +14029,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Nav.prototype.renderNavItem = function renderNavItem(child, index) {
 	    var onSelect = _utilsCreateChainedFunction2['default'](child.props.onSelect, this.props.onSelect);
 	    var active = this.isChildActive(child);
-	    var tabProps = this.getTabProps(child, index, active, onSelect);
+	    var tabProps = this.getTabProps(child, active, onSelect);
 
 	    return _react.cloneElement(child, _extends({
 	      active: active,
@@ -14040,20 +14040,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Nav.prototype.getActiveKey = function getActiveKey() {
-	    var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-	    var context = arguments.length <= 1 || arguments[1] === undefined ? this.context : arguments[1];
-
-	    var activeKey = props.activeKey;
-
-	    context = this.getContext('$bs_tabcontainer', context);
-
-	    if (context.activeKey) {
-	       true ? _warning2['default'](activeKey == null || props.activeHref, 'Specifing a Nav `activeKey` or `activeHref` prop in the context of a `TabContainer` is not supported. ' + 'Instead use `<TabContainer activeKey={' + activeKey + '} />`') : undefined;
-
-	      activeKey = context.activeKey;
+	    var context = this.context.$bs_tabcontainer;
+	    if (!context) {
+	      return this.props.activeKey;
 	    }
 
-	    return activeKey;
+	     true ? _warning2['default'](!(this.props.activeKey != null || this.props.activeHref), 'Specifing a Nav `activeKey` or `activeHref` prop in the context of a `TabContainer` is not supported. ' + 'Instead use `<TabContainer activeKey={' + this.props.activeKey + '} />`') : undefined;
+
+	    return context.activeKey;
 	  };
 
 	  Nav.prototype.isChildActive = function isChildActive(child) {
@@ -14082,7 +14076,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return child.props.active;
 	  };
 
-	  Nav.prototype.getTabProps = function getTabProps(child, idx, isActive, onSelect) {
+	  Nav.prototype.getTabProps = function getTabProps(child, isActive, onSelect) {
+	    var navRole = this.getNavRole();
+	    var context = this.context.$bs_tabcontainer;
+
+	    if (!context && navRole !== 'tablist') {
+	      // No tab props here.
+	      return null;
+	    }
+
 	    var _child$props = child.props;
 	    var linkId = _child$props.linkId;
 	    var controls = _child$props['aria-controls'];
@@ -14092,10 +14094,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _child$props$tabIndex = _child$props.tabIndex;
 	    var tabIndex = _child$props$tabIndex === undefined ? 0 : _child$props$tabIndex;
 
-	    var navRole = this.getNavRole();
-	    var context = this.getContext('$bs_tabcontainer');
-
-	    if (context.getId) {
+	    if (context && context.getId) {
 	       true ? _warning2['default'](!(linkId || controls), 'In the context of a TabContainer, NavItems are given generated `linkId` and `aria-controls` ' + 'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' + 'To control these attributes directly provide a `generateChildId` prop to the parent TabContainer.') : undefined;
 
 	      linkId = context.getId(eventKey, _utilsTabUtils.TAB) || null;
@@ -14106,6 +14105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (navRole === 'tablist') {
 	      role = role || 'tab';
 	      onKeyDown = _utilsCreateChainedFunction2['default'](this.handleTabKeyDown.bind(this, onSelect || function () {}), onKeyDown);
+	      tabIndex = isActive ? tabIndex : -1;
 	    }
 
 	    return {
@@ -14114,7 +14114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      role: role,
 	      onKeyDown: onKeyDown,
 	      'aria-controls': controls,
-	      tabIndex: isActive ? tabIndex : -1
+	      tabIndex: tabIndex
 	    };
 	  };
 
@@ -14160,10 +14160,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Nav.prototype.getNavRole = function getNavRole() {
 	    return this.props.role || (this.context.$bs_tabcontainer ? 'tablist' : null);
-	  };
-
-	  Nav.prototype.getContext = function getContext(key) {
-	    return this.context[key] || {};
 	  };
 
 	  return Nav;
