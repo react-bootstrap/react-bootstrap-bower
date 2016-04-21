@@ -9791,7 +9791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Component,
 	      _extends({}, this.props, {
 	        className: _classnames2['default'](classes, this.props.className),
-	        type: 'button',
+	        role: 'button',
 	        'aria-haspopup': true,
 	        'aria-expanded': this.props.open }),
 	      this.props.children || this.props.title,
@@ -18270,7 +18270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        error = idPropType.apply(undefined, [props].concat(args));
 
 	        if (!error && !props.id) {
-	          error = new Error('In order to properly inialize Tabs in a way that is accessible to assistive technologies ' + '(such as screen readers) an `id` or a `generateChildId` prop to TabContainer is required');
+	          error = new Error('In order to properly initialize Tabs in a way that is accessible to assistive technologies ' + '(such as screen readers) an `id` or a `generateChildId` prop to TabContainer is required');
 	        }
 	      }
 	      return error;
@@ -18311,31 +18311,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    })
 	  },
 
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      componentClass: 'div'
-	    };
-	  },
-
 	  getChildContext: function getChildContext() {
-	    var _this = this;
+	    var _props = this.props;
+	    var activeKey = _props.activeKey;
+	    var onSelect = _props.onSelect;
+	    var generateChildId = _props.generateChildId;
+	    var id = _props.id;
 
 	    return {
 	      $bs_tabcontainer: {
-	        activeKey: this.props.activeKey,
-	        onSelect: this.props.onSelect,
-	        getId: this.props.generateChildId || function (key, type) {
-	          return _this.props.id ? _this.props.id + '-' + type + '-' + key : null;
+	        activeKey: activeKey,
+	        onSelect: onSelect,
+	        getId: generateChildId || function (key, type) {
+	          return id ? id + '-' + type + '-' + key : null;
 	        }
 	      }
 	    };
 	  },
 
 	  render: function render() {
-	    var _props = this.props;
-	    var children = _props.children;
+	    var _props2 = this.props;
+	    var children = _props2.children;
 
-	    var props = _objectWithoutProperties(_props, ['children']);
+	    var props = _objectWithoutProperties(_props2, ['children']);
+
+	    delete props.generateChildId;
+	    delete props.onSelect;
+	    delete props.activeKey;
 
 	    return _react2['default'].cloneElement(_react2['default'].Children.only(children), props);
 	  }
@@ -18808,7 +18810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          containerProps,
 	          _react2['default'].createElement(
 	            'div',
-	            containerProps,
+	            null,
 	            tabs,
 	            panes
 	          )
@@ -18820,7 +18822,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        containerProps,
 	        _react2['default'].createElement(
 	          'div',
-	          containerProps,
+	          null,
 	          panes,
 	          tabs
 	        )
@@ -18832,7 +18834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      containerProps,
 	      _react2['default'].createElement(
 	        'div',
-	        containerProps,
+	        null,
 	        _react2['default'].createElement(
 	          _Nav2['default'],
 	          tabsProps,
