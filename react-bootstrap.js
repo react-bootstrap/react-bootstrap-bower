@@ -2045,8 +2045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      role: role,
 	      href: href,
 	      style: style,
-	      // http://getbootstrap.com/javascript/#dismiss-on-next-click
-	      tabIndex: tabIndex || 0,
+	      tabIndex: tabIndex,
 	      onClick: this.handleClick
 	    }));
 	  };
