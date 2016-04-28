@@ -5634,7 +5634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var children = this.extractChildren();
 	    var Component = this.props.componentClass;
 
-	    var props = _lodashCompatObjectOmit2['default'](this.props, ['id', 'bsClass', 'role']);
+	    var props = _lodashCompatObjectOmit2['default'](this.props, ['id', 'bsClass', 'role', 'onSelect']);
 	    var className = _utilsBootstrapUtils.prefix(this.props);
 
 	    var rootClasses = (_rootClasses = {
@@ -11964,6 +11964,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var props = _objectWithoutProperties(_props, ['className', 'style', 'onClick']);
 
+	    delete props.onSelect;
+
 	    var classes = {
 	      disabled: this.props.disabled,
 	      active: this.props.active
@@ -14144,7 +14146,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var _child$props = child.props;
-	    var linkId = _child$props.linkId;
+	    var id = _child$props.id;
 	    var controls = _child$props['aria-controls'];
 	    var eventKey = _child$props.eventKey;
 	    var role = _child$props.role;
@@ -14153,9 +14155,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tabIndex = _child$props$tabIndex === undefined ? 0 : _child$props$tabIndex;
 
 	    if (context && context.getId) {
-	       true ? _warning2['default'](!(linkId || controls), 'In the context of a TabContainer, NavItems are given generated `linkId` and `aria-controls` ' + 'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' + 'To control these attributes directly provide a `generateChildId` prop to the parent TabContainer.') : undefined;
+	       true ? _warning2['default'](!(id || controls), 'In the context of a TabContainer, NavItems are given generated `id` and `aria-controls` ' + 'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' + 'To control these attributes directly provide a `generateChildId` prop to the parent TabContainer.') : undefined;
 
-	      linkId = context.getId(eventKey, _utilsTabUtils.TAB) || null;
+	      id = context.getId(eventKey, _utilsTabUtils.TAB) || null;
 	      controls = context.getId(eventKey, _utilsTabUtils.PANE) || null;
 	      onSelect = _utilsCreateChainedFunction2['default'](onSelect, context.onSelect);
 	    }
@@ -14168,7 +14170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return {
 	      onSelect: onSelect,
-	      linkId: linkId,
+	      id: id,
 	      role: role,
 	      onKeyDown: onKeyDown,
 	      'aria-controls': controls,
@@ -18038,19 +18040,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * Transition onExited callback when animation is not `false`
 	     */
-	    onExited: _react.PropTypes.func
+	    onExited: _react.PropTypes.func,
+
+	    /**
+	     * Unmount the tab (remove it from the DOM) when it is no longer visible
+	     */
+	    unmountOnExit: _react.PropTypes.bool
 	  },
 
 	  contextTypes: {
 	    $bs_tabcontainer: _react.PropTypes.shape({
-	      getId: _react.PropTypes.func
+	      getId: _react.PropTypes.func,
+	      unmountOnExit: _react.PropTypes.bool
 	    }),
 	    $bs_tabcontent: _react.PropTypes.shape({
 	      bsClass: _react.PropTypes.string,
 	      animation: _react.PropTypes.oneOfType([_react.PropTypes.bool, _reactPropTypesLibElementType2['default']]),
 	      activeKey: _react.PropTypes.any,
 	      onExited: _react.PropTypes.func,
-	      register: _react.PropTypes.func
+	      register: _react.PropTypes.func,
+	      unmountOnExit: _react.PropTypes.bool
 	    })
 	  },
 
@@ -18107,6 +18116,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return props.animation != null ? props.animation : context.animation;
 	  },
 
+	  getUnmountOnExit: function getUnmountOnExit() {
+	    var context = this.getContext('$bs_tabcontent', this.context);
+	    return this.props.unmountOnExit != null ? this.props.unmountOnExit : context.unmountOnExit;
+	  },
+
 	  isActive: function isActive() {
 	    var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
 	    var context = arguments.length <= 1 || arguments[1] === undefined ? this.context : arguments[1];
@@ -18123,6 +18137,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var bsClass = this.props.bsClass || this.getContext('$bs_tabcontent').bsClass;
 
 	    var Transition = this.getTransition();
+
+	    if (!visible && !Transition && this.getUnmountOnExit()) {
+	      return null;
+	    }
 
 	    var classes = (_classes = {
 	      active: visible
@@ -18171,7 +18189,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onExited: _utilsCreateChainedFunction2['default'](this.handleExited, onExited),
 	          onEnter: _utilsCreateChainedFunction2['default'](this.handleEnter, onEnter),
 	          onEntering: onEntering,
-	          onEntered: onEntered
+	          onEntered: onEntered,
+	          unmountOnExit: this.getUnmountOnExit()
 	        },
 	        tabPane
 	      );
@@ -18390,7 +18409,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Use `false` to disable, `true` to enable the default "Fade"
 	     * animation or any `<Transition>` component.
 	     */
-	    animation: _react.PropTypes.oneOfType([_react.PropTypes.bool, _reactPropTypesLibElementType2['default']])
+	    animation: _react.PropTypes.oneOfType([_react.PropTypes.bool, _reactPropTypesLibElementType2['default']]),
+
+	    /**
+	     * Unmount the tab (remove it from the DOM) when it is no longer visible
+	     */
+	    unmountOnExit: _react.PropTypes.bool
 	  },
 
 	  contextTypes: {
@@ -18406,14 +18430,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      animation: animationPropType,
 	      activeKey: _react.PropTypes.any,
 	      onExited: _react.PropTypes.func,
-	      register: _react.PropTypes.func
+	      register: _react.PropTypes.func,
+	      unmountOnExit: _react.PropTypes.bool
 	    })
 	  },
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      componentClass: 'div',
-	      animation: true
+	      animation: true,
+	      unmountOnExit: false
 	    };
 	  },
 
@@ -18432,9 +18458,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        animation: this.props.animation,
 	        activeKey: exitingPane ? undefined : this.getActiveKey(),
 	        onExited: this.handlePaneExited,
-	        register: this.registerPane
+	        register: this.registerPane,
+	        unmountOnExit: this.props.unmountOnExit
 	      }
 	    };
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    this.panes = [];
 	  },
 
 	  /**
@@ -18485,7 +18516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  registerPane: function registerPane(eventKey) {
 	    var _this = this;
 
-	    var panes = this.panes || (this.panes = []);
+	    var panes = this.panes;
 
 	    !(panes.indexOf(eventKey) === -1) ?  true ? _invariant2['default'](false, 'You cannot have multiple TabPanes of with the same `eventKey` in the same ' + 'TabContent component. Duplicate eventKey: ' + eventKey) : _invariant2['default'](false) : undefined;
 
@@ -18696,6 +18727,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    onSelect: _react2['default'].PropTypes.func,
 
 	    /**
+	     * Unmount tabs (remove it from the DOM) when it is no longer visible
+	     */
+	    unmountOnExit: _react2['default'].PropTypes.bool,
+
+	    /**
 	     * @deprecated Use TabContainer to create differently shaped tab layouts.
 	     */
 	    position: _react2['default'].PropTypes.oneOf(['top', 'left', 'right']),
@@ -18732,7 +18768,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      animation: true,
 	      tabWidth: 2,
 	      position: 'top',
-	      standalone: false
+	      standalone: false,
+	      unmountOnExit: false
 	    };
 	  },
 
@@ -18769,11 +18806,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ref: 'tabs',
 	      role: 'tablist'
 	    });
+
 	    var childTabs = _utilsValidComponentChildren2['default'].map(children, this.renderTab);
 
 	    var panesProps = {
 	      ref: 'panes',
-	      animation: props.animation
+	      animation: props.animation,
+	      unmountOnExit: props.unmountOnExit
 	    };
 
 	    var childPanes = children;
