@@ -1652,16 +1652,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _warning2 = _interopRequireDefault(_warning);
 
+	var warned = {};
+
 	function deprecated(propType, explanation) {
 	  return function validate(props, propName, componentName) {
 	    if (props[propName] != null) {
-	      _warning2['default'](false, '"' + propName + '" property of "' + componentName + '" has been deprecated.\n' + explanation);
+	      var message = '"' + propName + '" property of "' + componentName + '" has been deprecated.\n' + explanation;
+	      if (!warned[message]) {
+	        _warning2['default'](false, message);
+	        warned[message] = true;
+	      }
 	    }
 
 	    return propType(props, propName, componentName);
 	  };
 	}
 
+	function _resetWarned() {
+	  warned = {};
+	}
+
+	deprecated._resetWarned = _resetWarned;
 	module.exports = exports['default'];
 
 /***/ },
@@ -2513,12 +2524,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 53 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 	exports['default'] = all;
+
+	var _common = __webpack_require__(50);
 
 	function all() {
 	  for (var _len = arguments.length, propTypes = Array(_len), _key = 0; _key < _len; _key++) {
@@ -2539,7 +2552,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    throw new Error('No validations provided');
 	  }
 
-	  return function validate(props, propName, componentName) {
+	  function validate(props, propName, componentName) {
 	    for (var i = 0; i < propTypes.length; i++) {
 	      var result = propTypes[i](props, propName, componentName);
 
@@ -2547,7 +2560,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return result;
 	      }
 	    }
-	  };
+	  }
+
+	  return _common.createChainableTypeChecker(validate);
 	}
 
 	module.exports = exports['default'];
@@ -3177,7 +3192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    arrOfProps[_key] = arguments[_key];
 	  }
 
-	  function validate(props, propName, componentName) {
+	  function validate(props, propName) {
 	    var usedPropCount = arrOfProps.map(function (listedProp) {
 	      return props[listedProp];
 	    }).reduce(function (acc, curr) {
@@ -5549,6 +5564,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _uncontrollable2 = _interopRequireDefault(_uncontrollable);
 
+	var _warning = __webpack_require__(36);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
 	var _utilsBootstrapUtils = __webpack_require__(24);
 
 	var _utilsCreateChainedFunction = __webpack_require__(84);
@@ -5575,7 +5594,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-	var TOGGLE_REF = 'toggle-btn';
 	var TOGGLE_ROLE = _DropdownToggle2['default'].defaultProps.bsRole;
 	var MENU_ROLE = _DropdownMenu2['default'].defaultProps.bsRole;
 
@@ -5624,7 +5642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  Dropdown.prototype.componentWillUpdate = function componentWillUpdate(nextProps) {
 	    if (!nextProps.open && this.props.open) {
-	      this._focusInDropdown = _domHelpersQueryContains2['default'](_reactDom2['default'].findDOMNode(this.refs.menu), _domHelpersActiveElement2['default'](document));
+	      this._focusInDropdown = _domHelpersQueryContains2['default'](_reactDom2['default'].findDOMNode(this.menu), _domHelpersActiveElement2['default'](document));
 	    }
 	  };
 
@@ -5697,8 +5715,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case _keycode2['default'].codes.down:
 	        if (!this.props.open) {
 	          this.toggleOpen('keydown');
-	        } else if (this.refs.menu.focusNext) {
-	          this.refs.menu.focusNext();
+	        } else if (this.menu.focusNext) {
+	          this.menu.focusNext();
 	        }
 	        event.preventDefault();
 	        break;
@@ -5719,7 +5737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Dropdown.prototype.focusNextOnOpen = function focusNextOnOpen() {
-	    var menu = this.refs.menu;
+	    var menu = this.menu;
 
 	    if (!menu.focusNext) {
 	      return;
@@ -5731,7 +5749,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Dropdown.prototype.focus = function focus() {
-	    var toggle = _reactDom2['default'].findDOMNode(this.refs[TOGGLE_REF]);
+	    var toggle = _reactDom2['default'].findDOMNode(this.toggle);
 
 	    if (toggle && toggle.focus) {
 	      toggle.focus();
@@ -5763,8 +5781,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Dropdown.prototype.refineMenu = function refineMenu(menu, open) {
+	    var _this2 = this;
+
+	    var ref = function ref(r) {
+	      return _this2.menu = r;
+	    };
+
+	    if (typeof menu.ref === 'string') {
+	       true ? _warning2['default'](false, 'String refs are not supported on `<Dropdown.Menu>` components. ' + 'To apply a ref to the component use the callback signature: \n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : undefined;
+	    } else {
+	      ref = _utilsCreateChainedFunction2['default'](menu.ref, ref);
+	    }
+
 	    var menuProps = {
-	      ref: 'menu',
+	      ref: ref,
 	      open: open,
 	      labelledBy: this.props.id,
 	      pullRight: this.props.pullRight,
@@ -5779,10 +5809,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  Dropdown.prototype.refineToggle = function refineToggle(toggle, open) {
+	    var _this3 = this;
+
+	    var ref = function ref(r) {
+	      return _this3.toggle = r;
+	    };
+
+	    if (typeof toggle.ref === 'string') {
+	       true ? _warning2['default'](false, 'String refs are not supported on `<Dropdown.Toggle>` components. ' + 'To apply a ref to the component use the callback signature: \n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : undefined;
+	    } else {
+	      ref = _utilsCreateChainedFunction2['default'](toggle.ref, ref);
+	    }
+
 	    var toggleProps = {
+	      ref: ref,
 	      open: open,
 	      id: this.props.id,
-	      ref: TOGGLE_REF,
 	      role: this.props.role
 	    };
 
@@ -5798,7 +5840,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	Dropdown.Toggle = _DropdownToggle2['default'];
 
-	Dropdown.TOGGLE_REF = TOGGLE_REF;
 	Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
 	Dropdown.MENU_ROLE = MENU_ROLE;
 
@@ -6027,7 +6068,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'insert': 45,
 	  'delete': 46,
 	  'command': 91,
-	  'right click': 93,
+	  'left command': 91,
+	  'right command': 93,
 	  'numpad *': 106,
 	  'numpad +': 107,
 	  'numpad -': 109,
@@ -6068,7 +6110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'escape': 27,
 	  'spc': 32,
 	  'pgup': 33,
-	  'pgdn': 33,
+	  'pgdn': 34,
 	  'ins': 45,
 	  'del': 46,
 	  'cmd': 91
@@ -8847,11 +8889,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 	var _createUncontrollable = __webpack_require__(160);
 
 	var _createUncontrollable2 = _interopRequireDefault(_createUncontrollable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mixin = {
 	  shouldComponentUpdate: function shouldComponentUpdate() {
@@ -8872,7 +8914,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (component.isMounted()) component.forceUpdate();
 	}
 
-	exports['default'] = _createUncontrollable2['default']([mixin], set);
+	exports.default = (0, _createUncontrollable2.default)([mixin], set);
 	module.exports = exports['default'];
 
 /***/ },
@@ -8885,21 +8927,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	exports['default'] = createUncontrollable;
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	exports.default = createUncontrollable;
 
 	var _react = __webpack_require__(20);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _invariant = __webpack_require__(32);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
 	var _utils = __webpack_require__(161);
 
 	var utils = _interopRequireWildcard(_utils);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	function createUncontrollable(mixins, set) {
 
@@ -8910,10 +8956,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var displayName = Component.displayName || Component.name || 'Component',
 	        basePropTypes = utils.getType(Component).propTypes,
+	        isCompositeComponent = utils.isReactComponent(Component),
 	        propTypes;
 
 	    propTypes = utils.uncontrolledPropTypes(controlledValues, basePropTypes, displayName);
 
+	    (0, _invariant2.default)(isCompositeComponent || !methods.length, '[uncontrollable] stateless function components cannot pass through methods ' + 'becasue they have no associated instances. Check component: ' + displayName + ', ' + 'attempting to pass through methods: ' + methods.join(', '));
 	    methods = utils.transform(methods, function (obj, method) {
 	      obj[method] = function () {
 	        var _refs$inner;
@@ -8922,7 +8970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	    }, {});
 
-	    var component = _react2['default'].createClass(_extends({
+	    var component = _react2.default.createClass(_extends({
 
 	      displayName: 'Uncontrolled(' + displayName + ')',
 
@@ -8931,7 +8979,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      propTypes: propTypes
 
 	    }, methods, {
-
 	      componentWillMount: function componentWillMount() {
 	        var props = this.props,
 	            keys = Object.keys(controlledValues);
@@ -8940,6 +8987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          values[key] = props[utils.defaultKey(key)];
 	        }, {});
 	      },
+
 
 	      /**
 	       * If a prop switches from controlled to Uncontrolled
@@ -8957,7 +9005,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 	        });
 	      },
-
 	      render: function render() {
 	        var _this2 = this;
 
@@ -8981,11 +9028,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          newProps[handle] = setAndNotify.bind(_this2, propName);
 	        });
 
-	        newProps = _extends({}, props, newProps, { ref: 'inner' });
+	        newProps = _extends({}, props, newProps, {
+	          ref: isCompositeComponent ? 'inner' : null
+	        });
 
-	        return _react2['default'].createElement(Component, newProps);
+	        return _react2.default.createElement(Component, newProps);
 	      }
-
 	    }));
 
 	    component.ControlledComponent = Component;
@@ -8994,8 +9042,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * useful when wrapping a Component and you want to control
 	     * everything
 	     */
-	    component.deferControlTo = function (newComponent, additions, nextMethods) {
-	      if (additions === undefined) additions = {};
+	    component.deferControlTo = function (newComponent) {
+	      var additions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	      var nextMethods = arguments[2];
 
 	      return uncontrollable(newComponent, _extends({}, controlledValues, additions), nextMethods);
 	    };
@@ -9022,7 +9071,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 	}
-
 	module.exports = exports['default'];
 
 /***/ },
@@ -9032,6 +9080,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	exports.__esModule = true;
+	exports.version = undefined;
 	exports.customPropType = customPropType;
 	exports.uncontrolledPropTypes = uncontrolledPropTypes;
 	exports.getType = getType;
@@ -9041,9 +9090,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.chain = chain;
 	exports.transform = transform;
 	exports.each = each;
+	exports.isReactComponent = isReactComponent;
 	exports.has = has;
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(20);
 
@@ -9052,6 +9100,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _invariant = __webpack_require__(32);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function customPropType(handler, propType, name) {
 
@@ -9074,7 +9124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    transform(controlledValues, function (obj, handler, prop) {
 	      var type = basePropTypes[prop];
 
-	      _invariant2['default'](typeof handler === 'string' && handler.trim().length, 'Uncontrollable - [%s]: the prop `%s` needs a valid handler key name in order to make it uncontrollable', displayName, prop);
+	      (0, _invariant2.default)(typeof handler === 'string' && handler.trim().length, 'Uncontrollable - [%s]: the prop `%s` needs a valid handler key name in order to make it uncontrollable', displayName, prop);
 
 	      obj[prop] = customPropType(handler, type, displayName);
 
@@ -9085,9 +9135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return propTypes;
 	}
 
-	var version = _react2['default'].version.split('.').map(parseFloat);
-
-	exports.version = version;
+	var version = exports.version = _react2.default.version.split('.').map(parseFloat);
 
 	function getType(component) {
 	  if (version[0] >= 15 || version[0] === 0 && version[1] >= 13) return component;
@@ -9134,7 +9182,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	function each(obj, cb, thisArg) {
 	  if (Array.isArray(obj)) return obj.forEach(cb, thisArg);
 
-	  for (var key in obj) if (has(obj, key)) cb.call(thisArg, obj[key], key, obj);
+	  for (var key in obj) {
+	    if (has(obj, key)) cb.call(thisArg, obj[key], key, obj);
+	  }
+	}
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	function isReactComponent(component) {
+	  return !!(component && component.prototype && component.prototype.isReactComponent);
 	}
 
 	function has(o, k) {
@@ -16002,7 +16064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    delayHide: _react2['default'].PropTypes.number,
 
 	    /**
-	     * The initial visibility state of the Overlay, for more nuanced visibility controll consider
+	     * The initial visibility state of the Overlay, for more nuanced visibility control consider
 	     * using the Overlay component directly.
 	     */
 	    defaultOverlayShown: _react2['default'].PropTypes.bool,
@@ -18362,19 +18424,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getChildContext: function getChildContext() {
 	    var _props = this.props;
 	    var activeKey = _props.activeKey;
-	    var onSelect = _props.onSelect;
 	    var generateChildId = _props.generateChildId;
 	    var id = _props.id;
 
 	    return {
 	      $bs_tabcontainer: {
 	        activeKey: activeKey,
-	        onSelect: onSelect,
+	        onSelect: this.handleSelect,
 	        getId: generateChildId || function (key, type) {
 	          return id ? id + '-' + type + '-' + key : null;
 	        }
 	      }
 	    };
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    // isMounted() isn't `true` at this point;
+	    this.unmounting = true;
+	  },
+
+	  handleSelect: function handleSelect(key) {
+	    if (!this.unmounting) {
+	      this.props.onSelect(key);
+	    }
 	  },
 
 	  render: function render() {
@@ -18554,6 +18626,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return function () {
 	      panes.splice(panes.indexOf(eventKey), 1);
+
+	      // #1892
+	      // new active state can propagate down _before_
+	      // the tab actually unmounts, so it will map be exiting.
+	      // since an exiting tab won't complete, clear the bad state
+	      if (eventKey === _this._exitingPane) {
+	        _this.handlePaneExited();
+	      }
+
+	      // If the tab was active, we need to tell the container
+	      // that it no longer exists and as such is not active.
 	      if (eventKey === _this.getActiveKey()) {
 	        _this.getContext('$bs_tabcontainer').onSelect();
 	      }
