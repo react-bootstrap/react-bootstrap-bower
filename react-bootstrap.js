@@ -4442,10 +4442,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // for testing
 
-	  Collapse.prototype._getTransitionInstance = function _getTransitionInstance() {
-	    return this.refs.transition;
-	  };
-
 	  Collapse.prototype._getScrollDimensionValue = function _getScrollDimensionValue(elem, dimension) {
 	    return elem['scroll' + _utilsCapitalize2['default'](dimension)] + 'px';
 	  };
@@ -4474,9 +4470,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      width: this._dimension() === 'width'
 	    };
 
-	    return _react2['default'].createElement(_reactOverlaysLibTransition2['default'], _extends({
-	      ref: 'transition'
-	    }, props, {
+	    return _react2['default'].createElement(_reactOverlaysLibTransition2['default'], _extends({}, props, {
 	      'aria-expanded': props.role ? props['in'] : null,
 	      className: _classnames2['default'](className, classes),
 	      exitedClassName: 'collapse',
@@ -9822,12 +9816,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return;
 	    }
 
-	    var modalNode = _reactDom2['default'].findDOMNode(this._modal);
-	    var modalHeight = modalNode.scrollHeight;
+	    var dialogNode = this._modal.getDialogElement();
+	    var dialogHeight = dialogNode.scrollHeight;
 
-	    var document = _domHelpersOwnerDocument2['default'](modalNode);
+	    var document = _domHelpersOwnerDocument2['default'](dialogNode);
 	    var bodyIsOverflowing = _reactOverlaysLibUtilsIsOverflowing2['default'](_reactDom2['default'].findDOMNode(this.props.container || document.body));
-	    var modalIsOverflowing = modalHeight > document.documentElement.clientHeight;
+	    var modalIsOverflowing = dialogHeight > document.documentElement.clientHeight;
 
 	    this.setState({
 	      style: {
@@ -9864,6 +9858,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2['default'].createElement(
 	      _reactOverlaysLibModal2['default'],
 	      _extends({}, baseModalProps, {
+	        ref: function (c) {
+	          _this._modal = c;
+	        },
 	        show: show,
 	        onEntering: _utilsCreateChainedFunction2['default'](onEntering, this.handleEntering),
 	        onExited: _utilsCreateChainedFunction2['default'](onExited, this.handleExited),
@@ -9877,9 +9874,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _react2['default'].createElement(
 	        Dialog,
 	        _extends({}, dialogProps, {
-	          ref: function (c) {
-	            _this._modal = c;
-	          },
 	          style: _extends({}, this.state.style, style),
 	          className: _classnames2['default'](className, inClassName),
 	          onClick: backdrop === true ? this.handleDialogClick : null
@@ -14918,7 +14912,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Panel.propTypes = propTypes;
 	Panel.defaultProps = defaultProps;
 
-	exports['default'] = _utilsBootstrapUtils.bsClass('panel', _utilsBootstrapUtils.bsStyles([].concat(_Object$values(_utilsStyleConfig.State), [_utilsStyleConfig.Style.DEFAULT, _utilsStyleConfig.Style.PRIMARY]), Panel));
+	exports['default'] = _utilsBootstrapUtils.bsClass('panel', _utilsBootstrapUtils.bsStyles([].concat(_Object$values(_utilsStyleConfig.State), [_utilsStyleConfig.Style.DEFAULT, _utilsStyleConfig.Style.PRIMARY]), _utilsStyleConfig.Style.DEFAULT, Panel));
 	module.exports = exports['default'];
 
 /***/ },
