@@ -2309,43 +2309,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _react = __webpack_require__(30);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _common = __webpack_require__(53);
+	var _createChainableTypeChecker = __webpack_require__(53);
 
-	/**
-	 * Checks whether a prop provides a type of element.
-	 *
-	 * The type of element can be provided in two forms:
-	 * - tag name (string)
-	 * - a return value of React.createClass(...)
-	 *
-	 * @param props
-	 * @param propName
-	 * @param componentName
-	 * @returns {Error|undefined}
-	 */
+	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
 
-	function validate(props, propName, componentName) {
-	  var errBeginning = _common.errMsg(props, propName, componentName, '. Expected an Element `type`');
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	  if (typeof props[propName] !== 'function') {
-	    if (_react2['default'].isValidElement(props[propName])) {
-	      return new Error(errBeginning + ', not an actual Element');
-	    }
+	function elementType(props, propName, componentName, location, propFullName) {
+	  var propValue = props[propName];
+	  var propType = typeof propValue === 'undefined' ? 'undefined' : _typeof(propValue);
 
-	    if (typeof props[propName] !== 'string') {
-	      return new Error(errBeginning + ' such as a tag name or return value of React.createClass(...)');
-	    }
+	  if (_react2.default.isValidElement(propValue)) {
+	    return new Error('Invalid ' + location + ' `' + propFullName + '` of type ReactElement ' + ('supplied to `' + componentName + '`, expected an element type (a string ') + 'or a ReactClass).');
 	  }
+
+	  if (propType !== 'function' && propType !== 'string') {
+	    return new Error('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected an element type (a string ') + 'or a ReactClass).');
+	  }
+
+	  return null;
 	}
 
-	exports['default'] = _common.createChainableTypeChecker(validate);
-	module.exports = exports['default'];
+	exports.default = (0, _createChainableTypeChecker2.default)(elementType);
 
 /***/ },
 /* 53 */
@@ -2354,30 +2345,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	exports.__esModule = true;
-	exports.errMsg = errMsg;
-	exports.createChainableTypeChecker = createChainableTypeChecker;
-
-	function errMsg(props, propName, componentName, msgContinuation) {
-	  return 'Invalid prop \'' + propName + '\' of value \'' + props[propName] + '\'' + (' supplied to \'' + componentName + '\'' + msgContinuation);
-	}
-
+	exports.default = createChainableTypeChecker;
 	/**
-	 * Create chain-able isRequired validator
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
 	 *
-	 * Largely copied directly from:
-	 *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
+	// Mostly taken from ReactPropTypes.
+
 	function createChainableTypeChecker(validate) {
-	  function checkType(isRequired, props, propName, componentName) {
-	    componentName = componentName || '<<anonymous>>';
+	  function checkType(isRequired, props, propName, componentName, location, propFullName) {
+	    var componentNameSafe = componentName || '<<anonymous>>';
+	    var propFullNameSafe = propFullName || propName;
+
 	    if (props[propName] == null) {
 	      if (isRequired) {
-	        return new Error('Required prop \'' + propName + '\' was not specified in \'' + componentName + '\'.');
+	        return new Error('Required ' + location + ' `' + propFullNameSafe + '` was not specified ' + ('in `' + componentNameSafe + '`.'));
 	      }
-	    } else {
-	      return validate(props, propName, componentName);
+
+	      return null;
 	    }
+
+	    for (var _len = arguments.length, args = Array(_len > 6 ? _len - 6 : 0), _key = 6; _key < _len; _key++) {
+	      args[_key - 6] = arguments[_key];
+	    }
+
+	    return validate.apply(undefined, [props, propName, componentNameSafe, location, propFullNameSafe].concat(args));
 	  }
 
 	  var chainedCheckType = checkType.bind(null, false);
@@ -2617,43 +2614,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	exports.__esModule = true;
-	exports['default'] = all;
+	exports.default = all;
 
-	var _common = __webpack_require__(53);
+	var _createChainableTypeChecker = __webpack_require__(53);
+
+	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function all() {
-	  for (var _len = arguments.length, propTypes = Array(_len), _key = 0; _key < _len; _key++) {
-	    propTypes[_key] = arguments[_key];
+	  for (var _len = arguments.length, validators = Array(_len), _key = 0; _key < _len; _key++) {
+	    validators[_key] = arguments[_key];
 	  }
 
-	  if (propTypes === undefined) {
-	    throw new Error('No validations provided');
-	  }
-
-	  if (propTypes.some(function (propType) {
-	    return typeof propType !== 'function';
-	  })) {
-	    throw new Error('Invalid arguments, must be functions');
-	  }
-
-	  if (propTypes.length === 0) {
-	    throw new Error('No validations provided');
-	  }
-
-	  function validate(props, propName, componentName) {
-	    for (var i = 0; i < propTypes.length; i++) {
-	      var result = propTypes[i](props, propName, componentName);
-
-	      if (result !== undefined && result !== null) {
-	        return result;
-	      }
+	  function allPropTypes() {
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
 	    }
+
+	    var error = null;
+
+	    validators.forEach(function (validator) {
+	      if (error != null) {
+	        return;
+	      }
+
+	      var result = validator.apply(undefined, args);
+	      if (result != null) {
+	        error = result;
+	      }
+	    });
+
+	    return error;
 	  }
 
-	  return _common.createChainableTypeChecker(validate);
+	  return (0, _createChainableTypeChecker2.default)(allPropTypes);
 	}
-
-	module.exports = exports['default'];
 
 /***/ },
 /* 57 */
@@ -5763,22 +5759,26 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 88 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	exports.__esModule = true;
-	exports["default"] = isRequiredForA11y;
+	exports.default = isRequiredForA11y;
+	function isRequiredForA11y(validator) {
+	  return function validate(props, propName, componentName, location, propFullName) {
+	    var componentNameSafe = componentName || '<<anonymous>>';
+	    var propFullNameSafe = propFullName || propName;
 
-	function isRequiredForA11y(propType) {
-	  return function validate(props, propName, componentName) {
 	    if (props[propName] == null) {
-	      return new Error("The prop '" + propName + "' is required to make '" + componentName + "' accessible" + " for users using assistive technologies such as screen readers");
+	      return new Error('The ' + location + ' `' + propFullNameSafe + '` is required to make ' + ('`' + componentNameSafe + '` accessible for users of assistive ') + 'technologies such as screen readers.');
 	    }
 
-	    return propType(props, propName, componentName);
+	    for (var _len = arguments.length, args = Array(_len > 5 ? _len - 5 : 0), _key = 5; _key < _len; _key++) {
+	      args[_key - 5] = arguments[_key];
+	    }
+
+	    return validator.apply(undefined, [props, propName, componentName, location, propFullName].concat(args));
 	  };
 	}
-
-	module.exports = exports["default"];
 
 /***/ },
 /* 89 */
@@ -6013,14 +6013,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function customPropType(handler, propType, name) {
 
-	  return function (props, propName) {
+	  return function (props, propName, wrappedName) {
 
 	    if (props[propName] !== undefined) {
 	      if (!props[handler]) {
 	        return new Error('You have provided a `' + propName + '` prop to ' + '`' + name + '` without an `' + handler + '` handler. This will render a read-only field. ' + 'If the field should be mutable use `' + defaultKey(propName) + '`. Otherwise, set `' + handler + '`');
 	      }
 
-	      return propType && propType(props, propName, name);
+	      for (var _len = arguments.length, args = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	        args[_key - 3] = arguments[_key];
+	      }
+
+	      return propType && propType.apply(undefined, [props, propName, name].concat(args));
 	    }
 	  };
 	}
@@ -6073,8 +6077,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function chain(thisArg, a, b) {
 	  return function chainedFunction() {
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
 	    }
 
 	    a && a.call.apply(a, [thisArg].concat(args));
@@ -7164,7 +7168,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.requiredRoles = requiredRoles;
 	exports.exclusiveRoles = exclusiveRoles;
 
-	var _reactPropTypesLibCommon = __webpack_require__(53);
+	var _reactPropTypesLibUtilsCreateChainableTypeChecker = __webpack_require__(53);
+
+	var _reactPropTypesLibUtilsCreateChainableTypeChecker2 = _interopRequireDefault(_reactPropTypesLibUtilsCreateChainableTypeChecker);
 
 	var _ValidComponentChildren = __webpack_require__(43);
 
@@ -7175,7 +7181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    roles[_key] = arguments[_key];
 	  }
 
-	  return _reactPropTypesLibCommon.createChainableTypeChecker(function (props, propName, component) {
+	  return _reactPropTypesLibUtilsCreateChainableTypeChecker2['default'](function (props, propName, component) {
 	    var missing = undefined;
 
 	    roles.every(function (role) {
@@ -7202,7 +7208,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    roles[_key2] = arguments[_key2];
 	  }
 
-	  return _reactPropTypesLibCommon.createChainableTypeChecker(function (props, propName, component) {
+	  return _reactPropTypesLibUtilsCreateChainableTypeChecker2['default'](function (props, propName, component) {
 	    var duplicate = undefined;
 
 	    roles.every(function (role) {
@@ -10018,9 +10024,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _mountable = __webpack_require__(157);
+	var _componentOrElement = __webpack_require__(157);
 
-	var _mountable2 = _interopRequireDefault(_mountable);
+	var _componentOrElement2 = _interopRequireDefault(_componentOrElement);
 
 	var _elementType = __webpack_require__(52);
 
@@ -10103,7 +10109,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * For the sake of assistive technologies, the container should usually be the document body, so that the rest of the
 	     * page content can be placed behind a virtual backdrop as well as a visual one.
 	     */
-	    container: _react2.default.PropTypes.oneOfType([_mountable2.default, _react2.default.PropTypes.func]),
+	    container: _react2.default.PropTypes.oneOfType([_componentOrElement2.default, _react2.default.PropTypes.func]),
 
 	    /**
 	     * A callback fired when the Modal is opening.
@@ -10506,29 +10512,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 
-	var _common = __webpack_require__(53);
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	/**
-	 * Checks whether a prop provides a DOM element
-	 *
-	 * The element can be provided in two forms:
-	 * - Directly passed
-	 * - Or passed an object that has a `render` method
-	 *
-	 * @param props
-	 * @param propName
-	 * @param componentName
-	 * @returns {Error|undefined}
-	 */
+	var _react = __webpack_require__(30);
 
-	function validate(props, propName, componentName) {
-	  if (typeof props[propName] !== 'object' || typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
-	    return new Error(_common.errMsg(props, propName, componentName, ', expected a DOM element or an object that has a `render` method'));
+	var _react2 = _interopRequireDefault(_react);
+
+	var _createChainableTypeChecker = __webpack_require__(53);
+
+	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function validate(props, propName, componentName, location, propFullName) {
+	  var propValue = props[propName];
+	  var propType = typeof propValue === 'undefined' ? 'undefined' : _typeof(propValue);
+
+	  if (_react2.default.isValidElement(propValue)) {
+	    return new Error('Invalid ' + location + ' `' + propFullName + '` of type ReactElement ' + ('supplied to `' + componentName + '`, expected a ReactComponent or a ') + 'DOMElement. You can usually obtain a ReactComponent or DOMElement ' + 'from a ReactElement by attaching a ref to it.');
 	  }
+
+	  if ((propType !== 'object' || typeof propValue.render !== 'function') && propValue.nodeType !== 1) {
+	    return new Error('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected a ReactComponent or a ') + 'DOMElement.');
+	  }
+
+	  return null;
 	}
 
-	exports['default'] = _common.createChainableTypeChecker(validate);
-	module.exports = exports['default'];
+	exports.default = (0, _createChainableTypeChecker2.default)(validate);
 
 /***/ },
 /* 158 */
@@ -10548,9 +10559,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _mountable = __webpack_require__(157);
+	var _componentOrElement = __webpack_require__(157);
 
-	var _mountable2 = _interopRequireDefault(_mountable);
+	var _componentOrElement2 = _interopRequireDefault(_componentOrElement);
 
 	var _ownerDocument = __webpack_require__(122);
 
@@ -10576,7 +10587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * A Node, Component instance, or function that returns either. The `container` will have the Portal children
 	     * appended to it.
 	     */
-	    container: _react2.default.PropTypes.oneOfType([_mountable2.default, _react2.default.PropTypes.func])
+	    container: _react2.default.PropTypes.oneOfType([_componentOrElement2.default, _react2.default.PropTypes.func])
 	  },
 
 	  componentDidMount: function componentDidMount() {
@@ -12835,7 +12846,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Built on top of `<Position/>` and `<Portal/>`, the overlay component is great for custom tooltip overlays.
 	 */
-
 	var Overlay = function (_React$Component) {
 	  _inherits(Overlay, _React$Component);
 
@@ -12969,11 +12979,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type func
 	   */
-	  onHide: function onHide(props, name, cname) {
-	    var pt = _react2.default.PropTypes.func;
+	  onHide: function onHide(props) {
+	    var propType = _react2.default.PropTypes.func;
+	    if (props.rootClose) {
+	      propType = propType.isRequired;
+	    }
 
-	    if (props.rootClose) pt = pt.isRequired;
-	    return pt(props, name, cname);
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
+
+	    return propType.apply(undefined, [props].concat(args));
 	  },
 
 
@@ -13042,9 +13058,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _mountable = __webpack_require__(157);
+	var _componentOrElement = __webpack_require__(157);
 
-	var _mountable2 = _interopRequireDefault(_mountable);
+	var _componentOrElement2 = _interopRequireDefault(_componentOrElement);
 
 	var _calculatePosition = __webpack_require__(185);
 
@@ -13077,7 +13093,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * It also injects "arrow" `left`, and `top` values for styling callout arrows
 	 * for giving your components a sense of directionality.
 	 */
-
 	var Position = function (_React$Component) {
 	  _inherits(Position, _React$Component);
 
@@ -13202,12 +13217,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * A node, element, or function that returns either. The child will be
 	   * be positioned next to the `target` specified.
 	   */
-	  target: _react2.default.PropTypes.oneOfType([_mountable2.default, _react2.default.PropTypes.func]),
+	  target: _react2.default.PropTypes.oneOfType([_componentOrElement2.default, _react2.default.PropTypes.func]),
 
 	  /**
 	   * "offsetParent" of the component
 	   */
-	  container: _react2.default.PropTypes.oneOfType([_mountable2.default, _react2.default.PropTypes.func]),
+	  container: _react2.default.PropTypes.oneOfType([_componentOrElement2.default, _react2.default.PropTypes.func]),
 	  /**
 	   * Minimum spacing in pixels between container border and component border
 	   */
@@ -13674,6 +13689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.handleToggle = this.handleToggle.bind(this);
 	    this.handleDelayedShow = this.handleDelayedShow.bind(this);
 	    this.handleDelayedHide = this.handleDelayedHide.bind(this);
+	    this.handleHide = this.handleHide.bind(this);
 
 	    this.handleMouseOver = function (e) {
 	      return _this.handleMouseOverOut(_this.handleDelayedShow, e);
@@ -13780,6 +13796,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 
+	  OverlayTrigger.prototype.handleHide = function handleHide() {
+	    this.hide();
+	  };
+
 	  OverlayTrigger.prototype.show = function show() {
 	    this.setState({ show: true });
 	  };
@@ -13793,7 +13813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _Overlay2['default'],
 	      _extends({}, props, {
 	        show: this.state.show,
-	        onHide: this.handleToggle,
+	        onHide: this.handleHide,
 	        target: this
 	      }),
 	      overlay
