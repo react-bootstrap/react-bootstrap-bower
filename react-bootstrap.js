@@ -7115,6 +7115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    propTypes = utils.uncontrolledPropTypes(controlledValues, basePropTypes, displayName);
 
 	    (0, _invariant2.default)(isCompositeComponent || !methods.length, '[uncontrollable] stateless function components cannot pass through methods ' + 'because they have no associated instances. Check component: ' + displayName + ', ' + 'attempting to pass through methods: ' + methods.join(', '));
+
 	    methods = utils.transform(methods, function (obj, method) {
 	      obj[method] = function () {
 	        var _refs$inner;
@@ -7159,6 +7160,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _this2._values[key] = nextProps[utils.defaultKey(key)];
 	          }
 	        });
+	      },
+	      getControlledInstance: function getControlledInstance() {
+	        return this.refs.inner;
 	      },
 	      render: function render() {
 	        var _this3 = this;
@@ -7242,7 +7246,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.__esModule = true;
 	exports.version = undefined;
-	exports.customPropType = customPropType;
 	exports.uncontrolledPropTypes = uncontrolledPropTypes;
 	exports.getType = getType;
 	exports.getValue = getValue;
@@ -7251,8 +7254,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.chain = chain;
 	exports.transform = transform;
 	exports.each = each;
-	exports.isReactComponent = isReactComponent;
 	exports.has = has;
+	exports.isReactComponent = isReactComponent;
 
 	var _react = __webpack_require__(85);
 
@@ -7264,20 +7267,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function customPropType(handler, propType, name) {
-
-	  return function (props, propName, wrappedName) {
-
+	function readOnlyPropType(handler, name) {
+	  return function (props, propName) {
 	    if (props[propName] !== undefined) {
 	      if (!props[handler]) {
 	        return new Error('You have provided a `' + propName + '` prop to ' + '`' + name + '` without an `' + handler + '` handler. This will render a read-only field. ' + 'If the field should be mutable use `' + defaultKey(propName) + '`. Otherwise, set `' + handler + '`');
 	      }
-
-	      for (var _len = arguments.length, args = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
-	        args[_key - 3] = arguments[_key];
-	      }
-
-	      return propType && propType.apply(undefined, [props, propName, name].concat(args));
 	    }
 	  };
 	}
@@ -7287,13 +7282,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (("development") !== 'production' && basePropTypes) {
 	    transform(controlledValues, function (obj, handler, prop) {
-	      var type = basePropTypes[prop];
-
 	      (0, _invariant2.default)(typeof handler === 'string' && handler.trim().length, 'Uncontrollable - [%s]: the prop `%s` needs a valid handler key name in order to make it uncontrollable', displayName, prop);
 
-	      obj[prop] = customPropType(handler, type, displayName);
-
-	      if (type !== undefined) obj[defaultKey(prop)] = type;
+	      obj[prop] = readOnlyPropType(handler, displayName);
 	    }, propTypes);
 	  }
 
@@ -7330,8 +7321,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function chain(thisArg, a, b) {
 	  return function chainedFunction() {
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	      args[_key2] = arguments[_key2];
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
 	    }
 
 	    a && a.call.apply(a, [thisArg].concat(args));
@@ -7352,6 +7343,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
+	function has(o, k) {
+	  return o ? Object.prototype.hasOwnProperty.call(o, k) : false;
+	}
+
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 * All rights reserved.
@@ -7362,10 +7357,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function isReactComponent(component) {
 	  return !!(component && component.prototype && component.prototype.isReactComponent);
-	}
-
-	function has(o, k) {
-	  return o ? Object.prototype.hasOwnProperty.call(o, k) : false;
 	}
 
 /***/ },
@@ -7541,30 +7532,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _extends4['default'])({}, (0, _bootstrapUtils.getClassSet)(bsProps), (_extends2 = {}, _extends2[(0, _bootstrapUtils.prefix)(bsProps, 'right')] = pullRight, _extends2));
 
-	    var list = _react2['default'].createElement(
-	      'ul',
-	      (0, _extends4['default'])({}, elementProps, {
-	        role: 'menu',
-	        className: (0, _classnames2['default'])(className, classes),
-	        'aria-labelledby': labelledBy
-	      }),
-	      _ValidComponentChildren2['default'].map(children, function (child) {
-	        return _react2['default'].cloneElement(child, {
-	          onKeyDown: (0, _createChainedFunction2['default'])(child.props.onKeyDown, _this2.handleKeyDown),
-	          onSelect: (0, _createChainedFunction2['default'])(child.props.onSelect, onSelect)
-	        });
-	      })
+	    return _react2['default'].createElement(
+	      _RootCloseWrapper2['default'],
+	      {
+	        noWrap: true,
+	        disabled: !open,
+	        onRootClose: onClose
+	      },
+	      _react2['default'].createElement(
+	        'ul',
+	        (0, _extends4['default'])({}, elementProps, {
+	          role: 'menu',
+	          className: (0, _classnames2['default'])(className, classes),
+	          'aria-labelledby': labelledBy
+	        }),
+	        _ValidComponentChildren2['default'].map(children, function (child) {
+	          return _react2['default'].cloneElement(child, {
+	            onKeyDown: (0, _createChainedFunction2['default'])(child.props.onKeyDown, _this2.handleKeyDown),
+	            onSelect: (0, _createChainedFunction2['default'])(child.props.onSelect, onSelect)
+	          });
+	        })
+	      )
 	    );
-
-	    if (open) {
-	      return _react2['default'].createElement(
-	        _RootCloseWrapper2['default'],
-	        { noWrap: true, onRootClose: onClose },
-	        list
-	      );
-	    }
-
-	    return list;
 	  };
 
 	  return DropdownMenu;
@@ -15967,8 +15956,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (maxButtons) {
 	      var hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
-	      startPage = hiddenPagesBefore > 1 ? hiddenPagesBefore : 1;
-	      hasHiddenPagesAfter = startPage + maxButtons <= items;
+	      startPage = hiddenPagesBefore > 2 ? hiddenPagesBefore : 1;
+	      hasHiddenPagesAfter = startPage + maxButtons < items;
 
 	      if (!hasHiddenPagesAfter) {
 	        endPage = items;
