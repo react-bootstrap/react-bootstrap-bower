@@ -4803,7 +4803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Only valid if `inline` is not set.
 	   */
-	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error']),
+	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error', null]),
 	  /**
 	   * Attaches a ref to the `<input>` element. Only functions can be used here.
 	   *
@@ -6566,7 +6566,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Which event when fired outside the component will cause it to be closed
 	   */
-	  rootCloseEvent: _react2['default'].PropTypes.oneOf(['click', 'mousedown'])
+	  rootCloseEvent: _react2['default'].PropTypes.oneOf(['click', 'mousedown']),
+
+	  /**
+	   * @private
+	   */
+	  onMouseEnter: _react2['default'].PropTypes.func,
+	  /**
+	   * @private
+	   */
+	  onMouseLeave: _react2['default'].PropTypes.func
 	};
 
 	var defaultProps = {
@@ -8614,7 +8623,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Uses `controlId` from `<FormGroup>` if not explicitly specified.
 	   */
-	  id: _react2['default'].PropTypes.string
+	  id: _react2['default'].PropTypes.string,
+	  /**
+	   * Attaches a ref to the `<input>` element. Only functions can be used here.
+	   *
+	   * ```js
+	   * <FormControl inputRef={ref => { this.input = ref; }} />
+	   * ```
+	   */
+	  inputRef: _react2['default'].PropTypes.func
 	};
 
 	var defaultProps = {
@@ -8642,8 +8659,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        type = _props.type,
 	        _props$id = _props.id,
 	        id = _props$id === undefined ? controlId : _props$id,
+	        inputRef = _props.inputRef,
 	        className = _props.className,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'type', 'id', 'className']);
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'type', 'id', 'inputRef', 'className']);
 
 	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
 	        bsProps = _splitBsProps[0],
@@ -8660,6 +8678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, elementProps, {
 	      type: type,
 	      id: id,
+	      ref: inputRef,
 	      className: (0, _classnames2['default'])(className, classes)
 	    }));
 	  };
@@ -8930,7 +8949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
 	   */
 	  controlId: _react2['default'].PropTypes.string,
-	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error'])
+	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error', null])
 	};
 
 	var childContextTypes = {
@@ -12338,9 +12357,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _elementType = __webpack_require__(106);
+
+	var _elementType2 = _interopRequireDefault(_elementType);
+
 	var _bootstrapUtils = __webpack_require__(89);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var propTypes = {
+	  componentClass: _elementType2['default']
+	};
+
+	var defaultProps = {
+	  componentClass: 'div'
+	};
 
 	var ModalBody = function (_React$Component) {
 	  (0, _inherits3['default'])(ModalBody, _React$Component);
@@ -12352,8 +12383,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  ModalBody.prototype.render = function render() {
 	    var _props = this.props,
+	        Component = _props.componentClass,
 	        className = _props.className,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['className']);
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'className']);
 
 	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
 	        bsProps = _splitBsProps[0],
@@ -12361,13 +12393,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
 
-	    return _react2['default'].createElement('div', (0, _extends3['default'])({}, elementProps, {
+	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, elementProps, {
 	      className: (0, _classnames2['default'])(className, classes)
 	    }));
 	  };
 
 	  return ModalBody;
 	}(_react2['default'].Component);
+
+	ModalBody.propTypes = propTypes;
+	ModalBody.defaultProps = defaultProps;
 
 	exports['default'] = (0, _bootstrapUtils.bsClass)('modal-body', ModalBody);
 	module.exports = exports['default'];
@@ -12513,9 +12548,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _elementType = __webpack_require__(106);
+
+	var _elementType2 = _interopRequireDefault(_elementType);
+
 	var _bootstrapUtils = __webpack_require__(89);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var propTypes = {
+	  componentClass: _elementType2['default']
+	};
+
+	var defaultProps = {
+	  componentClass: 'div'
+	};
 
 	var ModalFooter = function (_React$Component) {
 	  (0, _inherits3['default'])(ModalFooter, _React$Component);
@@ -12527,8 +12574,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  ModalFooter.prototype.render = function render() {
 	    var _props = this.props,
+	        Component = _props.componentClass,
 	        className = _props.className,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['className']);
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'className']);
 
 	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
 	        bsProps = _splitBsProps[0],
@@ -12536,13 +12584,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
 
-	    return _react2['default'].createElement('div', (0, _extends3['default'])({}, elementProps, {
+	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, elementProps, {
 	      className: (0, _classnames2['default'])(className, classes)
 	    }));
 	  };
 
 	  return ModalFooter;
 	}(_react2['default'].Component);
+
+	ModalFooter.propTypes = propTypes;
+	ModalFooter.defaultProps = defaultProps;
 
 	exports['default'] = (0, _bootstrapUtils.bsClass)('modal-footer', ModalFooter);
 	module.exports = exports['default'];
@@ -12720,9 +12771,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _elementType = __webpack_require__(106);
+
+	var _elementType2 = _interopRequireDefault(_elementType);
+
 	var _bootstrapUtils = __webpack_require__(89);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var propTypes = {
+	  componentClass: _elementType2['default']
+	};
+
+	var defaultProps = {
+	  componentClass: 'h4'
+	};
 
 	var ModalTitle = function (_React$Component) {
 	  (0, _inherits3['default'])(ModalTitle, _React$Component);
@@ -12734,8 +12797,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  ModalTitle.prototype.render = function render() {
 	    var _props = this.props,
+	        Component = _props.componentClass,
 	        className = _props.className,
-	        props = (0, _objectWithoutProperties3['default'])(_props, ['className']);
+	        props = (0, _objectWithoutProperties3['default'])(_props, ['componentClass', 'className']);
 
 	    var _splitBsProps = (0, _bootstrapUtils.splitBsProps)(props),
 	        bsProps = _splitBsProps[0],
@@ -12743,13 +12807,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var classes = (0, _bootstrapUtils.getClassSet)(bsProps);
 
-	    return _react2['default'].createElement('h4', (0, _extends3['default'])({}, elementProps, {
+	    return _react2['default'].createElement(Component, (0, _extends3['default'])({}, elementProps, {
 	      className: (0, _classnames2['default'])(className, classes)
 	    }));
 	  };
 
 	  return ModalTitle;
 	}(_react2['default'].Component);
+
+	ModalTitle.propTypes = propTypes;
+	ModalTitle.defaultProps = defaultProps;
 
 	exports['default'] = (0, _bootstrapUtils.bsClass)('modal-title', ModalTitle);
 	module.exports = exports['default'];
@@ -13440,13 +13507,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function createSimpleWrapper(tag, suffix, displayName) {
 	  var Wrapper = function Wrapper(_ref, _ref2) {
+	    var _ref2$$bs_navbar = _ref2.$bs_navbar,
+	        navbarProps = _ref2$$bs_navbar === undefined ? { bsClass: 'navbar' } : _ref2$$bs_navbar;
 	    var Component = _ref.componentClass,
 	        className = _ref.className,
 	        pullRight = _ref.pullRight,
 	        pullLeft = _ref.pullLeft,
 	        props = (0, _objectWithoutProperties3['default'])(_ref, ['componentClass', 'className', 'pullRight', 'pullLeft']);
-	    var _ref2$$bs_navbar = _ref2.$bs_navbar,
-	        navbarProps = _ref2$$bs_navbar === undefined ? { bsClass: 'navbar' } : _ref2$$bs_navbar;
 	    return _react2['default'].createElement(Component, (0, _extends4['default'])({}, props, {
 	      className: (0, _classnames2['default'])(className, (0, _bootstrapUtils.prefix)(navbarProps, suffix), pullRight && (0, _bootstrapUtils.prefix)(navbarProps, 'right'), pullLeft && (0, _bootstrapUtils.prefix)(navbarProps, 'left'))
 	    }));
@@ -14221,13 +14288,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Callback fired after the Overlay finishes transitioning out
 	   */
-	  onExited: _react2['default'].PropTypes.func
+	  onExited: _react2['default'].PropTypes.func,
+
+	  /**
+	   * Sets the direction of the Overlay.
+	   */
+	  placement: _react2['default'].PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
 	});
 
 	var defaultProps = {
 	  animation: _Fade2['default'],
 	  rootClose: false,
-	  show: false
+	  show: false,
+	  placement: 'right'
 	};
 
 	var Overlay = function (_React$Component) {
@@ -16343,10 +16416,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  };
 
-	  Panel.prototype.shouldRenderFill = function shouldRenderFill(child) {
-	    return _react2['default'].isValidElement(child) && child.props.fill != null;
-	  };
-
 	  Panel.prototype.renderHeader = function renderHeader(collapsible, header, id, role, expanded, bsProps) {
 	    var titleClassName = (0, _bootstrapUtils.prefix)(bsProps, 'title');
 
@@ -16912,7 +16981,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Only valid if `inline` is not set.
 	   */
-	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error']),
+	  validationState: _react2['default'].PropTypes.oneOf(['success', 'warning', 'error', null]),
 	  /**
 	   * Attaches a ref to the `<input>` element. Only functions can be used here.
 	   *
