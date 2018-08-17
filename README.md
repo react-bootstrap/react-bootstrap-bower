@@ -20,18 +20,21 @@ See the [documentation][documentation] with live editable examples.
 
 ## Local setup
 
-- Install the dependencies with `npm install`
-- Run tests `npm test`
-- Run tests in watch mode `npm run tdd`
-- Run the docs site in development mode with `npm run docs`. This will watch
-  for file changes as you work. Simply refresh the page to see the updates.
-- Build with `npm run build`
+Yarn is the our package manager of choice here. Check out setup
+instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
+After that you can run `yarn run bootstrap` to install all the needed dependencies.
+
+From there you can:
+
+- Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
+- Start a local copy of the docs site with `yarn start`
+- Or build a local copy of the library with `yarn run build`
 
 ## Contributions
 
 Yes please! See the [contributing guidelines][contributing] for details.
 
-[bootstrap]: http://getbootstrap.com
+[bootstrap]: https://getbootstrap.com/docs/3.3/
 [react]: http://facebook.github.io/react/
 
 [documentation]: http://react-bootstrap.github.io
@@ -46,6 +49,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
 [react-router]: https://github.com/reactjs/react-router
 [react-bootstrap-extended]: https://github.com/rbalicki2/react-bootstrap-extended
+[awesome-react-bootstrap-components]: https://github.com/Hermanya/awesome-react-bootstrap-components
 
 [thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
 [thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
