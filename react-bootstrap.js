@@ -12497,7 +12497,8 @@ function (_React$Component) {
         className = _this$props.className,
         style = _this$props.style,
         children = _this$props.children,
-        props = _objectWithoutPropertiesLoose(_this$props, ["dialogClassName", "className", "style", "children"]);
+        onMouseDownDialog = _this$props.onMouseDownDialog,
+        props = _objectWithoutPropertiesLoose(_this$props, ["dialogClassName", "className", "style", "children", "onMouseDownDialog"]);
 
     var _splitBsProps = splitBsProps(props),
         bsProps = _splitBsProps[0],
@@ -12518,14 +12519,15 @@ function (_React$Component) {
       className: classnames_default()(className, bsClassName),
       __source: {
         fileName: ModalDialog_jsxFileName,
-        lineNumber: 43
+        lineNumber: 44
       },
       __self: this
     }), external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("div", {
       className: classnames_default()(dialogClassName, dialogClasses),
+      onMouseDown: onMouseDownDialog,
       __source: {
         fileName: ModalDialog_jsxFileName,
-        lineNumber: 50
+        lineNumber: 53
       },
       __self: this
     }, external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement("div", {
@@ -12533,7 +12535,7 @@ function (_React$Component) {
       role: "document",
       __source: {
         fileName: ModalDialog_jsxFileName,
-        lineNumber: 51
+        lineNumber: 57
       },
       __self: this
     }, children)));
@@ -12917,6 +12919,21 @@ function (_React$Component) {
     var _this;
 
     _this = _React$Component.call(this, props, context) || this;
+
+    _this.handleDialogBackdropMouseDown = function () {
+      _this._waitingForMouseUp = true;
+    };
+
+    _this.handleMouseUp = function (ev) {
+      var dialogNode = _this._modal.getDialogElement();
+
+      if (_this._waitingForMouseUp && ev.target === dialogNode) {
+        _this._ignoreBackdropClick = true;
+      }
+
+      _this._waitingForMouseUp = false;
+    };
+
     _this.handleEntering = _this.handleEntering.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleExited = _this.handleExited.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleWindowResize = _this.handleWindowResize.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -12948,7 +12965,8 @@ function (_React$Component) {
   };
 
   _proto.handleDialogClick = function handleDialogClick(e) {
-    if (e.target !== e.currentTarget) {
+    if (this._ignoreBackdropClick || e.target !== e.currentTarget) {
+      this._ignoreBackdropClick = false;
       return;
     }
 
@@ -13018,18 +13036,20 @@ function (_React$Component) {
       backdropClassName: classnames_default()(prefix(props, 'backdrop'), backdropClassName, inClassName),
       onEntering: utils_createChainedFunction(onEntering, this.handleEntering),
       onExited: utils_createChainedFunction(onExited, this.handleExited),
+      onMouseUp: this.handleMouseUp,
       __source: {
         fileName: Modal_jsxFileName,
-        lineNumber: 252
+        lineNumber: 265
       },
       __self: this
     }), external_root_React_commonjs2_react_commonjs_react_amd_react_default.a.createElement(Dialog, _extends({}, dialogProps, {
       style: _extends({}, this.state.style, style),
       className: classnames_default()(className, inClassName),
       onClick: backdrop === true ? this.handleDialogClick : null,
+      onMouseDownDialog: this.handleDialogBackdropMouseDown,
       __source: {
         fileName: Modal_jsxFileName,
-        lineNumber: 268
+        lineNumber: 282
       },
       __self: this
     }), children));
